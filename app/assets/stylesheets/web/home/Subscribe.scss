@@ -1,0 +1,66 @@
+.container-subscribe {
+  h1{
+    font-weight: 300;
+    color: #438bad;
+  }
+  .error{
+    min-height: 25px;
+    font-weight: 300;
+    font-size: 14px;
+    color: red;
+  }
+  .subscribe{
+    .form-group{
+      width:100%;
+      input.form-control{
+        width: 65%;
+        display: inline-block;
+        font-size: 16px;
+        height: 48px;
+        border-color: #CDD7DA;
+        vertical-align: top;
+        &:focus{
+          border-color: #5a768c;
+          box-shadow: none;
+          -webkit-box-shadow: none;
+        }
+      }
+    }
+  }
+
+  .ost-nav-link {
+    font-size: 12px;
+    color: #597a84;
+    a{
+      color: #597a84;
+      &:hover, &:active,  &:focus{
+        color: #c0993a;
+        text-decoration: none;
+      }
+    }
+  }
+
+}
+
+#subscribe-success{
+  text-align: center;
+  background: #438bad;
+  border-radius: 10px;
+  padding: 10px 15px 25px 10px;
+  margin: 30px auto 0;
+  .small-title{
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 3px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    display: block;
+  }
+  .small-desc{
+    color: #fff;
+    font-weight: 300;
+    font-size: 16px;
+    display: block;
+  }
+}

@@ -1,0 +1,44 @@
+// Import functions as variables depend on functions
+@import "../../plugins/bootstrap/scss/functions";
+
+// Import theme variables
+@import "../Starboy/variables";
+
+.header-wrapper{
+  z-index: 1071;
+}
+
+.token-deploy-container{
+.token-deploy-content{
+  width: 700px;
+
+
+  .content-wrapper{
+    background-color: $alice-blue;
+    border-radius: 10px;
+  }
+
+}
+  p{
+    color: $sherpa;
+  }
+}
+.deploy-error-state{
+  .error-icon{
+    width:63px;
+    height:63px;
+  }
+}
+.metamask-confirm-account-container{
+  .container-box{
+    background-color: $grey-bg;
+    border-radius: 7.5px;
+  }
+  .confirm-account-section{
+    display : none;
+  }
+  #default-state-wrapper{
+    display:block;
+  }
+}
+

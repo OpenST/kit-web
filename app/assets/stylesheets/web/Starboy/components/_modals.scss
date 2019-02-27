@@ -1,0 +1,81 @@
+.modal{
+  .modal-content{
+    padding: 1rem;
+    border-radius: 0;
+    position: relative;
+  }
+  .modal-header{
+    justify-content: center;
+    border-bottom: none;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .modal-body {
+    overflow-y: auto;
+    max-height: 70vh;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: $modal-inner-padding;
+    margin-bottom: $modal-inner-padding;
+  }
+  .modal-footer {
+    justify-content: center;
+    border-top: none;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .heading{
+    font-size: 1.6rem;
+    color: color('cyan');
+  }
+  .desc{
+    font-size: 0.9rem;
+    color: $blue-700;
+  }
+  .desc-2{
+    font-size: 0.8rem;
+    color: $blue-700;
+  }
+  .btn{
+    font-size: 0.9rem;
+    line-height: 100%;
+    letter-spacing: 1px;
+    padding: 0.75rem 1rem;
+  }
+  .close{
+    top: 10px;
+    z-index: 1;
+    right: 10px;
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    &:focus{
+      outline: none;
+    }
+  }
+  .close-icon{
+    height: 15px;
+    width: 15px;
+  }
+  .link{
+    color: color('cyan');
+    border-bottom: 1px solid $cyan;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+  .card{
+    padding: 8px;
+    margin: 10px;
+    background-color: $alice-blue;
+    .item-1{
+      font-size: 0.8rem;
+      color: rgba(67, 139, 173, 0.8);
+    }
+    .item-2{
+      color: $blue-600;
+      font-size: 0.8rem;
+    }
+  }
+}

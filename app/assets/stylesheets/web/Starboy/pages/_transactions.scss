@@ -1,0 +1,26 @@
+.transactions{
+  width: 100%;
+  max-width: 100%;
+  .header{
+    color: $cyan;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    font-weight: $font-weight-bold;
+  }
+  .ost-table-row{
+    border: 1px solid $shakespeare;
+    background-color: $white;
+    > [class*="col-"]{
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+  }
+  .cell{
+    color: $blue-700;
+    font-size: 1rem;
+  }
+  .btn{
+    min-width: 130px;
+  }
+}
+

@@ -1,0 +1,179 @@
+<%
+
+
+    wallet_association =  @presenter_obj.sign_messages.wallet_association
+    ost_to_fiat =  @presenter_obj.oracle_price_points.to_fiat_conversion_factor("USD")
+
+    chain_id = GlobalConstant::Chain.origin_chain_id
+
+    addresses_api = GlobalConstant::RoutesMap.getApis()[:api_addresses]
+    deployment_api = GlobalConstant::RoutesMap.getApis()[:api_deploy]
+    deploy_route = GlobalConstant::RoutesMap.getRoutes()[:token_deploy]
+
+    #TODO Start : Alpesh check if the above stuff should come from presenter
+    conversion_factor = @presenter_obj.client_token_conversion_factor || 1
+    bt_to_ost_input_name = "conversion_factor"
+    bt_to_ost_min = GlobalConstant::ClientToken.bt_to_ost_min
+    bt_to_ost_step = GlobalConstant::ClientToken.bt_to_ost_step
+    bt_to_ost_max = GlobalConstant::ClientToken.bt_to_ost_max
+    #TODO END : Alpesh check if the above stuff should come from presenter
+
+    bt_to_ost_id = "bt_to_ost"
+    ost_to_bt_id = "ost_to_bt_id"
+
+%>
+<form data-ost-formhelper id="economy-planner" action="<%=GlobalConstant::RoutesMap.getApis()[:api_token]%>" method="POST"> <!-- #TODO URL -->
+  <div class="planner-container  text-center">
+    <h3 class="mt-5">
+      First, Let's Design The Token To Launch Your Economy
+    </h3>
+
+  <div class="container">
+      <div class="row ">
+        <div class="card card-planner my-5">
+          <div class="card-header text-left">
+            <h4 class="mb-2 ">Token Details</h4>
+            <p class="font-weight-light mb-0">
+              Set the unique identity for your token. Choose a Token Name that will help people relating with your brand. The Token Symbol acts like an identifier similar to USD, EUR, and GBP.
+            </p>
+          </div>
+          <div class="card-body ">
+              <div class="user-form row text-left">
+                <div class="form-group mb-2 d-inline-block col-3 mr-4">
+                  <label class="form-label" for="token_name">Token Name</label>
+                  <input type="text" class="form-control" id="name"
+                         value ="<%= @presenter_obj.client_token_name%>"
+                         placeholder="Token Name" name="name"
+                         minlength="4" maxlength="20" pattern="^[a-zA-Z][a-zA-Z0-9\s]+[a-zA-Z0-9\s]+[a-zA-Z0-9]" required
+                         autocomplete="off"
+                         tabindex="1" />
+                  <div class="invalid-feedback" data-forid="name">&nbps;</div>
+                </div>
+                <div class="form-group mb-2 d-inline-block col-3">
+                  <label class="form-label" for="token_symbol">Token Symbol</label>
+                  <input type="text" class="form-control" id="symbol"
+                         value ="<%= @presenter_obj.client_token_symbol%>"
+                         placeholder="Token Symbol" name="symbol"
+                         minlength="3" maxlength="4" pattern="^[a-zA-Z][a-zA-Z0-9]+" required
+                         autocomplete="off"
+                         tabindex="1" />
+                  <div class="invalid-feedback" data-forid="symbol">&nbps;</div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="row card card-planner mb-5">
+        <div class="text-left">
+          <div class="card-header">
+            <h4 class="mb-0 ">Advanced Options</h4>
+            <p class="font-weight-light mb-0 mt-2">
+              Set the Conversion Rate for your token is by deciding how much you want 1 Token to be initially worthed in terms of $USD.
+              <span class="header-recommendation font-weight-bold">
+                OST recommendation is to set the conversion rate to 1
+                <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
+                = 1 OST = $<span class="j-fiat-value"><%= ost_to_fiat %>&nbsp;</span>USD</span>
+            </p>
+          </div>
+        </div>
+          <div class="accordion" id="advance-options-accordion">
+            <div class="text-left">
+              <div class="" id="advance-options-header">
+                <p class="text-left slider-recommendation m-3 ">
+                  OST recommendation is to set the conversion rate to
+                    <span class="text-different-color">1</span>
+                       <b> <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>  =</b>
+                    <span class="text-different-color">1</span>
+                       <b> OST =</b>
+                    <span class="text-different-color j-fiat-value">$<%= ost_to_fiat %></span>
+                       <b>USD</b>
+                    <span class="edit-collapse ml-1" data-toggle="collapse"
+                          data-target="#collapsable-element"
+                          aria-expanded="true" aria-controls="collapsable-element">EDIT
+                    </span>
+                </p>
+              </div>
+              <div id="collapsable-element" class="collapse"
+                   aria-labelledby="advance-options-header" data-parent="#advance-options-accordion">
+                <div class="card-body pt-4 pb-0">
+                  <div class="conversion-section user-form">
+                    <div class="card-group">
+                      <div class="row form-group">
+                        <div class="col-4 right-border m-0 card">
+                          <label class="form-label mb-2">SET CONVERSION RATE</label>
+                          <div class="d-flex align-items-center">
+                            <span class="text-different-color mr-1">1</span> OST
+                            <span class="equal-to-sign mx-2 font-weight-bold">=</span>
+                            <span class="quantity">
+                              <input type="number" min="<%=bt_to_ost_min%>" max="<%= bt_to_ost_max %>"
+                                     step="<%= bt_to_ost_step%>" id="<%= ost_to_bt_id %>"
+                                     name="conversion_factor" value="<%= conversion_factor %>" required>
+                            </span>
+                            <span class="ost-mocker-value ml-1" style="font-size: 14px" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
+                          </div>
+
+                        </div>
+                        <div class="col-4 right-border m-0 card">
+                          <label class="form-label mb-2">AT CURRENT CONVERSION RATE</label>
+                          <div class="d-flex align-items-center">
+                            <span class="text-different-color mr-1">1</span> <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
+                            <span class="equal-to-sign mx-2 font-weight-bold">=</span> $
+                            <span class="ost-mocker-value text-different-color j-bt-to-fiat-val text-truncate"
+                                  data-type="fiat"  data-ost-mock-parser="ost.tokenSetup.btToFiat"> <%= ost_to_fiat %>
+                                              </span>
+                          </div>
+                        </div>
+                        <div class="col-4 instruction-text">
+                          Conversion rate establishes the fixed rate of exchange between your BT and OST. OST is Market linked so the inherent value of your token may fluctuate based on the value of OST.
+                        </div>
+                        <div class="invalid-feedback ml-3" style="font-size: 12px" data-for="conversion_factor" ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              <div class="invalid-feedback general_error mb-2" data-for="general_error"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <footer>
+      <div class="row sticky-footer">
+        <div class="container">
+          <div class="row">
+            <button type="submit" class="btn btn-steps-nav bg-yellow pt-3 pb-3 ml-auto"
+                     data-submiting="Proceeding..." id="setup-token-btn" title="Proceed">Proceed &gt;</button>
+          </div>
+        </div>
+      </div>
+      <div class="pseudo-footer"></div>
+    </footer>
+  </div>
+</form>
+
+<% content_for :popups do %>
+  <%= render partial: 'shared/web/modals/token_setup_admin_error'%>
+<% end %>
+
+<% content_for :end_js do %>
+  <script type="text/javascript">
+    function awse(val){return val}
+      $( function () {
+          ost.tokenSetup.init({
+
+              walletAssociation : "<%= wallet_association%>",
+              chainId : '<%= chain_id %>',
+
+              addressesEndPoint: '<%= addresses_api%>',
+              deploymentEndpoint : '<%=deployment_api %>' ,
+              deployRoute : '<%= deploy_route %>',
+
+              ost_to_fiat : '<%= ost_to_fiat %>',
+              ost_to_bt : '<%= conversion_factor %>',
+              ostToBtId : "<%= ost_to_bt_id %>"
+          });
+      });
+  </script>
+<% end %>

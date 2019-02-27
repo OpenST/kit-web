@@ -1,0 +1,40 @@
+<section class="modal fade" id="helpVideoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered h-100 mx-auto my-0" role="document" style="max-width: 800px;margin: 30px auto;">
+    <div class="modal-content">
+
+
+      <div class="modal-body">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <!-- 16:9 aspect ratio -->
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always">></iframe>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<% content_for :end_js do %>
+  <script type="text/javascript">
+    $( function () {
+      // when the modal is opened autoplay it
+      $('#helpVideoModal').on('shown.bs.modal', function (event) {
+        console.log("shown.bs.modal", arguments);
+        var videoSrc = $( event.relatedTarget).data("src");
+        // set the video src to autoplay
+        $("#video").attr('src',videoSrc + "?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1" );
+      });
+      // stop playing the youtube video when I close the modal
+      $('#helpVideoModal').on('hide.bs.modal', function (e) {
+        $("#video").attr('src', "");
+      });
+    });
+  </script>
+<% end %>

@@ -1,0 +1,42 @@
+<%
+    is_enabled = true
+    classes = classes.present? ? classes : ""
+    label_classes = label_classes.present? ? label_classes : ""
+
+    if ( defined? max && defined? min )
+        is_enabled  = max.to_f > min.to_f
+    end
+    is_disbaled = !is_enabled
+    
+    if is_disbaled 
+        classes += "  disabled "
+        label_classes += "  disabled " if min <= 0
+    end
+
+
+%>
+
+<div class="form-group" id="<%=id%>_slider_form_group">
+  <label class="form-label <%= label_classes %>" for="<%=id%>"><%= raw label%></label>
+  <div class="input-group slider-with-input top <%= (defined? classes) ? classes : '' %>">
+    <span class="slider-input-top">
+        <input type="<%=type%>" class="form-control mt-1 mb-2 <%= label_classes %> " id="<%=id%>" name="<%=name%>"
+          min="<%=min%>" max="<%=max%>" step="<%=step%>" value="<%=value%>"/>
+        <span id="<%=id%>-error" class="error" for="<%=id%>">&nbsp;</span>
+    </span>
+    <input
+        type="text"
+        id="<%=id%>_slider"
+        data-provide="slider"
+        data-slider-min="<%=min%>"
+        data-slider-max="<%=max%>"
+        data-slider-step="<%=step%>"
+        data-slider-value="<%=value%>"
+        data-slider-tooltip="<%=tooltip%>"
+        data-enabled="<%= is_enabled  %>"
+        <% if defined? ticks %>data-slider-ticks="<%=ticks.to_s%>"<% end %>
+        <% if defined? ticks_labels %>data-slider-ticks-labels='<%=raw ticks_labels.to_s%>'<% end %>
+    >
+  </div>
+
+</div>

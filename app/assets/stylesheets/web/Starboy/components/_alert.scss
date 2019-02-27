@@ -1,0 +1,20 @@
+.alert{
+  &.alert-secondary{
+    border: none;
+    color: $blue-600;
+    font-size: 0.875rem;
+    background-color: $alice-blue;
+  }
+
+  &.alert-warning {
+    border: none;
+    background-color: transparent;
+    color: $orange;
+  }
+
+  .icon {
+    height: 20px;
+    width: 20px;
+    margin-top: -4px;
+  }
+}

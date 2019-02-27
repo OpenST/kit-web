@@ -1,0 +1,36 @@
+.token-supply-infotext{
+
+  font-size: 0.9rem;
+  text-align: center;
+  color: #438bad;
+
+}
+
+#bt_to_mint {
+  min-height: 35px;
+  margin-bottom: 0!important;
+}
+
+#bt_to_mint-error {
+  min-height: 10px;
+}
+
+.state-icon{
+  font-size: 0;
+}
+
+.total-ost{
+  top: 50%;
+  left: 50%;
+  color: #438BAD;
+  text-align: center;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+#stake-mint-process{
+  .ost-mocker-value-pre,
+  .ost-mocker-value{
+    display: inline-block;
+  }
+}

@@ -1,0 +1,28 @@
+.ost-supply{
+  width: 4px;
+  height: 22px;
+  border-radius: 3.8px;
+  display: inline-block;
+  small{
+    color: $sherpa;
+  }
+  &.available{
+    background-color: #34445b;
+  }
+  &.allocated{
+    background-color: #f6c62b;
+  }
+  &.staked-minting{
+    background-color: #88c7ca;
+  }
+}
+.card-bg{
+  border: none;
+  background-color: $alice-blue;
+  .card-body{
+    padding: 1rem 1.25rem;
+    .card-text{
+
+    }
+  }
+}

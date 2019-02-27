@@ -1,0 +1,118 @@
+.sidebar-nav{
+  border-right: 1px solid #9fc0cf;
+  background: color("teal-bg");
+  width: $side-bar-nav-width;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: $zindex-dropdown;
+  transition: $transition-base;
+  overflow:auto;
+
+  &.active{
+    margin-left: -$side-bar-nav-width;
+  }
+
+  @media (max-width: 768px) {
+    margin-left: -$side-bar-nav-width;
+    &.active {
+      margin-left: 0;
+    }
+  }
+
+  //
+  // Pills
+  //
+
+  .nav-pills {
+    .nav-item{
+      &:first-child{
+        .nav-link{
+          border-top: none;
+        }
+      }
+    }
+    .nav-link{
+      color: $cyan;
+      border-radius: inherit;
+      border-top: solid 1px rgba(175, 225, 227, 0.2);;
+      padding: 0.8rem $nav-link-padding-x;
+
+      svg.icon{
+        height: 22px;
+        width: 22px;
+        fill: $shakespeare;
+      }
+
+      span.label{
+        margin-left: 12px;
+      }
+      &:hover{
+        background-color: rgba(155, 175, 181, 0.1);
+      }
+    }
+
+    .nav-link.active,
+    .show > .nav-link {
+      color: $nav-pills-link-active-color;
+      background-color: $cyan;
+
+      svg.icon{
+        fill: $nav-pills-link-active-color;
+      }
+
+      .badge{
+        color: color("teal");
+        background-color: $nav-pills-link-active-color;
+      }
+    }
+
+    .nav-link.disabled{
+      cursor: default;
+      pointer-events: none;
+      color: $nav-pills-link-inactive-color;
+      background-color: color($nav-pills-link-inactive-bg);
+      svg.icon{
+        fill: $mystic;
+      }
+    }
+
+    .badge{
+      color: $nav-pills-link-active-color;
+      background-color: $cyan;
+      text-transform: uppercase;
+      font-weight: inherit;
+      font-size: 8px;
+      letter-spacing: 0.6px;
+      padding: 0 0.4em;
+      height: 12px;
+      line-height: 13px;
+      right: 0;
+      top: 21px;
+      position: absolute;
+    }
+
+  }
+
+}
+
+.env-indicator-tag{
+  background-color: #9fc0cf;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  color:white;
+  left: $side-bar-nav-width;
+  font-size: $font-size-xs ;
+  top: 50%;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius:3px;
+  transform: translateY(-50%);
+  text-transform: uppercase;
+  letter-spacing: -2.1px;
+  padding: 10px 0;
+  z-index: 1000; // Keep this more than cover elements.
+  @media (max-width: 768px) {
+    left: 0;
+  }
+}

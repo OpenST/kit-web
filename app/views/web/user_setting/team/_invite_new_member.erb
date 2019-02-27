@@ -1,0 +1,51 @@
+<div class="invite-new-member-wrapper">
+  <div class="container">
+    <div class="row">
+      <h3 class="mt-4  col-12 pl-0">Invite Team Member</h3>
+      <hr class="mb-3 col-12"/>
+    </div>
+    <div class="row">
+      <form id="invite_new_member_form" class="user-form" action="<%=GlobalConstant::RoutesMap.getApis()[:api_invite_admin] %>" method="POST">
+        <div class="row">
+          <div class="col-8">
+            <div class="form-group" >
+              <label class="form-label text-uppercase" data-forid="transaction_name">email address</label>
+              <input id="invitee_email" type="email"
+                     name="email" class="form-control" aria-describedby="emailHelp" placeholder="Example@example.com" required autofocus/>
+              <div class="invalid-feedback" data-forid="invitee_email_address">&nbps;</div>
+            </div>
+            <div class="form-group" >
+              <label class="form-label text-uppercase" data-forid="transaction_name">SELECT ADMIN TYPE</label>
+              <div class="col-12 form-check form-check-inline">
+                <input class="form-check-input radio-button"
+                       id="user-type-admin" type="radio" name="is_super_admin" value="0" checked/>
+                <label class="form-check-label radio-button-label" for="user-type-admin">
+                  <span class="radio-button-circle"></span>Admin (Will be able to access Dashboard and Developers documentation)</label>
+              </div>
+              <div class="col-12 form-check form-check-inline">
+                <input class="form-check-input radio-button"
+                       id="user-type-super-admin" type="radio" name="is_super_admin" value="1"/>
+                <label class="form-check-label radio-button-label" for="user-type-super-admin">
+                  <span class="radio-button-circle"></span>
+                  Super Admin (Will be able to access and rotate API Keys, Mint Tokens, And Invite Team Members)
+                </label>
+              </div>
+              <div class="invalid-feedback" data-forid="is_super_admin">&nbps;</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <button id="invite_new_member_submit" type="submit" data-submiting="Sending..."
+                    class="mt-1 btn btn-gold d-inline-block float-left">SEND INVITE</button>
+            <button type="button" id="invite_new_member_cancel_btn"
+               class="mt-1 ml-4 btn ost-btn-secondary d-inline-block float-left">CANCEL</button>
+          </div>
+          <div class="col-12 general_error text-left invalid-feedback mt-2">&nbsp;</div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

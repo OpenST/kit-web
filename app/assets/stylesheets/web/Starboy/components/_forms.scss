@@ -1,0 +1,308 @@
+.form-group{
+
+  .form-label{
+    color: color('blue-700');
+    margin: 0 0 5px 0;
+    font-size: 0.9rem;
+  }
+
+  .form-link{
+    color: $cyan;
+    display: inline-block;
+    border-bottom: 1px solid $cyan;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+
+  .form-check-label{
+    color: #747a80;
+  }
+
+  .form-control{
+    border: 1px solid #cdd7da;
+  }
+
+  .form-text{
+    color: color('blue-700') !important;
+  }
+
+  .error{
+    color: color('red');
+    font-size: 0.8rem;
+    height: 0.8rem;
+  }
+
+  .form-control-input-group{
+    border-right: 0 !important;
+  }
+
+  .input-group-inline{
+    background: $white;
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+    svg.icon{
+      height: 22px;
+      width: 22px;
+      fill: #d3e3e5;
+    }
+  }
+
+  .slider-with-input{
+
+    input.form-control{
+      font-size: 0.8rem;
+    }
+    input.disabled{
+      color: $mystic;
+    }
+
+    .input-group-text {
+      font-size: 0.8rem;
+    }
+
+    .slider-track{
+      background: none;
+      box-shadow: none;
+    }
+
+    .slider-selection{
+      background: $blue-700;
+      box-shadow: none;
+    }
+
+    .slider-handle{
+      cursor: pointer;
+      background: $blue-700;
+    }
+
+    .slider-track-high{
+      border: 1px solid $blue-700;
+    }
+
+    .tooltip{
+      .tooltip-inner{
+        padding: 0.10rem 0.5rem;
+        color: $blue-700;
+        background-color: $white;
+        border: 1px solid $blue-700;
+        font-size: 0.75rem  ;
+        border-radius: $border-radius-lg;
+      }
+    }
+
+    ~.error{
+      text-align: right;
+    }
+
+    &.right{
+      .slider-horizontal{
+        margin: 0 0 0 10px;
+      }
+    }
+
+    &.top{
+      .slider-horizontal{
+        margin: 0 10px 0 10px;
+      }
+    }
+
+    &.slider-yellow{
+      .slider-selection{
+        background: $yellow-300;
+      }
+      .slider-handle{
+        background: $yellow-300;
+      }
+      .slider-track-high{
+        border: 1px solid $yellow-300;
+      }
+      .tooltip{
+        .tooltip-inner{
+          color: $yellow-300;
+          background-color: $white;
+          border: 1px solid $yellow-300;
+        }
+        .arrow{
+          &:before{
+            border-top-color: $yellow-300;
+          }
+        }
+      }
+    }
+
+    &.slider-ost-gas {
+      .slider-selection{
+        background: $banana;
+      }
+      .slider-handle{
+        background: $banana;
+      }
+      .slider-track-high{
+        border: 1px solid $banana;
+      }
+    }
+
+    &.slider-bt {
+      .slider-selection{
+        background: $aqua;
+      }
+      .slider-handle{
+        background: $aqua;
+      }
+      .slider-track-high{
+        border: 1px solid $aqua;
+      }
+    }
+
+    &.slider-bt.disabled, &.slider-ost-gas.disabled {
+      .slider-selection{
+        background: $mystic;
+      }
+      .slider-handle{
+        background: $mystic;
+      }
+      .slider-track-high{
+        border: 1px solid $mystic;
+      }
+    }
+
+    &.slider-primary {
+      .slider-selection{
+        background: $blue-700;
+      }
+      .slider-handle{
+        background: $blue-700;
+      }
+      .slider-track-high{
+        border: 1px solid $blue-700;
+      }
+      .tooltip{
+        .tooltip-inner{
+          color: $blue-700;
+          background-color: $white;
+          border: 1px solid $blue-700;
+        }
+        .arrow{
+          &:before{
+            border-top-color: $blue-700;
+          }
+        }
+      }
+    }
+
+  }
+
+}
+
+.user-form{
+
+  .form-title{
+    color: color('blue-700');
+    font-size: 24px;
+    text-align: center;
+    font-weight: 400;
+  }
+
+  .form-group{
+
+    .form-label{
+      color: $blue-500;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      margin: 0 0 5px 0;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+
+    .form-label.disabled {
+      color: $mystic;
+    }
+
+    .form-check-label{
+      color: #747a80;
+      font-size: 12px;
+    }
+
+    .form-control{
+      border: 1px solid #cdd7da;
+      font-size: 15px;
+      &:focus{
+        box-shadow: none;
+        border: 1px solid #597A84;
+      }
+    }
+
+    .form-control:focus + .input-group-append > .input-group-inline {
+      border: 1px solid #597A84;
+    }
+
+    .form-text{
+      color: #597a84 !important;
+      font-size: 12px;
+    }
+
+    input::placeholder {
+      color: #cdd7da;
+    }
+
+  }
+
+  .zxcvbn-group {
+    overflow: hidden;
+
+    .zxcvbn {
+      height: 8px;
+      background: #f2f2f2;
+      float: left;
+      width: 19%;
+      margin: 0 1% 0 0;
+    }
+    .zxcvbn-0 {
+      background-color: #e7003b;
+    }
+    .zxcvbn-1 {
+      background-color: #ff7a00;
+    }
+    .zxcvbn-2 {
+      background-color: #e6e664;
+    }
+    .zxcvbn-3 {
+      background-color: #a7d646;
+    }
+    .zxcvbn-4 {
+      background-color: #30b3c5;
+    }
+  }
+}
+
+.form-container-sm{
+  max-width: 540px;
+  margin: 0 auto;
+}
+.form-container-md{
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.general_error {
+  text-align: center;
+}
+
+.cloud-bg{
+  background: url(https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-tech-bg-2@2x.png) bottom ;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+.text-muted{
+  color: $blue-700 !important;
+}
+
+.letter-space-1{
+  letter-spacing: 1px;
+}
+
+.font-size-p{
+  font-size: 0.875rem;
+}

@@ -1,0 +1,36 @@
+.list-group {
+  &.show-last-border {
+    border-bottom: $list-group-border-width solid $blue-100;
+  }
+}
+
+.list-group-item {
+    font-size: $font-size-base;
+    color: $blue-700;
+    border: $list-group-border-width solid $blue-100;
+
+    .item-heading {
+      padding: $list-group-item-padding-y $list-group-item-padding-x $list-group-item-padding-y 0;  
+      font-weight: $font-weight-light !important;
+      margin-left: -$list-group-item-padding-x;
+    }
+
+    .link-item {
+      padding: $list-group-item-padding-y 0;
+      &:active, &:hover, &:focus, &:link, &:visited {
+        color: $blue-700;
+        text-decoration: none;
+      }
+    }
+    &.link{
+      &:hover{
+        background-color: rgba(155, 175, 181, 0.05);
+      }
+    }
+}
+
+.card-body .list-group {
+  margin-left: -$card-spacer-x;
+  margin-right: -$card-spacer-x;
+}
+

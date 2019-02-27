@@ -1,0 +1,94 @@
+<%
+  workflow_id = @presenter_obj.workflow.id
+  minting_status_api = GlobalConstant::RoutesMap.getApis()[:api_workflow]+"/#{workflow_id}"
+  bt_symbol = @presenter_obj.client_token_symbol
+  stake_ost = @presenter_obj.workflow_payload.fe_ost_to_stake
+  total_mint_bt = @presenter_obj.workflow_payload.fe_bt_to_mint
+%>
+
+<div class="container token-mint-progress-container">
+
+  <section class="jSection" id="minting-inprogress">
+    <div class="row">
+      <div class="col-10 mx-auto text-center">
+        <div class="row">
+          <h3 class="col-8 mx-auto mt-6">Minting <%= bt_symbol %>  Tokens</h3>
+          <div class="col-10 mx-auto text-left rounded border-0">
+            <div class="text-muted font-weight-light mb-5 text-center">
+              This process takes several minutes. You can continue to explore KIT, we will inform you once the tokens are minted.
+            </div>
+            <div class="my-5" id="mint-progress">
+              <%= render :partial => "shared/web/common/progress_bar" %>
+            </div>
+            <div class="alert alert-secondary align-items-center d-flex" role="alert">
+              <svg style="width: 30px;height: 30px">
+                <switch>
+                  <use class="success-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
+                </switch>
+              </svg>
+              <span class="ml-3 align-middle text-muted font-weight-light">
+                Allow the contract Stake <%= stake_ost%> <%= ost_currency_symbol %> to Mint <%= total_mint_bt%> <%= bt_symbol %> Tokens
+              </span>
+            </div>
+            <div class="alert alert-secondary align-items-center d-flex" role="alert">
+              <svg style="width: 30px;height: 30px">
+                <switch>
+                  <use class="success-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
+                </switch>
+              </svg>
+              <span class="ml-3 align-middle text-muted font-weight-light">Authorize Contract to Start the Staking Process</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="jSection" style="display:none;" id="minting-complete">
+    <div class="row">
+      <div class="col-10 mx-auto text-center">
+        <div class="row">
+          <h3 class="col-8 mx-auto mt-6">Minting Complete</h3>
+          <div class="shadow-box col-8 mx-auto my-3">
+            <div class="p-4 text-muted font-weight-light d-flex align-items-center">
+              <svg style="width: 30px;height: 30px;margin-right: 8px">
+                <switch>
+                  <use class="success-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
+                </switch>
+              </svg>
+              You have successfully minted&nbsp;<span class="total-token-minted"><%= total_mint_bt %></span>&nbsp;<%= bt_symbol%>&nbsp;Tokens
+            </div>
+          </div>
+          <div class="col-8 mt-3 mx-auto">
+            <a href="javascript:alert('TODO Update link')" class="btn btn-secondary">DASHBOARD</a>
+            <a href="<%= GlobalConstant::RoutesMap.getRoutes()[:token_mint] %>" class="btn btn-primary ml-3">MINT MORE</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="minting-error-state jSection text-center mt-5" style="display: none">
+  <svg class="error-icon align-middle" style="width: 40px;  height: 40px;">
+    <switch>
+      <use class="error-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#error-icon"></use>
+    </switch>
+  </svg>
+  <h3 class="text-center mt-3 display-header">Looks like there was an issue in the minting process</h3>
+  <p class="font-weight-light  mb-5 text-muted">
+    Your transactions are processed via metamask, but OSTKIT was unable to process it. Please contact <b>support@ost.com</b> .
+  </p>
+  <div class="invalid-feedback general_error"></div>
+</div>
+
+<% content_for :end_js do%>
+  <script>
+    $(function () {
+      ost.tokenMintProgress.init({
+        mintingStatusEndPoint:"<%=minting_status_api%>",
+        workflowId : "<%= workflow_id%>"
+      });
+    });
+  </script>
+<% end %>

@@ -1,0 +1,42 @@
+constants:
+  sub_env: <%= ENV['CW_SUB_ENV']%>
+  root_url: <%= ENV['CW_ROOT_URL']%>
+
+  recaptcha:
+    site_key: <%= ENV['STW_RECAPTCHA_SITE_KEY']%>
+
+  cloudfront:
+    domain: <%= ENV['CW_CLOUDFRONT_DOMAIN'] %>
+
+  company_api:
+    root_url: <%= ENV['CW_CA_ROOT_URL'] %>
+    cookie_domain: <%= ENV['CW_CA_COOKIE_DOMAIN'] %>
+    basic_auth_user: <%= ENV['CW_CA_BASIC_AUTH_USER'].to_s %>
+    basic_auth_pass: <%= ENV['CW_CA_BASIC_AUTH_PASS'].to_s %>
+    open_timeout: 5
+    read_timeout: 5
+
+  api_sidekiq_interface:
+    redis_url: <%= ENV['CA_REDIS_ENDPOINT'] %>
+    admin_user: 'sidekiq.admin'
+    admin_pw: <%= ENV['CW_SK_ADMIN_PW'] %>
+
+  basic_auth:
+    username: <%= ENV['CW_BASIC_AUTH_USERNAME'] %>
+    password: <%= ENV['CW_BASIC_AUTH_PASSWORD'] %>
+
+  company_other_product_urls:
+    kyc_root_url: <%= ENV['COMPANY_KYC_ROOT_URL'] %>
+    kit_root_url: <%= ENV['COMPANY_KIT_ROOT_URL'] %>
+    view_root_url: <%= ENV['COMPANY_VIEW_ROOT_URL'] %>
+    token_sale_url: <%= ENV['COMPANY_TOKEN_SALE_URL'] %>
+    simple_token_url: <%= ENV['COMPANY_SIMPLE_TOKEN_URL'] %>
+
+  pepo_campaign:
+    encrypted_client_id: <%= ENV['STW_CAMPAIGN_ENCRYPTED_CLIENT_ID'] %>
+    encrypted_list_id: <%= ENV['STW_CAMPAIGN_ENCRYPTED_LIST_ID'] %>
+
+  placeholder_image_src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABGdBTUEAALGPC/xhBQAAABdJREFUCB1j/PTp038GJMCExAYzCQsAAPxAA91ZSr1IAAAAAElFTkSuQmCC"
+
+  chain:
+    origin_chain_id: <%= ENV['CW_CA_ORIGIN_CHAIN_ID'] %>

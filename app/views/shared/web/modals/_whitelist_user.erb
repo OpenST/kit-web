@@ -1,0 +1,54 @@
+<div class="modal fade" id="whitelist_user_modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg h-100 mx-auto my-0" role="document">
+    <div class="modal-content text-center">
+      <button type="button" class="close text-right" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">
+          <svg class="close-icon">
+            <switch>
+              <use class="success-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#modal-close-icon"></use>
+            </switch>
+          </svg>
+        </span>
+      </button>
+      <div class="modal-body pt-4 px-6 mx-6" style="overflow-x: hidden">
+        <div class="default-state" >
+          <h3 class="font-weight-bold">Ready To Go Live?</h3>
+          <p class="sub-header mb-5">Have you tested your economy and are you ready to go live? Connect with our commercial team to proceed. Please confirm below to be contacted by the OST Team.</p>
+          <form id="whitelist_user_form" action="<%= request_whitelist_api %>" method="POST">
+            <div class="row">
+              <div class="col-12 form-group mb-0">
+<!--                <label for="whitelist_user_checkbox" class="label-cbx mb-0">-->
+<!--                  <input required class="form-control" id="whitelist_user_checkbox" type="checkbox" name="whitelist_user_checkbox" value="1">-->
+<!--                  <div class="checkbox">-->
+                    <%#= render partial: 'shared/web/common/animated-checkbox'%>
+<!--                  </div>-->
+<!--                  <span class="terms-chk font-weight-normal ml-2 display-3">-->
+<!--                  Yes, I want to be contacted by the OST Support team.-->
+<!--                </span>-->
+<!--                </label>-->
+<!--                <div class="error invalid-feedback" data-for="whitelist_user_checkbox"></div>-->
+                <input type="hidden" name="sandbox_token_name" value="<%= sandbox_token_name %>"/>
+                <input type="hidden" name="sandbox_token_symbol" value="<%= sandbox_token_symbol %>"/>
+<!--              <div class="col-12 mx-auto">-->
+                <button type="submit" data-submiting="Confirming..." class="btn btn-primary whitelist-user-btn" title="CONFIRM">CONFIRM</button>
+                <button type="button" data-dismiss="modal" class="btn btn-secondary ml-3" title="CANCEL">CANCEL</button>
+                <div class="col-12 mt-2 ml-3 general_error error" data-forid="whitelist_user_form">&nbsp;</div>
+<!--              </div>-->
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="success-state" style="display: none;">
+          <h4 class="font-weight-bold">The request has been successful processed
+            and the OST team will get in touch shortly.</h4>
+          <h6 class="sub-header">Meanwhile, you may continue to explore more
+            in the Sandbox Environment.</h6>
+          <div class="col-12 mx-auto mt-5">
+            <button type="button" data-dismiss="modal" class="btn btn-primary">CLOSE</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

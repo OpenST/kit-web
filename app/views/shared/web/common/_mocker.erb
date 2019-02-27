@@ -1,0 +1,32 @@
+<%
+  # This component obeserves an input for change and updates its own display value.
+  # The width of component needs to be controled from out side.
+  # Supported Local Variables
+
+  mock_selector = mock_selector.present? ? mock_selector : "";
+  mock_type = mock_type.present? ? mock_type : "";
+  header = header.present? ? header : "";
+  value_prefix = value_prefix.present? ? value_prefix : "";
+  value_postfix = value_postfix.present? ? value_postfix : "";
+  footer = footer.present? ? footer : "";
+  value = value.present? ? value : "";
+  card_classes = card_classes.present? ? card_classes : "";
+  mock_parser = mock_parser.present? ? mock_parser : "";
+%>
+
+<div class="card mocker-card <%= card_classes %> ">
+  <div class="card-body">
+    <div class="ost-mocker-header"><%= raw header %></div>
+    <div class="ost-mocker-value-wrap">
+      <div class="ost-mocker-value-pre"><%= raw value_prefix %></div>
+      <div class="ost-mocker-value" data-type="<%= raw mock_type %>"
+           data-ost-mock-element="<%= raw mock_selector %>"
+           data-ost-mock-parser="<%= raw mock_parser%>" >
+        <%= value %>
+      </div>
+      <div class="ost-mocker-value-post"><%= raw value_postfix %></div>
+    </div>
+    <div class="ost-mocker-footer"><%= raw footer %></div>
+  </div>
+</div>
+

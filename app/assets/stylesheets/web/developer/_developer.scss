@@ -1,0 +1,56 @@
+// Import functions as variables depend on functions
+@import "../../plugins/bootstrap/scss/functions";
+
+// Import theme variables
+@import "../Starboy/variables";
+
+
+.developers-container{
+  .container{
+    .dev-container-box{
+      background-color:rgba(155, 175, 181, 0.1);
+      .api-delete-btn{
+        cursor: pointer;
+      }
+    }
+
+    p{
+      font-size: $font-size-sm;
+
+    }
+    ul{
+      li{
+        font-size: $font-size-sm;
+        color: $blue-700;
+      }
+    }
+
+    .keys-wrapper{
+      .expiry{
+        color: $blue-700;
+        font-size: $font-size-sm;
+      }
+    }
+    .generate-key-btn{
+      display: none;
+    }
+    .error{
+      min-height: 25px;
+      font-weight: $font-weight-normal;
+      font-size: $font-size-sm;
+      color: $red;
+    }
+  }
+
+}
+
+.modal{
+  & .modal-content{
+    & .modal-body{
+      .sub-header{
+        color: $blue-700;
+        font-weight: $font-weight-light;
+      }
+    }
+  }
+}

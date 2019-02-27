@@ -1,0 +1,37 @@
+.slider-with-input {
+    width: 100%;
+}
+.slider-with-input .slider {
+    flex-grow: 1;
+    max-width: 100%;
+}
+.slider-input-left {
+    width: 1%;
+    min-width: 100px;
+    display: table-cell;
+    padding-right: 12px;
+}
+.slider-input-left input {
+    text-align: left;
+}
+.slider-input-right {
+    width: 1%;
+    min-width: 142px;
+    display: table-cell;
+    padding-left: 12px;
+}
+.slider-input-right input {
+    text-align: right;
+}
+.slider-input-bottom,
+.slider-input-top{
+    display: table-row;
+    width: 100%;
+}
+.slider-input-bottom input {
+    margin-top: 5px;
+    text-align: right;
+}
+.slider-input-line {
+    margin-top: 5px;
+}

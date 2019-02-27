@@ -1,0 +1,206 @@
+.btn{
+  text-transform: uppercase;
+  font-weight: 500;
+  min-width: 185px;
+  letter-spacing: 2px;
+  font-size: 0.75rem;
+  padding: 0.75rem;
+}
+
+.btn-gold{
+  border-color: $yellow-300;
+  background: $yellow-300;
+  color: #fff;
+  &.focus-cls,
+  &:focus{
+    color: #fff;
+    outline: none;
+    text-decoration: none;
+  }
+  &.hover-cls, &.active-cls,
+  &:hover, &:active{
+    color: #fff;
+    text-decoration: none;
+    background-color: $yellow-400;
+    border-color: $yellow-400;
+  }
+}
+
+.btn-primary {
+  color: $white;
+  &:focus{
+    color: $white;
+  }
+  &:hover{
+    color: $white;
+    background-color: $yellow-400;
+    border-color: $yellow-400;
+  }
+  &:active{
+    color: $white;
+    background-color: $yellow-400;
+    border-color: $yellow-400;
+  }
+  &:disabled{
+    color: $white;
+  }
+}
+
+.btn-steps-nav{
+  font-size: 0.8rem;
+  border-radius: 0;
+  color: #fff;
+  &.focus-cls,
+  &:focus{
+    color: #fff;
+    outline: none;
+    text-decoration: none;
+  }
+  &.hover-cls, &.active-cls,
+  &:hover, &:active{
+    color: #fff;
+    text-decoration: none;
+  }
+  &.bg-yellow{
+    border-color: #af7f19;
+    background: #af7f19;
+  }
+}
+
+.btn-white{
+  border-color: #7f9183;
+  background: #ffffff;
+  color: #7f9183;
+  &.focus-cls,
+  &:focus{
+    color: #7f9183;
+    outline: none;
+    text-decoration: none;
+  }
+  &.hover-cls, &.active-cls,
+  &:hover, &:active{
+    color: #7f9183;
+    text-decoration: none;
+    background-color: #ffffff;
+    border-color: #7f9183;
+  }
+}
+
+.btn-api{
+  border-color: #a1c5d6;
+  background: transparent;
+  color: #a1c5d6;
+  &.focus-cls,
+  &:focus{
+    color: #a1c5d6;
+    outline: none;
+    text-decoration: none;
+    box-shadow: none;
+  }
+  &.hover-cls, &.active-cls,
+  &:hover, &:active{
+    color: #84d1d4;
+    text-decoration: none;
+    background-color: #f9fdfd;
+    border-color: #84d1d4;
+    .icon-api-transactions{
+      fill: #ffffff;
+    }
+  }
+}
+
+.btn-gold-border{
+  border-color: #e4b030;
+  color: #e4b030;
+  &.focus-cls,
+  &:focus{
+    color: #7f9183;
+    outline: none;
+    text-decoration: none;
+  }
+  &.hover-cls, &.active-cls,
+  &:hover, &:active{
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #D9A025;
+    border-color: #D9A025;
+  }
+}
+
+.ost-btn-secondary{
+  border: 1px solid $blue-800;
+  background: $white;
+  color: $blue-800;
+  &.focus-cls,
+  &:focus{
+    color: $blue-800;
+    outline: none;
+    box-shadow: none;
+    text-decoration: none;
+  }
+  &.hover-cls, &.active-cls,
+  &:hover, &:active{
+    color: $white;
+    text-decoration: none;
+    background-color: $blue-800;
+    border-color: $blue-800;
+    svg.icon-play{
+      fill: $white;
+    }
+  }
+}
+
+.btn-secondary{
+  border: 1px solid $blue-800;
+  color: $blue-800;
+  &.focus-cls,
+  &:focus {
+    color: $white;
+    text-decoration: none;
+    background-color: $blue-800;
+    border-color: $blue-800;
+  }
+  &.hover-cls, &.active-cls,
+  &:hover, &:active{
+    color: $white;
+    text-decoration: none;
+    background-color: $blue-800;
+    border-color: $blue-800;
+  }
+}
+
+.btn-info{
+  border: 1px solid #69a2bd;
+  background: #fff;
+  color: #69a2bd;
+  &.focus-cls,
+  &:focus{
+    color: #69a2bd;
+    outline: none;
+    box-shadow: none;
+    text-decoration: none;
+  }
+  &.hover-cls, &.active-cls,
+  &:hover, &:active{
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #69a2bd;
+    border-color: #69a2bd;
+    .icon-api-transactions{
+      fill: #ffffff;
+    }
+  }
+}
+
+
+.edit-btn{
+  padding: 10px 14px;
+  display: inline-block;
+  text-align: center;
+  margin-left: 10px;
+  &:hover{
+    .icon-edit-transactions{
+      fill: #ffffff;
+    }
+  }
+}

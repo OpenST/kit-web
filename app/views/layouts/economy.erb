@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= @page_meta_data[:title] %></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="<%= @page_meta_data[:description] %>">
+  <meta name="keywords" content="<%= @page_meta_data[:keywords] %>">
+  <meta name="robots" content="<%= @page_meta_data[:robots] %>">
+  <% if @page_meta_data[:canonical].present? %>
+      <link rel="canonical" href="<%= @page_meta_data[:canonical] %>" />
+  <% end %>
+
+  <%
+    og_meta = @page_meta_data[:og]
+     if og_meta.present?
+  %>
+      <% if og_meta[:title].present? %>
+          <meta property="og:title" content="<%= og_meta[:title] %>"/>
+          <meta property="og:description" content="<%= og_meta[:description] %>"/>
+          <meta property="og:type" content="<%= og_meta[:type] %>"/>
+          <meta property="og:url" content="<%= og_meta[:url] %>"/>
+          <meta property="og:site_name" content="kit.ost.com"/>
+          <meta property="og:image" content="<%= og_meta[:image] %>"/>
+      <% end %>
+  <% end %>
+
+  <%
+          tw_meta = @page_meta_data[:twitter]
+          if tw_meta.present?
+  %>
+      <meta name="twitter:card" content="<%= tw_meta[:card] %>" />
+      <% if tw_meta[:site].present? %>
+          <meta name="twitter:site" content="<%= tw_meta[:site] %>" />
+      <% end %>
+      <% if tw_meta[:title].present? %>
+          <meta name="twitter:title" content="<%= tw_meta[:title] %>" />
+      <% end %>
+      <% if tw_meta[:description].present? %>
+          <meta name="twitter:description" content="<%= tw_meta[:description] %>" />
+      <% end %>
+      <% if tw_meta[:creator].present? %>
+          <meta name="twitter:creator" content="<%= tw_meta[:creator] %>" />
+      <% end %>
+      <% if tw_meta[:image].present? %>
+          <meta name="twitter:image" content="<%= tw_meta[:image] %>" />
+      <% end %>
+      <% if tw_meta[:image_alt].present? %>
+          <meta name="twitter:image:alt" content="<%= tw_meta[:image_alt] %>" />
+      <% end %>
+  <% end %>
+
+  <%= csrf_meta_tags %>
+
+  <% if Rails.env.production? %>
+    <%= render :partial => 'shared/web/common/ga_config_economy' %>
+  <% end %>
+
+  <%= render :partial => "/shared/web/common/fav_icons" %>
+
+  <%= stylesheet_link_tag "web/bootstrap-theme" %>
+  <%= stylesheet_link_tag "#{specific_manifest_file_path}", media: 'all' if has_specific_css_manifest_file? %>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body contenteditable="false">
+
+<%= render :partial => "/shared/web/common/header" %>
+<%= render :partial => "/shared/web/common/other-icons.svg" %>
+
+<% content_for :app_content_classes do %>
+  <%=params[:action] == 'team' ? 'cloud-bg team-page-height' : ''%>
+<% end %>
+
+<main id="app-content" class="wrapper <%= yield (:app_content_classes) %>">
+
+  <%
+    content_style = ""
+    cover_elem_style = ""
+    if @fe_no_nav.present? && @fe_no_nav
+      content_style = "width:100%;margin-left:0"
+      cover_elem_style = "width:100%"
+    else
+  %>
+    <%= render :partial => "/shared/web/common/sidebar" %>
+  <% end %>
+
+
+  <%= render :partial => "/shared/web/economy/metamask/metamask" %>
+
+  <section id="content" class="container-fluid" style="<%= content_style %>">
+      <style>#content #cover-container .cover-element{<%= cover_elem_style %>}</style>
+      <%if params[:action] != 'team' %>
+        <%= render :partial => "/shared/web/common/test_data_banner" %>
+      <% end %>
+      <%= yield %>
+      <div class="row">
+          <% # meta-mask-workflow Needs to be the first element %>
+          <div class="col-12" id="cover-container">
+            <%= yield(:cover_elements) %>
+          </div>
+      </div>
+  </section>
+
+  <% content_for :popups do %>
+    <%= render :partial => "shared/web/modals/help_video" %>
+  <%end%>
+
+</main>
+
+<%= yield(:popups) %>
+<%= javascript_include_tag "web/common" %>
+<%= javascript_include_tag "#{specific_manifest_file_path}" if has_specific_js_manifest_file? %>
+
+<%= yield(:end_js) %>
+<script type="text/javascript">
+  $(function () {
+    $( window ).on('load', function () {
+      setTimeout(function () {
+        //Load typekit fonts.
+        $('head').append('<link rel="stylesheet" href="https://use.typekit.net/lde7yjs.css" />');
+
+        // Force Load All other Images.
+        var responsivelyLazy = window.responsivelyLazy;
+        responsivelyLazy && responsivelyLazy.forceLoadAll && responsivelyLazy.forceLoadAll();
+      }, 100);
+    })
+  });
+  window.redirectMap = <%= raw GlobalConstant::RoutesMap.getRoutes.to_json %>;
+</script>
+
+</body>
+</html>

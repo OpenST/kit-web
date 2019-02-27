@@ -1,0 +1,177 @@
+<%
+  is_mainnet = GlobalConstant::Base.main_sub_environment?
+  workflow_id = @presenter_obj.workflow.id
+  deployment_status_api = GlobalConstant::RoutesMap.getApis()[:api_workflow] +"/#{workflow_id}"
+  resetdeploy_api =GlobalConstant::RoutesMap.getApis()[:api_reset_deployment]
+  redirect_url = GlobalConstant::RoutesMap.getRoutes()[:token_setup]
+  mint_token_url = GlobalConstant::RoutesMap.getRoutes()[:token_mint]
+  invite_team_url = GlobalConstant::RoutesMap.getRoutes()[:team]
+  developer_url = GlobalConstant::RoutesMap.getRoutes()[:developer]
+  is_poll_failed = false
+  if @presenter_obj.client_token.status == GlobalConstant::ClientToken.deployment_failed
+          is_poll_failed = true
+  end
+
+  current_step_failed_status = GlobalConstant::Workflow.failed
+  client_token_symbol = @presenter_obj.client_token_symbol
+%>
+
+  <div class="token-deploy-container text-center" style="display: <%= !is_poll_failed ? "block" : "none" %>">
+
+
+      <div class="token-deploy-in-progress token-deploy-content mx-auto">
+        <h3 class="mt-6">Your Token Is Being Deployed</h3>
+        <p class="font-weight-light mb-5 mt-3"> OST is deploying the smart contracts needed to launch your economy. This process will require several minutes.</p>
+        <div class="token-deploy-progress-wrapper  mx-auto">
+          <%= render :partial => "shared/web/common/progress_bar" %>
+        </div>
+        <h3 class="my-5">
+          Meanwhile you can continue
+        </h3>
+      </div>
+
+    <div class="deploy-success-state token-deploy-content mx-auto text-center mt-5" style="display: none;">
+      <h3 class="my-5">Set Up Complete</h3>
+      <div class="shadow-box p-3 row">
+
+        <div class="col-8 d-flex align-items-center">
+          <svg class="success-icon align-middle" style="width: 34px; height: 34px">
+            <switch>
+              <use class="success-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
+            </switch>
+          </svg>
+
+          <p class="mb-0 ml-2">Set Up is Complete. Lets start by Minting&nbsp;<%=client_token_symbol %></p>
+        </div>
+        <div class="col-4 my-auto text-right">
+          <a class="btn btn-primary d-inline" href="<%=mint_token_url %>">
+            Mint Tokens
+          </a>
+        </div>
+
+      </div>
+      <h3 class="my-5">
+        You can also...
+      </h3>
+
+
+    </div>
+
+
+    <div class="optional-actions-content mx-auto token-deploy-content">
+
+      <% if is_mainnet%>
+        <div class="my-3 content-wrapper p-2  row">
+          <div class="col-1 my-auto">
+            <svg class="get-ost-icon align-middle" style="width: 34px; height: 34px">
+              <switch>
+                <use class="get-ost-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#get-ost-icon"></use>
+              </switch>
+            </svg>
+          </div>
+          <p class="col-7 text-left my-auto">
+            Request OST to get started.
+          </p>
+          <div class="col-4">
+            <a class="btn btn-secondary" target="_blank" href="https://openst.org/#token">
+              Buy ost
+            </a>
+          </div>
+        </div>
+      <% end %>
+      <div class="my-3 content-wrapper p-2  row">
+        <div class="col-1 my-auto">
+          <svg class="invite-team-icon align-middle" style="width: 34px; height: 34px">
+            <switch>
+              <use class="invite-team-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#invite-team-icon"></use>
+            </switch>
+          </svg>
+
+        </div>
+        <p class="col-7 text-left my-auto">
+          Inviting your team members to collaborate
+        </p>
+        <div class="col-4">
+          <a class="btn btn-secondary"  href="<%=invite_team_url %>">
+            Invite Team
+          </a>
+
+        </div>
+
+
+      </div>
+      <div class="my-3 content-wrapper p-2  row">
+        <div class="col-1 my-auto">
+          <svg class="get-api-keys-icon align-middle" style="width: 34px; height: 34px">
+            <switch>
+              <use class="get-api-keys-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#get-api-keys-icon"></use>
+            </switch>
+          </svg>
+
+        </div>
+        <p class="col-7 text-left my-auto">
+          Starting the API integration with your application
+        </p>
+        <div class="col-4">
+          <a class="btn btn-secondary"  href="<%=developer_url %>">
+            Get API Keys
+          </a>
+
+        </div>
+
+
+      </div>
+      <div class="my-3 content-wrapper p-2  row">
+        <div class="col-1 my-auto">
+          <svg class="ost-guides-icon align-middle" style="width: 34px; height: 34px">
+            <switch>
+              <use class="ost-guides-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ost-guides-icon"></use>
+            </switch>
+          </svg>
+
+        </div>
+        <p class="col-7 text-left my-auto">
+          Consulting the guides and tutorials to get started
+        </p>
+        <div class="col-4">
+          <button class="btn btn-secondary">
+            Read Docs
+          </button>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+</div>
+
+
+<div class="deploy-error-state text-center mt-5" style="display: <%= is_poll_failed ? "block" : "none" %>">
+  <svg class="error-icon align-middle">
+    <switch>
+      <use class="error-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#error-icon"></use>
+    </switch>
+  </svg>
+  <h3 class="text-center mt-5 display-header">Looks like there was an issue in the setup process </h3>
+  <p class="font-weight-light  mb-5 text-muted">
+    Please try connecting to the support team to proceed.
+  </p>
+  <div class="invalid-feedback general_error"></div>
+</div>
+
+<% content_for :end_js do %>
+  <script type="text/javascript">
+    $( function () {
+      var isPollFailed = <%= is_poll_failed %> ;
+      ost.tokenDeploy.init({
+        getDeployStatusEndPoint:"<%=deployment_status_api%>",
+        resetdeployEndPoint : "<%=resetdeploy_api %>",
+        redirectUrl : "<%=redirect_url %>" ,
+        currentStepFailedStatus : "<%= current_step_failed_status %>",
+        workflowId : "<%= workflow_id %>"
+      });
+    });
+  </script>
+<% end %>

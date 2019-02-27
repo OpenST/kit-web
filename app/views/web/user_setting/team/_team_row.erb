@@ -1,0 +1,92 @@
+<%
+
+  verified_email_property = "has_verified_email" ;
+  setup_mfa_property = "has_setup_mfa" ;
+  super_admin_invite_privilege = "is_super_admin_invited";
+  super_admin_privilege = "is_super_admin";
+  admin_invite_privilege = "is_admin_invited";
+  admin_privilege = "is_admin";
+
+%>
+
+
+<script type="text/x-handlebars-template" data-row-template>
+  <div class="row align-items-center mt-1 mb-3 rounded ost-table-row cell" data-user-id="{{id}}">
+    <div class="col-5">
+      {{manager.email}}<br/>
+      <small class="font-weight-light">
+        {{ getUserRoleText privileges }}
+      </small>
+    </div>
+    <div class="col-3 text-uppercase">{{manager.status}}</div>
+    <% if @presenter_obj.is_super_admin? %>
+
+      {{#notLoginedUser id}}
+        <div class="col-4 ">
+          <select class="form-control selectpicker">
+            <option value="" selected disabled>ACTIONS</option>
+            <option value="delete">DELETE USER</option>
+            {{#hasVerifiedEmail manager.properties}}
+              {{#isSuperAdmin privileges }}
+                <option value="un-assign">UN-ASSIGN SUPER ADMIN</option>
+                {{else}}
+                <option value="assign">ASSIGN SUPER ADMIN</option>
+              {{/isSuperAdmin}}
+            {{else}}
+              <option value="resend-invite">RESEND INVITE</option>
+            {{/hasVerifiedEmail}}
+            {{#hasSetupMfa manager.properties}}
+            <option value="reset-mfa">RESET MFA</option>
+            {{/hasSetupMfa}}
+          </select>
+        </div>
+      {{/notLoginedUser}}
+
+    <%end%>
+  </div>
+</script>
+
+<% content_for :end_js do %>
+  <script type="text/javascript">
+
+    Handlebars.registerHelper('hasVerifiedEmail', function(properties ,  options ) {
+      if( properties && properties.indexOf( "<%= verified_email_property %>" ) > -1  ){
+        return options.fn(this);
+      }
+      return options.inverse(this);
+    });
+
+    Handlebars.registerHelper("hasSetupMfa", function(properties ,  options ) {
+      if( properties && properties.indexOf( "<%= setup_mfa_property %>" ) > -1  ){
+        return options.fn(this);
+      }
+      return options.inverse(this);
+    });
+
+    Handlebars.registerHelper("isSuperAdmin", function(privilages ,  options ) {
+      if( privilages && privilages.indexOf( "<%= super_admin_privilege %>" ) > -1  ){
+        return options.fn(this);
+      }
+      return options.inverse(this);
+    });
+
+    Handlebars.registerHelper("notLoginedUser", function( id  ,  options ) {
+      var loginedUserID = ost.team.loginedUserConfig.id ;
+      if( id != loginedUserID  ){
+        return options.fn(this);
+      }
+      return  options.inverse(this);
+    });
+
+    Handlebars.registerHelper("getUserRoleText", function( privileges  ,  options ) {
+      if( !privileges ) return "";
+      if( privileges.indexOf( "<%= super_admin_invite_privilege %>" ) > -1 || privileges.indexOf( "<%= super_admin_privilege %>" ) > -1 ){
+        return "Super Admin"
+      } else if( privileges.indexOf( "<%= admin_invite_privilege %>" ) > -1 || privileges.indexOf( "<%= admin_privilege %>" ) > -1 ){
+        return "Admin";
+      }
+    });
+
+
+  </script>
+<% end %>

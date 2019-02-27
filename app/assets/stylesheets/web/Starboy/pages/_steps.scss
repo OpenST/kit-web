@@ -1,0 +1,66 @@
+.stepwizard {
+  width: 75%;
+  margin: 0 auto;
+  counter-reset: step;
+  li {
+    font-size: 0.9rem;
+    width: 33.33%;
+    float: left;
+    position: relative;
+    font-weight: 500;
+    text-align: center;
+    &:first-child{
+      &:after {
+        background-color: transparent;
+      }
+    }
+    &:before{
+      content: counter(step);
+      counter-increment: step;
+      width: 40px;
+      height: 40px;
+      font-size: 1rem;
+      border-radius: 50%;
+      background-color: $cyan;
+      color: $white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 5px auto;
+    }
+    &:after {
+      content: '';
+      width: 100%;
+      height: 1px;
+      background-color: $blue-400;
+      position: absolute;
+      top: 20px;
+      z-index: -1;
+      left: -50%;
+    }
+    &.active{
+      color: #88c7ca;
+      &:before{
+        border: 3px solid $white;
+        background-color: $teal;
+        box-shadow: 0 0 0 2px #88c7ca;
+        color: #fff;
+      }
+    }
+    &.incomplete{
+      color: $blue-700;
+      &:before{
+        box-shadow: 0 0 0 1px #88c7ca;
+        color: #88c7ca;
+        background-color: $white;
+      }
+    }
+    &.complete{
+      color: $cyan;
+      &:before{
+        color: $white;
+        background-color: $cyan;
+      }
+    }
+  }
+}

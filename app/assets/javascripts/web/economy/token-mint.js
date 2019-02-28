@@ -32,6 +32,8 @@
     jClientRetryBtn                 :   $('.jClientRetryBtn'),
     jEtherText                      :   $('.ether-text'),
     jOstText                        :   $('.ost-text'),
+    jEthOstText                     :   $('.eth-ost-text'),
+    jLowBal                         :   $('.low-bal'),
     jTokenSetupAdminErrorModal      :   $('#token_setup_admin_error'),
     //Static jQuery elements End
   
@@ -73,6 +75,9 @@
     stakeAndMintError               :   "Looks like there was an issue in the minting process, Please connect with customer support with the 2 transaction hash.",
     //General error msg end
 
+    deferredEthObj : $.Deferred(),
+    deferredOstObj : $.Deferred(),
+
     init : function (config) {
       
       console.log("===config====" , config );
@@ -95,6 +100,7 @@
       oThis.initPriceOracle();
       oThis.initUIValues();
       oThis.bindActions();
+      oThis.checkForBalCallback();
     },
     
     initPriceOracle : function ( ) {
@@ -219,7 +225,7 @@
       if( workflowId ){
         oThis.onWorkFlow( workflowId );
       }else {
-        oThis.checkEthBal();
+        oThis.checkForBal();
       }
     },
   
@@ -247,43 +253,56 @@
 
     checkForBal: function () {
       oThis.resetGetOstUIState();
-      oThis.checkEthBal();
+      oThis.getEthBal();
+      oThis.getOstBal();
     },
-  
-    checkEthBal : function () {
-      var walletAddress = oThis.getWalletAddress() ;
+
+    checkForBalCallback : function() {
+      $.when(oThis.deferredEthObj, oThis.deferredOstObj )
+        .done( function( eth, ost ){
+          var minETHRequire = oThis.getMinETHRequired(),
+            ethBN = eth && BigNumber( eth ),
+            minOstRequire = oThis.getMinOstRequired(),
+            ostBN =  ost && ost && BigNumber( ost ),
+            lowEth = !ethBN ||  ethBN.isLessThan( minETHRequire ),
+            lowOst = !ostBN || ostBN.isLessThan( minOstRequire )
+          ;
+
+          if( lowEth || lowOst ){
+            oThis.jLowBal.hide();
+            oThis.showSection(  oThis.jInsufficientBalSection ) ;
+          }
+
+          if( lowEth && lowOst ) {
+            oThis.jEthOstText.show();
+          } else if( lowEth ) {
+            oThis.jEtherText.show();
+          } else if( lowOst ) {
+            $('.buy-ost-btn').show();
+            oThis.jOstText.show();
+          } else{
+            ost = PriceOracle.fromWei( ost );
+            oThis.onValidationComplete( ost );
+          }
+      })
+    },
+
+    getEthBal : function () {
+      var walletAddress = oThis.getWalletAddress();
       oThis.metamask.getBalance( walletAddress  , function ( eth ) {
-        var minETHRequire = oThis.getMinETHRequired(),
-            ethBN = eth && BigNumber( eth )
-        ;
-        if( !ethBN ||  ethBN.isLessThan( minETHRequire ) ){
-          oThis.showSection(  oThis.jInsufficientBalSection ) ;
-          oThis.jEtherText.show();
-        }else {
-          oThis.checkForOstBal();
-        }
-      }) ;
+        oThis.deferredEthObj.resolve( eth );
+      });
     },
-    
-    checkForOstBal : function(){
-      var walletAddress = oThis.getWalletAddress() ,
-          simpleTokenContractAddress  =   oThis.getSimpleTokenContractAddress()
+
+    getOstBal : function() {
+      var walletAddress = oThis.getWalletAddress(),
+        simpleTokenContractAddress  =   oThis.getSimpleTokenContractAddress()
       ;
       oThis.metamask.balanceOf( walletAddress , simpleTokenContractAddress , function ( ost ) {
-        var minOstRequire = oThis.getMinOstRequired() ,
-            ostBN =  ost && ost && BigNumber( ost )
-        ;
-        if( !ostBN || ostBN.isLessThan( minOstRequire ) ){
-          oThis.showSection(  oThis.jInsufficientBalSection ) ;
-          $('.buy-ost-btn').show();
-          oThis.jOstText.show();
-        }else {
-          ost = PriceOracle.fromWei( ost );
-          oThis.onValidationComplete( ost );
-        }
-      } ) ;
+        oThis.deferredOstObj.resolve( ost );
+      });
     },
-    
+
     /*********************************************************************************************************-/
      *                                                                                                       *
      *       NOTE IMPORTANT : OST PASSED AFTER VALIDATION ON BALANCE IS NOT IN WEI , ITS ABSOLUTE VALUE      *

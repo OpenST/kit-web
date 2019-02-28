@@ -212,13 +212,17 @@
                         </switch>
                       </svg>
                       <div style="overflow: auto;" class="text-muted font-weight-light">
-                        <span class="ether-text" style="display: none;">
+                        <span class="low-bal ether-text" style="display: none;">
                           Looks like the account selected in metamask does not have enough <%= ether_text %> to pay gas for Minting Tokens,
                           You can select a different account or Buy some <%= ether_text %>.
                         </span>
-                        <span class="ost-text" style="display: none;">
+                        <span class="low-bal ost-text" style="display: none;">
                           Looks like the account selected in metamask does not have enough <%= ost_currency_symbol %> to Mint Tokens,
                           You can select a different account or Buy More <%= ost_currency_symbol %>.
+                        </span>
+                        <span class="low-bal eth-ost-text" style="display: none;">
+                          Looks like the account selected in metamask does not have enough <%= ether_text %> and <%= ost_currency_symbol %> to Mint Tokens,
+                          You can select a different account or Buy More <%= ether_text %> and <%= ost_currency_symbol %>.
                         </span>
                       </div>
                     <% else %>

@@ -73,17 +73,13 @@
         window.location = oThis.redirectMainnet;
       });
 
-      // oThis.jWhitelistUserModal.on("show.bs.modal", function () {
-      //   //reset the checkbox and clear errors
-      //   oThis.jWhitelistUserCheckbox.prop('checked', false);
-      //   $('.error').text('');
-      // });
-
     },
 
     onRequestWhitelistUserSuccess: function(){
       $('.switch-mode').addClass('disabled');
+      $('.switch-mode .switch').addClass('disabled');
       oThis.isMainnetWhitelistingRequested = true;
+      oThis.initTooltip();
       oThis.jWhitelistUserModalDefaultState.hide();
       oThis.jWhitelistUserModalSuccessState.show();
     }

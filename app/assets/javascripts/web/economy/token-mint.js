@@ -100,7 +100,6 @@
       oThis.initPriceOracle();
       oThis.initUIValues();
       oThis.bindActions();
-      oThis.checkForBalCallback();
     },
     
     initPriceOracle : function ( ) {
@@ -255,6 +254,7 @@
       oThis.resetGetOstUIState();
       oThis.getEthBal();
       oThis.getOstBal();
+      oThis.checkForBalCallback();
     },
 
     checkForBalCallback : function() {

@@ -75,8 +75,9 @@
     stakeAndMintError               :   "Looks like there was an issue in the minting process, Please connect with customer support with the 2 transaction hash.",
     //General error msg end
 
-    deferredEthObj : null,
-    deferredOstObj : null,
+    //Deferred Eth Bal object and Ost Bal obj
+    defEthBal : null,
+    defOstBal : null,
 
     init : function (config) {
       
@@ -252,15 +253,13 @@
 
     checkForBal: function () {
       oThis.resetGetOstUIState();
-      oThis.deferredEthObj = $.Deferred();
-      oThis.deferredOstObj = $.Deferred();
       oThis.getEthBal();
       oThis.getOstBal();
       oThis.checkForBalCallback();
     },
 
     checkForBalCallback : function() {
-      $.when(oThis.deferredEthObj, oThis.deferredOstObj )
+      $.when(oThis.defEthBal, oThis.defOstBal )
         .done( function( eth, ost ){
           var minETHRequire = oThis.getMinETHRequired(),
             ethBN = eth && BigNumber( eth ),
@@ -291,8 +290,9 @@
 
     getEthBal : function () {
       var walletAddress = oThis.getWalletAddress();
+      oThis.defEthBal = $.Deferred();
       oThis.metamask.getBalance( walletAddress  , function ( eth ) {
-        oThis.deferredEthObj.resolve( eth );
+        oThis.defEthBal.resolve( eth );
       });
     },
 
@@ -300,8 +300,9 @@
       var walletAddress = oThis.getWalletAddress(),
         simpleTokenContractAddress  =   oThis.getSimpleTokenContractAddress()
       ;
+      oThis.defOstBal = $.Deferred();
       oThis.metamask.balanceOf( walletAddress , simpleTokenContractAddress , function ( ost ) {
-        oThis.deferredOstObj.resolve( ost );
+        oThis.defOstBal.resolve( ost );
       });
     },
 
@@ -552,8 +553,8 @@
 
       var data = [
         ['Type', 'Tokens'],
-        ['OSTAvailable', ostAvailable],
-        ['OSTStaked', ostToStake]
+        ['OSTStaked', ostToStake],
+        ['OSTAvailable', ostAvailable]
       ];
      oThis.mintDonuteChart.draw({
         data : data
@@ -568,8 +569,8 @@
       oThis.mintDonuteChart.draw({
         data: [
           ['Type', 'Tokens'],
+          ['OSTStaked', ostToStake],
           ['OSTAvailable', ostAvailable],
-          ['OSTStaked', ostToStake]
         ],
         selector: '#ostSupplyInAccountPie',
         type: 'PieChart',
@@ -578,7 +579,7 @@
           pieHole: 0.7,
           pieSliceText: 'none',
           pieSliceBorderColor: 'none',
-          colors: ['34445b','88c7ca'],
+          colors: ['88c7ca', '34445b'],
           backgroundColor: 'transparent',
           enableInteractivity: false,
           legend: 'none',

@@ -205,40 +205,25 @@
                 %>
                 <div class="col-6 align-self-top d-flex text-left pl-0 jStatusWrapper">
                   <div class="status-message">
-                    <% if is_buy_ost %>
-                      <svg class="svg float-left mr-2" style="width: 25px;height: 25px">
-                        <switch>
-                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-error"></use>
-                        </switch>
-                      </svg>
-                      <div style="overflow: auto;" class="text-muted font-weight-light">
+                    <svg class="svg float-left mr-2" style="width: 25px;height: 25px">
+                      <switch>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<%= is_buy_ost ? '#icon-error' : '#icon-fund-wallet' %>"></use>
+                      </switch>
+                    </svg>
+                    <div style="overflow: auto;" class="text-muted font-weight-light">
                         <span class="low-bal ether-text" style="display: none;">
-                          Looks like the account selected in metamask does not have enough <%= ether_text %> to pay gas for Minting Tokens,
-                          You can select a different account or Buy some <%= ether_text %>.
+                          Looks like the account selected in metamask does not have enough <%= ether_text %> to pay gas for Minting Tokens.
+                          <%= is_buy_ost ? 'Buy' : 'Get' %> <%= ether_text %> to continue.
                         </span>
-                        <span class="low-bal ost-text" style="display: none;">
-                          Looks like the account selected in metamask does not have enough <%= ost_currency_symbol %> to Mint Tokens,
-                          You can select a different account or Buy More <%= ost_currency_symbol %>.
+                      <span class="low-bal ost-text" style="display: none;">
+                          Looks like the account selected in metamask does not have enough <%= ost_currency_symbol %> to Mint Tokens.
+                        <%= is_buy_ost ? 'Buy' : 'Get' %> <%= ost_currency_symbol %> to continue.
                         </span>
-                        <span class="low-bal eth-ost-text" style="display: none;">
-                          Looks like the account selected in metamask does not have enough <%= ether_text %> and <%= ost_currency_symbol %> to Mint Tokens,
-                          You can select a different account or Buy More <%= ether_text %> and <%= ost_currency_symbol %>.
+                      <span class="low-bal eth-ost-text" style="display: none;">
+                          Looks like the account selected in metamask does not have enough <%= ether_text %> and <%= ost_currency_symbol %> to Mint Tokens.
+                        <%= is_buy_ost ? 'Buy' : 'Get' %> <%= ether_text %> and <%= ost_currency_symbol %> to continue.
                         </span>
-                      </div>
-                    <% else %>
-                      <div class="d-flex align-items-center">
-                        <div class="mr-2 align-self-start">
-                          <svg style="width: 25px;height: 30px">
-                            <switch>
-                              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-fund-wallet"></use>
-                            </switch>
-                          </svg>
-                        </div>
-                        <div style="overflow: auto;" class="text-muted font-weight-light">
-                          <span>Your selected address does not have sufficient <%= ether_text %> or <%= ost_currency_symbol %>.</span>
-                        </div>
-                      </div>
-                    <% end %>
+                    </div>
                   </div>
                 </div>
               </div>

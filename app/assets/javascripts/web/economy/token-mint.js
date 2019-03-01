@@ -75,8 +75,8 @@
     stakeAndMintError               :   "Looks like there was an issue in the minting process, Please connect with customer support with the 2 transaction hash.",
     //General error msg end
 
-    deferredEthObj : $.Deferred(),
-    deferredOstObj : $.Deferred(),
+    deferredEthObj : null,
+    deferredOstObj : null,
 
     init : function (config) {
       
@@ -252,6 +252,8 @@
 
     checkForBal: function () {
       oThis.resetGetOstUIState();
+      oThis.deferredEthObj = $.Deferred();
+      oThis.deferredOstObj = $.Deferred();
       oThis.getEthBal();
       oThis.getOstBal();
       oThis.checkForBalCallback();

@@ -5,10 +5,6 @@ module GlobalConstant
 
     class << self
 
-      def max_value_of_min_stp_to_mint
-        GlobalConstant::Base.main_sub_environment? ? 5 : 100
-      end
-
       def initial_ost_funding
         '10000'  #keep this in sync with SASS and KIT_API
       end

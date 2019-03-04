@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   end
 
   scope "#{GlobalConstant::Environment.url_prefix}", controller: 'web/economy' do
+    get '/' => :dashboard, as: 'dashboard'
     get '/token/setup' => :token_setup, as: 'token_setup'
     get '/token/deploy' => :token_deploy, as: 'token_deploy'
     get '/token/mint' => :token_mint, as: 'token_mint'

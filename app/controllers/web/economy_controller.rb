@@ -7,6 +7,27 @@ class Web::EconomyController < Web::BaseController
 
   after_action :remove_browser_caching
 
+
+  # Economy dashboard
+  #
+  # * Author: Sunil
+  # * Date: 01/03/2019
+  # * Reviewed By: Puneet
+  #
+  def dashboard
+    @response = CompanyApi::Request::Token.new(
+      CompanyApi::Response::Formatter::Token,
+      request.cookies,
+      {"User-Agent" => http_user_agent}
+    ).fetch_token_details()
+
+    unless @response.success?
+      return handle_temporary_redirects(@response)
+    end
+
+    @presenter_obj = ::WebPresenter::TokenPresenter.new(@response, params)
+  end
+
   # Planner to perform economy setup step one
   #
   # * Author: Ankit

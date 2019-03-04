@@ -7,6 +7,7 @@ module GlobalConstant
 
       def getRoutes
         {
+          dashboard:            "/#{GlobalConstant::Environment.url_prefix}/",
           token_setup:          "/#{GlobalConstant::Environment.url_prefix}/token/setup/",
           mainnet_token_setup:  "/#{GlobalConstant::Environment.main_sub_env_url_prefix}/token/setup/",
           sandbox_token_setup:  "/#{GlobalConstant::Environment.sandbox_sub_url_prefix}/token/setup/",

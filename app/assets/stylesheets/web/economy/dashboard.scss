@@ -1,4 +1,16 @@
 .dashboard{
+  .stats-col{
+    border-radius: 5px;
+    border: solid 1px #85b4ca;
+    .title{
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .gold{
+      color: #e4b030;
+      letter-spacing: 0.4px;
+    }
+  }
   .card{
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.08) !important;
   }

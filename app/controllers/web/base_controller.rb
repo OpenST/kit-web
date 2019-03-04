@@ -39,9 +39,7 @@ class Web::BaseController < ApplicationController
   #
   def basic_auth
 
-    return if Rails.env.development?
-
-    return if Rails.env.production? && GlobalConstant::Base.is_public_launch_done?
+    return if Rails.env.development? || Rails.env.production?
 
     users = {
       GlobalConstant::BasicAuth.username => GlobalConstant::BasicAuth.password
@@ -72,26 +70,15 @@ class Web::BaseController < ApplicationController
     response.headers['Last-Modified'] = "#{Time.now.gmtime.strftime("%a, %d %b %Y %T GMT")}"
   end
 
-  # Verify existing login
+  # Primary check if login cookie not present, then redirect to login page
   #
   # * Author: Puneet
   # * Date: 02/02/2018
   # * Reviewed By:
   #
-  def dont_render_if_logged_in
-
-    return unless @is_user_logged_in
-
-    @response = CompanyApi::Request::Manager.new(
-        CompanyApi::Response::Formatter::Manager,
-        request.cookies,
-        {"User-Agent" => http_user_agent}
-    ).get_manager_details({})
-
-    if @response.go_to.present? || !@response.success?
-      handle_temporary_redirects(@response) and return
-    end
-
+  def redirect_to_login_if_login_cookie_not_present
+    return if @is_user_logged_in
+    redirect_to :login, status: GlobalConstant::ErrorCode.temporary_redirect and return
   end
 
   # Verify existing login
@@ -100,12 +87,15 @@ class Web::BaseController < ApplicationController
   # * Date: 02/02/2018
   # * Reviewed By:
   #
-  def dont_render_if_logged_out
-
-    return if @is_user_logged_in
-
-    redirect_to :login, status: GlobalConstant::ErrorCode.temporary_redirect and return
-
+  def logout_if_login_cookie_present
+    # If cookie is present, log out without bothering about the response.
+    if @is_user_logged_in
+      CompanyApi::Request::Manager.new(
+        CompanyApi::Response::Formatter::Manager,
+        request.cookies,
+        {"User-Agent" => http_user_agent}
+      ).logout({})
+    end
   end
 
 end

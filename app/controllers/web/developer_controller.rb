@@ -5,6 +5,8 @@ class Web::DeveloperController < Web::BaseController
   before_action :check_if_client_is_supported
   before_action :set_page_meta_info
 
+  before_action :redirect_to_login_if_login_cookie_not_present
+
   after_action :remove_browser_caching
 
   # Planner to perform economy setup step one

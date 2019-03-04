@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-  constraints(InitOst) do
-    scope '', controller: 'web/ost' do
-      get '/' => :index
-    end
-  end
-
   scope '', controller: 'application' do
     get '/health-checker' => :health_checker
   end

@@ -1,11 +1,3 @@
-
-<%# if GlobalConstant::Base.main_sub_environment? %>
-  <%#= render :partial => "/web/user/sign_up_left_mainnet"%>
-<%# else %>
-  <%#= render :partial => "/web/user/sign_up_left_testnet" %>
-<%# end %>
-
-
 <div class="container-fluid m-auto" style="overflow-y: scroll">
   <div class="row">
     <div class="container">
@@ -15,17 +7,12 @@
                 action="<%=GlobalConstant::RoutesMap.getApis()[:api_sign_up] %>" method="POST"
           >
 
-            <h3 class="text-center">Welcome, Register to access <svg style="width: 50px;height: 30px;vertical-align: bottom">
-              <switch>
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ost-header-logo"></use>
-              </switch>
-            </svg>
-
-              <%# if GlobalConstant::Base.main_sub_environment? %>
-<!--                Mainnet Alpha 1-->
-              <%# else %>
-<!--                alpha-->
-              <%# end %>
+            <h3 class="text-center">Welcome, Register to access
+              <svg style="width: 50px;height: 30px;vertical-align: bottom">
+                <switch>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ost-header-logo"></use>
+                </switch>
+              </svg>
             </h3>
 
             <div class="general_error invalid-feedback" data-forid="sign_up_form">&nbsp;</div>
@@ -65,7 +52,7 @@
                 <input id="tos" class="checkbox-custom form-check-input" name="agreed_terms_of_service"
                        type="checkbox" required
                        data-msg-required="You must agree to the OST KIT⍺ Terms of Service & Privacy Policy to register."
-                  />
+                />
                 <label for="tos" class="checkbox-custom-label form-check-label">
             <span class="tos-text">By checking this box, you agree to our
               <a href="//drive.google.com/file/d/1rNemmuIq7ZamlwS962uqenNsljhEXKU_/view" target="_blank"

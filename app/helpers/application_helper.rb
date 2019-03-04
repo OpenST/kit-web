@@ -66,24 +66,4 @@ module ApplicationHelper
     return GlobalConstant::Environment.go_back_env_url_prefix_param + "=" + go_back_value
   end
 
-  # Min OST required to start stake and mint based on SUB ENV
-  #
-  def min_ost_to_proceed_onboard
-    if(GlobalConstant::Base.main_sub_environment?)
-      100
-    else
-      1000
-    end
-  end
-
-  # Min ETH required to start stake and mint based on SUB ENV
-  #
-  def min_eth_to_proceed_onboard
-    if(GlobalConstant::Base.main_sub_environment?)
-      0.0015
-    else
-      0.05
-    end
-  end
-
 end

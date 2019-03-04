@@ -1,0 +1,17 @@
+.dashboard{
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.08) !important;
+  .list-items{
+    color: #597a84;
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.8rem;
+    margin-bottom: 0.8rem;
+    border-bottom: 0.5px solid rgba(133,180,202, 0.5);
+    &:last-child{
+      border-bottom: none;
+    }
+  }
+  .btn{
+    min-width: 150px;
+  }
+}

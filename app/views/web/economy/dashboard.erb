@@ -1,1 +1,71 @@
-Economy Dashboard. Work in progress.
+<%
+  dashboard_links = [
+      {
+        svg: "#invite-team-icon",
+        desc: "Invite your team members",
+        btn_txt: "invite team".upcase,
+        href: GlobalConstant::RoutesMap.getRoutes()[:team] + "?" + get_go_back_url_query_param
+      },
+      {
+        svg: "#get-api-keys-icon",
+        desc: "Integrate OST APIs with your application",
+        btn_txt: "get api keys".upcase,
+        href: GlobalConstant::RoutesMap.getRoutes()[:developer] + "?" + get_go_back_url_query_param
+      },
+      {
+        svg: "#ost-guides-icon",
+        desc: "Check our guides and tutorials for a quick start",
+        btn_txt: "ost guides".upcase
+      }
+  ]
+%>
+
+<div class="container my-6">
+  <div class="row mb-5">
+    <div class="col-12 mx-auto user-form">
+      <div class="card card-planner dashboard">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Welcome to OST KIT</h3>
+        </div>
+        <div class="card-body pt-2">
+          <div class="row">
+            <div class="col-7">
+              <ul class="list-unstyled m-0">
+                <li class="list-items">
+                  <svg style="width: 20px;height: 20px;">
+                    <switch>
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#complete-kyc-icon"></use>
+                    </switch>
+                  </svg>
+                  <span class="display-3 ml-2">Complete KYC | Enable production Mode</span>
+                  <button class="btn btn-secondary ml-auto" title="Complete KYC">complete kyc</button>
+                </li>
+                <% dashboard_links.each_with_index do|data, index| %>
+                  <li class="list-items">
+                    <svg style="width: 20px;height: 20px;">
+                      <switch>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<%= data[:svg] %>"></use>
+                      </switch>
+                    </svg>
+                    <span class="display-3 ml-2"><%= data[:desc] %></span>
+                    <a href="<%= data[:href] %>" class="btn btn-secondary ml-auto" title="<%= data[:btn_txt] %>"><%= data[:btn_txt] %></a>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="col-5">
+              <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-dashboard-hero-illustration@2x.png" class="img-fluid" alt="OST KIT">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <img src="/ost-kit-dashboard-coming-soon.png" class="img-fluid w-100" alt="OST KIT">
+    </div>
+  </div>
+
+</div>

@@ -36,7 +36,11 @@ module GlobalConstant
         GlobalConstant::Base.main_sub_environment? && GlobalConstant::Base.environment_name == GlobalConstant::Environment.production_environment
       end
 
-
+      # Get go back env url prefix remember page
+      #
+      def go_back_env_url_prefix_param
+        return 'gbeup'
+      end
 
     end
 

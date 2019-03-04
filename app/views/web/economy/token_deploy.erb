@@ -5,7 +5,7 @@
   resetdeploy_api =GlobalConstant::RoutesMap.getApis()[:api_reset_deployment]
   redirect_url = GlobalConstant::RoutesMap.getRoutes()[:token_setup]
   mint_token_url = GlobalConstant::RoutesMap.getRoutes()[:token_mint]
-  invite_team_url = GlobalConstant::RoutesMap.getRoutes()[:team]
+  invite_team_url = GlobalConstant::RoutesMap.getRoutes()[:team] + "?" + get_go_back_url_query_param
   developer_url = GlobalConstant::RoutesMap.getRoutes()[:developer]
   is_poll_failed = false
   if @presenter_obj.client_token.status == GlobalConstant::ClientToken.deployment_failed
@@ -92,7 +92,7 @@
           Inviting your team members to collaborate
         </p>
         <div class="col-4">
-          <a class="btn btn-secondary"  href="<%=invite_team_url %>">
+          <a class="btn btn-secondary"  href="<%= invite_team_url %>">
             Invite Team
           </a>
 

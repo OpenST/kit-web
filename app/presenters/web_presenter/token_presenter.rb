@@ -133,6 +133,18 @@ module WebPresenter
       end
     end
 
+    # Developer page addresses in presenter object
+    #
+    # * Author: Shlok
+    # * Date: 04/03/2019
+    # * Reviewed By:
+    #
+    def developer_page_addresses
+      @developer_page_addresses ||= begin
+        formatter_obj.present? ? formatter_obj.developer_page_addresses : nil
+      end
+    end
+
 
   end
 

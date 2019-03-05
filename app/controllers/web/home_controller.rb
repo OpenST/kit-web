@@ -4,20 +4,43 @@ class Web::HomeController < Web::BaseController
 
   before_action :set_page_meta_info
 
+  # Kit Home page
+  #
+  # * Author: Puneet
+  # * Date: 03/01/2019
+  # * Reviewed By: Kedar
+  #
   def index
-    if Rails.env.production? && GlobalConstant::Base.main_sub_environment?
-      redirect_to :sign_up_without_invite, status: GlobalConstant::ErrorCode.temporary_redirect and return
-    end
   end
 
+  # Unsupported client page
+  #
+  # * Author: Puneet
+  # * Date: 03/01/2019
+  # * Reviewed By: Kedar
+  #
   def unsupported_client
 
   end
 
+  # Service unavailable
+  #
+  # * Author: Puneet
+  # * Date: 03/01/2019
+  # * Reviewed By: Kedar
+  #
   def service_unavailable
 
   end
 
+  private
+
+  # Decide dynamic layout
+  #
+  # * Author: Puneet
+  # * Date: 03/01/2019
+  # * Reviewed By: Kedar
+  #
   def resolve_layout
     case action_name
     when "unsupported_client"

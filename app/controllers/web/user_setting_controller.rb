@@ -5,8 +5,16 @@ class Web::UserSettingController < Web::BaseController
   before_action :check_if_client_is_supported
   before_action :set_page_meta_info
 
+  before_action :redirect_to_login_if_login_cookie_not_present
+
   after_action :remove_browser_caching
 
+  # Kit economy team page
+  #
+  # * Author: Puneet
+  # * Date: 03/01/2019
+  # * Reviewed By: Kedar
+  #
   def team
     @response = CompanyApi::Request::Manager.new(
         CompanyApi::Response::Formatter::Manager,

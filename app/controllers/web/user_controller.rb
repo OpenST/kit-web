@@ -5,28 +5,27 @@ class Web::UserController < Web::BaseController
   before_action :check_if_client_is_supported
   before_action :set_page_meta_info
 
-  before_action :dont_render_if_logged_in, only: [
-    :reset_password, :update_password
+  before_action :logout_if_login_cookie_present, only: [
+    :sign_up,
+    :login,
+    :logout,
+    :reset_password,
+    :update_password
   ]
 
-  before_action :dont_render_if_logged_out, only: [
+  before_action :redirect_to_login_if_login_cookie_not_present, only: [
     :mfa
   ]
 
   after_action :remove_browser_caching
 
+  # Kit Signup page
+  #
+  # * Author: Puneet
+  # * Date: 03/01/2019
+  # * Reviewed By: Kedar
+  #
   def sign_up
-
-    # If cookie is present, log out without bothering about the response.
-    if @is_user_logged_in
-
-      CompanyApi::Request::Manager.new(
-        CompanyApi::Response::Formatter::Manager,
-        request.cookies,
-        {"User-Agent" => http_user_agent}
-      ).logout({})
-
-    end
 
     if params[:i_t].present?
 
@@ -62,6 +61,12 @@ class Web::UserController < Web::BaseController
 
   end
 
+  # Kit MFA Page
+  #
+  # * Author: Puneet
+  # * Date: 03/01/2019
+  # * Reviewed By: Kedar
+  #
   def mfa
 
     @response = CompanyApi::Request::Manager.new(
@@ -80,50 +85,55 @@ class Web::UserController < Web::BaseController
 
   end
 
+  # Kit Login
+  #
+  # * Author: Puneet
+  # * Date: 03/01/2019
+  # * Reviewed By: Kedar
+  #
   def login
-
-    return unless @is_user_logged_in
-
-    # Call logout with bothering about response
-    CompanyApi::Request::Manager.new(
-        CompanyApi::Response::Formatter::Manager,
-        request.cookies,
-        {"User-Agent" => http_user_agent}
-    ).logout({})
-
   end
 
+  # Kit Logout
+  #
+  # * Author: Puneet
+  # * Date: 03/01/2019
+  # * Reviewed By: Kedar
+  #
   def logout
-
-    # If user was already logged out, redirect to login
-    unless @is_user_logged_in
-      redirect_to :login and return
-    end
-
-    # Else trigger log out without bothering about response
-    CompanyApi::Request::Manager.new(
-        CompanyApi::Response::Formatter::Manager,
-        request.cookies,
-        {"User-Agent" => http_user_agent}
-    ).logout({})
-
     redirect_to :login
-
   end
 
+  # Kit Reset Password Request
+  #
+  # * Author: Puneet
+  # * Date: 03/01/2019
+  # * Reviewed By: Kedar
+  #
   def reset_password
-
   end
 
+  # Kit Update password
+  #
+  # * Author: Puneet
+  # * Date: 03/01/2019
+  # * Reviewed By: Kedar
+  #
   def update_password
-
     unless Util::CommonValidator.is_valid_token?(params[:r_t])
       render 'web/user/invalid_token'
       return
     end
-
   end
 
+  # Kit verify double optin email
+  #
+  # NOTE: Verify Email page works with logged in and logged out modes
+  #
+  # * Author: Puneet
+  # * Date: 03/01/2019
+  # * Reviewed By: Kedar
+  #
   def verify_email
 
     if params[:r_t].present?

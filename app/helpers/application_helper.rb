@@ -30,6 +30,8 @@ module ApplicationHelper
     params[:action].gsub('_','-')
   end
 
+  # Get OST currency symbol based on SUB ENV
+  #
   def ost_currency_symbol
     if(GlobalConstant::Base.main_sub_environment?)
       "OST"
@@ -38,6 +40,8 @@ module ApplicationHelper
     end
   end
 
+  # Get value chain text based on SUB ENV
+  #
   def ost_valuechain_text
     if(Rails.env.production? && GlobalConstant::Base.main_sub_environment?)
       'Main Ethereum Network'
@@ -46,24 +50,20 @@ module ApplicationHelper
     end
   end
 
-  def min_ost_to_proceed_onboard
-    if(GlobalConstant::Base.main_sub_environment?)
-      100
-    else
-      1000
-    end
+  # Get go back env url prefix for pages shared across sub envs
+  #
+  def go_back_env_url_prefix
+    params[GlobalConstant::Environment.go_back_env_url_prefix_param] == GlobalConstant::Environment.main_sub_env_url_prefix ?
+      GlobalConstant::Environment.main_sub_env_url_prefix : GlobalConstant::Environment.sandbox_sub_url_prefix
   end
 
-  def min_eth_to_proceed_onboard
-    if(GlobalConstant::Base.main_sub_environment?)
-      0.0015
-    else
-      0.05
-    end
-  end
-
-  def assets_domain
-    GlobalConstant::Base.main_sub_environment? ? 'mainnetdev.ost.com' : 'dev.ost.com'
+  # Get go back to url query param
+  #
+  def get_go_back_url_query_param
+    go_back_value = (params[GlobalConstant::Environment.go_back_env_url_prefix_param].present? ?
+                       params[GlobalConstant::Environment.go_back_env_url_prefix_param] :
+                       GlobalConstant::Environment.url_prefix)
+    return GlobalConstant::Environment.go_back_env_url_prefix_param + "=" + go_back_value
   end
 
 end

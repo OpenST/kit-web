@@ -140,7 +140,7 @@
         Below you will find your Company Token Holder Address, Branded Token Addresses and OST⍺ ERC20 contract address.
       </p>
       <% developer_addresses_config.each do |address| %>
-        <% if developer_page_addresses.data[address['key_name']] %>
+        <% if developer_page_addresses && developer_page_addresses.data[address['key_name']] %>
           <div class="dev-container-box p-3 px-4 mb-3">
             <h4>
               <%= address['label'] %>

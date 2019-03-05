@@ -6,7 +6,7 @@ module CompanyApi
 
       class Token < CompanyApi::Response::Formatter::Base
 
-        attr_reader :min_eth_in_wei, :min_ost_in_wei, :workflow_payload
+        attr_reader :min_eth_in_wei, :min_ost_in_wei, :workflow_payload, :developer_page_addresses
 
         # Initialize
         #
@@ -43,6 +43,7 @@ module CompanyApi
           set_min_ost_in_wei(@data['min_ost_in_wei'])
           set_workflow_payload(@data['workflow_payload'])
           set_sub_env_payload(@data['sub_env_payloads']) if @data['sub_env_payloads'].present?
+          set_developer_page_addresses(@data['developer_page_addresses']) if @data['developer_page_addresses'].present?
         end
 
         private
@@ -57,6 +58,10 @@ module CompanyApi
 
         def set_workflow_payload(data)
           @workflow_payload = CompanyApi::Response::Entity::WorkflowPayload.new(data)
+        end
+
+        def set_developer_page_addresses(data)
+          @developer_page_addresses = CompanyApi::Response::Entity::DeveloperPageAddresses.new(data)
         end
 
       end

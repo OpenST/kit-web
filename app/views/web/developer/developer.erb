@@ -1,7 +1,39 @@
 <%
   api_get_key = GlobalConstant::RoutesMap.getApis()[:get_api_keys]
   api_delete_key = GlobalConstant::RoutesMap.getApis()[:delete_api_key]
-  is_super_admin = @presenter_obj.is_super_admin?
+  developer_page_addresses = @presenter_obj.developer_page_addresses
+  developer_addresses_config = [
+      {
+          "label" => "Company Token Holder Address:",
+          "key_name" => "token_holder_address",
+          "description" => "The Member Reserve address is the initial holder of your minted branded tokens, from which tokens are transferred to different accounts in your economy."
+      },
+      {
+          "label" => "Utility Branded Token Address:",
+          "key_name" => "utility_branded_token_contract",
+          "description" => "In addition, you will find the Airdrop contract and the Budget Holder addresses for your Branded Token. After the Branded Token and Airdrop contracts are deployed, airdrop tokens are transferred from the Member Reserve Address to the Budget Holder Address."
+      },
+      {
+          "label" => "Branded Token Address:",
+          "key_name" => "branded_token_contract",
+          "description" => "Your Branded Token's Budget Holder Address will reserve the tokens to be airdropped. The Airdrop contract will manage transactions within your economy."
+      },
+      {
+          "label" => "OST⍺ ERC20 contract address:",
+          "key_name" => "erc20_contract_address",
+          "description" => "Below you will find OST⍺ ERC20 contract address on the Ropsten Test Network and your company's Universally Unique Identifier (UUID). Company UUID is required as a parameter in order to execute transactions between the company and users using APIs."
+      },
+      {
+          "label" => "Company UUID:",
+          "key_name" => "company_user_id",
+          "description" => "Your Branded Token's Budget Holder Address will reserve the tokens to be airdropped. The Airdrop contract will manage transactions within your economy."
+      },
+      {
+          "label" => "Gateway UX Composer address:",
+          "key_name" => "gateway_composer_address",
+          "description" => "Below you will find OST⍺ ERC20 contract address on the Ropsten Test Network and your company's Universally Unique Identifier (UUID). Company UUID is required as a parameter in order to execute transactions between the company and users using APIs."
+      }
+  ]
 %>
 
 <div class="developers-container">
@@ -54,7 +86,7 @@
         The Quick start guide links below will take you all the way from integrating our SDK to creating users, airdropping and transferring tokens among these users. If you're looking for more detailed information about any class in the SDKs, feel free to explore our SDK Github Repository. Links to the github repository of respective SDK are provided in the quick start guides.
       </p>
       <div class="text-left">
-<!--        TODO: Add links to icons-->
+        <!--        TODO: Add links to icons-->
         <a class="d-inline" href="#">
           <svg class="icon ios-icon" style="height: 60px;width: 150px;">
             <switch>
@@ -100,6 +132,29 @@
         </a>
       </div>
     </div>
+    <div class="mt-5">
+      <h4>
+        Your Addresses On OpenST Utility Chain
+      </h4>
+      <p>
+        Below you will find your Company Token Holder Address, Branded Token Addresses and OST⍺ ERC20 contract address.
+      </p>
+      <% developer_addresses_config.each do |address| %>
+        <% if developer_page_addresses && developer_page_addresses.data[address['key_name']] %>
+          <div class="dev-container-box p-3 px-4 mb-3">
+            <h4>
+              <%= address['label'] %>
+            </h4>
+            <p class="my-1">
+              <%= developer_page_addresses.data[address['key_name']] %>
+            </p>
+            <p>
+              <%= address['description']%>
+            </p>
+          </div>
+        <% end%>
+      <%end %>
+    </div>
   </div>
 </div>
 
@@ -125,18 +180,18 @@
           <p>{{key}}</p>
         </div>
         {{#if expiry_timestamp}}
-         <div class="col-4">
-            <div class="float-right d-inline d-flex align-items-center">
-              <span class="mr-2 expiry">Expires on {{prettifyDate expiry_timestamp}}</span>
-              <span class="api-delete-btn">
+        <div class="col-4">
+          <div class="float-right d-inline d-flex align-items-center">
+            <span class="mr-2 expiry">Expires on {{prettifyDate expiry_timestamp}}</span>
+            <span class="api-delete-btn">
                 <svg class="align-middle" style="height: 35px;width: 35px;">
                   <switch>
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#api-delete-icon"></use>
                   </switch>
                 </svg>
               </span>
-            </div>
-         </div>
+          </div>
+        </div>
         {{/if}}
       </div>
       <div>

@@ -1,45 +1,39 @@
 <%
   api_get_key = GlobalConstant::RoutesMap.getApis()[:get_api_keys]
   api_delete_key = GlobalConstant::RoutesMap.getApis()[:delete_api_key]
-  # developer_page_addresses = @presenter_obj.developer_page_addresses
-  # developer_addresses_config = [
-  #     {
-  #         "token_holder_address" => {
-  #             "label" => "Company Token Holder Address:",
-  #             "description" => "The Member Reserve address is the initial holder of your minted branded tokens, from which tokens are transferred to different accounts in your economy."
-  #         }
-  #     },
-  #     {
-  #         "utility_branded_token_contract" => {
-  #             "label" => "Utility Branded Token Address:",
-  #             "description" => "In addition, you will find the Airdrop contract and the Budget Holder addresses for your Branded Token. After the Branded Token and Airdrop contracts are deployed, airdrop tokens are transferred from the Member Reserve Address to the Budget Holder Address."
-  #         }
-  #     },
-  #     {
-  #         "branded_token_contract" => {
-  #             "label" => "Branded Token Address:",
-  #             "description" => "Your Branded Token's Budget Holder Address will reserve the tokens to be airdropped. The Airdrop contract will manage transactions within your economy."
-  #         }
-  #     },
-  #     {
-  #         "erc20_contract_address" => {
-  #             "label" => "OST⍺ ERC20 contract address:",
-  #             "description" => "Below you will find OST⍺ ERC20 contract address on the Ropsten Test Network and your company's Universally Unique Identifier (UUID). Company UUID is required as a parameter in order to execute transactions between the company and users using APIs."
-  #         }
-  #     },
-  #     {
-  #         "company_user_id" => {
-  #             "label" => "Company UUID:",
-  #             "description" => "Your Branded Token's Budget Holder Address will reserve the tokens to be airdropped. The Airdrop contract will manage transactions within your economy."
-  #         }
-  #     },
-  #     {
-  #         "gateway_composer_address" => {
-  #             "label" => "Gateway UX Composer address:",
-  #             "description" => "Below you will find OST⍺ ERC20 contract address on the Ropsten Test Network and your company's Universally Unique Identifier (UUID). Company UUID is required as a parameter in order to execute transactions between the company and users using APIs."
-  #         }
-  #     }
-  # ]
+  developer_page_addresses = @presenter_obj.developer_page_addresses
+  developer_addresses_config = [
+      {
+          "label" => "Company Token Holder Address:",
+          "key_name" => "token_holder_address",
+          "description" => "The Member Reserve address is the initial holder of your minted branded tokens, from which tokens are transferred to different accounts in your economy."
+      },
+      {
+          "label" => "Utility Branded Token Address:",
+          "key_name" => "utility_branded_token_contract",
+          "description" => "In addition, you will find the Airdrop contract and the Budget Holder addresses for your Branded Token. After the Branded Token and Airdrop contracts are deployed, airdrop tokens are transferred from the Member Reserve Address to the Budget Holder Address."
+      },
+      {
+          "label" => "Branded Token Address:",
+          "key_name" => "branded_token_contract",
+          "description" => "Your Branded Token's Budget Holder Address will reserve the tokens to be airdropped. The Airdrop contract will manage transactions within your economy."
+      },
+      {
+          "label" => "OST⍺ ERC20 contract address:",
+          "key_name" => "erc20_contract_address",
+          "description" => "Below you will find OST⍺ ERC20 contract address on the Ropsten Test Network and your company's Universally Unique Identifier (UUID). Company UUID is required as a parameter in order to execute transactions between the company and users using APIs."
+      },
+      {
+          "label" => "Company UUID:",
+          "key_name" => "company_user_id",
+          "description" => "Your Branded Token's Budget Holder Address will reserve the tokens to be airdropped. The Airdrop contract will manage transactions within your economy."
+      },
+      {
+          "label" => "Gateway UX Composer address:",
+          "key_name" => "gateway_composer_address",
+          "description" => "Below you will find OST⍺ ERC20 contract address on the Ropsten Test Network and your company's Universally Unique Identifier (UUID). Company UUID is required as a parameter in order to execute transactions between the company and users using APIs."
+      }
+  ]
 %>
 
 <div class="developers-container">
@@ -145,23 +139,21 @@
       <p>
         Below you will find your Company Token Holder Address, Branded Token Addresses and OST⍺ ERC20 contract address.
       </p>
-      <%# developer_addresses_config.each do |address| %>
-        <%# address.each do |key, value| %>
-          <%# if developer_page_addresses.data[key] %>
-<!--            <div class="dev-container-box p-3 px-4 mb-3">-->
-<!--              <h4>-->
-                <%#= value['label'] %>
-<!--              </h4>-->
-<!--              <p class="my-1">-->
-                <%#= developer_page_addresses.data[key] %>
-<!--              </p>-->
-<!--              <p>-->
-                <%#= value['description']%>
-<!--              </p>-->
-<!--            </div>-->
-          <%# end%>
-        <%#end%>
-      <%#end %>
+      <% developer_addresses_config.each do |address| %>
+        <% if developer_page_addresses.data[address['key_name']] %>
+          <div class="dev-container-box p-3 px-4 mb-3">
+            <h4>
+              <%= address['label'] %>
+            </h4>
+            <p class="my-1">
+              <%= developer_page_addresses.data[address['key_name']] %>
+            </p>
+            <p>
+              <%= address['description']%>
+            </p>
+          </div>
+        <% end%>
+      <%end %>
     </div>
   </div>
 </div>

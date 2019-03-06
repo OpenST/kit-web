@@ -4,18 +4,22 @@
         svg: "#invite-team-icon",
         desc: "Invite your team members",
         btn_txt: "invite team".upcase,
-        href: GlobalConstant::RoutesMap.getRoutes()[:team] + "?" + get_go_back_url_query_param
+        href: GlobalConstant::RoutesMap.getRoutes()[:team] + "?" + get_go_back_url_query_param,
+        target: ""
       },
       {
         svg: "#get-api-keys-icon",
         desc: "Integrate OST APIs with your application",
         btn_txt: "get api keys".upcase,
-        href: GlobalConstant::RoutesMap.getRoutes()[:developer] + "?" + get_go_back_url_query_param
+        href: GlobalConstant::RoutesMap.getRoutes()[:developer] + "?" + get_go_back_url_query_param,
+        target: ""
       },
       {
         svg: "#ost-guides-icon",
         desc: "Check our guides and tutorials for a quick start",
-        btn_txt: "ost guides".upcase
+        btn_txt: "ost guides".upcase,
+        href: "javascript:void(0)",
+        target: "_blank"
       }
   ]
 %>
@@ -75,7 +79,7 @@
                       </switch>
                     </svg>
                     <span class="display-3 ml-2"><%= data[:desc] %></span>
-                    <a href="<%= data[:href] %>" class="btn btn-secondary ml-auto" title="<%= data[:btn_txt] %>"><%= data[:btn_txt] %></a>
+                    <a href="<%= data[:href] %>" class="btn btn-secondary ml-auto" title="<%= data[:btn_txt] %>" target="<%= data[:target] %>"><%= data[:btn_txt] %></a>
                   </li>
                 <% end %>
               </ul>

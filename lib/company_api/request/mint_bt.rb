@@ -2,7 +2,7 @@ module CompanyApi
 
   module Request
 
-    class Developer < CompanyApi::Request::Base
+    class MintBt < CompanyApi::Request::Base
 
       # Initialize
       #
@@ -14,23 +14,33 @@ module CompanyApi
       # @param [Hash] cookies (mandatory) - cookies that need to be sent to API
       # @param [Hash] headers (optional) - headers that need to be sent to API
       #
-      # @return [CompanyApi::Request::Developer] returns an object of CompanyApi::Request::Developer class
+      # @return [CompanyApi::Request::MintBt] returns an object of CompanyApi::Request::MintBt class
       #
       def initialize(api_response_formatter_class, cookies, headers = {})
 
         super(api_response_formatter_class, cookies, true, headers)
-        @service_base_route = 'developer/'
+        @service_base_route = 'token/mint/'
 
       end
 
-      # Developer page details
+      # Get mint details
       #
       # * Author: Puneet
-      # * Date: 14/02/2018
+      # * Date: 08/12/2018
       # * Reviewed By: Sunil
       #
-      def index
-        get('')
+      def mint
+        get('', {})
+      end
+
+      # Get mint progress
+      #
+      # * Author: Puneet
+      # * Date: 08/12/2018
+      # * Reviewed By: Sunil
+      #
+      def mint_progress
+        get('progress', {})
       end
 
     end

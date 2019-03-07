@@ -196,6 +196,8 @@ module CompanyApi
             if response_data['success']
               # Success
               formatted_data = format_success_response_data(response_data['data'])
+              Rails.looger.debug("API formatted data ==*== #{formatted_data.inspect}")
+              Rails.looger.debug("API response_data['go_to'] ==*== #{response_data['go_to'].inspect}")
               success_with_data(formatted_data, response_data['go_to'])
             elsif response_data['err']['go_to'].present?
               # API Error

@@ -16,7 +16,7 @@ class Web::UserSettingController < Web::BaseController
   # * Reviewed By: Kedar
   #
   def team
-    @response = CompanyApi::Request::Manager.new(
+    @response = CompanyApi::Request::Setting.new(
         CompanyApi::Response::Formatter::Manager,
         request.cookies,
         {"User-Agent" => http_user_agent}

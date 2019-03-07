@@ -2,7 +2,6 @@
   is_mainnet = GlobalConstant::Base.main_sub_environment?
   workflow_id = @presenter_obj.workflow.id
   deployment_status_api = GlobalConstant::RoutesMap.getApis()[:api_workflow] +"/#{workflow_id}"
-  resetdeploy_api =GlobalConstant::RoutesMap.getApis()[:api_reset_deployment]
   redirect_url = GlobalConstant::RoutesMap.getRoutes()[:token_setup]
   mint_token_url = GlobalConstant::RoutesMap.getRoutes()[:token_mint]
   invite_team_url = GlobalConstant::RoutesMap.getRoutes()[:team] + "?" + get_go_back_url_query_param
@@ -163,7 +162,6 @@
       var isPollFailed = <%= is_poll_failed %> ;
       ost.tokenDeploy.init({
         getDeployStatusEndPoint:"<%=deployment_status_api%>",
-        resetdeployEndPoint : "<%=resetdeploy_api %>",
         redirectUrl : "<%=redirect_url %>" ,
         currentStepFailedStatus : "<%= current_step_failed_status %>",
         workflowId : "<%= workflow_id %>"

@@ -54,7 +54,7 @@
       </p>
       <button type="button" class="btn btn-primary mt-3 show-keys-btn" data-submiting="Fetching..." >Show Keys</button>
       <button type="button" class="btn btn-primary mt-3 generate-key-btn" data-submiting="Generating...">Generate New Keys</button>
-      <div class="error mt-2"></div>
+      <div class="error mt-2 generate-key-error"></div>
       <div class="keys-wrapper mt-5"></div>
     </div>
 
@@ -198,6 +198,7 @@
         <h4>API Secret</h4>
         <p>{{secret}}</p>
       </div>
+      <div class="error delete-key-error"></div>
     </div>
     {{/each}}
   </script>

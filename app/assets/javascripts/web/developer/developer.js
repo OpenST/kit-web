@@ -12,7 +12,8 @@
     jShowKeyBtn     : $('.show-keys-btn'),
     jKeysWrapper    : $('.keys-wrapper'),
     jMainContainer  : $('.developers-container'),
-    jErrorEl        : $('.error'),
+    jGenerateErr    : $('.generate-key-error'),
+    jDeleteErr      : null,
     keys            : null,
 
     jTokenSetupAdminErrorModal  :  $('#token_setup_admin_error'),
@@ -40,6 +41,7 @@
 
       oThis.jKeysWrapper.on('click',oThis.sDeleteKey,function( e ){
         e.stopPropagation();
+        oThis.jDeleteErr = $(this).closest('.dev-container-box').find('.delete-key-error');
         oThis.deleteAPIKey();
       });
 
@@ -53,10 +55,12 @@
           if( response.data ){
             oThis.keys = response.data['api_keys'];
             oThis.onSuccess();
+          }else {
+            oThis.onError( response , oThis.jGenerateErr );
           }
         },
         error     : function ( err ) {
-          oThis.onError( err );
+          oThis.onError( err , oThis.jGenerateErr );
         },
         complete  : function () {
           utilities.btnSubmitCompleteState( oThis.jShowKeyBtn );
@@ -80,10 +84,11 @@
             if( errorMsg && errorMsg.toLowerCase() == utilities.authorizationErrMsg.toLowerCase() ){ //Temp change it later.
               oThis.jTokenSetupAdminErrorModal.modal('show');
             }
+            oThis.onError( response , oThis.jGenerateErr );
           }
         },
         error     : function ( err ) {
-          oThis.onError( err );
+          oThis.onError( err , oThis.jGenerateErr );
         },
         complete  : function () {
          utilities.btnSubmitCompleteState( oThis.jGenerateKeyBtn );
@@ -104,10 +109,11 @@
             if( errorMsg && errorMsg.toLowerCase() == utilities.authorizationErrMsg.toLowerCase() ){ //Temp change it later.
               oThis.jTokenSetupAdminErrorModal.modal('show');
             }
+            oThis.onError( response , oThis.jDeleteErr);
           }
         },
         error     : function ( err ) {
-          oThis.onError( err );
+          oThis.onError( err , oThis.jDeleteErr );
         },
         complete  : function () {
 
@@ -130,16 +136,20 @@
       }
     },
 
-    onError( error ) {
-      if( !error ) return;
-      var serverErrors = error.err.error_data || {};
-      if(serverErrors && serverErrors.msg) {
-        oThis.jErrorEl.text( serverErrors.msg );
+    onError: function( error , jEl ) {
+      if( !error || !jEl ) return;
+      if( typeof  error == 'string'){
+        error = JSON.parse( error );
+      }
+      var serverErrors =  utilities.deepGet( error ,  "err.error_data ") || [] ,
+        errMsg;
+      if(serverErrors && serverErrors[0]) {
+        errMsg =  serverErrors[0]['msg'] ;
       }
       else {
-        utilities.showGeneralError( oThis.jErrorEl, error );
+        errMsg = utilities.getGeneralError( error );
       }
-
+      jEl.text( errMsg );
     },
 
     appendKeysInfoToDOM: function(){

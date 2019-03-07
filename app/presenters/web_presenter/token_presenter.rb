@@ -145,6 +145,18 @@ module WebPresenter
       end
     end
 
+    # Developer page addresses in presenter object
+    #
+    # * Author: Shlok
+    # * Date: 04/03/2019
+    # * Reviewed By:
+    #
+    def dashboard_details
+      @dashboard_details ||= begin
+        formatter_obj.present? ? formatter_obj.dashboard_details : nil
+      end
+    end
+
 
   end
 

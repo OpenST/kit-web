@@ -137,7 +137,7 @@ class ApplicationController < ActionController::Base
         redirect_to :mfa and return
       when 'authenticate_mfa'
         redirect_to :mfa and return
-      when 'economy_dashboard'
+      when 'dashboard'
         redirect_to :dashboard and return
       when 'token_setup'
         redirect_to :token_setup and return
@@ -155,6 +155,10 @@ class ApplicationController < ActionController::Base
         redirect_to :service_unavailable and return
       when 'login'
         redirect_to :login and return
+      when 'logout'
+        redirect_to :logout and return
+      when 'developer'
+        redirect_to :developer and return
       else
         fail "unhandled internal redirect: #{service_response.go_to}"
     end

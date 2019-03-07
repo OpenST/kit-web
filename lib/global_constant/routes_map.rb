@@ -13,13 +13,15 @@ module GlobalConstant
           sandbox_token_setup:  "/#{GlobalConstant::Environment.sandbox_sub_url_prefix}/token/setup/",
           token_deploy:         "/#{GlobalConstant::Environment.url_prefix}/token/deploy/",
           token_mint:           "/#{GlobalConstant::Environment.url_prefix}/token/mint/",
-          token_progress:       "/#{GlobalConstant::Environment.url_prefix}/token/mint-progress/",
+          token_mint_progress:  "/#{GlobalConstant::Environment.url_prefix}/token/mint-progress/",
           developer:            "/#{GlobalConstant::Environment.url_prefix}/developer/",
           team:                 "/settings/team/",
           setup_mfa:            "/mfa/",
           authenticate_mfa:     "/mfa/",
           service_unavailable:  "/service-unavailable/",
-          verify_email:         "/verify-email/"
+          verify_email:         "/verify-email/",
+          login:                "/login/",
+          logout:                "/logout/",
         }
       end
 

@@ -118,7 +118,7 @@
              oThis.metamask.enable();
            } else {
              var errorMsg = utilities.deepGet(res, "err.display_text") ;
-             if(errorMsg === ''){
+             if( errorMsg && errorMsg.toLowerCase() == utilities.authorizationErrMsg.toLowerCase() ){ //Temp change it later.
                oThis.jTokenSetupAdminErrorModal.modal('show');
              }
            }
@@ -217,7 +217,7 @@
                 }
                 else{
                   var errorMsg = utilities.deepGet(response, "err.display_text") ;
-                  if(errorMsg === ''){
+                  if( errorMsg && errorMsg.toLowerCase() == utilities.authorizationErrMsg.toLowerCase() ){ //Temp change it later.
                     oThis.jTokenSetupAdminErrorModal.modal('show');
                   } else {
                     oThis.showConfirmError(oThis.jGeneralErrorState);

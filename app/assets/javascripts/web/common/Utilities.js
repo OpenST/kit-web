@@ -5,6 +5,7 @@
   var oThis = ost.utilities = {
   
     generalErrorMsg : "Something went wrong, try again later." ,
+    authorizationErrMsg : "Not authorised to perform this action",
     /*
      * Validate Re-Captcha within form
      *

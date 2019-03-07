@@ -209,12 +209,16 @@
 
         onDesiredAccount: function(){
           ost.coverElements.hideAll();
-          oThis.onDesiredAccount();
+          if(oThis.isSuperAdmin) {
+            oThis.onDesiredAccount();
+          }
         },
 
         onNewAccount: function(){
           ost.coverElements.hideAll();
-          oThis.validateAccount();
+          if(oThis.isSuperAdmin) {
+            oThis.validateAccount();
+          }
         }
       });
     },
@@ -831,7 +835,7 @@
       if( pollingThis.isMaxRetries() ){
         pollingThis.stopPolling() ;
         var errorMsg = utilities.deepGet(error, "err.display_text") ;
-        if(errorMsg === ''){
+        if( errorMsg && errorMsg.toLowerCase() == utilities.authorizationErrMsg.toLowerCase()){ //Temp change it later.
           oThis.jTokenSetupAdminErrorModal.modal('show');
         } else {
           oThis.confirmStakeAndMintIntendErrorStateUpdate( error );

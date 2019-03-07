@@ -32,22 +32,22 @@
         <div class="col-4 text-center">
           <div class="stats-col p-3">
             <h6 class="title">total supply</h6>
-            <div class="gold">LGBT 5000</div>
-            <div class="gold">$250</div>
+            <div class="gold">LGBT <%= @presenter_obj.dashboard_details.total_supply %></div>
+            <div class="gold">$<%= @presenter_obj.dashboard_details.total_supply_dollar %></div>
           </div>
         </div>
         <div class="col-4 text-center">
           <div class="stats-col p-3">
             <h6 class="title">circulating supply</h6>
-            <div class="gold">LGBT 5000</div>
-            <div class="gold">$250</div>
+            <div class="gold">LGBT <%= @presenter_obj.dashboard_details.circulating_supply %></div>
+            <div class="gold">$<%= @presenter_obj.dashboard_details.circulating_supply_dollar %></div>
           </div>
         </div>
         <div class="col-4 text-center">
           <div class="stats-col p-3">
             <h6 class="title">gas spent</h6>
-            <div class="gold">OST⍺ 1000</div>
-            <div class="gold">$14</div>
+            <div class="gold">OST⍺ <%= @presenter_obj.dashboard_details.total_volume %></div>
+            <div class="gold">$<%= @presenter_obj.dashboard_details.total_volume_dollar %></div>
           </div>
         </div>
       </div>

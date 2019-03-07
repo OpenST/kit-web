@@ -77,7 +77,7 @@
             oThis.onSuccess();
           } else {
             var errorMsg = utilities.deepGet(response, "err.display_text") ;
-            if(errorMsg === ''){
+            if( errorMsg && errorMsg.toLowerCase() == utilities.authorizationErrMsg.toLowerCase() ){ //Temp change it later.
               oThis.jTokenSetupAdminErrorModal.modal('show');
             }
           }
@@ -101,7 +101,7 @@
             oThis.onSuccess();
           } else {
             var errorMsg = utilities.deepGet(response, "err.display_text") ;
-            if(errorMsg === ''){
+            if( errorMsg && errorMsg.toLowerCase() == utilities.authorizationErrMsg.toLowerCase() ){ //Temp change it later.
               oThis.jTokenSetupAdminErrorModal.modal('show');
             }
           }

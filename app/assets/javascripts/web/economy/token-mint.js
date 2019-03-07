@@ -831,7 +831,7 @@
       if( pollingThis.isMaxRetries() ){
         pollingThis.stopPolling() ;
         var errorMsg = utilities.deepGet(error, "err.display_text") ;
-        if(errorMsg === ''){
+        if( errorMsg && errorMsg.toLowerCase() == utilities.authorizationErrMsg.toLowerCase()){ //Temp change it later.
           oThis.jTokenSetupAdminErrorModal.modal('show');
         } else {
           oThis.confirmStakeAndMintIntendErrorStateUpdate( error );

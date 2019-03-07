@@ -43,6 +43,9 @@ module CompanyApi
         get('deploy', {})
       end
 
+      def dashboard
+        get('dashboard', {})
+      end
     end
 
   end

@@ -19,10 +19,10 @@ class Web::EconomyController < Web::BaseController
   def dashboard
 
     @response = CompanyApi::Request::Token.new(
-      CompanyApi::Response::Formatter::Token,
-      request.cookies,
-      {"User-Agent" => http_user_agent}
-    ).fetch_token_details()
+        CompanyApi::Response::Formatter::Token,
+        request.cookies,
+        {"User-Agent" => http_user_agent}
+    ).dashboard()
 
     unless @response.success?
       return handle_temporary_redirects(@response)

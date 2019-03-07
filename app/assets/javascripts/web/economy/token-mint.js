@@ -209,12 +209,16 @@
 
         onDesiredAccount: function(){
           ost.coverElements.hideAll();
-          oThis.onDesiredAccount();
+          if(oThis.isSuperAdmin) {
+            oThis.onDesiredAccount();
+          }
         },
 
         onNewAccount: function(){
           ost.coverElements.hideAll();
-          oThis.validateAccount();
+          if(oThis.isSuperAdmin) {
+            oThis.validateAccount();
+          }
         }
       });
     },

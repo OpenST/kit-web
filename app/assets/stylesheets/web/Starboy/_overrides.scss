@@ -15,3 +15,11 @@ p{
   visibility: visible;
   letter-spacing: 1px;
 }
+
+.navbar{
+  .dropdown-menu-user{
+    .dropdown-item{
+      font-size: 0.875rem !important;
+    }
+  }
+}

@@ -33,7 +33,7 @@
               'P_FIAT': 5
             });
             oThis.initDisplayFiatValue() ;
-            oThis.inputSpinner();
+            // oThis.inputSpinner();
         },
 
         bindActions : function(){

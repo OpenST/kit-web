@@ -43,8 +43,6 @@ module CompanyApi
         get('deploy', {})
       end
 
-      private
-
     end
 
   end

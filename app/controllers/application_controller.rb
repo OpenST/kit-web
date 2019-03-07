@@ -160,7 +160,7 @@ class ApplicationController < ActionController::Base
       when 'developer'
         redirect_to :developer and return
       else
-        fail "unhandled internal redirect: #{service_response.go_to}"
+        render_error_response_for(service_response)
     end
 
   end

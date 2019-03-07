@@ -7,8 +7,7 @@
       utilities = ns("ost.utilities")
   ;
   var oThis = ost.tokenDeploy = {
-    
-    jResetDeployBtn : null,
+
     polling : null ,
     tokenDeployContainer : null,
     jResetDeployError: null ,
@@ -22,8 +21,7 @@
       $.extend(oThis, config);
 
       console.log("======config======" , config);
-      
-      oThis.jResetDeployBtn = $(".j-reset-deployment-btn");
+
       oThis.tokenDeployContainer = $(".token-deploy-container");
       oThis.jResetDeployError =  $('.deploy-error-state');
       oThis.sProgressBarEl = ".token-deploy-progress-wrapper";
@@ -43,33 +41,6 @@
     },
 
     bindActions : function(){
-      oThis.jResetDeployBtn.on("click",function () {
-        oThis.onResetDeploy();
-      });
-    },
-
-    onResetDeploy : function(){
-      utilities.clearErrors( oThis.jResetDeployError ) ;
-      $.ajax({
-        url: oThis.resetdeployEndPoint,
-        method: "POST",
-        beforeSend: function(){
-          utilities.btnSubmittingState( oThis.jResetDeployBtn );
-        },
-        success : function (response) {
-          if( response.success ){
-            window.location = oThis.redirectUrl;
-          }else {
-            oThis.onResetFailure( response );
-          }
-        },
-        error : function (response) {
-          oThis.onResetFailure( response );
-        },
-        complete: function () {
-          utilities.btnSubmitCompleteState( oThis.jResetDeployBtn );
-        }
-      })
     },
 
     onResetFailure : function( res ){

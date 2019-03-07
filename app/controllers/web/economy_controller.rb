@@ -19,10 +19,10 @@ class Web::EconomyController < Web::BaseController
   def dashboard
 
     @response = CompanyApi::Request::Token.new(
-        CompanyApi::Response::Formatter::Token,
-        request.cookies,
-        {"User-Agent" => http_user_agent}
-    ).mint()
+      CompanyApi::Response::Formatter::Token,
+      request.cookies,
+      {"User-Agent" => http_user_agent}
+    ).fetch_token_details()
 
     unless @response.success?
       return handle_temporary_redirects(@response)
@@ -83,7 +83,7 @@ class Web::EconomyController < Web::BaseController
   #
   def token_mint
 
-    @response = CompanyApi::Request::Token.new(
+    @response = CompanyApi::Request::MintBt.new(
         CompanyApi::Response::Formatter::Token,
         request.cookies,
         {"User-Agent" => http_user_agent}
@@ -105,7 +105,7 @@ class Web::EconomyController < Web::BaseController
   #
   def token_mint_progress
 
-    @response = CompanyApi::Request::Token.new(
+    @response = CompanyApi::Request::MintBt.new(
         CompanyApi::Response::Formatter::Token,
         request.cookies,
         {"User-Agent" => http_user_agent}

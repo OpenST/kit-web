@@ -90,7 +90,7 @@ class Web::BaseController < ApplicationController
   def logout_if_login_cookie_present
     # If cookie is present, log out without bothering about the response.
     if @is_user_logged_in
-      CompanyApi::Request::Manager.new(
+      CompanyApi::Request::Access.new(
         CompanyApi::Response::Formatter::Manager,
         request.cookies,
         {"User-Agent" => http_user_agent}

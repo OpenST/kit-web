@@ -53,18 +53,8 @@
     bindEvents : function() {
       var oThis = this;
 
-      oThis.jChangeModeToggle.on('click', function( event ){
-        event.preventDefault();
-        if(oThis.currentEnv == oThis.sandboxSubUrlPrefix){
-          if( !oThis.isUserWhitelisted ) {
-            oThis.jWhitelistUserModal.modal('show');
-          } else{
-            oThis.jConfirmModeChangeModal.modal('show');
-          }
-        } else if(oThis.currentEnv == oThis.mainSubEnvUrlPrefix){
-          oThis.jChangeModeToggle.prop('checked', true);
-          window.location = oThis.redirectSandbox;
-        }
+      oThis.jChangeModeToggle.on('click', function(){
+        oThis.sendRequestToTheTeam(event);
       });
 
       oThis.jConfirmModeChangeBtn.on('click', function( event ) {
@@ -73,6 +63,24 @@
         window.location = oThis.redirectMainnet;
       });
 
+      $('#dashboard-complete-kyc').on('click', function () {
+        oThis.sendRequestToTheTeam(event);
+      });
+
+    },
+
+    sendRequestToTheTeam: function( event ){
+      event.preventDefault();
+      if(oThis.currentEnv == oThis.sandboxSubUrlPrefix){
+        if( !oThis.isUserWhitelisted ) {
+          oThis.jWhitelistUserModal.modal('show');
+        } else{
+          oThis.jConfirmModeChangeModal.modal('show');
+        }
+      } else if(oThis.currentEnv == oThis.mainSubEnvUrlPrefix){
+        oThis.jChangeModeToggle.prop('checked', true);
+        window.location = oThis.redirectSandbox;
+      }
     },
 
     onRequestWhitelistUserSuccess: function(){

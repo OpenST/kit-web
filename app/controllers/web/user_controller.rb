@@ -34,7 +34,7 @@ class Web::UserController < Web::BaseController
         return
       end
 
-      @response = CompanyApi::Request::Manager.new(
+      @response = CompanyApi::Request::Access.new(
           CompanyApi::Response::Formatter::Manager,
           request.cookies,
           {"User-Agent" => http_user_agent}
@@ -69,7 +69,7 @@ class Web::UserController < Web::BaseController
   #
   def mfa
 
-    @response = CompanyApi::Request::Manager.new(
+    @response = CompanyApi::Request::Access.new(
         CompanyApi::Response::Formatter::Manager,
         request.cookies,
         {"User-Agent" => http_user_agent}
@@ -143,7 +143,7 @@ class Web::UserController < Web::BaseController
         return
       end
 
-      @response = CompanyApi::Request::Manager.new(
+      @response = CompanyApi::Request::Access.new(
         CompanyApi::Response::Formatter::Manager,
         request.cookies,
         {"User-Agent" => http_user_agent}
@@ -165,7 +165,7 @@ class Web::UserController < Web::BaseController
       
     else
      
-      @response = CompanyApi::Request::Manager.new(
+      @response = CompanyApi::Request::Access.new(
           CompanyApi::Response::Formatter::Manager,
           request.cookies,
           {"User-Agent" => http_user_agent}

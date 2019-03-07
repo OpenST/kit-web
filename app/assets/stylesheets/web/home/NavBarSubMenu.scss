@@ -38,7 +38,7 @@
     border-radius: .25rem;
     background-color: #FFFFFF;
     li{
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       a{
         padding: 8px 8px!important;
         white-space: unset;
@@ -214,6 +214,7 @@
           transform: rotate(45deg);
           top: -8px;
           left: 20px;
+          z-index: -1;
           box-shadow: -1px -1px 5px -2px rgba(0, 0, 0, 0.1);
         }
       }

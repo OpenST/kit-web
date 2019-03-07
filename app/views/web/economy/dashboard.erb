@@ -4,18 +4,22 @@
         svg: "#invite-team-icon",
         desc: "Invite your team members",
         btn_txt: "invite team".upcase,
-        href: GlobalConstant::RoutesMap.getRoutes()[:team] + "?" + get_go_back_url_query_param
+        href: GlobalConstant::RoutesMap.getRoutes()[:team] + "?" + get_go_back_url_query_param,
+        target: ""
       },
       {
         svg: "#get-api-keys-icon",
         desc: "Integrate OST APIs with your application",
         btn_txt: "get api keys".upcase,
-        href: GlobalConstant::RoutesMap.getRoutes()[:developer] + "?" + get_go_back_url_query_param
+        href: GlobalConstant::RoutesMap.getRoutes()[:developer] + "?" + get_go_back_url_query_param,
+        target: ""
       },
       {
         svg: "#ost-guides-icon",
         desc: "Check our guides and tutorials for a quick start",
-        btn_txt: "ost guides".upcase
+        btn_txt: "ost guides".upcase,
+        href: "javascript:void(0)",
+        target: "_blank"
       }
   ]
 %>
@@ -54,7 +58,7 @@
     <div class="col-12">
       <div class="card card-planner">
         <div class="card-body">
-          <div class="row align-items-center">
+          <div class="row">
             <div class="col-7">
               <h3 class="mb-3">Welcome to OST KIT</h3>
               <ul class="list-unstyled m-0">
@@ -65,7 +69,7 @@
                     </switch>
                   </svg>
                   <span class="display-3 ml-2">Complete KYC | Enable production Mode</span>
-                  <button class="btn btn-secondary ml-auto" title="Complete KYC">complete kyc</button>
+                  <button class="btn btn-secondary ml-auto" id="dashboard-complete-kyc" title="Complete KYC">complete kyc</button>
                 </li>
                 <% dashboard_links.each_with_index do|data, index| %>
                   <li class="list-items">
@@ -75,7 +79,7 @@
                       </switch>
                     </svg>
                     <span class="display-3 ml-2"><%= data[:desc] %></span>
-                    <a href="<%= data[:href] %>" class="btn btn-secondary ml-auto" title="<%= data[:btn_txt] %>"><%= data[:btn_txt] %></a>
+                    <a href="<%= data[:href] %>" class="btn btn-secondary ml-auto" title="<%= data[:btn_txt] %>" target="<%= data[:target] %>"><%= data[:btn_txt] %></a>
                   </li>
                 <% end %>
               </ul>
@@ -91,8 +95,8 @@
 
   <div class="row">
     <div class="col-12">
-      <div class="text-center d-flex align-items-center">
-        <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-dashboard-coming-soon.png" class="img-fluid w-100" alt="Dashboard Economic Indicators Coming Soon">
+      <div class="text-center d-flex align-items-center embed-responsive embed-responsive-16by9">
+        <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-dashboard-coming-soon.png" class="img-fluid w-100 embed-responsive-item" alt="Dashboard Economic Indicators Coming Soon">
         <div class="position-absolute">
           <h2 class="font-weight-bold">Coming soon!<br/> Economic Indicators</h2>
           <p class="mb-0 mx-auto display-3 col-7 coming-soon-desc">Economic indicators give deep insights into your token economy. You will have access to data points like ‘No of Transaction Performed Vs OST spent’ No of Transactions By Type, Name , Tags amongst others.</p>

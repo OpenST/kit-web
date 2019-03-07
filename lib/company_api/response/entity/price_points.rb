@@ -26,8 +26,8 @@ module CompanyApi
           @data
         end
 
-        def to_fiat_conversion_factor(curreny_pref)
-          conversion_factors[curreny_pref]
+        def to_fiat_conversion_factor(currency_pref)
+          conversion_factors[currency_pref]
         end
 
         private

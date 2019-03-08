@@ -72,12 +72,13 @@
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#complete-kyc-icon"></use>
                       </switch>
                     </svg>
-                    <%if is_mainnet_whitelisting_requested %>
-                      <span class="display-3 ml-2 whitelisting_requested">Request for Whitelisting has been sent</span>
-                    <%else  %>
+
+                    <span style="display: <%= is_mainnet_whitelisting_requested ? "block" : "none" %>"
+                          class="display-3 ml-2 whitelisting_requested">Request for Whitelisting has been sent</span>
+                    <div style="display: <%= !is_mainnet_whitelisting_requested ? "inline-block" : "none" %>" >
                       <span class="display-3 ml-2 whitelisting_not_requested">Complete KYC | Enable production Mode</span>
                       <button class="btn btn-secondary ml-auto" id="dashboard-complete-kyc" title="Complete KYC">complete kyc</button>
-                    <% end %>
+                    </div>
                   </li>
                 <% end %>
                 <% dashboard_links.each_with_index do|data, index| %>

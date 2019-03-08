@@ -43,7 +43,7 @@ class Web::EconomyController < Web::BaseController
       CompanyApi::Response::Formatter::Token,
       request.cookies,
       {"User-Agent" => http_user_agent}
-    ).fetch_token_details()
+    ).fetch_token_details_before_setup()
 
     unless @response.success?
       return handle_temporary_redirects(@response)

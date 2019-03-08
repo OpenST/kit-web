@@ -22,6 +22,9 @@
         target: "_blank"
       }
   ]
+
+  is_whitelisted_user = @presenter_obj.sub_env_payloads.is_mainnet_whitelisted?
+  is_mainnet_whitelisting_requested = @presenter_obj.sub_env_payloads.is_mainnet_whitelisting_requested?
 %>
 
 <div class="container my-6 dashboard">
@@ -62,15 +65,21 @@
             <div class="col-7">
               <h3 class="mb-3">Welcome to OST KIT</h3>
               <ul class="list-unstyled m-0">
-                <li class="list-items">
-                  <svg style="width: 20px;height: 20px;">
-                    <switch>
-                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#complete-kyc-icon"></use>
-                    </switch>
-                  </svg>
-                  <span class="display-3 ml-2">Complete KYC | Enable production Mode</span>
-                  <button class="btn btn-secondary ml-auto" id="dashboard-complete-kyc" title="Complete KYC">complete kyc</button>
-                </li>
+                <% if !is_whitelisted_user %>
+                  <li class="list-items">
+                    <svg style="width: 20px;height: 20px;">
+                      <switch>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#complete-kyc-icon"></use>
+                      </switch>
+                    </svg>
+                    <%if is_mainnet_whitelisting_requested %>
+                      <span class="display-3 ml-2">Request for Whitelisting has been sent</span>
+                    <%else  %>
+                      <span class="display-3 ml-2">Complete KYC | Enable production Mode</span>
+                      <button class="btn btn-secondary ml-auto" id="dashboard-complete-kyc" title="Complete KYC">complete kyc</button>
+                    <% end %>
+                  </li>
+                <% end %>
                 <% dashboard_links.each_with_index do|data, index| %>
                   <li class="list-items">
                     <svg style="width: 20px;height: 20px;">

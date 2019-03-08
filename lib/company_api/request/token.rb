@@ -23,13 +23,15 @@ module CompanyApi
 
       end
 
-      # Fetch token details
+      # Fetch token details before setup
+      # NOTE: This would return default price points
+      # (after setup starts we should ONLY use price points for the chain token has been associated with)
       #
       # * Author: Puneet
       # * Date: 08/12/2018
       # * Reviewed By: Sunil
       #
-      def fetch_token_details
+      def fetch_token_details_before_setup
         get('')
       end
 

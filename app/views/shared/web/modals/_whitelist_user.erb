@@ -17,23 +17,11 @@
           <form id="whitelist_user_form" action="<%= request_whitelist_api %>" method="POST">
             <div class="row">
               <div class="col-12 form-group mb-0">
-<!--                <label for="whitelist_user_checkbox" class="label-cbx mb-0">-->
-<!--                  <input required class="form-control" id="whitelist_user_checkbox" type="checkbox" name="whitelist_user_checkbox" value="1">-->
-<!--                  <div class="checkbox">-->
-                    <%#= render partial: 'shared/web/common/animated-checkbox'%>
-<!--                  </div>-->
-<!--                  <span class="terms-chk font-weight-normal ml-2 display-3">-->
-<!--                  Yes, I want to be contacted by the OST Support team.-->
-<!--                </span>-->
-<!--                </label>-->
-<!--                <div class="error invalid-feedback" data-for="whitelist_user_checkbox"></div>-->
                 <input type="hidden" name="sandbox_token_name" value="<%= sandbox_token_name %>"/>
                 <input type="hidden" name="sandbox_token_symbol" value="<%= sandbox_token_symbol %>"/>
-<!--              <div class="col-12 mx-auto">-->
                 <button type="submit" data-submiting="Confirming..." class="btn btn-primary whitelist-user-btn" title="CONFIRM">CONFIRM</button>
                 <button type="button" data-dismiss="modal" class="btn btn-secondary ml-3" title="CANCEL">CANCEL</button>
                 <div class="col-12 mt-2 ml-3 general_error error" data-forid="whitelist_user_form">&nbsp;</div>
-<!--              </div>-->
               </div>
             </div>
           </form>

@@ -22,6 +22,8 @@
     jWhitelistUserCheckbox : $('#whitelist_user_checkbox'),
     jWhitelistUserModalDefaultState : $('#whitelist_user_modal .default-state'),
     jWhitelistUserModalSuccessState : $('#whitelist_user_modal .success-state'),
+    jWhitelistingRequestedText : $('.whitelisting_requested'),
+    jWhitelistingNotRequestedText : $('.whitelisting_not_requested'),
 
     init: function( config ){
       var oThis = this;
@@ -53,7 +55,7 @@
     bindEvents : function() {
       var oThis = this;
 
-      oThis.jChangeModeToggle.on('click', function(){
+      oThis.jChangeModeToggle.on('click', function( event){
         oThis.sendRequestToTheTeam(event);
       });
 
@@ -63,7 +65,7 @@
         window.location = oThis.redirectMainnet;
       });
 
-      $('#dashboard-complete-kyc').on('click', function () {
+      $('#dashboard-complete-kyc').on('click', function (event) {
         oThis.sendRequestToTheTeam(event);
       });
 
@@ -75,11 +77,19 @@
         if( !oThis.isUserWhitelisted ) {
           oThis.jWhitelistUserModal.modal('show');
         } else{
-          oThis.jConfirmModeChangeModal.modal('show');
+          oThis.onCompleteKycRequestSendSuccess();
         }
       } else if(oThis.currentEnv == oThis.mainSubEnvUrlPrefix){
         oThis.jChangeModeToggle.prop('checked', true);
         window.location = oThis.redirectSandbox;
+      }
+    },
+
+    onCompleteKycRequestSendSuccess: function(){
+      oThis.jConfirmModeChangeModal.modal('show');
+      if(oThis.isMainnetWhitelistingRequested){
+        oThis.jWhitelistingNotRequestedText.hide();
+        oThis.jWhitelistingRequestedText.show();
       }
     },
 

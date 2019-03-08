@@ -149,3 +149,11 @@
     }
   }
 }
+
+// Patch to restrict the page squeezing or shrinking while content is blur
+.modal-open{
+  #app-content{
+    position: fixed;
+    height: 100vh;
+  }
+}

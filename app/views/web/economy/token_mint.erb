@@ -38,7 +38,7 @@
 %>
 
 <div id="stake-mint-start" class="col-9 mx-auto mt-6 jMintSections" style="display: <%= is_workflow ? "none" : "block" %>">
-  <div class="card text-center p-6">
+  <div class="card text-center p-6 card-planner border-0">
     <h3 class="mb-0">Power Your Economy</h3>
     <div class="simulator-image-wrapper my-4">
       <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-start-minting@2x.png" width="150" class="img-fluid"/>
@@ -51,7 +51,7 @@
 </div>
 
 <div id="stake-mint-process" class="jMintSections" style="display: none;">
-
+  <form action="<%= gateway_composer_api %>" data-ost-formhelper method="GET" id="stake-mint-confirm-form" >
     <div class="container">
       <div class="row">
         <div class="col-10 mx-auto user-form">
@@ -68,14 +68,12 @@
                            }
                 %>
                 <div class="col-6 text-left pl-0">
-                  <span class="text-muted font-weight-light">Please make sure the primary address associated with your account is selected in your metamask plugin.</span>
+                  <span class="text-muted font-weight-light">Please make sure the Account Owner Address previously associated with this account is selected in MetaMask.</span>
                 </div>
               </div>
               <div class="row">
                 <div class="col-4">
-                  <form> <!--This is required by jQuerey validator so please dont remove-->
-                    <%=
-                      render partial: 'shared/web/common/slider_top',
+                    <%= render partial: 'shared/web/common/slider_top',
                              locals: {
                                  label: "#{bt_symbol} Tokens to mint",
                                  id: bt_to_mint_id,
@@ -89,7 +87,6 @@
                                  classes: 'slider-primary'
                              }
                     %>
-                  </form>
                   <div class="mt-4 mb-2">
                     <%=
                       render partial: 'shared/web/common/mocker',
@@ -105,7 +102,6 @@
 
                 </div>
                 <div class="col-8  form-group m-0">
-<!--                  <label class="form-label">OST SUPPLY IN ACCOUNT</label>-->
                   <div class="d-flex align-items-center">
                     <div class="p-0 form-group m-0 position-relative">
                       <div id="ostSupplyInAccountPie" class="pie-chat" style="width:200px; height: 200px"></div>
@@ -142,10 +138,12 @@
 
             </div>
           </div>
-          <button id="token-mint-continue-btn" class="btn btn-primary d-inline-block">Continue</button>
+          <button type="submit" data-submiting="Submitting...." class="btn btn-primary d-inline-block">Continue</button>
+          <div class="invalid-feedback general_error">&nbsp;</div>
         </div>
       </div>
     </div>
+  </form>
 </div>
 
 <div class="jMintSections" id="jAddressNotWhitelistedSection" style="display: none;">
@@ -258,12 +256,6 @@
 
 
 <% content_for :popups do %>
-  <%= render :partial => "shared/web/modals/stake_mint_confirm",
-             :locals => {
-                 :bt_to_mint_selector => "#" + bt_to_mint_id,
-                 :stake_address_name => staker_address_name,
-                 :gateway_composer_api => gateway_composer_api
-             } %>
   <%= render partial: 'shared/web/modals/token_setup_admin_error' %>
 <% end %>
 

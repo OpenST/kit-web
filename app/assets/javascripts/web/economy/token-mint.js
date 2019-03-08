@@ -10,7 +10,6 @@
 
     //Static jQuery elements start
     jMintTokensBtn                  :   $("#mint-tokens"),
-    jMintTokenContinueBtn           :   $("#token-mint-continue-btn"),
     jStakeMintStart                 :   $("#stake-mint-start"),
     jStakeMintProcess               :   $("#stake-mint-process"),
     jAddressNotWhitelistedSection   :   $('#jAddressNotWhitelistedSection') ,
@@ -27,7 +26,6 @@
     jAutorizeStakeAndMintMsgWrapper :   $('.jAutorizeStakeAndMintWrapper'),
     jSignClientErrorBtnWrap         :   $('.jSignClientErrorBtnWrap'),
     jStakeAndMintSignServerError    :   $('.jStakeAndMintSignServerError'),
-    jStakeAndMintConfirmModal       :   $("#stake-mint-confirm-modal"),
     jGoBackBtn                      :   $('.jGoBackBtn'),
     jClientRetryBtn                 :   $('.jClientRetryBtn'),
     jEtherText                      :   $('.ether-text'),
@@ -157,10 +155,6 @@
         } else {
             oThis.jTokenSetupAdminErrorModal.modal('show');
         }
-      });
-
-      oThis.jMintTokenContinueBtn.off('click').on("click",function () {
-        oThis.jStakeAndMintConfirmModal.modal('show');
       });
       
       oThis.jGoBackBtn.off('click').on('click' , function () {
@@ -605,7 +599,6 @@
     onConfirmStakeMintSuccess : function ( res ) {
         var data = res && res.data  ;
         oThis.setDataInDataConfig( "gatewayComposerDetails" ,  data );
-        oThis.jStakeAndMintConfirmModal.modal('hide');
         oThis.showSection( oThis.jTokenStakeAndMintSignSection ) ;
         oThis.approve();
     },

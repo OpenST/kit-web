@@ -96,6 +96,10 @@ $sprite-location: "https://dxwfxs8b4lg24.cloudfront.net/ost/images/ost-sprite-v8
   @include icon-generator(98px, 98px, -520px, -450px, -637px, -637px, 30);
 }
 
+.header-social-gitter-icon{
+  @include icon-generator(98px, 98px, -520px, -338px, -637px, -637px, 30);
+}
+
 
 
 // Footer social icons CSS

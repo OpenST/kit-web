@@ -75,9 +75,9 @@
       event.preventDefault();
       if(oThis.currentEnv == oThis.sandboxSubUrlPrefix){
         if( !oThis.isUserWhitelisted ) {
-          oThis.jWhitelistUserModal.modal('show');
-        } else{
           oThis.onCompleteKycRequestSendSuccess();
+        } else{
+          oThis.jConfirmModeChangeModal.modal('show');
         }
       } else if(oThis.currentEnv == oThis.mainSubEnvUrlPrefix){
         oThis.jChangeModeToggle.prop('checked', true);
@@ -86,7 +86,7 @@
     },
 
     onCompleteKycRequestSendSuccess: function(){
-      oThis.jConfirmModeChangeModal.modal('show');
+      oThis.jWhitelistUserModal.modal('show');
       if(oThis.isMainnetWhitelistingRequested){
         oThis.jWhitelistingNotRequestedText.hide();
         oThis.jWhitelistingRequestedText.show();

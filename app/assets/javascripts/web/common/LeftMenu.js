@@ -75,21 +75,13 @@
       event.preventDefault();
       if(oThis.currentEnv == oThis.sandboxSubUrlPrefix){
         if( !oThis.isUserWhitelisted ) {
-          oThis.onCompleteKycRequestSendSuccess();
+          oThis.jWhitelistUserModal.modal('show');
         } else{
           oThis.jConfirmModeChangeModal.modal('show');
         }
       } else if(oThis.currentEnv == oThis.mainSubEnvUrlPrefix){
         oThis.jChangeModeToggle.prop('checked', true);
         window.location = oThis.redirectSandbox;
-      }
-    },
-
-    onCompleteKycRequestSendSuccess: function(){
-      oThis.jWhitelistUserModal.modal('show');
-      if(oThis.isMainnetWhitelistingRequested){
-        oThis.jWhitelistingNotRequestedText.hide();
-        oThis.jWhitelistingRequestedText.show();
       }
     },
 
@@ -100,6 +92,9 @@
       oThis.initTooltip();
       oThis.jWhitelistUserModalDefaultState.hide();
       oThis.jWhitelistUserModalSuccessState.show();
+      oThis.jWhitelistingNotRequestedText.hide();
+      oThis.jWhitelistingRequestedText.show();
+      $('#dashboard-complete-kyc').hide();
     }
 
   };

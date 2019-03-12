@@ -1,5 +1,7 @@
 <%
 
+    sandbox_sub_url_prefix = GlobalConstant::Environment.sandbox_sub_url_prefix
+    current_env  = GlobalConstant::Environment.url_prefix
 
     wallet_association =  @presenter_obj.sign_messages.wallet_association
     ost_to_fiat =  @presenter_obj.oracle_price_points.to_fiat_conversion_factor("USD")
@@ -24,9 +26,25 @@
 %>
 <form data-ost-formhelper id="economy-planner" action="<%=GlobalConstant::RoutesMap.getApis()[:api_token]%>" method="POST"> <!-- #TODO URL -->
   <div class="planner-container  text-center">
-    <h3 class="mt-5">
-      First, Let's Design The Token To Launch Your Economy
-    </h3>
+
+  <% if current_env == sandbox_sub_url_prefix %>
+    <div class="container">
+      <div class="row">
+        <div class="card card-planner mt-6">
+          <div class="card-header text-left brand-curreny-bg border-0">
+            <div class="col-8 p-0">
+              <h4 class="mb-2">Deploy Your Brand Curreny</h4>
+              <p class="font-weight-light mb-0">
+                The journey of your Brand Token starts on Testnet/Sandbox. First you will be able to safely test with a test token holding no real economic value. Get familiar with the platform functionalities and run the necessary integration tests with your application. Once ready, you will deploy your Brand Currency on Mainnet/Production to your real users.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% else %>
+      <h3 class="mt-5">First, Let's Design The Token To Launch Your Economy</h3>
+  <% end %>
 
   <div class="container">
       <div class="row ">

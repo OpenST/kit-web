@@ -155,6 +155,11 @@
   #app-content{
     position: fixed;
     height: 100vh;
+    width: 100%;
+    padding-top: 3rem;
+    &.wrapper{
+      top: 5px;
+    }
   }
 }
 

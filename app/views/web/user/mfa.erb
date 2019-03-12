@@ -52,3 +52,22 @@
     </div>
   </div>
 </div>
+
+<% # Small JS to auto-submit TFA on 6 chars, hence written here directly  %>
+<% content_for :end_js do %>
+  <script type="text/javascript">
+    $(function () {
+      var mfaTimeOut ;
+      $("input[name='otp']").on('keyup', function(){
+        var jEl = $(this) ;
+        clearTimeout( mfaTimeOut );
+        mfaTimeOut = setTimeout( function () {
+          var val = jEl.val();
+          if(val && val.length >= 6) {
+            $('#mfa-form').submit();
+          }
+        }, 300)
+      })
+    });
+  </script>
+<% end %>

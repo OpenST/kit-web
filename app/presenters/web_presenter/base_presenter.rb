@@ -161,12 +161,16 @@ module WebPresenter
       @params[:controller]
     end
 
+    def is_dashboard_route?
+      ['dashboard'].include?(action) && ['web/economy'].include?(controller)
+    end
+
     def is_token_setup_route?
-      ['token_setup' , 'token_deploy'].include?(action) && ['web/economy'].include?(controller)
+      ['token_setup', 'token_deploy'].include?(action) && ['web/economy'].include?(controller)
     end
 
     def is_token_mint_route?
-      ['token_mint' , 'token_mint_progress'].include?(action) && ['web/economy'].include?(controller)
+      ['token_mint', 'token_mint_progress'].include?(action) && ['web/economy'].include?(controller)
     end
 
     def is_developer_route?

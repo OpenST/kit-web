@@ -69,7 +69,7 @@
                 </div>
                 <div class="form-group mb-2 d-inline-block col-3">
                   <label class="form-label" for="token_symbol">Token Symbol</label>
-                  <input type="text" class="form-control" id="symbol"
+                  <input type="text" class="form-control text-uppercase" id="symbol"
                          value ="<%= @presenter_obj.client_token_symbol%>"
                          placeholder="Token Symbol" name="symbol"
                          minlength="3" maxlength="4" pattern="^[a-zA-Z][a-zA-Z0-9]+" required
@@ -127,7 +127,7 @@
                                      step="<%= bt_to_ost_step%>" id="<%= ost_to_bt_id %>"
                                      name="conversion_factor" value="<%= conversion_factor %>" required>
                             </span>
-                            <span class="ost-mocker-value ml-1" style="font-size: 16px" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
+                            <span class="ost-mocker-value ml-1" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
                           </div>
 
                         </div>

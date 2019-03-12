@@ -25,12 +25,12 @@
 
 %>
 <form data-ost-formhelper id="economy-planner" action="<%=GlobalConstant::RoutesMap.getApis()[:api_token]%>" method="POST"> <!-- #TODO URL -->
-  <div class="planner-container  text-center">
+  <div class="planner-container text-center mt-6">
 
   <% if current_env == sandbox_sub_url_prefix %>
     <div class="container">
       <div class="row">
-        <div class="card card-planner mt-6">
+        <div class="card card-planner">
           <div class="card-header text-left brand-curreny-bg border-0">
             <div class="col-8 p-0">
               <h4 class="mb-2">Deploy Your Brand Curreny</h4>
@@ -42,17 +42,15 @@
         </div>
       </div>
     </div>
-  <% else %>
-      <h3 class="mt-5">First, Let's Design The Token To Launch Your Economy</h3>
   <% end %>
 
   <div class="container">
-      <div class="row ">
-        <div class="card card-planner my-5">
+      <div class="row my-5">
+        <div class="card card-planner">
           <div class="card-header text-left">
             <h4 class="mb-2 ">Token Details</h4>
             <p class="font-weight-light mb-0">
-              Set the unique identity for your token. Choose a Token Name that will help people relating with your brand. The Token Symbol acts like an identifier similar to USD, EUR, and GBP.
+              Choose a Token Name and Identifier that relates to your Brand. The Token Identifier will act as a short code for your token, similar to EUR, GBP, USD.
             </p>
           </div>
           <div class="card-body ">
@@ -68,7 +66,7 @@
                   <div class="invalid-feedback" data-forid="name">&nbsp;</div>
                 </div>
                 <div class="form-group mb-2 d-inline-block col-3">
-                  <label class="form-label" for="token_symbol">Token Symbol</label>
+                  <label class="form-label" for="token_symbol">Token Identifier</label>
                   <input type="text" class="form-control text-uppercase" id="symbol"
                          value ="<%= @presenter_obj.client_token_symbol%>"
                          placeholder="Token Symbol" name="symbol"
@@ -81,7 +79,7 @@
           </div>
         </div>
       </div>
-      <div class="row card card-planner mb-5">
+      <div class="row card card-planner my-5">
         <div class="text-left">
           <div class="card-header">
             <h4 class="mb-0 ">Advanced Options</h4>

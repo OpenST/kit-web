@@ -19,18 +19,18 @@
 
 
   <div class="token-deploy-in-progress token-deploy-content mx-auto">
-    <h3 class="mt-6">Your Token Is Being Deployed</h3>
-    <p class="font-weight-light mb-5 mt-3"> OST is deploying the smart contracts needed to launch your economy. This process will require several minutes.</p>
+    <h3 class="mt-6">Creating Your Brand Token</h3>
+    <p class="font-weight-light mb-5 mt-3">OST is deploying the smart contracts needed to launch your economy. This process will require several minutes.</p>
     <div class="token-deploy-progress-wrapper  mx-auto">
       <%= render :partial => "shared/web/common/progress_bar" %>
     </div>
     <h3 class="my-5">
-      Meanwhile you can continue
+      Meanwhile you can
     </h3>
   </div>
 
   <div class="deploy-success-state token-deploy-content mx-auto text-center mt-5" style="display: none;">
-    <h3 class="my-5">Set Up Complete</h3>
+    <h3 class="my-5">Setup is Complete</h3>
     <div class="shadow-box p-3 row">
 
       <div class="col-8 d-flex align-items-center">
@@ -40,7 +40,7 @@
           </switch>
         </svg>
 
-        <p class="mb-0 ml-2">Set Up is Complete. Lets start by Minting&nbsp;<%=client_token_symbol %></p>
+        <p class="mb-0 ml-2">You can now start minting your first tokens</p>
       </div>
       <div class="col-4 my-auto text-right">
         <a class="btn btn-primary d-inline" href="<%=mint_token_url %>">
@@ -87,7 +87,7 @@
         </svg>
       </div>
       <p class="col-7 text-left my-auto">
-        Inviting your team members to collaborate
+        Invite your team members to collaborate
       </p>
       <div class="col-4">
         <a class="btn btn-secondary" href="<%= invite_team_url %>">
@@ -105,7 +105,7 @@
 
       </div>
       <p class="col-7 text-left my-auto">
-        Starting the API integration with your application
+        Start the API integration with your application
       </p>
       <div class="col-4">
         <a class="btn btn-secondary"  href="<%=developer_url %>">
@@ -126,7 +126,7 @@
 
       </div>
       <p class="col-7 text-left my-auto">
-        Consulting the guides and tutorials to get started
+        Check-out our Guides and Tutorials
       </p>
       <div class="col-4">
         <button class="btn btn-secondary">

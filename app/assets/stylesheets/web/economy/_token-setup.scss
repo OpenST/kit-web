@@ -149,3 +149,18 @@
     }
   }
 }
+
+// Patch to restrict the page squeezing or shrinking while content is blur
+.modal-open{
+  #app-content{
+    position: fixed;
+    height: 100vh;
+  }
+}
+
+.brand-curreny-bg{
+  background: url('https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-deploy-your-brand-curreny.png')!important;
+  background-repeat: no-repeat!important;
+  background-position: center right!important;
+  background-size: contain !important;
+}

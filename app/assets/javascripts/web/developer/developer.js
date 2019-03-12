@@ -52,8 +52,8 @@
         url       : oThis.api_get_key,
         method    : 'GET',
         success   : function ( response ) {
-          if( response.data ){
-            oThis.keys = response.data['api_keys'];
+          if( response.success ){
+            oThis.keys = response.data && response.data['api_keys'];
             oThis.onSuccess();
           }else {
             oThis.onError( response , oThis.jGenerateErr );

@@ -21,7 +21,7 @@ module GlobalConstant
           service_unavailable:  "/service-unavailable/",
           verify_email:         "/verify-email/",
           login:                "/login/",
-          logout:                "/logout/",
+          logout:                "/logout/"
         }
       end
 

@@ -22,6 +22,8 @@
     jWhitelistUserCheckbox : $('#whitelist_user_checkbox'),
     jWhitelistUserModalDefaultState : $('#whitelist_user_modal .default-state'),
     jWhitelistUserModalSuccessState : $('#whitelist_user_modal .success-state'),
+    jWhitelistingRequestedText : $('.whitelisting_requested'),
+    jWhitelistingNotRequestedText : $('.whitelisting_not_requested'),
 
     init: function( config ){
       var oThis = this;
@@ -53,7 +55,7 @@
     bindEvents : function() {
       var oThis = this;
 
-      oThis.jChangeModeToggle.on('click', function(){
+      oThis.jChangeModeToggle.on('click', function( event){
         oThis.sendRequestToTheTeam(event);
       });
 
@@ -63,7 +65,7 @@
         window.location = oThis.redirectMainnet;
       });
 
-      $('#dashboard-complete-kyc').on('click', function () {
+      $('#dashboard-complete-kyc').on('click', function (event) {
         oThis.sendRequestToTheTeam(event);
       });
 
@@ -90,6 +92,9 @@
       oThis.initTooltip();
       oThis.jWhitelistUserModalDefaultState.hide();
       oThis.jWhitelistUserModalSuccessState.show();
+      oThis.jWhitelistingNotRequestedText.hide();
+      oThis.jWhitelistingRequestedText.show();
+      $('#dashboard-complete-kyc').hide();
     }
 
   };

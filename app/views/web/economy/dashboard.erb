@@ -22,6 +22,9 @@
         target: "_blank"
       }
   ]
+
+  is_whitelisted_user = @presenter_obj.sub_env_payloads.is_mainnet_whitelisted?
+  is_mainnet_whitelisting_requested = @presenter_obj.sub_env_payloads.is_mainnet_whitelisting_requested?
 %>
 
 <div class="container my-6 dashboard">
@@ -32,21 +35,21 @@
         <div class="col-4 text-center">
           <div class="stats-col p-3">
             <h6 class="title">total supply</h6>
-            <div class="gold">LGBT <%= @presenter_obj.dashboard_details.total_supply %></div>
+            <div class="gold"><%= @presenter_obj.client_token_symbol%>&nbsp;<%= @presenter_obj.dashboard_details.total_supply %></div>
             <div class="gold">$<%= @presenter_obj.dashboard_details.total_supply_dollar %></div>
           </div>
         </div>
         <div class="col-4 text-center">
           <div class="stats-col p-3">
             <h6 class="title">circulating supply</h6>
-            <div class="gold">LGBT <%= @presenter_obj.dashboard_details.circulating_supply %></div>
+            <div class="gold"><%= @presenter_obj.client_token_symbol%>&nbsp;<%= @presenter_obj.dashboard_details.circulating_supply %></div>
             <div class="gold">$<%= @presenter_obj.dashboard_details.circulating_supply_dollar %></div>
           </div>
         </div>
         <div class="col-4 text-center">
           <div class="stats-col p-3">
-            <h6 class="title">gas spent</h6>
-            <div class="gold">OST⍺ <%= @presenter_obj.dashboard_details.total_volume %></div>
+            <h6 class="title">total volume</h6>
+            <div class="gold"><%= ost_currency_symbol %>&nbsp;<%= @presenter_obj.dashboard_details.total_volume %></div>
             <div class="gold">$<%= @presenter_obj.dashboard_details.total_volume_dollar %></div>
           </div>
         </div>
@@ -62,15 +65,22 @@
             <div class="col-7">
               <h3 class="mb-3">Welcome to OST KIT</h3>
               <ul class="list-unstyled m-0">
-                <li class="list-items">
-                  <svg style="width: 20px;height: 20px;">
-                    <switch>
-                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#complete-kyc-icon"></use>
-                    </switch>
-                  </svg>
-                  <span class="display-3 ml-2">Complete KYC | Enable production Mode</span>
-                  <button class="btn btn-secondary ml-auto" id="dashboard-complete-kyc" title="Complete KYC">complete kyc</button>
-                </li>
+                <% if !is_whitelisted_user %>
+                  <li class="list-items">
+                    <svg style="width: 20px;height: 20px;">
+                      <switch>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#complete-kyc-icon"></use>
+                      </switch>
+                    </svg>
+
+                    <span style="display: <%= is_mainnet_whitelisting_requested ? "block" : "none" %>"
+                          class="display-3 ml-2 whitelisting_requested w-100">Request for Whitelisting has been sent</span>
+                    <div style="display: <%= !is_mainnet_whitelisting_requested ? "flex" : "none" %>"  class="w-100 align-items-center">
+                      <span class="display-3 ml-2 whitelisting_not_requested">Complete KYC | Enable production Mode</span>
+                      <button class="btn btn-secondary ml-auto" id="dashboard-complete-kyc" title="Complete KYC">complete kyc</button>
+                    </div>
+                  </li>
+                <% end %>
                 <% dashboard_links.each_with_index do|data, index| %>
                   <li class="list-items">
                     <svg style="width: 20px;height: 20px;">

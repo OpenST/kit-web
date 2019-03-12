@@ -15,7 +15,7 @@
           <div class="general_error invalid-feedback" data-forid="sign_up_form"></div>
           <% if qr_url %>
             <div class="general_error invalid-feedback" data-forid="sign_up_form"></div>
-            <p class="desc text-center">Set up the Multi-Factor Authentication</p>
+            <p class="desc text-center">Set up the Two-Factor Authentication</p>
             <div class="qr-code-container row mx-auto ">
               <div class="col-12 col-md-5 align-self-center text-center">
                 <div class="img-container">
@@ -36,14 +36,13 @@
 
             </div>
           <% else %>
-            <p class="text-center font-weight-light">Please open Google Authenticator and enter the
-              MFA code to complete sign-in.</p>
+            <p class="text-center font-weight-light">Please open Google Authenticator and enter the TFA code to complete sign-in.</p>
           <% end %>
           <form id="mfa-form" class="user-form text-center" action="<%= GlobalConstant::RoutesMap.getApis()[:api_mfa] %>" method="POST" data-ost-formhelper>
             <div class="form-group row mx-auto mt-5">
-              <label class="form-label" >mfa code</label>
+              <label class="form-label" >tfa code</label>
               <input type="number" name="otp" min="0" max="999999" class="form-control" autocomplete="off" required autofocus>
-              <div class="invalid-feedback" data-forid="email">&nbps;</div>
+              <div class="invalid-feedback" data-forid="email">&nbsp;</div>
             </div>
             <button type="submit" id="mfa-submit-btn"  class="ml-3 btn btn-primary" data-submiting="Submitting">submit</button>
           </form>

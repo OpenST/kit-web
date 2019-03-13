@@ -101,7 +101,7 @@
     loadingHTML: "<div class='loader'></div>",
     columns : [
       {
-        type: 'string',
+        type: 'date',
         opt_label: 'Date',
         opt_id: 'timestamp'
       },
@@ -153,10 +153,10 @@
           color: '597a84',
           fontSize: 10
         },
-        baseline: 5,
         gridlines: {
           color: "#e3eef3"
         },
+        format:'MMM d, y'
       },
       vAxis: {
         textStyle: {
@@ -222,7 +222,6 @@
           color: '597a84',
           fontSize: 10
         },
-        baseline: 5,
         gridlines: {
           color: "#e3eef3"
         },
@@ -234,7 +233,6 @@
           color: '597a84',
           fontSize: 10
         },
-        // baseline: 5,
         gridlines: {
           color: "#e3eef3"
         },

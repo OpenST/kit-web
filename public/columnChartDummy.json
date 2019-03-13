@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "data": {
+    "result_type": "transaction_type",
+    "transaction_type": [
+      {
+        "type": "Reward",
+        "total_transfers": 12
+      },
+      {
+        "type": "Purchase",
+        "total_transfers": 7
+      },
+      {
+        "type": "Download",
+        "total_transfers": 3
+      },
+      {
+        "type": "Upvote",
+        "total_transfers": 7
+      }
+    ],
+    "meta": {}
+  }
+}
+

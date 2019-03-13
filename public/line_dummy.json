@@ -1,0 +1,40 @@
+{
+  "success": true,
+  "data": {
+    "result_type": "transaction_type",
+    "transaction_type": [
+      {
+        "timestamp": 1549929600,
+        "transactionType1":0,
+        "transactionType2":0,
+        "transactionType3":0
+      },
+      {
+        "timestamp": 1550016000,
+        "transactionType1":4,
+        "transactionType2":3,
+        "transactionType3":2
+      },
+      {
+        "timestamp": 1550102400,
+        "transactionType1":5,
+        "transactionType2":4,
+        "transactionType3":3
+      },
+      {
+        "timestamp": 1550188800,
+        "transactionType1":1,
+        "transactionType2":5,
+        "transactionType3":2
+      },
+      {
+        "timestamp": 1550275200,
+        "transactionType1":2,
+        "transactionType2":3,
+        "transactionType3":4
+      }
+    ],
+    "meta": {}
+  }
+}
+

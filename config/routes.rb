@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
 
-  scope '', controller: 'application' do
+  scope '', controller: 'application', :format => false do
     get '/health-checker' => :health_checker
   end
 
-  scope '', controller: 'web/home' do
+  scope '', controller: 'web/home', :format => false do
     get '/' => :index
     get '/unsupported-client' => :unsupported_client
     get '/service-unavailable' => :service_unavailable
   end
 
-  scope '', controller: 'web/user' do
+  scope '', controller: 'web/user', :format => false do
     get '/login' => :login, as: 'login'
     get '/logout' => :logout
     get '/sign-up' => :sign_up
@@ -21,11 +21,11 @@ Rails.application.routes.draw do
     get '/invalid-token' => :invalid_token
   end
 
-  scope 'settings', controller: 'web/user_setting' do
+  scope 'settings', controller: 'web/user_setting', :format => false do
     get '/team' => :team
   end
 
-  scope "#{GlobalConstant::Environment.url_prefix}", controller: 'web/economy' do
+  scope "#{GlobalConstant::Environment.url_prefix}", controller: 'web/economy', :format => false do
     get '/' => :dashboard, as: 'dashboard'
     get '/token/setup' => :token_setup, as: 'token_setup'
     get '/token/deploy' => :token_deploy, as: 'token_deploy'
@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     get '/token/mint-progress' => :token_mint_progress, as: 'token_mint_progress'
   end
 
-  scope "#{GlobalConstant::Environment.url_prefix}/developer", controller: 'web/developer' do
+  scope "#{GlobalConstant::Environment.url_prefix}/developer", controller: 'web/developer', :format => false do
     get '/' => :developer, as: 'developer'
   end
 

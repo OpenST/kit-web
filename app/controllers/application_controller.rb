@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   include Sanitizer
   before_action :sanitize_params
   after_action :handle_whitelisted_api_cookies
+  after_action :set_response_headers
 
   include CookieConcern
   include ApplicationHelper
@@ -26,7 +27,7 @@ class ApplicationController < ActionController::Base
   # ELB Health Checker
   #
   def health_checker
-    render plain: '', :status => 200, :content_type => 'text/html'
+    render plain: '', :status => 200
   end
 
   private
@@ -44,12 +45,17 @@ class ApplicationController < ActionController::Base
     params[:is_bot] = res.present? ? 1 : 0
   end
 
+  # Set response headers
+  #
+  def set_response_headers
+    response.headers["Content-Type"] = 'text/html; charset=utf-8'
+  end
+
   # Sanitize params
   #
   def sanitize_params
     sanitize_params_recursively(params)
   end
-
 
   # Handle API specific whitelisted cookies
   #

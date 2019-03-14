@@ -12,7 +12,7 @@
     content: '';
     height: 43px;
     width: 0px;
-    margin: 0 12px;
+    margin: 0 15px;
     border-right: 1.5px solid #69a2bd;
   }
 }
@@ -20,9 +20,11 @@
 .team-home-icon{
   padding: 5px;
   border-radius: 10px;
-  border: 1.5px solid #6aa2bd;
+  border: 2px solid #6aa2bd;
   transition: background-color 0.2s;
   svg{
+    height: 25px;
+    width: 25px;
     fill: #6aa2bd;
     transition: fill 0.2s;
   }

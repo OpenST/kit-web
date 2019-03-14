@@ -6,3 +6,13 @@
     bottom: 0;
   }
 }
+
+.team-home-icon{
+  &:before{
+    content: '';
+    height: 35px;
+    width: 0px;
+    margin: 0 12px;
+    border-right: 1.5px solid #69a2bd;
+  }
+}

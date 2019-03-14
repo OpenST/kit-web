@@ -36,7 +36,7 @@
 
             </div>
           <% else %>
-            <h3 class="text-center">Welcome back to OST Platform</h3>
+            <h3 class="text-center">Welcome back to the OST Platform</h3>
             <p class="text-center font-weight-light">Please enter the 2FA code associated with your account.</p>
           <% end %>
           <form id="mfa-form" class="user-form text-center" action="<%= GlobalConstant::RoutesMap.getApis()[:api_mfa] %>" method="POST" data-ost-formhelper>

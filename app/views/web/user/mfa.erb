@@ -11,10 +11,10 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 mx-auto">
-          <h3 class="text-center">Your account has been activated</h3>
           <div class="general_error invalid-feedback" data-forid="sign_up_form"></div>
           <% if qr_url %>
-            <div class="general_error invalid-feedback" data-forid="sign_up_form"></div>
+            <h3 class="text-center">Secure Your Account</h3>
+<!--            <div class="general_error invalid-feedback" data-forid="sign_up_form"></div>-->
             <p class="desc text-center">Secure your account by setting up 2-Factor Authentication</p>
             <div class="qr-code-container row mx-auto ">
               <div class="col-12 col-md-5 align-self-center text-center">
@@ -36,7 +36,8 @@
 
             </div>
           <% else %>
-            <p class="text-center font-weight-light">Please open Google Authenticator and enter the TFA code to complete sign-in.</p>
+            <h3 class="text-center">Welcome back to OST Platform</h3>
+            <p class="text-center font-weight-light">Please enter the 2FA code associated with your account.</p>
           <% end %>
           <form id="mfa-form" class="user-form text-center" action="<%= GlobalConstant::RoutesMap.getApis()[:api_mfa] %>" method="POST" data-ost-formhelper>
             <div class="form-group row mx-auto mt-5">

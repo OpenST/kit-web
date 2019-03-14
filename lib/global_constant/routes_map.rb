@@ -9,8 +9,8 @@ module GlobalConstant
         {
           dashboard:            "/#{GlobalConstant::Environment.url_prefix}/",
           token_setup:          "/#{GlobalConstant::Environment.url_prefix}/token/setup/",
-          mainnet_token_setup:  "/#{GlobalConstant::Environment.main_sub_env_url_prefix}/token/setup/",
-          sandbox_token_setup:  "/#{GlobalConstant::Environment.sandbox_sub_url_prefix}/token/setup/",
+          mainnet_token_dashboard: "/#{GlobalConstant::Environment.main_sub_env_url_prefix}/",
+          sandbox_token_dashboard: "/#{GlobalConstant::Environment.sandbox_sub_url_prefix}/",
           token_deploy:         "/#{GlobalConstant::Environment.url_prefix}/token/deploy/",
           token_mint:           "/#{GlobalConstant::Environment.url_prefix}/token/mint/",
           token_mint_progress:  "/#{GlobalConstant::Environment.url_prefix}/token/mint-progress/",

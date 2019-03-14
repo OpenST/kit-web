@@ -7,12 +7,29 @@
   }
 }
 
-.team-home-icon{
+.team-home-border{
   &:before{
     content: '';
-    height: 35px;
+    height: 43px;
     width: 0px;
     margin: 0 12px;
     border-right: 1.5px solid #69a2bd;
+  }
+}
+
+.team-home-icon{
+  padding: 5px;
+  border-radius: 10px;
+  border: 1.5px solid #6aa2bd;
+  transition: background-color 0.2s;
+  svg{
+    fill: #6aa2bd;
+    transition: fill 0.2s;
+  }
+  &:hover{
+    background-color: #6aa2bd;
+    svg{
+      fill: #ffffff;
+    }
   }
 }

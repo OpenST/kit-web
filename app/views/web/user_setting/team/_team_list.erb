@@ -8,14 +8,14 @@
     <div class="col-12 p-0">
       <div class="d-flex justify-content-between align-items-center mb-5">
         <div class="d-flex align-items-center">
-          <a href="<%= dashboard_url %>" style="font-size: 0">
-            <svg style="height: 35px;width: 35px">
+          <a href="<%= dashboard_url %>" style="font-size: 0" class="team-home-icon">
+            <svg style="height: 30px;width: 30px">
               <switch>
                 <use class="error-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#team-home-icon"></use>
               </switch>
             </svg>
           </a>
-          <h3 class="mb-0 team-home-icon d-flex">Your Team</h3>
+          <h3 class="mb-0 team-home-border d-flex align-items-center">Your Team</h3>
         </div>
         <% if @presenter_obj.is_super_admin? %>
           <button id="invite_new_member_btn" class="btn btn-gold float-right">Invite Team Member</button>

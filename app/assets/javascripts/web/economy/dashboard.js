@@ -49,24 +49,18 @@
       },
 
       getAjaxUrl: function (api ,  val ) {
-        //Depending on val return complete url , default return Day.
-        //Check for indexOf graph_duration
-        //IF present append value
-        //IF not append value with param graph_duration
-        //append and return
-
          if(!val && api.indexOf('graph_duration') < 0 ){
            var url = api + '?graph_duration=Day';
            return url;
            console.log("url",url);
-         }else{
+         }else {
            var url = api + '?graph_duration=' + val;
            return url
-           console.log("url",url);
+           console.log("url", url);
          }
-
-
       },
+
+
       bindActions :function () {
         jIntervals.on('click',function (event) {
           jIntervals.removeClass('active');

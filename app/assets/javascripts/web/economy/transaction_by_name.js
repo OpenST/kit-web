@@ -6,7 +6,7 @@
     ajax : {
       url:'columnChartURL'
     },
-    selector: '#jColumnChart',
+    selector: '#transactionByNameChart',
     type: 'ColumnChart',
     noDataHTML: $('#jColumnChartNoData').html(), //TODO
     loadingHTML: "<div class='loader'></div>",
@@ -14,7 +14,7 @@
       {
         type: 'string',
         opt_label: 'Type',
-        opt_id: 'type'
+        opt_id: 'name'
       },
       {
         type: 'number',

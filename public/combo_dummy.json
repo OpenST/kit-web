@@ -53,10 +53,3 @@
 }
 
 
-/** url
-  1. API/?graph_duration=Hour
-  2. API/?graph_duration=Day
-  3. API/?graph_duration=Week
-  4. API/?graph_duration=Month
-  5. API/?graph_duration=Year
-**/

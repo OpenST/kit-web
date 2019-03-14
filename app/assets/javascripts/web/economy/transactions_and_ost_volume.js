@@ -4,6 +4,7 @@
 
 
   ost.transactions_and_ost_volume = {
+    config: {
     ajax: {
       url: 'url'
     },
@@ -80,46 +81,49 @@
         textStyle: {color: '597a84',fontSize: 10}
       }
     },
-  }
+  },
 
-  ost.filterOptionsMap = {
-    "day" :{
-      count : 12 ,
-      format :'h aa' ,
-      columns_1 : {
-        type: 'datetime',
-        opt_label: 'Date',
-        opt_id: 'timestamp'
-      }},
-    "week" : {
-      count : 7 ,
-      format :'EEE' ,
-      columns_1 : {
-        type: 'date',
-        opt_label: 'Date',
-        opt_id: 'timestamp'
+    filterOptionsMap : {
+      "day" :{
+        count : 12 ,
+        format :'h aa' ,
+        columns_1 : {
+          type: 'datetime',
+          opt_label: 'Date',
+          opt_id: 'timestamp'
+        }},
+      "week" : {
+        count : 7 ,
+        format :'EEE' ,
+        columns_1 : {
+          type: 'date',
+          opt_label: 'Date',
+          opt_id: 'timestamp'
+        }
+      },
+      "month" : {
+        count : 15 ,
+        format :'d' ,
+        columns_1 : {
+          type: 'date',
+          opt_label: 'Date',
+          opt_id: 'timestamp'
+        }
+      },
+      "year" : {
+        count : 12 ,
+        format :"MMM''yy" ,
+        columns_1 : {
+          type: 'date',
+          opt_label: 'Date',
+          opt_id: 'timestamp'
+        }
       }
-    },
-    "month" : {
-      count : 15 ,
-      format :'d' ,
-      columns_1 : {
-        type: 'date',
-        opt_label: 'Date',
-        opt_id: 'timestamp'
-      }
-    },
-    "year" : {
-      count : 12 ,
-      format :"MMM''yy" ,
-      columns_1 : {
-        type: 'date',
-        opt_label: 'Date',
-        opt_id: 'timestamp'
-      }
+
     }
-
   }
+
+
 
 
 

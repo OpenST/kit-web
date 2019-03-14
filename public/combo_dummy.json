@@ -4,80 +4,59 @@
     "result_type": "number_transactions",
     "number_transactions": [
       {
-        "timestamp": 1522540800,
+        "timestamp": 1552003200,
         "token_transfers": 0,
         "token_transactions": 0,
         "token_ost_volume": 0
       },
       {
-        "timestamp": 1525132800,
+        "timestamp": 1552089600,
         "token_transfers": 0,
         "token_transactions": 0,
         "token_ost_volume": 0
       },
       {
-        "timestamp": 1527811200,
+        "timestamp": 1552176000,
         "token_transfers": 0,
         "token_transactions": 0,
         "token_ost_volume": 0
       },
       {
-        "timestamp": 1530403200,
-        "token_transfers": "14509",
-        "token_transactions": "7015",
-        "token_ost_volume": "6434.955019205731882029"
-      },
-      {
-        "timestamp": 1533081600,
+        "timestamp": 1552262400,
         "token_transfers": 0,
         "token_transactions": 0,
         "token_ost_volume": 0
       },
       {
-        "timestamp": 1535760000,
+        "timestamp": 1552348800,
         "token_transfers": 0,
         "token_transactions": 0,
         "token_ost_volume": 0
       },
       {
-        "timestamp": 1538352000,
-        "token_transfers": "11",
-        "token_transactions": "7",
-        "token_ost_volume": "0.918730176749858593"
+        "timestamp": 1552435200,
+        "token_transfers": "5",
+        "token_transactions": "2",
+        "token_ost_volume": "0.59221879465535275"
       },
       {
-        "timestamp": 1541030400,
+        "timestamp": 1552521600,
         "token_transfers": 0,
         "token_transactions": 0,
         "token_ost_volume": 0
-      },
-      {
-        "timestamp": 1543622400,
-        "token_transfers": 0,
-        "token_transactions": 0,
-        "token_ost_volume": 0
-      },
-      {
-        "timestamp": 1546300800,
-        "token_transfers": 0,
-        "token_transactions": 0,
-        "token_ost_volume": 0
-      },
-      {
-        "timestamp": 1548979200,
-        "token_transfers": 0,
-        "token_transactions": 0,
-        "token_ost_volume": 0
-      },
-      {
-        "timestamp": 1551398400,
-        "token_transfers": "2",
-        "token_transactions": "1",
-        "token_ost_volume": "0.146962531829756275"
       }
     ],
     "meta": {
-      "duration": "Year"
+      "duration": "Week"
     }
   }
 }
+
+
+/** url
+  1. API/?graph_duration=Hour
+  2. API/?graph_duration=Day
+  3. API/?graph_duration=Week
+  4. API/?graph_duration=Month
+  5. API/?graph_duration=Year
+**/

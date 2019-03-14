@@ -1,40 +1,52 @@
 {
   "success": true,
   "data": {
-    "result_type": "transaction_type",
-    "transaction_type": [
+    "result_type": "transaction_types",
+    "transaction_types": [
       {
         "timestamp": 1549929600,
-        "transactionType1":0,
-        "transactionType2":0,
-        "transactionType3":0
+        "user_to_user_transfer":0,
+        "company_to_user_transfer":0,
+        "user_to_company_transfer":0
       },
       {
         "timestamp": 1550016000,
-        "transactionType1":4,
-        "transactionType2":3,
-        "transactionType3":2
+        "user_to_user_transfer":3,
+        "company_to_user_transfer":5,
+        "user_to_company_transfer":4
       },
       {
         "timestamp": 1550102400,
-        "transactionType1":5,
-        "transactionType2":4,
-        "transactionType3":3
+        "user_to_user_transfer":1,
+        "company_to_user_transfer":10,
+        "user_to_company_transfer":20
       },
       {
         "timestamp": 1550188800,
-        "transactionType1":1,
-        "transactionType2":5,
-        "transactionType3":2
+        "user_to_user_transfer":40,
+        "company_to_user_transfer":50,
+        "user_to_company_transfer":60
       },
       {
         "timestamp": 1550275200,
-        "transactionType1":2,
-        "transactionType2":3,
-        "transactionType3":4
+        "user_to_user_transfer":70,
+        "company_to_user_transfer":80,
+        "user_to_company_transfer":90
       }
     ],
+    "transaction_volume": {
+      "user_to_user" : 10,
+      "company_to_user" : 30,
+      "user_to_company" : 60
+    },
     "meta": {}
   }
 }
 
+/** url
+  1. API/?graph_duration=Hour
+  2. API/?graph_duration=Day
+  3. API/?graph_duration=Week
+  4. API/?graph_duration=Month
+  5. API/?graph_duration=Year
+**/

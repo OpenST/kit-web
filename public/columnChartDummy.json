@@ -1,22 +1,22 @@
 {
   "success": true,
   "data": {
-    "result_type": "transaction_type",
-    "transaction_type": [
+    "result_type": "transaction_by_name",
+    "transaction_by_name": [
       {
-        "type": "Reward",
+        "name": "Reward",
         "total_transfers": 12
       },
       {
-        "type": "Purchase",
+        "name": "Purchase",
         "total_transfers": 7
       },
       {
-        "type": "Download",
+        "name": "Download",
         "total_transfers": 3
       },
       {
-        "type": "Upvote",
+        "name": "Upvote",
         "total_transfers": 7
       }
     ],
@@ -24,3 +24,10 @@
   }
 }
 
+/** url
+  1. API/?graph_duration=Hour
+  2. API/?graph_duration=Day
+  3. API/?graph_duration=Week
+  4. API/?graph_duration=Month
+  5. API/?graph_duration=Year
+**/

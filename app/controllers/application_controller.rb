@@ -147,10 +147,10 @@ class ApplicationController < ActionController::Base
         redirect_to :dashboard and return
       when 'token_setup'
         redirect_to :token_setup and return
-      when 'sandbox_token_setup'
-        redirect_to "/#{GlobalConstant::Environment.sandbox_sub_url_prefix}/token/setup" and return
-      when 'mainnet_token_setup'
-        redirect_to "/#{GlobalConstant::Environment.main_sub_env_url_prefix}/token/setup" and return
+      when 'sandbox_token_dashboard'
+        redirect_to "/#{GlobalConstant::Environment.sandbox_sub_url_prefix}" and return
+      when 'mainnet_token_dashboard'
+        redirect_to "/#{GlobalConstant::Environment.main_sub_env_url_prefix}" and return
       when 'token_deploy'
         redirect_to :token_deploy and return
       when 'token_mint'

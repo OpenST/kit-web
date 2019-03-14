@@ -57,54 +57,92 @@
     </div>
   </div>
 
-  <div class="row mb-5">
-    <div class="col-12">
-      <div class="card card-planner">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-7">
-              <h3 class="mb-3">Welcome to OST KIT</h3>
-              <ul class="list-unstyled m-0">
-                <% if !is_whitelisted_user %>
-                  <li class="list-items">
-                    <svg style="width: 20px;height: 20px;">
-                      <switch>
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#complete-kyc-icon"></use>
-                      </switch>
-                    </svg>
+<!--  <div class="row mb-5">-->
+<!--    <div class="col-12">-->
+<!--      <div class="card card-planner">-->
+<!--        <div class="card-body">-->
+<!--          <div class="row">-->
+<!--            <div class="col-7">-->
+<!--              <h3 class="mb-3">Welcome to OST KIT</h3>-->
+<!--              <ul class="list-unstyled m-0">-->
+                <%# if !is_whitelisted_user %>
+<!--                  <li class="list-items">-->
+<!--                    <svg style="width: 20px;height: 20px;">-->
+<!--                      <switch>-->
+<!--                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#complete-kyc-icon"></use>-->
+<!--                      </switch>-->
+<!--                    </svg>-->
 
-                    <span style="display: <%= is_mainnet_whitelisting_requested ? "block" : "none" %>"
-                          class="display-3 ml-2 whitelisting_requested w-100">Request for Whitelisting has been sent</span>
-                    <div style="display: <%= !is_mainnet_whitelisting_requested ? "flex" : "none" %>"  class="w-100 align-items-center">
-                      <span class="display-3 ml-2 whitelisting_not_requested">Complete KYC | Enable production Mode</span>
-                      <button class="btn btn-secondary ml-auto" id="dashboard-complete-kyc" title="Complete KYC">complete kyc</button>
-                    </div>
-                  </li>
-                <% end %>
-                <% dashboard_links.each_with_index do|data, index| %>
-                  <li class="list-items">
-                    <svg style="width: 20px;height: 20px;">
-                      <switch>
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<%= data[:svg] %>"></use>
-                      </switch>
-                    </svg>
-                    <span class="display-3 ml-2"><%= data[:desc] %></span>
-                    <a href="<%= data[:href] %>" class="btn btn-secondary ml-auto" title="<%= data[:btn_txt] %>" target="<%= data[:target] %>"><%= data[:btn_txt] %></a>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-            <div class="col-5">
-              <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-dashboard-hero-illustration@2x.png" class="img-fluid" alt="OST KIT">
-            </div>
-          </div>
+<!--                    <span style="display: <%#= is_mainnet_whitelisting_requested ? "block" : "none" %>"-->
+<!--                          class="display-3 ml-2 whitelisting_requested w-100">Request for Whitelisting has been sent</span>-->
+<!--                    <div style="display: <%#= !is_mainnet_whitelisting_requested ? "flex" : "none" %>"  class="w-100 align-items-center">-->
+<!--                      <span class="display-3 ml-2 whitelisting_not_requested">Complete KYC | Enable production Mode</span>-->
+<!--                      <button class="btn btn-secondary ml-auto" id="dashboard-complete-kyc" title="Complete KYC">complete kyc</button>-->
+<!--                    </div>-->
+<!--                  </li>-->
+                <%# end %>
+                <%# dashboard_links.each_with_index do|data, index| %>
+<!--                  <li class="list-items">-->
+<!--                    <svg style="width: 20px;height: 20px;">-->
+<!--                      <switch>-->
+<!--                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<%#= data[:svg] %>"></use>-->
+<!--                      </switch>-->
+<!--                    </svg>-->
+<!--                    <span class="display-3 ml-2"><%#= data[:desc] %></span>-->
+<!--                    <a href="<%#= data[:href] %>" class="btn btn-secondary ml-auto" title="<%#= data[:btn_txt] %>" target="<%#= data[:target] %>"><%#= data[:btn_txt] %></a>-->
+<!--                  </li>-->
+                <%# end %>
+<!--              </ul>-->
+<!--            </div>-->
+<!--            <div class="col-5">-->
+<!--              <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-dashboard-hero-illustration@2x.png" class="img-fluid" alt="OST KIT">-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+    <div class="row transactions_and ost_volume">
+      <div class="col-12">
+        <h3 class="mb-3">Economic Indicators </h3>
+        <div class="d-flex graph-header">
+          <div class="mr-auto p-2">No. of Transactions vs. OST Volume</div>
+<!--          <div class="p-2 interval partition" data-interval="hour">1 H</div>-->
+          <div class="p-2 interval active" data-interval="day">1 D</div>
+          <div class="p-2 interval" data-interval="week">1 W</div>
+          <div class="p-2 interval" data-interval="month">1 M</div>
+          <div class="p-2 interval" data-interval="year">1 Y</div>
         </div>
+        <div class=" graph-container" id="comboChart"></div>
       </div>
     </div>
-  </div>
-  <div class="p-5" id="jColumnChart"></div>
-  <div class="p-5" id="lineChart"></div>
-  <div class="p-5" id="comboChart"></div>
+    <div class="row">
+      <div class="p-5" id="lineChart"></div>
+    </div>
+    <div class="row">
+      <div class="p-5" id="jColumnChart"></div>
+    </div>
+
+
+
+
+
+
+
+</div>
+<% content_for :end_js do %>
+<script type="text/javascript">
+  $( function () {
+    ost.dashboard.init({
+      transactions_and_ost_volume_url : "/combo_dummy.json",
+      transaction_by_type_url : "/line_dummy.json",
+      transaction_by_name_url : "/columnChartDummy.json"
+    });
+  });
+</script>
+<% end %>
+
+
 
 <!--  <div class="row">-->
 <!--    <div class="col-12">-->
@@ -117,5 +155,3 @@
 <!--      </div>-->
 <!--    </div>-->
 <!--  </div>-->
-
-</div>

@@ -39,4 +39,23 @@
   .coming-soon-desc{
     line-height: 2;
   }
+  .graph-header{
+    border-top: 2px solid #e3eef3;
+    border-bottom: 2px solid #e3eef3;
+    color: #438bad;
+    .partition{
+      border-left: 2px solid #e3eef3;
+    }
+    .interval{
+      cursor: pointer;
+      &.active{
+        color:#e4b030
+      }
+    }
+  }
+  .graph-container{
+    width:100%;
+    height:350px;
+
+  }
 }

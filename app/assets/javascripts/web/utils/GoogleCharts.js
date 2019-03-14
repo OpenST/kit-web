@@ -42,9 +42,12 @@
      * Draw method to be called externally
      * Can pass config here
      */
-    draw: function(config){
+    draw: function(config , callback ){
       var oThis = this;
-      $.extend( oThis, config );
+
+      if( config ){
+        $.extend( oThis, config );
+      }
 
       if ( ($.isEmptyObject(oThis.data) && $.isEmptyObject(oThis.ajax)) || !oThis.selector || !oThis.type ){
         console.warn('Mandatory inputs for Google charts are missing [data OR ajax, options, selector, type]');
@@ -65,15 +68,18 @@
 
       if(!$.isEmptyObject(oThis.ajax)){
         var ajaxObj = {
-          success: function(response){
-            oThis.data = oThis.ajaxCallback(response);
-            console.log('AJAX data: ', oThis.data);
-            console.log('Drawing chart using AJAX data and callback...');
-            if(oThis.data.length === 0){
-              oThis.renderBlank();
-            } else {
-              oThis.render();
+          success: function(response) {
+            if( response.success ){
+              oThis.data = oThis.ajaxCallback(response);
+              console.log('AJAX data: ', oThis.data);
+              console.log('Drawing chart using AJAX data and callback...');
+              if(oThis.data.length === 0){
+                oThis.renderBlank();
+              } else {
+                oThis.render();
+              }
             }
+            callback && callback( response );
           }
         };
         $.extend( ajaxObj, oThis.ajax );

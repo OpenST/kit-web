@@ -143,7 +143,7 @@ class ApplicationController < ActionController::Base
         redirect_to :mfa and return
       when 'authenticate_mfa'
         redirect_to :mfa and return
-      when 'dashboard'
+      when 'token_dashboard'
         redirect_to :dashboard and return
       when 'token_setup'
         redirect_to :token_setup and return

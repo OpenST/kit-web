@@ -64,7 +64,6 @@
     -webkit-box-align: center!important;
     -ms-flex-align: center!important;
     align-items: center!important;
-
   }
 
   .loader{
@@ -73,5 +72,30 @@
     width: 60px;
     margin: 0 auto;
     background-size: 60px;
+  }
+
+  .pie-chart-container{
+    background-color: #f9fafa;
+    border-radius: 10px;
+  }
+
+  .color-bar{
+    width: 5px;
+    &.color-bar-red{
+      border: 3px solid #ff5f5a;
+    }
+    &.color-bar-yellow{
+      border: 3px solid #f6c62b;
+    }
+    &.color-bar-blue{
+      border: 3px solid #84d1d4;
+    }
+  }
+
+  .pieChartLegend{
+    font-size: 12px;
+    font-weight: 600;
+    font-style: normal;
+    color: #597a84;
   }
 }

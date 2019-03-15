@@ -115,7 +115,7 @@
           <div class="p-2 interval" data-interval="month">1 M</div>
           <div class="p-2 interval" data-interval="year">1 Y</div>
         </div>
-        <div class=" graph-container" id="comboChart"></div>
+        <div class="graph-container" id="comboChart"></div>
       </div>
     </div>
 
@@ -128,13 +128,30 @@
         <div class="p-2 interval" data-interval="month">1 M</div>
         <div class="p-2 interval" data-interval="year">1 Y</div>
       </div>
-      <div id="tx_by_type">
+      <div class="" id="tx_by_type">
         <div class="row">
-          <div class="col-10 graph-container" id="lineChart">
+          <div class="col-9 graph-container" id="lineChart">
 
           </div>
-          <div class="col-2 graph-container" id="pieChart">
-
+          <div class="col-3 graph-container pie-chart-container my-5">
+            <div id="pieChart"></div>
+            <div class="pieChartLegend" style="display:none;">
+              <div>
+                <span class="mr-2">User to User</span>
+                <span class="mr-2 color-bar color-bar-yellow"></span>
+                <span class="user-to-user-val">100</span>
+              </div>
+              <div>
+                <span class="mr-2">Company to User</span>
+                <span class="mr-2 color-bar color-bar-red"></span>
+                <span class="user-to-user-val">100</span>
+              </div>
+              <div>
+                <span class="mr-2">User to company</span>
+                <span class="mr-2 color-bar color-bar-blue"></span>
+                <span class="user-to-user-val">100</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

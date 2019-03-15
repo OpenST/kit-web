@@ -74,6 +74,7 @@
         ;
         config.data = data;
         oThis.transactionByTypePieChart.draw( config  );
+        // $('.pieChartLegend').show();
       },
 
       drawTransactionByNameGraph : function (filter) {

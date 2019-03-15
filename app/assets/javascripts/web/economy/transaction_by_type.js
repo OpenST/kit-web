@@ -37,15 +37,15 @@
       series: {
         0: {
           labelInLegend: 'User to User',
-          color: 'yellow'
+          color: 'f6c62b'
         },
         1: {
           labelInLegend: 'Company to User',
-          color: 'red'
+          color: 'ff5f5a'
         },
         2: {
           labelInLegend: 'User to company',
-          color: 'blue'
+          color: '84d1d4'
         }
       },
       legend: {
@@ -68,7 +68,7 @@
         gridlines: {
           color: "#e3eef3"
         },
-        format: 'MMM d, y'
+        format: 'MMM d'
       },
       vAxis: {
         textStyle: {
@@ -96,7 +96,7 @@
       pieHole: 0.7,
       pieSliceText: 'none',
       pieSliceBorderColor: 'none',
-      colors: ['f6c62b','88c7ca','34445b'],
+      colors: ['f6c62b','ff5f5a','84d1d4'],
       backgroundColor: 'transparent',
       legend: 'none',
       chartArea: {

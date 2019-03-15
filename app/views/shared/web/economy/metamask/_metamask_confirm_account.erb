@@ -1,31 +1,31 @@
 <div class="metamask-confirm-account-container row">
   <div class="text-center col-12 col-md-8 mx-auto">
     <div id="default-state-wrapper" class="confirm-account-section" >
-      <h3 class="text-center mt-6">Associate Your Primary Address</h3>
+      <h3 class="text-center mt-6">Select Your Account Owner Address</h3>
       <p class="font-weight-light mb-5 text-muted">
-        The address displayed below will be associated with your OST account as the Primary Address. Please make sure to keep the access to this address restricted.
+        The address displayed below will be associated with your OST account. This is an important address, please make sure to keep the access to this address restricted.
       </p>
       <p class="font-weight-light mb-3 text-muted container-box p-3">
-        Would you like to associate a different address? Simply open the MetaMask extension and select the desired address.
+        Would you like to use a different address? Simply open the MetaMask Extension and select the desired address.
       </p>
       <p class="font-weight-light mb-5 text-muted container-box p-3 confirm-address">
         0x
       </p>
-      <button class="btn btn-primary btn-confirm">confirm address</button>
+      <button class="btn btn-primary btn-confirm">Associate Address</button>
 
 
       <%=
         faqs_data = [
           {
-            title: 'Why do I need to use Chrome and install MetaMask?',
+            title: 'What is a Token Economy Address?',
             url: 'https://help.ost.com/support/solutions/articles/35000059263-why-do-i-need-to-install-metamask-'
           },
           {
-            title: 'How do I unlock MetaMask?',
+            title: 'Would I need one MetaMask account on both environments?',
             url: 'https://help.ost.com/support/solutions/articles/35000059264-how-do-i-unlock-metamask-'
           },
           {
-            title: 'Why can I use only one MetaMask account with OST KIT⍺?',
+            title: 'Why do I need to install MetaMask?',
             url: 'https://help.ost.com/support/solutions/articles/35000059265-why-can-i-use-only-one-metamask-account-with-ost-kit%E2%8D%BA-'
           }
         ]
@@ -38,7 +38,7 @@
     </div>
     <div>
       <div id="associate-address-error-state" class="confirm-account-section mt-6" >
-        <svg class="error-icon align-middle" style="width:50px; height:50px">
+        <svg class="error-icon align-middle" style="width:40px; height:40px">
           <switch>
             <use class="error-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#error-icon"></use>
           </switch>
@@ -54,7 +54,7 @@
       </div>
     </div>
     <div id="rejected-sign-error-state" class="confirm-account-section mt-6">
-      <svg class="error-icon align-middle" style="width:50px; height:50px">
+      <svg class="error-icon align-middle" style="width:40px; height:40px">
         <switch>
           <use class="error-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#error-icon"></use>
         </switch>
@@ -70,7 +70,7 @@
 
     </div>
     <div id="deployment-error-state" class="confirm-account-section mt-6">
-      <svg class="error-icon align-middle" style="width:50px; height:50px">
+      <svg class="error-icon align-middle" style="width:40px; height:40px">
         <switch>
           <use class="error-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#error-icon"></use>
         </switch>
@@ -83,7 +83,7 @@
 
     </div>
     <div id="general-error-state" class="confirm-account-section mt-6">
-      <svg class="error-icon align-middle" style="width:50px; height:50px">
+      <svg class="error-icon align-middle" style="width:40px; height:40px">
         <switch>
           <use class="error-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#error-icon"></use>
         </switch>

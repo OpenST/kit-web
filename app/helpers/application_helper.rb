@@ -36,7 +36,7 @@ module ApplicationHelper
     if(GlobalConstant::Base.main_sub_environment?)
       "OST"
     else
-      "OST⍺"
+      "OST-Test"
     end
   end
 

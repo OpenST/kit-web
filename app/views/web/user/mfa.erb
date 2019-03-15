@@ -79,6 +79,10 @@
         }
       });
 
+      jForm.formHelper().complete = function() {
+        isXHRSend = false ;
+      }
+
     });
   </script>
 <% end %>

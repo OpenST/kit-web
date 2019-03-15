@@ -9,7 +9,7 @@
     selector: '#tx_by_type',
     graphSelector: '#lineChart',
     type: 'LineChart',
-    noDataHTML: $('#transactionsbytype').html(), //TODO
+    noDataHTML: $('#transactionByTypeNodataHTML').html(), //TODO
     loadingHTML: "<div class='loader'></div>",
     columns: [
       {

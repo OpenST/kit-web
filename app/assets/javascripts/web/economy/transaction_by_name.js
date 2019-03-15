@@ -8,7 +8,7 @@
     },
     selector: '#transactionByNameChart',
     type: 'ColumnChart',
-    noDataHTML: $('#jColumnChartNoData').html(), //TODO
+    noDataHTML: $('#transactionByNameNodataHTML').html(), //TODO
     loadingHTML: "<div class='loader'></div>",
     columns: [  //TODO understand
       {

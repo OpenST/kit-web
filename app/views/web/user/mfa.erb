@@ -11,11 +11,11 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 mx-auto">
-          <h3 class="text-center">Secure Your Account</h3>
           <div class="general_error invalid-feedback" data-forid="sign_up_form"></div>
           <% if qr_url %>
-            <div class="general_error invalid-feedback" data-forid="sign_up_form"></div>
-            <p class="desc text-center">Set up the Two-Factor Authentication</p>
+            <h3 class="text-center">Your account has been activated</h3>
+<!--            <div class="general_error invalid-feedback" data-forid="sign_up_form"></div>-->
+            <p class="desc text-center">Secure your account by setting up 2-Factor Authentication</p>
             <div class="qr-code-container row mx-auto ">
               <div class="col-12 col-md-5 align-self-center text-center">
                 <div class="img-container">
@@ -30,17 +30,18 @@
                     <a target="_blank" href='https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_IN'>Play Store</a>
                     or
                     <a target="_blank"  href='https://itunes.apple.com/in/app/google-authenticator/id388497605?mt=8'>App Store</a>.
-                    Open the app on your phone and scan the QR code. Enter the 6 digit code associated with OST KIT in the text box below. This level of authentication ensures that your account remains secure at all times.
+                    Open the app on your phone and scan the QR code. Enter the 6 digit code associated with your OST Platform account in the box below. 2-Factor Authentication ensures that your account is secure.
                 </span>
               </div>
 
             </div>
           <% else %>
-            <p class="text-center font-weight-light">Please open Google Authenticator and enter the TFA code to complete sign-in.</p>
+            <h3 class="text-center">Welcome back to the OST Platform</h3>
+            <p class="text-center font-weight-light">Please enter the 2FA code associated with your account.</p>
           <% end %>
           <form id="mfa-form" class="user-form text-center" action="<%= GlobalConstant::RoutesMap.getApis()[:api_mfa] %>" method="POST" data-ost-formhelper>
             <div class="form-group row mx-auto mt-5">
-              <label class="form-label" >tfa code</label>
+              <label class="form-label" >2fa code</label>
               <input type="number" name="otp" min="0" max="999999" class="form-control" autocomplete="off" required autofocus>
               <div class="invalid-feedback" data-forid="email">&nbsp;</div>
             </div>
@@ -52,3 +53,36 @@
     </div>
   </div>
 </div>
+
+<% # Small JS to auto-submit TFA on 6 chars, hence written here directly  %>
+<% content_for :end_js do %>
+  <script type="text/javascript">
+    $(function () {
+      var jForm =  $('#mfa-form'),
+          mfaTimeOut , isXHRSend = false ;
+      $("input[name='otp']").on('keyup', function(){
+        var jEl = $(this) ;
+        clearTimeout( mfaTimeOut );
+        mfaTimeOut = setTimeout( function () {
+          var val = jEl.val();
+          if(val && val.length >= 6) {
+            jForm.submit();
+          }
+        }, 300)
+      });
+
+      jForm.on("beforeSubmit", function (event) {
+        if ( !isXHRSend  ) {
+          isXHRSend = !isXHRSend ;
+        }else {
+          event.preventDefault();
+        }
+      });
+
+      jForm.formHelper().complete = function() {
+        isXHRSend = false ;
+      }
+
+    });
+  </script>
+<% end %>

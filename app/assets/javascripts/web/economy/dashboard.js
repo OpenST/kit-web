@@ -1,15 +1,17 @@
 ;
 (function (window,$) {
     var ost = ns('ost'),
-        transactions_and_ost_volume = ns('ost.transactions_and_ost_volume'),//TODO create one ns with 2 keys config and filtermap
-        transaction_by_type         = ns('ost.transaction_by_type'),//TODO create one ns with 2 keys config and filtermap
-        transaction_by_name         = ns('ost.transaction_by_name'),//TODO create one ns with 2 keys config and filtermap
-        utilities                   =  ns("ost.utilities"),
+        transactions_and_ost_volume    = ns('ost.transactions_and_ost_volume'),//TODO create one ns with 2 keys config and filtermap
+        transaction_by_type_line_graph = ns('ost.transaction_by_type_line_graph'),//TODO create one ns with 2 keys config and filtermap
+        transaction_by_type_pie_chart  = ns('ost.transaction_by_type_pie_chart'),
+        transaction_by_name            = ns('ost.transaction_by_name'),//TODO create one ns with 2 keys config and filtermap
+        utilities                      = ns("ost.utilities"),
 
         transactions_and_ost_volume_config = transactions_and_ost_volume['config'],
         filterOptionsMap                   = transactions_and_ost_volume['filterOptionsMap'],  //TODO change to specific name
         jTransactionsAndOstVolumeIntervals = $('.transactions_and_ost_volume .interval'), //TODO 3 different for each ,  and name change
-        jTransactionsByNameIntervals       = $('.transaction_by_name .interval');
+        jTransactionsByNameIntervals       = $('.transaction_by_name .interval'),
+        jTransactionsByTypeIntervals       = $('.transaction_by_type .interval');
     var oThis = ost.dashboard = {
       init: function (config) {
           $.extend(oThis,config);
@@ -20,8 +22,10 @@
       initCharts: function(){
         oThis.transactionAndOstVolumeGraph = new GoogleCharts();
         oThis.transactionByNameGraph = new GoogleCharts();
+        oThis.transactionByTypeLineGraph = new GoogleCharts();
+        oThis.transactionByTypePieChart = new GoogleCharts();
         oThis.drawTransactionAndOstVolumeGraph() ;
-        //oThis.drawTransactionByTypeGraph() ;
+        oThis.drawTransactionByTypeGraph() ;
         oThis.drawTransactionByNameGraph() ;
       },
 
@@ -47,7 +51,24 @@
       },
 
       drawTransactionByTypeGraph : function () {
-        //TODO
+        oThis.drawTransactionByTypeLineGraph();
+      },
+
+      drawTransactionByTypeLineGraph: function(){
+        var config = $.extend(true , {} , transaction_by_type_line_graph ),
+          url = oThis.getAjaxUrl( oThis.transaction_by_type_url ) ,
+          ajax = utilities.deepGet( config , 'ajax' )
+        ;
+        ajax['url'] = url ;
+        oThis.transactionByTypeLineGraph.draw( config );
+      },
+
+      drawTransactionByTypePieChart: function( response ){
+        var data = response.data['transaction_volume'],
+            config = $.extend(true , {} , transaction_by_type_pie_chart )
+        ;
+        config.data = data;
+        oThis.transactionByTypePieChart.draw( config );
       },
 
       drawTransactionByNameGraph : function (filter) {
@@ -96,7 +117,13 @@
           jTransactionsByNameIntervals.removeClass('active');
           $(this).addClass('active');
           oThis.drawTransactionByNameGraph($(this).data('interval'));
-        })
+        });
+
+        jTransactionsByTypeIntervals.on('click',function (event) {
+          jTransactionsByTypeIntervals.removeClass('active');
+          $(this).addClass('active');
+          oThis.drawTransactionByTypeGraph($(this).data('interval'));
+        });
       }
 
 

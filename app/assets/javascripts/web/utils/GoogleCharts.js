@@ -119,9 +119,11 @@
     render: function(){
       var oThis = this;
       google.charts.setOnLoadCallback(function(){
-        var data = oThis.makeData(oThis.data);
-        console.log('Drawing '+oThis.type+' chart in '+oThis.selector);
-        var chart = new google.visualization[oThis.type]($(oThis.selector)[0]);
+        var data = oThis.makeData(oThis.data),
+          sSelector = oThis.graphSelector || oThis.selector
+        ;
+        console.log('Drawing '+oThis.type+' chart in '+sSelector);
+        var chart = new google.visualization[oThis.type]($(sSelector)[0]);
         chart.draw(data, oThis.options);
       });
     },

@@ -2,11 +2,12 @@
 (function () {
   var ost = ns('ost');
 
-  ost.transaction_by_type = {
+  ost.transaction_by_type_line_graph = {
     ajax: {
       url: 'lineChartUrl'
     },
-    selector: '#lineChart',
+    selector: '#tx_by_type',
+    graphSelector: '#lineChart',
     type: 'LineChart',
     noDataHTML: $('#transactionsbytype').html(), //TODO
     loadingHTML: "<div class='loader'></div>",
@@ -19,17 +20,17 @@
       {
         type: 'number',
         opt_label: 'User to User',
-        opt_id: 'transactionType1'
+        opt_id: 'user_to_user_transfer'
       },
       {
         type: 'number',
         opt_label: 'Company To User',
-        opt_id: 'transactionType2'
+        opt_id: 'company_to_user_transfer'
       },
       {
         type: 'number',
         opt_label: 'User to Company',
-        opt_id: 'transactionType3'
+        opt_id: 'user_to_company_transfer'
       }
     ],
     options: {
@@ -78,6 +79,32 @@
         gridlines: {
           color: "#e3eef3"
         }
+      }
+    }
+  }
+
+  ost.transaction_by_type_pie_chart = {
+    ajax: {
+
+    },
+    selector: '#tx_by_type',
+    graphSelector: '#pieChart',
+    type: 'PieChart',
+    noDataHTML: $('#transactionsbytype').html(), //TODO
+    loadingHTML: "<div class='loader'></div>",
+    columns:[],
+    options: {
+      pieHole: 0.7,
+      pieSliceText: 'none',
+      pieSliceBorderColor: 'none',
+      colors: ['f6c62b','88c7ca','34445b'],
+      backgroundColor: 'transparent',
+      legend: 'none',
+      chartArea: {
+        width: 180,
+        height: 180,
+        top: 10,
+        left: 10
       }
     }
   }

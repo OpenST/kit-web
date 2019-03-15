@@ -98,6 +98,7 @@
       pieSliceBorderColor: 'none',
       colors: ['f6c62b','88c7ca','34445b'],
       backgroundColor: 'transparent',
+      enableInteractivity: false,
       legend: 'none',
       chartArea: {
         width: 180,

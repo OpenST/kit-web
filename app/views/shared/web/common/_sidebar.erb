@@ -2,7 +2,7 @@
   planner_url = GlobalConstant::RoutesMap.getRoutes()[:token_setup]
   mint_token_url = GlobalConstant::RoutesMap.getRoutes()[:token_mint]
   developer_url = GlobalConstant::RoutesMap.getRoutes()[:developer]
-  dashboard_url = GlobalConstant::RoutesMap.getRoutes()[:dashboard]
+  dashboard_url = GlobalConstant::RoutesMap.getRoutes()[:token_dashboard]
   api_request_whitelist = GlobalConstant::RoutesMap.getApis()[:api_request_whitelist]
   is_whitelisted_user = @presenter_obj.sub_env_payloads.is_mainnet_whitelisted?
   is_mainnet_whitelisting_requested = @presenter_obj.sub_env_payloads.is_mainnet_whitelisting_requested?
@@ -22,7 +22,7 @@
   </div>
 
   <div class="switch-mode p-3 <%= (current_env == sandbox_sub_url_prefix) ? 'checked' : 'unchecked' %> <%= is_mainnet_whitelisting_requested && !is_whitelisted_user ? 'disabled' : '' %>">
-    <div class="d-flex align-items-center switch-mode-tooltip" data-toggle="tooltip" data-placement="right" data-boundary="window" data-title="The request has been sent. Please wait for the OST Support team to get in touch.">
+    <div class="d-flex align-items-center switch-mode-tooltip" data-toggle="tooltip" data-placement="right" data-boundary="window" data-title="Production access request has already been sent.">
       <span class="sandbox-title">Sandbox Mode</span>
       <label class="switch ml-auto <%= is_mainnet_whitelisting_requested && !is_whitelisted_user ? 'disabled' : '' %>">
         <input id="switch_mode_checkbox" type="checkbox" <%= (current_env == sandbox_sub_url_prefix) ?'checked' : ''%> >
@@ -110,8 +110,8 @@
           isUserWhitelisted: <%= is_whitelisted_user %>,
           isMainnetWhitelistingRequested: <%=is_mainnet_whitelisting_requested %>,
           currentEnv: "<%= current_env %>",
-          redirectMainnet: "<%= GlobalConstant::RoutesMap.getRoutes()[:mainnet_token_setup] %>",
-          redirectSandbox: "<%= GlobalConstant::RoutesMap.getRoutes()[:sandbox_token_setup] %>",
+          redirectMainnet: "<%= GlobalConstant::RoutesMap.getRoutes()[:mainnet_token_dashboard] %>",
+          redirectSandbox: "<%= GlobalConstant::RoutesMap.getRoutes()[:sandbox_token_dashboard] %>",
           sandboxSubUrlPrefix: "<%= sandbox_sub_url_prefix %>",
           mainSubEnvUrlPrefix: "<%= main_sub_env_url_prefix %>"
         });

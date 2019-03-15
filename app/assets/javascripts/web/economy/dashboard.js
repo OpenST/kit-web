@@ -60,7 +60,12 @@
           ajax = utilities.deepGet( config , 'ajax' )
         ;
         ajax['url'] = url ;
-        oThis.transactionByTypeLineGraph.draw( config );
+        oThis.transactionByTypeLineGraph.draw( config, function( res ){
+          oThis.drawTransactionByTypePieChart( res );
+          var jWrapper = $(oThis.transactionByTypeLineGraph.selector) ;
+          jWrapper.find('.loading-wrapper').remove();
+          jWrapper.find('.'+oThis.transactionByTypeLineGraph.loadingClass).removeClass( oThis.transactionByTypeLineGraph.loadingClass );
+        });
       },
 
       drawTransactionByTypePieChart: function( response ){
@@ -68,7 +73,7 @@
             config = $.extend(true , {} , transaction_by_type_pie_chart )
         ;
         config.data = data;
-        oThis.transactionByTypePieChart.draw( config );
+        oThis.transactionByTypePieChart.draw( config  );
       },
 
       drawTransactionByNameGraph : function (filter) {
@@ -80,17 +85,9 @@
         console.log('ajax',transactions_and_ost_volume_config['ajax']);
         ajax['url'] = url ;
 
-        // if(filter){
-        //   var hAxis = utilities.deepGet( config , 'options.hAxis' ),
-        //     gridlines = hAxis['gridlines'] ,
-        //     columns = config['columns']
-        //   ;
-        //   gridlines['count'] = filterOptionsMap[filter].count;
-        //   hAxis['format']=filterOptionsMap[filter].format;
-        //   columns[0] = filterOptionsMap[filter].columns_1;
-        // }
+        oThis.transactionByNameGraph.draw( config  , function ( res ) {
 
-        oThis.transactionByNameGraph.draw( config );
+        });
       },
 
       getAjaxUrl: function (api ,  val ) {

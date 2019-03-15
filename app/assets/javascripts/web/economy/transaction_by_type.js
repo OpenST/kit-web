@@ -87,8 +87,7 @@
     ajax: {
 
     },
-    selector: '#tx_by_type',
-    graphSelector: '#pieChart',
+    selector: '#pieChart',
     type: 'PieChart',
     noDataHTML: $('#transactionsbytype').html(), //TODO
     loadingHTML: "<div class='loader'></div>",

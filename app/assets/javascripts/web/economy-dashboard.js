@@ -2,5 +2,6 @@
 //= require web/economy/transaction_by_type
 //= require web/economy/transaction_by_name
 //= require web/utils/GoogleCharts
+//= require plugins/handlebars/handlebars
 //= require web/economy/dashboard
 //= require plugins/moment/moment.min

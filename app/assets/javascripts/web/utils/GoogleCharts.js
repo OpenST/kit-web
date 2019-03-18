@@ -129,8 +129,13 @@
         $(oThis.selector).find('.loader').hide();
         console.log('Drawing '+oThis.type+' chart in '+sSelector);
         var chart = new google.visualization[oThis.type]($(sSelector)[0]);
+        google.visualization.events.addListener(chart, 'ready', oThis.readyHandler);
         chart.draw(data, oThis.options);
       });
+    },
+
+    readyHandler: function(){
+      console.log("Override this method");
     },
 
     renderBlank: function(){

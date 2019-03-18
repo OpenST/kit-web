@@ -1,5 +1,22 @@
 ;
 (function (window,$) {
+  const pieChartConstants = {
+    legendsLabelAndClass: {
+      "user_to_user" : {
+        label : "User to User User to User User to User",
+        class : 'color-bar-yellow'
+      },
+      "company_to_user" : {
+        label : 'Company to User',
+        class : 'color-bar-red'
+      },
+      "user_to_company" : {
+        label : "User to Company",
+        class : 'color-bar-blue'
+      }
+    }
+  };
+
     var ost = ns('ost'),
         transactions_and_ost_volume    = ns('ost.transactions_and_ost_volume'),//TODO create one ns with 2 keys config and filtermap
         transaction_by_type_line_graph = ns('ost.transaction_by_type_line_graph'),//TODO create one ns with 2 keys config and filtermap
@@ -12,7 +29,8 @@
         jTransactionsAndOstVolumeIntervals = $('.transactions_and_ost_volume .interval'), //TODO 3 different for each ,  and name change
         jTransactionsByNameIntervals       = $('.transaction_by_name .interval'),
         jTransactionsByTypeIntervals       = $('.transaction_by_type .interval'),
-        jTotalTransactions                 = $('.total-transactions-value');
+        jTotalTransactions                 = $('.total-transactions-value'),
+        jPieChartContainer                 = $('.pie-chart-container');
     var oThis = ost.dashboard = {
       init: function (config) {
           $.extend(oThis,config);
@@ -27,6 +45,7 @@
         oThis.drawTransactionAndOstVolumeGraph() ;
         oThis.drawTransactionByTypeGraph() ;
         oThis.drawTransactionByNameGraph() ;
+
       },
 
       drawTransactionAndOstVolumeGraph: function (filter) { //TODO Name change to draw
@@ -69,12 +88,44 @@
       },
 
       drawTransactionByTypePieChart: function( response ){
-        var data = response.data['transaction_volume'],
-            config = $.extend(true , {} , transaction_by_type_pie_chart )
+        var config = $.extend(true , {} , transaction_by_type_pie_chart ),
+            data   = response.data['transaction_volume'],
+            total  = 0
         ;
-        config.data = data;
+
+        oThis.updateLegend( data );
+        config.readyHandler = oThis.readyHandler;
+
+        oThis.transactionByTypePieChart = new GoogleCharts( config );
+        data.forEach(function ( item ) {
+          total +=  item['value'];
+        });
+        jTotalTransactions.text( total );
+
+        config.data = oThis.transactionByTypePieChart.dataParser(data);
         oThis.transactionByTypePieChart.draw( config  );
-        // $('.pieChartLegend').show();
+
+      },
+
+      updateLegend: function( data ) {
+        var source = document.getElementById("ostTransactionsPieChart").innerHTML,
+            template = Handlebars.compile(source),
+            context = {},
+            html
+        ;
+
+        context['data'] = JSON.parse(JSON.stringify(data));
+        context['data'].forEach( function( value , index ) {
+          var config = utilities.deepGet(pieChartConstants, 'legendsLabelAndClass.'+value.category );
+          value['label'] = config['label'];
+          value['class'] = config['class'];
+        });
+        html = template( context );
+        $(".pieChartLegend").append(html);
+      },
+
+      readyHandler:function () {
+        jPieChartContainer.css({opacity:1});
       },
 
       drawTransactionByNameGraph : function (filter) {

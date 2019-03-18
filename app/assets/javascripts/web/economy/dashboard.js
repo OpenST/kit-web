@@ -18,15 +18,15 @@
   };
 
     var ost = ns('ost'),
-        transactions_and_ost_volume    = ns('ost.transactions_and_ost_volume'),//TODO create one ns with 2 keys config and filtermap
-        transaction_by_type_line_graph = ns('ost.transaction_by_type_line_graph'),//TODO create one ns with 2 keys config and filtermap
+        transactions_and_ost_volume    = ns('ost.transactions_and_ost_volume'),
+        transaction_by_type_line_graph = ns('ost.transaction_by_type_line_graph'),
         transaction_by_type_pie_chart  = ns('ost.transaction_by_type_pie_chart'),
-        transaction_by_name            = ns('ost.transaction_by_name'),//TODO create one ns with 2 keys config and filtermap
+        transaction_by_name            = ns('ost.transaction_by_name'),
         utilities                      = ns("ost.utilities"),
 
         transactions_and_ost_volume_config = transactions_and_ost_volume['config'],
-        filterOptionsMap                   = transactions_and_ost_volume['filterOptionsMap'],  //TODO change to specific name
-        jTransactionsAndOstVolumeIntervals = $('.transactions_and_ost_volume .interval'), //TODO 3 different for each ,  and name change
+        filterOptionsMap                   = transactions_and_ost_volume['filterOptionsMap'],
+        jTransactionsAndOstVolumeIntervals = $('.transactions_and_ost_volume .interval'),
         jTransactionsByNameIntervals       = $('.transaction_by_name .interval'),
         jTransactionsByTypeIntervals       = $('.transaction_by_type .interval'),
         jTotalTransactions                 = $('.total-transactions-value'),
@@ -48,7 +48,7 @@
 
       },
 
-      drawTransactionAndOstVolumeGraph: function (filter) { //TODO Name change to draw
+      drawTransactionAndOstVolumeGraph: function (filter) {
         var config = $.extend(true , {} , transactions_and_ost_volume_config ),
             url = oThis.getAjaxUrl( oThis.transactions_and_ost_volume_url , filter) ,
             ajax = utilities.deepGet( config , 'ajax' )
@@ -129,7 +129,7 @@
       },
 
       drawTransactionByNameGraph : function (filter) {
-        //TODO
+
         var config = $.extend(true , {} , transaction_by_name ),
           url = oThis.getAjaxUrl( oThis.transaction_by_name_url , filter) ,
           ajax = utilities.deepGet( config , 'ajax' )

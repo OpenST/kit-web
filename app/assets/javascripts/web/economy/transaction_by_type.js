@@ -109,10 +109,10 @@
       enableInteractivity: false,
       legend: 'none',
       chartArea: {
-        width: 180,
-        height: 180,
-        top: 10,
-        left: 10
+        width: 200,
+        height: 200,
+        // top: 10,
+        // left: 10
       }
     }
   }

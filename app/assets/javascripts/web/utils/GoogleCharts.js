@@ -42,7 +42,7 @@
       if( jELBlur && oThis.loadingClass ) {
         isToBlur ?  jELBlur.addClass( oThis.loadingClass ) : jELBlur.removeClass( oThis.loadingClass );
       }
-      $(oThis.selector).prepend('<div class="loading-wrapper" style="position:absolute;left:0;z-index:1;width:100%;">'+oThis.loadingHTML+'</div>');
+      $(oThis.selector).prepend('<span class="loading-wrapper" style="position:absolute;left:0;z-index:1;width:100%;">'+oThis.loadingHTML+'</span>');
     },
 
     /*

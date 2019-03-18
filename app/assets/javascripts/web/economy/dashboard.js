@@ -11,7 +11,8 @@
         filterOptionsMap                   = transactions_and_ost_volume['filterOptionsMap'],  //TODO change to specific name
         jTransactionsAndOstVolumeIntervals = $('.transactions_and_ost_volume .interval'), //TODO 3 different for each ,  and name change
         jTransactionsByNameIntervals       = $('.transaction_by_name .interval'),
-        jTransactionsByTypeIntervals       = $('.transaction_by_type .interval');
+        jTransactionsByTypeIntervals       = $('.transaction_by_type .interval'),
+        jTotalTransactions                 = $('.total-transactions-value');
     var oThis = ost.dashboard = {
       init: function (config) {
           $.extend(oThis,config);
@@ -68,10 +69,12 @@
       },
 
       drawTransactionByTypePieChart: function( response ){
-        var config = $.extend(true , {} , transaction_by_type_pie_chart );
-        oThis.transactionByTypePieChart = new GoogleCharts( config );
-        config.data = oThis.transactionByTypePieChart.dataParser(response.data['transaction_volume']);
+        var data = response.data['transaction_volume'],
+            config = $.extend(true , {} , transaction_by_type_pie_chart )
+        ;
+        config.data = data;
         oThis.transactionByTypePieChart.draw( config  );
+        // $('.pieChartLegend').show();
       },
 
       drawTransactionByNameGraph : function (filter) {

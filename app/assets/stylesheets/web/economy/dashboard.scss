@@ -4,6 +4,13 @@
 // Import theme variables
 @import "../Starboy/variables";
 
+#tx_by_type {
+    .loading-wrapper {
+      top: 50% ;
+      margin-top: -15px;
+    }
+}
+
 .dashboard{
   .stats-col{
     border-radius: 5px;
@@ -71,7 +78,10 @@
     background: url('https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/processed-loader-1.gif');
     height: 60px;
     width: 60px;
-    margin: 0 auto;
+    margin-top:  auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
     background-size: 60px;
   }
 
@@ -84,7 +94,18 @@
   .pie-chart-container{
     background-color: #f9fafa;
     border-radius: 10px;
+    opacity: 0;
+
+    .total-transactions{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      color: #438BAD;
+      text-align: center;
+      transform: translate(-50%, -50%);
+    }
   }
+
 
   .color-bar{
     width: 5px;

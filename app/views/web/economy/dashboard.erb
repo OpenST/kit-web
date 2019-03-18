@@ -130,28 +130,40 @@
       </div>
       <div class="" id="tx_by_type">
         <div class="row">
-          <div class="col-9 graph-container" id="lineChart">
+          <div class="col-9 graph-container my-auto" id="lineChart">
 
           </div>
-          <div class="col-3 graph-container pie-chart-container my-5">
-            <div id="pieChart"></div>
-            <div class="pieChartLegend" style="display:none;">
-              <div>
-                <span class="mr-2">User to User</span>
-                <span class="mr-2 color-bar color-bar-yellow"></span>
-                <span class="user-to-user-val">100</span>
+          <div class="col-3 graph-container pie-chart-container my-5" >
+            <div class="mx-auto">
+              <div class="position-relative">
+                <div id="pieChart"></div>
+                <div class="total-transactions">
+                  <span>Total</span><br/>
+                  <span class="total-transactions-value"></span>
+                </div>
               </div>
-              <div>
-                <span class="mr-2">Company to User</span>
-                <span class="mr-2 color-bar color-bar-red"></span>
-                <span class="user-to-user-val">100</span>
-              </div>
-              <div>
-                <span class="mr-2">User to company</span>
-                <span class="mr-2 color-bar color-bar-blue"></span>
-                <span class="user-to-user-val">100</span>
+              <div class="pieChartLegend" >
+                <div class="row m-2">
+                  <div class="mr-2 ">User to User</div>
+                  <div class="mr-2  color-bar color-bar-yellow ml-auto"></div>
+                  <div class="user-to-user-val  ">100</div>
+                </div>
+                <div class="row m-2">
+                  <span class="mr-2">Company to User</span>
+                  <span class="mr-2 color-bar color-bar-red ml-auto"></span>
+                  <span class="user-to-user-val">100</span>
+                </div>
+                <div class="row m-2">
+                  <span class="mr-2">User to company</span>
+                  <span class="mr-2 color-bar color-bar-blue ml-auto"></span>
+                  <span class="user-to-user-val">100</span>
+                </div>
               </div>
             </div>
+
+
+
+
           </div>
         </div>
       </div>

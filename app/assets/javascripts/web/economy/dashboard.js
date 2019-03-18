@@ -3,7 +3,7 @@
   const pieChartConstants = {
     legendsLabelAndClass: {
       "user_to_user" : {
-        label : "User to User User to User User to User",
+        label : "User to User",
         class : 'color-bar-yellow'
       },
       "company_to_user" : {

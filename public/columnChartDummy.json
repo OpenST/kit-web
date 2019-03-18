@@ -5,19 +5,23 @@
     "transaction_by_name": [
       {
         "name": "Reward",
-        "total_transfers": 12
+        "total_transfers": 12,
+        "timestamp": 1541929600
       },
       {
         "name": "Purchase",
-        "total_transfers": 7
+        "total_transfers": 7,
+        "timestamp": 1550016000
       },
       {
         "name": "Download",
-        "total_transfers": 3
+        "total_transfers": 3,
+        "timestamp": 155010240
       },
       {
         "name": "Upvote",
-        "total_transfers": 7
+        "total_transfers": 7,
+        "timestamp": 1550275200
       }
     ],
     "meta": {}

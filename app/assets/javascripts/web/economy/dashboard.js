@@ -23,7 +23,6 @@
         oThis.transactionAndOstVolumeGraph = new GoogleCharts();
         oThis.transactionByNameGraph = new GoogleCharts();
         oThis.transactionByTypeLineGraph = new GoogleCharts();
-        oThis.transactionByTypePieChart = new GoogleCharts();
         oThis.drawTransactionAndOstVolumeGraph() ;
         oThis.drawTransactionByTypeGraph() ;
         oThis.drawTransactionByNameGraph() ;
@@ -69,12 +68,10 @@
       },
 
       drawTransactionByTypePieChart: function( response ){
-        var data = response.data['transaction_volume'],
-            config = $.extend(true , {} , transaction_by_type_pie_chart )
-        ;
-        config.data = data;
+        var config = $.extend(true , {} , transaction_by_type_pie_chart );
+        oThis.transactionByTypePieChart = new GoogleCharts( config );
+        config.data = oThis.transactionByTypePieChart.dataParser(response.data['transaction_volume']);
         oThis.transactionByTypePieChart.draw( config  );
-        // $('.pieChartLegend').show();
       },
 
       drawTransactionByNameGraph : function (filter) {
@@ -87,7 +84,18 @@
         ajax['url'] = url ;
 
         oThis.transactionByNameGraph.draw( config  , function ( res ) {
-
+          var data  = utilities.deepGet( res , 'data.transaction_by_name'),
+              startDate, endDate, dataLength, displayDate, sDateContainer, options
+          ;
+          sDateContainer = $('.date-container');
+          dataLength = data.length;
+          startDate = moment(data[0].timestamp * 1000).format("D MMM [']YY");
+          endDate = moment(data[dataLength - 1].timestamp * 1000).format("D MMM [']YY");
+          displayDate = startDate;
+          if( endDate ){
+            displayDate += " - "+ endDate;
+          }
+          $(sDateContainer).html(displayDate);
         });
       },
 

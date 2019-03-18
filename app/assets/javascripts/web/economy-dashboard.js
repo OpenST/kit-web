@@ -3,3 +3,4 @@
 //= require web/economy/transaction_by_name
 //= require web/utils/GoogleCharts
 //= require web/economy/dashboard
+//= require plugins/moment/moment.min

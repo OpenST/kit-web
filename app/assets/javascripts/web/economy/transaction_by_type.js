@@ -84,14 +84,22 @@
   }
 
   ost.transaction_by_type_pie_chart = {
-    ajax: {
-
-    },
     selector: '#pieChart',
     type: 'PieChart',
     noDataHTML: $('#transactionsbytype').html(), //TODO
     loadingHTML: "<div class='loader'></div>",
-    columns:[],
+    columns:[
+      {
+        type: 'string',
+        opt_label: 'Category',
+        opt_id: 'category'
+      },
+      {
+        type: 'number',
+        opt_label: 'Value',
+        opt_id: 'value'
+      }
+    ],
     options: {
       pieHole: 0.7,
       pieSliceText: 'none',

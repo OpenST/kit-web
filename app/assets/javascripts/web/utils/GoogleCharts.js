@@ -120,7 +120,7 @@
     /*
      * Rendering chart
      */
-    render: function(){
+    render: function(callback){
       var oThis = this;
       google.charts.setOnLoadCallback(function(){
         var data = oThis.makeData(oThis.data),
@@ -154,6 +154,11 @@
       if($.isEmptyObject(response_data)){
         return [];
       }
+      return oThis.dataParser(response_data);
+    },
+
+    dataParser: function(response_data){
+      var oThis = this;
       var data = [];
       var header_temp = Object.keys(response_data[0]);
       var header = [];
@@ -166,7 +171,7 @@
           }
         });
       } else {
-        var header = header_temp;
+        header = header_temp;
       }
       data.push(header);
       $.each( response_data, function( index, value ) {

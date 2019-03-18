@@ -121,7 +121,7 @@
           value['class'] = config['class'];
         });
         html = template( context );
-        $(".pieChartLegend").append(html);
+        $(".pieChartLegend").html(html);
       },
 
       readyHandler:function () {

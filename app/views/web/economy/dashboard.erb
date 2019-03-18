@@ -1,34 +1,4 @@
-<%
-  dashboard_links = [
-      {
-        svg: "#invite-team-icon",
-        desc: "Invite your team members",
-        btn_txt: "invite team".upcase,
-        href: GlobalConstant::RoutesMap.getRoutes()[:team] + "?" + get_go_back_url_query_param,
-        target: ""
-      },
-      {
-        svg: "#get-api-keys-icon",
-        desc: "Integrate OST APIs with your application",
-        btn_txt: "get api keys".upcase,
-        href: GlobalConstant::RoutesMap.getRoutes()[:developer] + "?" + get_go_back_url_query_param,
-        target: ""
-      },
-      {
-        svg: "#ost-guides-icon",
-        desc: "Check our guides and tutorials for a quick start",
-        btn_txt: "ost guides".upcase,
-        href: "javascript:alert('TODO')",
-        target: "_blank"
-      }
-  ]
-
-  is_whitelisted_user = @presenter_obj.sub_env_payloads.is_mainnet_whitelisted?
-  is_mainnet_whitelisting_requested = @presenter_obj.sub_env_payloads.is_mainnet_whitelisting_requested?
-%>
-
 <div class="container my-6 dashboard">
-
   <div class="row mb-5">
     <div class="col-12">
       <div class="row">
@@ -56,68 +26,20 @@
       </div>
     </div>
   </div>
-
-<!--  <div class="row mb-5">-->
-<!--    <div class="col-12">-->
-<!--      <div class="card card-planner">-->
-<!--        <div class="card-body">-->
-<!--          <div class="row">-->
-<!--            <div class="col-7">-->
-<!--              <h3 class="mb-3">Welcome to OST KIT</h3>-->
-<!--              <ul class="list-unstyled m-0">-->
-                <%# if !is_whitelisted_user %>
-<!--                  <li class="list-items">-->
-<!--                    <svg style="width: 20px;height: 20px;">-->
-<!--                      <switch>-->
-<!--                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#complete-kyc-icon"></use>-->
-<!--                      </switch>-->
-<!--                    </svg>-->
-
-<!--                    <span style="display: <%#= is_mainnet_whitelisting_requested ? "block" : "none" %>"-->
-<!--                          class="display-3 ml-2 whitelisting_requested w-100">Request for Whitelisting has been sent</span>-->
-<!--                    <div style="display: <%#= !is_mainnet_whitelisting_requested ? "flex" : "none" %>"  class="w-100 align-items-center">-->
-<!--                      <span class="display-3 ml-2 whitelisting_not_requested">Complete KYC | Enable production Mode</span>-->
-<!--                      <button class="btn btn-secondary ml-auto" id="dashboard-complete-kyc" title="Complete KYC">complete kyc</button>-->
-<!--                    </div>-->
-<!--                  </li>-->
-                <%# end %>
-                <%# dashboard_links.each_with_index do|data, index| %>
-<!--                  <li class="list-items">-->
-<!--                    <svg style="width: 20px;height: 20px;">-->
-<!--                      <switch>-->
-<!--                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<%#= data[:svg] %>"></use>-->
-<!--                      </switch>-->
-<!--                    </svg>-->
-<!--                    <span class="display-3 ml-2"><%#= data[:desc] %></span>-->
-<!--                    <a href="<%#= data[:href] %>" class="btn btn-secondary ml-auto" title="<%#= data[:btn_txt] %>" target="<%#= data[:target] %>"><%#= data[:btn_txt] %></a>-->
-<!--                  </li>-->
-                <%# end %>
-<!--              </ul>-->
-<!--            </div>-->
-<!--            <div class="col-5">-->
-<!--              <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-dashboard-hero-illustration@2x.png" class="img-fluid" alt="OST KIT">-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-
-
   <div class="row transactions_and_ost_volume">
-      <div class="col-12">
-        <h3 class="mb-3">Economic Indicators </h3>
-        <div class="d-flex graph-header">
-          <div class="mr-auto p-2">No. of Transactions vs. OST Volume</div>
-<!--          <div class="p-2 interval partition" data-interval="hour">1 H</div>-->
-          <div class="p-2 interval active" data-interval="day">1 D</div>
-          <div class="p-2 interval" data-interval="week">1 W</div>
-          <div class="p-2 interval" data-interval="month">1 M</div>
-          <div class="p-2 interval" data-interval="year">1 Y</div>
-        </div>
-        <div class="graph-container" id="comboChart"></div>
+    <div class="col-12">
+      <h3 class="mb-3">Economic Indicators </h3>
+      <div class="d-flex graph-header">
+        <div class="mr-auto p-2">No. of Transactions vs. OST Volume</div>
+        <!--          <div class="p-2 interval partition" data-interval="hour">1 H</div>-->
+        <div class="p-2 interval active" data-interval="day">1 D</div>
+        <div class="p-2 interval" data-interval="week">1 W</div>
+        <div class="p-2 interval" data-interval="month">1 M</div>
+        <div class="p-2 interval" data-interval="year">1 Y</div>
       </div>
+      <div class="graph-container" id="comboChart"></div>
     </div>
+  </div>
 
   <div class="row transaction_by_type">
     <div class="col-12">
@@ -130,11 +52,8 @@
       </div>
       <div class="" id="tx_by_type">
         <div class="row">
-          <div class="col-9 graph-container my-auto" id="lineChart">
-
-          </div>
-
-          <div class="col-3 graph-container pie-chart-container my-5" >
+          <div class="col-9 graph-container my-auto" id="lineChart"></div>
+          <div class="col-3 graph-container pie-chart-container my-5">
             <div class="mx-auto">
               <div class="position-relative">
                 <div id="pieChart"></div>
@@ -143,117 +62,83 @@
                   <span class="total-transactions-value"></span>
                 </div>
               </div>
-              <div class="pieChartLegend" >
-
-              </div>
+              <div class="pieChartLegend"></div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
   </div>
 
-
-    <div class=" row transaction_by_name">
+  <div class=" row transaction_by_name">
+    <div class="col-12">
+      <div class="d-flex graph-header">
+        <div class="mr-auto p-2">No. of Transactions By Name</div>
+        <div class="p-2 interval partition date-container">Date</div>
+        <div class="p-2 interval active" data-interval="day">1 D</div>
+        <div class="p-2 interval" data-interval="week">1 W</div>
+        <div class="p-2 interval" data-interval="month">1 M</div>
+        <div class="p-2 interval" data-interval="year">1 Y</div>
+      </div>
+      <div class=" graph-container" id="transactionByNameChart"></div>
+    </div>
+  </div>
+  <div id="transactionsAnsOstVolumeNodataHTML" style="display: none;">
+    <div class="py-5 row w-100">
       <div class="col-12">
-        <div class="d-flex graph-header">
-          <div class="mr-auto p-2">No. of Transactions By Name</div>
-          <div class="p-2 interval partition date-container">Date</div>
-          <div class="p-2 interval active" data-interval="day">1 D</div>
-          <div class="p-2 interval" data-interval="week">1 W</div>
-          <div class="p-2 interval" data-interval="month">1 M</div>
-          <div class="p-2 interval" data-interval="year">1 Y</div>
-        </div>
-        <div class=" graph-container" id="transactionByNameChart"></div>
+        <svg class="transactions-and-ost-volume-no-data nodata">
+          <switch>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#transactions-and-ost-volume-no-data"></use>
+          </switch>
+        </svg>
       </div>
     </div>
+  </div>
 
-
-
-
-
-    <div id="transactionsAnsOstVolumeNodataHTML" style="display: none;" >
-      <div class="py-5 row w-100" >
-        <div class="col-12">
-          <svg class="transactions-and-ost-volume-no-data nodata">
-            <switch>
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#transactions-and-ost-volume-no-data"></use>
-            </switch>
-          </svg>
-        </div>
+  <div id="transactionByNameNodataHTML" style="display: none;">
+    <div class="py-5 row w-100">
+      <div class="col-12">
+        <svg class="transaction-by-name-no-data nodata">
+          <switch>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#transaction-by-name-no-data"></use>
+          </switch>
+        </svg>
       </div>
     </div>
+  </div>
 
-      <div id="transactionByNameNodataHTML" style="display: none;" >
-        <div class="py-5 row w-100" >
-          <div class="col-12">
-            <svg class="transaction-by-name-no-data nodata">
-              <switch>
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#transaction-by-name-no-data"></use>
-              </switch>
-            </svg>
-          </div>
-        </div>
+  <div id="transactionByTypeNodataHTML" style="display: none;">
+    <div class="py-5 row w-100">
+      <div class="col-12">
+        <svg class="transaction-by-type-no-data nodata">
+          <switch>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#transaction-by-type-no-data"></use>
+          </switch>
+        </svg>
       </div>
-
-        <div id="transactionByTypeNodataHTML" style="display: none;" >
-          <div class="py-5 row w-100" >
-            <div class="col-12">
-              <svg class="transaction-by-type-no-data nodata">
-                <switch>
-                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#transaction-by-type-no-data"></use>
-                </switch>
-              </svg>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-
-
-
-
+    </div>
+  </div>
 </div>
 <% content_for :end_js do %>
-<script type="text/javascript">
-  $( function () {
-    ost.dashboard.init({
-      transactions_and_ost_volume_url : "/combo_dummy.json",
-      transaction_by_type_url : "/line_dummy.json",
-      transaction_by_name_url : "/columnChartDummy.json"
+  <script type="text/javascript">
+    $(function () {
+      ost.dashboard.init({
+        transactions_and_ost_volume_url: "/combo_dummy.json",
+        transaction_by_type_url: "/line_dummy.json",
+        transaction_by_name_url: "/columnChartDummy.json"
+      });
     });
-  });
-</script>
-<script type="text/x-handlebars-template" id="ostTransactionsPieChart">
-
-  {{#each data}}
-    <div class="row m-2">
-      <div class="col-10 text-wrap">{{label}}
-
-      </div>
-      <div class="col-2">
-        <span class="color-bar {{class}} ml-auto"></span>
-        {{value}}
+  </script>
+  <script type="text/x-handlebars-template" id="ostTransactionsPieChart">
+    {{#each data}}
+    <div class="row m-3 ">
+      <div class="col-9 text-wrap">{{label}}</div>
+      <div class="col-3 mb-1 my-auto">
+        <span class="color-bar {{class}} ml-auto mr-2"></span>
+        <span>{{value}}</span>
       </div>
     </div>
-  {{/each}}
-</script>
+    {{/each}}
+  </script>
 <% end %>
 
-
-
-<!--  <div class="row">-->
-<!--    <div class="col-12">-->
-<!--      <div class="text-center d-flex align-items-center embed-responsive embed-responsive-16by9">-->
-<!--        <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-dashboard-coming-soon.png" class="img-fluid w-100 embed-responsive-item" alt="Dashboard Economic Indicators Coming Soon">-->
-<!--        <div class="position-absolute">-->
-<!--          <h2 class="font-weight-bold">Coming soon!<br/> Economic Indicators</h2>-->
-<!--          <p class="mb-0 mx-auto display-3 col-7 coming-soon-desc">Economic indicators give deep insights into your token economy. You will have access to data points like ‘No of Transaction Performed Vs OST spent’ No of Transactions By Type, Name , Tags amongst others.</p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->

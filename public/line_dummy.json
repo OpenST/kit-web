@@ -34,11 +34,12 @@
         "user_to_company_transfer":90
       }
     ],
-    "transaction_volume": {
-      "user_to_user" : 10,
-      "company_to_user" : 30,
-      "user_to_company" : 60
-    },
+    "transaction_volume": [
+      ["Category", "Value"],
+      ["user_to_user" , 10],
+      ["company_to_user" , 30],
+      ["user_to_company" , 60]
+    ],
     "meta": {}
   }
 }

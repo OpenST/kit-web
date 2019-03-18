@@ -115,15 +115,54 @@
           <div class="p-2 interval" data-interval="month">1 M</div>
           <div class="p-2 interval" data-interval="year">1 Y</div>
         </div>
-        <div class=" graph-container" id="comboChart"></div>
+        <div class="graph-container" id="comboChart"></div>
       </div>
     </div>
 
+  <div class="row transaction_by_type">
+    <div class="col-12">
+      <div class="d-flex graph-header">
+        <div class="mr-auto p-2">No. of Transactions By Type</div>
+        <div class="p-2 interval active" data-interval="day">1 D</div>
+        <div class="p-2 interval" data-interval="week">1 W</div>
+        <div class="p-2 interval" data-interval="month">1 M</div>
+        <div class="p-2 interval" data-interval="year">1 Y</div>
+      </div>
+      <div class="" id="tx_by_type">
+        <div class="row">
+          <div class="col-9 graph-container" id="lineChart">
 
-    <div class=" mt-5 row transaction_by_name">
+          </div>
+          <div class="col-3 graph-container pie-chart-container my-5">
+            <div id="pieChart"></div>
+            <div class="pieChartLegend" style="display:none;">
+              <div>
+                <span class="mr-2">User to User</span>
+                <span class="mr-2 color-bar color-bar-yellow"></span>
+                <span class="user-to-user-val">100</span>
+              </div>
+              <div>
+                <span class="mr-2">Company to User</span>
+                <span class="mr-2 color-bar color-bar-red"></span>
+                <span class="user-to-user-val">100</span>
+              </div>
+              <div>
+                <span class="mr-2">User to company</span>
+                <span class="mr-2 color-bar color-bar-blue"></span>
+                <span class="user-to-user-val">100</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div class=" row transaction_by_name">
       <div class="col-12">
         <div class="d-flex graph-header">
-          <div class="mr-auto p-2">No. of Transactions vs. OST Volume</div>
+          <div class="mr-auto p-2">No. of Transactions By Name</div>
           <!--          <div class="p-2 interval partition" data-interval="hour">1 H</div>-->
           <div class="p-2 interval active" data-interval="day">1 D</div>
           <div class="p-2 interval" data-interval="week">1 W</div>
@@ -135,14 +174,46 @@
     </div>
 
 
-    <div class="row">
-      <div class="p-5" id="lineChart"></div>
-    </div>
 
 
-    <div class="row">
-      <div class="p-5" id="jColumnChart"></div>
+
+    <div id="transactionsAnsOstVolumeNodataHTML" style="display: none;" >
+      <div class="py-5 row w-100" >
+        <div class="col-12">
+          <svg class="transactions-and-ost-volume-no-data nodata">
+            <switch>
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#transactions-and-ost-volume-no-data"></use>
+            </switch>
+          </svg>
+        </div>
+      </div>
     </div>
+
+      <div id="transactionByNameNodataHTML" style="display: none;" >
+        <div class="py-5 row w-100" >
+          <div class="col-12">
+            <svg class="transaction-by-name-no-data nodata">
+              <switch>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#transaction-by-name-no-data"></use>
+              </switch>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+        <div id="transactionByTypeNodataHTML" style="display: none;" >
+          <div class="py-5 row w-100" >
+            <div class="col-12">
+              <svg class="transaction-by-type-no-data nodata">
+                <switch>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#transaction-by-type-no-data"></use>
+                </switch>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+
 
 
 

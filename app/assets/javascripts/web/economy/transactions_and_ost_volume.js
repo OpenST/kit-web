@@ -10,7 +10,7 @@
     },
     selector: '#comboChart',
     type: 'ComboChart',
-    noDataHTML: $('#graphsNodataHTML').html(),
+    noDataHTML: $('#transactionsAnsOstVolumeNodataHTML').html(),
     loadingHTML: "<div class='loader'></div>",
     columns: [
       {

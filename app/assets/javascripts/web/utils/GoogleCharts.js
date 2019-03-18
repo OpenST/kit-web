@@ -21,9 +21,7 @@
     tsUnixToJs: true,
     noDataHTML: '<div class="noDataHTML">No data to populate graphs</div>',
     loadingHTML: '<div style="width:60px;font-size:12px;margin:0 auto">Loading...</div>',
-    loadingCSS: {
-      'filter' : 'blur(5px)'
-    },
+    loadingClass: 'blur-content-5',
 
     /*
      * Initiates Google Charts by google.charts.load
@@ -36,6 +34,15 @@
       } else {
         console.warn('Google charts not loaded. Include https://www.gstatic.com/charts/loader.js');
       }
+    },
+
+    showHideLoading : function( isToBlur ){
+      var oThis =this,
+          jELBlur = $(oThis.selector).find('> div');
+      if( jELBlur && oThis.loadingClass ) {
+        isToBlur ?  jELBlur.addClass( oThis.loadingClass ) : jELBlur.removeClass( oThis.loadingClass );
+      }
+      $(oThis.selector).prepend('<div class="loading-wrapper" style="position:absolute;left:0;z-index:1;width:100%;">'+oThis.loadingHTML+'</div>');
     },
 
     /*
@@ -59,15 +66,11 @@
         return false;
       }
 
-      var jELBlur = $(oThis.selector).find('> div');
-      if( jELBlur && oThis.loadingCSS ) {
-        jELBlur.css( oThis.loadingCSS );
-      }
-
-      $(oThis.selector).prepend('<div style="position:absolute;left:0;z-index:1;width:100%;">'+oThis.loadingHTML+'</div>');
-
       if(!$.isEmptyObject(oThis.ajax)){
         var ajaxObj = {
+          beforeSend: function(){
+            oThis.showHideLoading( true );
+          },
           success: function(response) {
             if( response.success ){
               oThis.data = oThis.ajaxCallback(response);
@@ -83,6 +86,7 @@
           }
         };
         $.extend( ajaxObj, oThis.ajax );
+
         $.ajax(ajaxObj);
       } else {
         console.log('Drawing chart using using data...');
@@ -119,9 +123,12 @@
     render: function(){
       var oThis = this;
       google.charts.setOnLoadCallback(function(){
-        var data = oThis.makeData(oThis.data);
-        console.log('Drawing '+oThis.type+' chart in '+oThis.selector);
-        var chart = new google.visualization[oThis.type]($(oThis.selector)[0]);
+        var data = oThis.makeData(oThis.data),
+          sSelector = oThis.graphSelector || oThis.selector
+        ;
+        $(oThis.selector).find('.loader').hide();
+        console.log('Drawing '+oThis.type+' chart in '+sSelector);
+        var chart = new google.visualization[oThis.type]($(sSelector)[0]);
         chart.draw(data, oThis.options);
       });
     },

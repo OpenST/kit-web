@@ -14,7 +14,6 @@
           <div class="general_error invalid-feedback" data-forid="sign_up_form"></div>
           <% if qr_code_token %>
             <h3 class="text-center">Your account has been activated</h3>
-<!--            <div class="general_error invalid-feedback" data-forid="sign_up_form"></div>-->
             <p class="desc text-center">Secure your account by setting up 2-Factor Authentication</p>
             <div class="qr-code-container row mx-auto ">
               <div class="col-12 col-md-5 align-self-center text-center">
@@ -58,31 +57,9 @@
 <% content_for :end_js do %>
   <script type="text/javascript">
     $(function () {
-      var jForm =  $('#mfa-form'),
-          mfaTimeOut , isXHRSend = false ;
-      $("input[name='otp']").on('keyup', function(){
-        var jEl = $(this) ;
-        clearTimeout( mfaTimeOut );
-        mfaTimeOut = setTimeout( function () {
-          var val = jEl.val();
-          if(val && val.length >= 6) {
-            jForm.submit();
-          }
-        }, 300)
-      });
-
-      jForm.on("beforeSubmit", function (event) {
-        if ( !isXHRSend  ) {
-          isXHRSend = !isXHRSend ;
-        }else {
-          event.preventDefault();
-        }
-      });
-
-      jForm.formHelper().complete = function() {
-        isXHRSend = false ;
-      }
-
+      ost.user.mfa.init({
+        qr_code_string: "<%= raw qr_code_token %>"
+      })
     });
   </script>
 <% end %>

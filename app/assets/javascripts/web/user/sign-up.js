@@ -3,8 +3,9 @@
 
   var parentNS = ns("ost.user")
     , ost = ns("ost")
+    , oThis
   ;
-
+  
   parentNS.signup = oThis = {
     jForm: null
     , formHelper : null

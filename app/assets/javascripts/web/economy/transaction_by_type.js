@@ -48,14 +48,7 @@
           color: '84d1d4'
         }
       },
-      legend: {
-        alignment: 'end',
-        position: 'top',
-        textStyle: {
-          color: '597a84',
-          fontSize: 10
-        }
-      },
+      legend: 'none',
       chartArea: {
         width: '80%',
         height: '80%'

@@ -50,11 +50,32 @@
         <div class="p-2 interval" data-interval="month">1 M</div>
         <div class="p-2 interval" data-interval="year">1 Y</div>
       </div>
-      <div class="" id="tx_by_type">
+      <div id="tx_by_type">
+        <div class="row my-3">
+          <div class="ml-3 typeChartSubHeading"> Number of Transactions </div>
+          <div class="ml-auto d-flex flex-row mr-3 typeChartLengend">
+
+              <div class="color-box-yellow mr-2 ml-4 my-auto"></div>
+              <div> User to User </div>
+
+
+              <div class="color-box-red mr-2 ml-4 my-auto"></div>
+              <div> Company to User </div>
+
+
+              <div class="color-box-blue mr-2 ml-4 my-auto"></div>
+              <div> User to Company </div>
+
+          </div>
+        </div>
         <div class="row">
-          <div class="col-9 graph-container my-auto" id="lineChart"></div>
-          <div class="col-3 graph-container pie-chart-container my-5">
+          <div class="col-9 graph-container mt-0 mb-5 pr-0" id="lineChart"></div>
+          <div class="col-3 graph-container pie-chart-container mb-5 ">
+
             <div class="mx-auto">
+              <div class="text-center my-2 typeChartSubHeading">
+                Volume of Transactions
+              </div>
               <div class="position-relative">
                 <div id="pieChart"></div>
                 <div class="total-transactions">
@@ -62,7 +83,7 @@
                   <span class="total-transactions-value"></span>
                 </div>
               </div>
-              <div class="pieChartLegend"></div>
+              <div class="pieChartLegend typeChartLengend"></div>
             </div>
           </div>
         </div>
@@ -74,7 +95,7 @@
     <div class="col-12">
       <div class="d-flex graph-header">
         <div class="mr-auto p-2">No. of Transactions By Name</div>
-        <div class="p-2 interval partition date-container">Date</div>
+        <div class="p-2 partition date-container">Date</div>
         <div class="p-2 interval active" data-interval="day">1 D</div>
         <div class="p-2 interval" data-interval="week">1 W</div>
         <div class="p-2 interval" data-interval="month">1 M</div>

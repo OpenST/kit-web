@@ -60,6 +60,10 @@
         color:#e4b030
       }
     }
+    .date-container{
+      color:#e4b030;
+      font-size: 14px;
+    }
   }
 
   .graph-container{
@@ -123,10 +127,33 @@
     }
   }
 
-  .pieChartLegend{
+  .color-box-yellow{
+    background-color: #f6c62b;
+    height: 15px;
+    width : 15px;
+  }
+  .color-box-red{
+    background-color: #ff5f5a;
+    height: 15px;
+    width : 15px;
+  }
+  .color-box-blue{
+    background-color: #84d1d4;
+    height: 15px;
+    width : 15px;
+  }
+  .typeChartLengend{
     font-size: 12px;
     font-weight: 600;
     font-style: normal;
     color: #597a84;
   }
+  .typeChartSubHeading{
+    font-size: 14px;
+    font-weight: 600;
+    font-style: normal;
+    color: #438BAD;
+  }
+
+
 }

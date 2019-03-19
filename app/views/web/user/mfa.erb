@@ -1,8 +1,8 @@
 <%
-  if @presenter_obj.present? && @presenter_obj.setup_mfa.present? && @presenter_obj.setup_mfa.qr_code_url.present?
-    qr_url = @presenter_obj.setup_mfa.qr_code_url
+  if @presenter_obj.present? && @presenter_obj.setup_mfa.present? && @presenter_obj.setup_mfa.qr_code_token.present?
+    qr_code_token = @presenter_obj.setup_mfa.qr_code_token
   else
-    qr_url = nil
+    qr_code_token = nil
   end
 %>
 
@@ -12,7 +12,7 @@
       <div class="row">
         <div class="col-md-6 mx-auto">
           <div class="general_error invalid-feedback" data-forid="sign_up_form"></div>
-          <% if qr_url %>
+          <% if qr_code_token %>
             <h3 class="text-center">Your account has been activated</h3>
 <!--            <div class="general_error invalid-feedback" data-forid="sign_up_form"></div>-->
             <p class="desc text-center">Secure your account by setting up 2-Factor Authentication</p>
@@ -20,7 +20,7 @@
               <div class="col-12 col-md-5 align-self-center text-center">
                 <div class="img-container">
                   <div class="qr-image my-3">
-                    <img src="<%= qr_url %>" alt="QR CODE">
+
                   </div>
                 </div>
               </div>

@@ -24,8 +24,8 @@ module CompanyApi
           @data
         end
 
-        def qr_code_url
-          @data['qr_code_url']
+        def qr_code_token
+          @data['qr_code_token']
         end
 
       end

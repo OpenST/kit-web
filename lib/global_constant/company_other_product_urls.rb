@@ -17,14 +17,6 @@ module GlobalConstant
         config['view_root_url']
       end
 
-      def token_sale_url
-        config['token_sale_url']
-      end
-
-      def simple_token_url
-        config['simple_token_url']
-      end
-
       private
 
       def config

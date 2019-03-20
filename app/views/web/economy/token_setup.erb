@@ -123,6 +123,8 @@
                             <span class="quantity">
                               <input type="number" min="<%=bt_to_ost_min%>" max="<%= bt_to_ost_max %>"
                                      step="<%= bt_to_ost_step%>" id="<%= ost_to_bt_id %>"
+                                     data-msg-min="Please enter a value greater than 0.00001."
+                                     data-msg-max="The value entered must be less than or equal to <%= bt_to_ost_max %>"
                                      name="conversion_factor" value="<%= conversion_factor %>" title="Conversion rate value" required>
                             </span>
                             <span class="ost-mocker-value ml-1" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>

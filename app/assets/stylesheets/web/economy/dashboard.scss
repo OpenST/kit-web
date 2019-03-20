@@ -68,7 +68,7 @@
 
   .graph-container{
     width:100%;
-    height:350px;
+    min-height:350px;
     position: relative;
     display: -webkit-box!important;
     display: -ms-flexbox!important;
@@ -82,18 +82,31 @@
     background: url('https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/processed-loader-1.gif');
     height: 60px;
     width: 60px;
-    margin-top:  auto;
-    margin-bottom: auto;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
     background-size: 60px;
   }
 
-  .nodata{
-    width:100%;
-    height: 310px;
+  .no-data{
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    padding: 10px;
+    background-repeat: no-repeat;
 
+    &.transactions-and-ost-volume-nodata-html-image{
+      background-image: url('https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-graph-transactions-ost-volume-1.png');
+
+    }
+    &.transaction-by-type-nodata-html-image{
+      background-image: url('https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-graph-transactions-by-type-1.png');
+
+    }
+
+    &.transaction-by-name-nodata-html-image{
+      background-image: url('https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-graph-transactions-by-name-1.png');
+    }
   }
+
 
   .pie-chart-container{
     background-color: #f9fafa;

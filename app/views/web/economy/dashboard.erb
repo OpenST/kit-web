@@ -26,7 +26,8 @@
       </div>
     </div>
   </div>
-  <div class="row transactions_and_ost_volume">
+
+  <div class="row transactions_and_ost_volume my-6">
     <div class="col-12">
       <h3 class="mb-3">Economic Indicators </h3>
       <div class="d-flex graph-header">
@@ -41,7 +42,7 @@
     </div>
   </div>
 
-  <div class="row transaction_by_type">
+  <div class="row transaction_by_type my-6">
     <div class="col-12">
       <div class="d-flex graph-header">
         <div class="mr-auto p-2">No. of Transactions By Type</div>
@@ -68,7 +69,7 @@
 
           </div>
         </div>
-        <div class="row mb-5">
+        <div class="row">
           <div class="col-9 graph-container pr-0" id="lineChart"></div>
           <div class="col-3 graph-container pie-chart-container">
 
@@ -91,7 +92,7 @@
     </div>
   </div>
 
-  <div class=" row transaction_by_name">
+  <div class="row transaction_by_name my-6">
     <div class="col-12">
       <div class="d-flex graph-header">
         <div class="mr-auto p-2">No. of Transactions By Name</div>
@@ -104,40 +105,17 @@
       <div class=" graph-container" id="transactionByNameChart"></div>
     </div>
   </div>
-  <div id="transactionsAnsOstVolumeNodataHTML" style="display: none;">
-    <div class="py-5 row w-100">
-      <div class="col-12">
-        <svg class="transactions-and-ost-volume-no-data nodata">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#transactions-and-ost-volume-no-data"></use>
-          </switch>
-        </svg>
-      </div>
-    </div>
+
+  <div id="transactionsAnsOstVolumeNodataHTML" style="display: none;" class="my-6">
+    <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-graph-transactions-ost-volume-1.png" class="d-block mx-auto w-100" />
   </div>
 
-  <div id="transactionByNameNodataHTML" style="display: none;">
-    <div class="py-5 row w-100">
-      <div class="col-12">
-        <svg class="transaction-by-name-no-data nodata">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#transaction-by-name-no-data"></use>
-          </switch>
-        </svg>
-      </div>
-    </div>
+  <div id="transactionByTypeNodataHTML" style="display: none;" class="my-6">
+    <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-graph-transactions-by-type-1.png" class="d-block mx-auto w-100" />
   </div>
 
-  <div id="transactionByTypeNodataHTML" style="display: none;">
-    <div class="py-5 row w-100">
-      <div class="col-12">
-        <svg class="transaction-by-type-no-data nodata">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#transaction-by-type-no-data"></use>
-          </switch>
-        </svg>
-      </div>
-    </div>
+  <div id="transactionByNameNodataHTML" style="display: none;" class="my-6">
+    <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-graph-transactions-by-name-1.png" class="d-block mx-auto w-100" />
   </div>
 </div>
 <% content_for :end_js do %>

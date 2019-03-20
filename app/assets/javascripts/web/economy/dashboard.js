@@ -147,7 +147,7 @@
           startDate = moment(data[0].timestamp * 1000).format("D MMM [']YY");
           endDate = moment(data[dataLength - 1].timestamp * 1000).format("D MMM [']YY");
           displayDate = startDate;
-          if( endDate ){
+          if( endDate && startDate !== endDate){
             displayDate += " - "+ endDate;
           }
           $(sDateContainer).html(displayDate);

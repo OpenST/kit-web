@@ -2,21 +2,21 @@
   dashboard_links = [
       {
         svg: "#invite-team-icon",
-        desc: "Invite your team members",
+        desc: "Invite team members to the OST Platform",
         btn_txt: "invite team".upcase,
         href: GlobalConstant::RoutesMap.getRoutes()[:team] + "?" + get_go_back_url_query_param,
         target: ""
       },
       {
         svg: "#get-api-keys-icon",
-        desc: "Integrate OST APIs with your application",
+        desc: "Start integrating with your app",
         btn_txt: "get api keys".upcase,
         href: GlobalConstant::RoutesMap.getRoutes()[:developer] + "?" + get_go_back_url_query_param,
         target: ""
       },
       {
         svg: "#ost-guides-icon",
-        desc: "Check our guides and tutorials for a quick start",
+        desc: "Check out the developer documentation",
         btn_txt: "ost guides".upcase,
         href: "javascript:alert('TODO')",
         target: "_blank"
@@ -63,7 +63,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-7">
-              <h3 class="mb-3">Welcome to OST KIT</h3>
+              <h3 class="mb-4">Welcome to OST Platform</h3>
               <ul class="list-unstyled m-0">
                 <% if !is_whitelisted_user %>
                   <li class="list-items">
@@ -74,10 +74,10 @@
                     </svg>
 
                     <span style="display: <%= is_mainnet_whitelisting_requested ? "block" : "none" %>"
-                          class="display-3 ml-2 whitelisting_requested w-100">Request for Whitelisting has been sent</span>
+                          class="display-3 ml-2 whitelisting_requested w-100">Request for Production environment access has been sent</span>
                     <div style="display: <%= !is_mainnet_whitelisting_requested ? "flex" : "none" %>"  class="w-100 align-items-center">
-                      <span class="display-3 ml-2 whitelisting_not_requested">Complete KYC | Enable production Mode</span>
-                      <button class="btn btn-secondary ml-auto" id="dashboard-complete-kyc" title="Complete KYC">complete kyc</button>
+                      <span class="display-3 ml-2 whitelisting_not_requested">Production environment request</span>
+                      <button class="btn btn-secondary ml-auto" id="dashboard-complete-kyc" title="SEND Request">send request</button>
                     </div>
                   </li>
                 <% end %>

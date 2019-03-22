@@ -1,6 +1,7 @@
 ;
 (function (window,$) {
-  const pieChartConstants = {
+
+  var pieChartConstants = {
     legendsLabelAndClass: {
       "user_to_user" : {
         label : "User to User",
@@ -18,14 +19,14 @@
   };
 
     var ost = ns('ost'),
-        transactions_and_ost_volume    = ns('ost.transactions_and_ost_volume'),
-        transaction_by_type_line_graph = ns('ost.transaction_by_type_line_graph'),
-        transaction_by_type_pie_chart  = ns('ost.transaction_by_type_pie_chart'),
-        transaction_by_name            = ns('ost.transaction_by_name'),
+        graphConfig = ost.dashboardGraphConfig,
+        filterOptionsMap               = graphConfig.filterOptionsMap,
+        transactions_and_ost_volume    = graphConfig.transactions_and_ost_volume,
+        transaction_by_type_line_graph = graphConfig.transaction_by_type_line_graph,
+        transaction_by_type_pie_chart  = graphConfig.transaction_by_type_pie_chart,
+        transaction_by_name            = graphConfig.transaction_by_name,
         utilities                      = ns("ost.utilities"),
 
-        transactions_and_ost_volume_config = transactions_and_ost_volume['config'],
-        filterOptionsMap                   = transactions_and_ost_volume['filterOptionsMap'],
         jTransactionsAndOstVolumeIntervals = $('.transactions_and_ost_volume .interval'),
         jTransactionsByNameIntervals       = $('.transaction_by_name .interval'),
         jTransactionsByTypeIntervals       = $('.transaction_by_type .interval'),
@@ -43,17 +44,16 @@
         oThis.transactionByNameGraph = new GoogleCharts();
         oThis.transactionByTypeLineGraph = new GoogleCharts();
         oThis.drawTransactionAndOstVolumeGraph() ;
-        oThis.drawTransactionByTypeGraph() ;
+        oThis.drawTransactionByTypeLineGraph() ;
         oThis.drawTransactionByNameGraph() ;
 
       },
 
       drawTransactionAndOstVolumeGraph: function (filter) {
-        var config = $.extend(true , {} , transactions_and_ost_volume_config ),
+        var config = $.extend(true , {} , transactions_and_ost_volume ),
             url = oThis.getAjaxUrl( oThis.transactions_and_ost_volume_url , filter) ,
             ajax = utilities.deepGet( config , 'ajax' )
         ;
-        console.log('ajax',transactions_and_ost_volume_config['ajax']);
         ajax['url'] = url ;
 
         if(filter){
@@ -69,13 +69,9 @@
         oThis.transactionAndOstVolumeGraph.draw( config );
       },
 
-      drawTransactionByTypeGraph : function () {
-        oThis.drawTransactionByTypeLineGraph();
-      },
-
-      drawTransactionByTypeLineGraph: function(){
+      drawTransactionByTypeLineGraph: function(filter){
         var config = $.extend(true , {} , transaction_by_type_line_graph ),
-          url = oThis.getAjaxUrl( oThis.transaction_by_type_url ) ,
+          url = oThis.getAjaxUrl( oThis.transaction_by_type_url , filter ) ,
           ajax = utilities.deepGet( config , 'ajax' )
         ;
         ajax['url'] = url ;
@@ -135,7 +131,6 @@
           url = oThis.getAjaxUrl( oThis.transaction_by_name_url , filter) ,
           ajax = utilities.deepGet( config , 'ajax' )
         ;
-        console.log('ajax',transactions_and_ost_volume_config['ajax']);
         ajax['url'] = url ;
 
         oThis.transactionByNameGraph.draw( config  , function ( res ) {
@@ -145,9 +140,11 @@
           sDateContainer = $('.date-container');
           dataLength = data.length;
           startDate = moment(data[0].timestamp * 1000).format("D MMM [']YY");
-          endDate = moment(data[dataLength - 1].timestamp * 1000).format("D MMM [']YY");
+          if( filter && filter.toLowerCase() != "day" ){
+            endDate = moment(data[dataLength - 1].timestamp * 1000).format("D MMM [']YY");
+          }
           displayDate = startDate;
-          if( endDate && startDate !== endDate){
+          if( endDate ){
             displayDate += " - "+ endDate;
           }
           $(sDateContainer).html(displayDate);
@@ -158,11 +155,9 @@
          if(!val && api.indexOf('graph_duration') < 0 ){
            var url = api + '?graph_duration=day';
            return url;
-           console.log("url",url);
          }else {
            var url = api + '?graph_duration=' + val;
-           return url
-           console.log("url", url);
+           return url;
          }
       },
 
@@ -183,7 +178,7 @@
         jTransactionsByTypeIntervals.on('click',function (event) {
           jTransactionsByTypeIntervals.removeClass('active');
           $(this).addClass('active');
-          oThis.drawTransactionByTypeGraph($(this).data('interval'));
+          oThis.drawTransactionByTypeLineGraph($(this).data('interval'));
         });
       }
 

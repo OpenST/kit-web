@@ -120,7 +120,7 @@
     /*
      * Rendering chart
      */
-    render: function(callback){
+    render: function( ){
       var oThis = this;
       google.charts.setOnLoadCallback(function(){
         var data = oThis.makeData(oThis.data),

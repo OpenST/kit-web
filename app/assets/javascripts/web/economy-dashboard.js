@@ -1,6 +1,4 @@
-//= require web/economy/transactions_and_ost_volume
-//= require web/economy/transaction_by_type
-//= require web/economy/transaction_by_name
+//= require web/economy/dashboard-graph-config
 //= require web/utils/GoogleCharts
 //= require plugins/handlebars/handlebars
 //= require web/economy/dashboard

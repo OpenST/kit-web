@@ -12,25 +12,23 @@
 <!--      </button>-->
       <div class="modal-body pt-4 px-6 mx-6" style="overflow-x: hidden">
         <div class="default-state" >
-          <h3 class="font-weight-bold">Ready To Go Live?</h3>
-          <p class="sub-header mb-5">Have you tested your economy and are you ready to go live? Connect with our commercial team to proceed. Please confirm below to be contacted by the OST Team.</p>
+          <h3 class="font-weight-bold">Ready to switch to Production?</h3>
+          <p class="sub-header mb-5">In order to use Production environment, you will be contacted by OST team. Please note, Sandbox data will not be transferred to Production.</p>
           <form id="whitelist_user_form" action="<%= request_whitelist_api %>" method="POST">
             <div class="row">
               <div class="col-12 form-group mb-0">
                 <input type="hidden" name="sandbox_token_name" value="<%= sandbox_token_name %>"/>
                 <input type="hidden" name="sandbox_token_symbol" value="<%= sandbox_token_symbol %>"/>
                 <button type="button" data-dismiss="modal" class="btn btn-secondary" title="CANCEL">CANCEL</button>
-                <button type="submit" data-submiting="Confirming..." class="btn btn-primary whitelist-user-btn ml-3" title="CONFIRM">CONFIRM</button>
+                <button type="submit" data-submiting="Sending..." class="btn btn-primary whitelist-user-btn ml-3" title="Send Request">Send Request</button>
                 <div class="col-12 mt-2 ml-3 general_error error" data-forid="whitelist_user_form">&nbsp;</div>
               </div>
             </div>
           </form>
         </div>
         <div class="success-state" style="display: none;">
-          <h4 class="font-weight-bold">The request has been successful processed
-            and the OST team will get in touch shortly.</h4>
-          <h6 class="sub-header">Meanwhile, you may continue to explore more
-            in the Sandbox Environment.</h6>
+          <h4 class="font-weight-bold">Your request has been fowarded to OST team and we will get back to you</h4>
+          <h6 class="sub-header">You can still continue using the Sandbox environment for testing.</h6>
           <div class="col-12 mx-auto mt-5">
             <button type="button" data-dismiss="modal" class="btn btn-primary">CLOSE</button>
           </div>

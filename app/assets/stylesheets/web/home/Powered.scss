@@ -1,7 +1,7 @@
 .container-powered{
 //  padding-top: 1.5rem;
-  padding-bottom: 170px;
-  overflow: hidden;
+//  padding-bottom: 170px;
+//  overflow: hidden;
   &.container-managedash{
     background-color: #33445b;
     padding-bottom: 375px;
@@ -15,9 +15,11 @@
     }
   }
   &.kit{
-    background-color: #aee1e3;
+    background-color: #e7f6f7;
     h1{
-      color: #ffffff;
+      color: #597a84;
+      font-weight: 400!important;
+      letter-spacing: 0.6px;
     }
   }
   &.ost{
@@ -35,7 +37,6 @@
 }
 
 .container-powered-containers{
-  margin: -150px auto 20px auto;
   &.container-managedash-containers{
     margin: -375px auto 20px auto;
   }
@@ -73,5 +74,11 @@
     color: #597a84;
     font-size: 0.9rem;
     font-weight: 300;
+  }
+  .rounded{
+    opacity: 0.9;
+    border-radius: 2.5px;
+    border: none;
+    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.06);
   }
 }

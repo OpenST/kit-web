@@ -1,0 +1,90 @@
+.block-container {
+  background-color: #34445b;
+  h2{
+    color: #ffffff;
+    letter-spacing: 1.2px;
+    margin-bottom: 1.5rem;
+  }
+  p{
+    color: #ffffff;
+    font-weight: 300;
+    letter-spacing: 0.4px;
+  }
+}
+
+.openst-forum {
+  border: 1.5px solid #ffffff !important;
+  color: #ffffff !important;
+  background-color: #34445b !important;
+  &:hover {
+    border: 1.5px solid #ffffff !important;
+    color: #34445b !important;
+    background-color: #ffffff !important;
+  }
+}
+
+.info-card {
+  .info-card-body {
+    border: solid 1px #597A84;
+    border-radius: .25rem;
+  }
+  h5 {
+    color: #ffffff;
+    margin-left: 10px;
+    margin-bottom: 0;
+    display: inline-block;
+  }
+  p{
+    margin-top: 1rem;
+  }
+  .white-paper-link {
+    color: #D9A025;
+    border-bottom: 1.5px solid #D9A025;
+    letter-spacing: 2.7px;
+    font-weight: 700;
+    padding-bottom: 2px;
+    //font-size: $font-size-sm;
+  }
+  .github-link {
+    color: #d3e3e5;
+    letter-spacing: 2.7px;
+    padding-bottom: 2px;
+    font-weight: 700;
+    border-bottom: 1.5px solid #d3e3e5;
+  }
+}
+
+@media (max-width: 768px) {
+  .openst-forum {
+    display: none;
+  }
+  .info-card {
+    .info-card-body {
+      height: auto;
+    }
+    p{
+      height: auto;
+    }
+  }
+}
+@media (min-width:768px) and (max-width: 992px) {
+  .info-card {
+    .info-card-body {
+      height: 350px;
+    }
+    p{
+      height: 235px;
+    }
+  }
+}
+@media (min-width:992px) and (max-width: 1024px) {
+  .info-card {
+    .info-card-body {
+      height: 290px;
+    }
+    p{
+      height: 165px;
+    }
+  }
+}
+

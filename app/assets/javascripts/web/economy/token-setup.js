@@ -64,6 +64,7 @@
               btFiatVal = PriceOracle.btToFiatPrecession( 1 ) ,
               ostFiatVal = PriceOracle.ostToFiat( 1 )
           ;
+          ostFiatVal = PriceOracle.toPrecessionFiat( ostFiatVal );
           jEL.data("ost-mock-element" , "#"+ oThis.ostToBtId );
           jEL.ostMocker();
           jEL.text( btFiatVal );

@@ -6,16 +6,11 @@
           <form id="login_form" class="user-form"
                 action="<%= GlobalConstant::RoutesMap.getApis()[:api_login] %>" method="POST">
             <h3 class="text-center mb-2" style="font-size: 2rem;">Log In
-<!--              <svg style="width: 50px;height: 30px;vertical-align: bottom">-->
-<!--                <switch>-->
-<!--                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ost-header-logo"></use>-->
-<!--                </switch>-->
-<!--              </svg>-->
             </h3>
             <div class="general_error invalid-feedback">&nbsp</div>
             <div class="form-group mb-2">
               <label class="form-label" for="email">Email address</label>
-              <input type="email" class="form-control" id="email" name="email"
+              <input type="email" class="form-control" id="email" name="email" title="Email"
                      aria-describedby="emailHelp" placeholder="Email Address" name="email" required tabindex="1" autofocus/>
               <div class="invalid-feedback" data-forid="email">&nbsp;</div>
             </div>
@@ -23,8 +18,8 @@
               <label class="form-label float-left" for="exampleInputPassword1">Password</label>
               <span class="form-label float-right text-capitalize font-weight-light"><a class="form-text mt-0" href="/reset-password">Forgot password?</a></span>
               <div class="input-group">
-                <input type="password" class="form-control form-control-input-group" placeholder="Password"
-                       id="password" name="password" required minlength="8"  tabindex="2"/>
+                <input type="password" class="form-control form-control-input-group" placeholder="Password" title="Password"
+                       id="password" name="password" required minlength="8" data-msg-minlength="Password needs to be at least 8 characters"  tabindex="2"/>
                 <div class="input-group-append">
                   <span class="input-group-text input-group-inline input-group-eye">
                     <svg class="icon">

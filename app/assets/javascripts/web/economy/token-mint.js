@@ -25,7 +25,7 @@
     jAllowStakeAndMintMsgWrapper    :   $('.jAllowStakeAndMintWrapper'),
     jAutorizeStakeAndMintMsgWrapper :   $('.jAutorizeStakeAndMintWrapper'),
     jSignClientErrorBtnWrap         :   $('.jSignClientErrorBtnWrap'),
-    jStakeAndMintSignServerError    :   $('.jStakeAndMintSignServerError'),
+    jStakeAndMintSignServerError    :   $('#jStakeAndMintSignServerError'),
     jGoBackBtn                      :   $('.jGoBackBtn'),
     jClientRetryBtn                 :   $('.jClientRetryBtn'),
     jEtherText                      :   $('.ether-text'),
@@ -568,7 +568,7 @@
         data: [
           ['Type', 'Tokens'],
           ['OSTStaked', ostToStake],
-          ['OSTAvailable', ostAvailable],
+          ['OSTAvailable', ostAvailable]
         ],
         selector: '#ostSupplyInAccountPie',
         type: 'PieChart',

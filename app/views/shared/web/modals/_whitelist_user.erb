@@ -1,37 +1,20 @@
 <div class="modal fade" id="whitelist_user_modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg h-100 mx-auto my-0" role="document">
     <div class="modal-content text-center">
-<!--      <button type="button" class="close text-right" data-dismiss="modal" aria-label="Close">-->
-<!--        <span aria-hidden="true">-->
-<!--          <svg class="close-icon">-->
-<!--            <switch>-->
-<!--              <use class="success-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#modal-close-icon"></use>-->
-<!--            </switch>-->
-<!--          </svg>-->
-<!--        </span>-->
-<!--      </button>-->
       <div class="modal-body pt-4 px-6 mx-6" style="overflow-x: hidden">
         <div class="default-state" >
           <h3 class="font-weight-bold">Ready to switch to Production?</h3>
-          <p class="sub-header mb-5">In order to use Production environment, you will be contacted by OST team. Please note, Sandbox data will not be transferred to Production.</p>
-          <form id="whitelist_user_form" action="<%= request_whitelist_api %>" method="POST">
+          <p class="sub-header mb-2">
+            Please contact your OST Client Success team to plan your move to Production. <br />
+            Otherwise, please <a href="https://goo.gl/forms/SpSF6OnWwz3XFbuU2" target="_blank">submit this form</a>.
+            <p class="sub-header mt-3 mb-1">In the meantime you can continue to use Sandbox.</p>
+          </p>
             <div class="row">
               <div class="col-12 form-group mb-0">
-                <input type="hidden" name="sandbox_token_name" value="<%= sandbox_token_name %>"/>
-                <input type="hidden" name="sandbox_token_symbol" value="<%= sandbox_token_symbol %>"/>
-                <button type="button" data-dismiss="modal" class="btn btn-secondary" title="CANCEL">CANCEL</button>
-                <button type="submit" data-submiting="Sending..." class="btn btn-primary whitelist-user-btn ml-3" title="Send Request">Send Request</button>
+                <button type="button" data-dismiss="modal" class="btn btn-secondary" title="Close">CLOSE</button>
                 <div class="col-12 mt-2 ml-3 general_error error" data-forid="whitelist_user_form">&nbsp;</div>
               </div>
             </div>
-          </form>
-        </div>
-        <div class="success-state" style="display: none;">
-          <h4 class="font-weight-bold">Your request has been fowarded to OST team and we will get back to you</h4>
-          <h6 class="sub-header">You can still continue using the Sandbox environment for testing.</h6>
-          <div class="col-12 mx-auto mt-5">
-            <button type="button" data-dismiss="modal" class="btn btn-primary">CLOSE</button>
-          </div>
         </div>
 
       </div>

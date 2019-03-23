@@ -47,15 +47,17 @@
     border-bottom: 1.5px solid #D9A025;
     letter-spacing: 2.7px;
     font-weight: 700;
-    padding-bottom: 2px;
-    //font-size: $font-size-sm;
+    padding: 6px 0;
   }
   .github-link {
-    color: #d3e3e5;
+    color: #d3e3e5 !important;
     letter-spacing: 2.7px;
-    padding-bottom: 2px;
+    padding: 6px 0;
     font-weight: 700;
     border-bottom: 1.5px solid #d3e3e5;
+    &:before, &:after{
+      background: #d3e3e5;
+    }
   }
   a{
     &:hover{

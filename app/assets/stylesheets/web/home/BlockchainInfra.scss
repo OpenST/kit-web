@@ -52,6 +52,11 @@
     font-weight: 700;
     border-bottom: 1.5px solid #d3e3e5;
   }
+  a{
+    &:hover{
+      text-decoration: none;
+    }
+  }
 }
 
 @media (max-width: 768px) {

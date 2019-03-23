@@ -193,6 +193,13 @@
 
   }
 
+  .invalid-feedback, error{
+    a{
+      color: $red;
+      text-decoration: underline;
+    }
+  }
+
 }
 
 .user-form{

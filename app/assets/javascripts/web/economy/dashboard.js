@@ -134,21 +134,24 @@
         ajax['url'] = url ;
 
         oThis.transactionByNameGraph.draw( config  , function ( res ) {
-          var data  = utilities.deepGet( res , 'data.transaction_by_name'),
-              startDate, endDate, dataLength, displayDate, sDateContainer, options
-          ;
-          sDateContainer = $('.date-container');
-          dataLength = data.length;
-          startDate = moment(data[0].timestamp * 1000).format("D MMM [']YY");
-          if( filter && filter.toLowerCase() != "day" ){
-            endDate = moment(data[dataLength - 1].timestamp * 1000).format("D MMM [']YY");
-          }
-          displayDate = startDate;
-          if( endDate ){
-            displayDate += " - "+ endDate;
-          }
-          $(sDateContainer).html(displayDate);
+          oThis.setDate( res, filter );
         });
+      },
+
+      setDate : function( res, filter ) {
+        var data  = utilities.deepGet( res , 'data.meta'),
+          startDate, endDate, displayDate, sDateContainer
+        ;
+        sDateContainer = $('.date-container');
+        startDate = moment(data['startTimestamp'] * 1000).format("D MMM [']YY");
+        if( filter && filter.toLowerCase() != "day" ){
+          endDate = moment(data['endTimestamp'] * 1000).format("D MMM [']YY");
+        }
+        displayDate = startDate;
+        if( endDate ){
+          displayDate += " - "+ endDate;
+        }
+        $(sDateContainer).html(displayDate);
       },
 
       getAjaxUrl: function (api ,  val ) {

@@ -10,6 +10,11 @@
     font-weight: 300;
     letter-spacing: 0.4px;
   }
+  @media (max-width: 768px) {
+    .openst-forum {
+      display: none;
+    }
+  }
 }
 
 .openst-forum {
@@ -55,40 +60,6 @@
   a{
     &:hover{
       text-decoration: none;
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .openst-forum {
-    display: none;
-  }
-  .info-card {
-    .info-card-body {
-      height: auto;
-    }
-    p{
-      height: auto;
-    }
-  }
-}
-@media (min-width:768px) and (max-width: 992px) {
-  .info-card {
-    .info-card-body {
-      height: 350px;
-    }
-    p{
-      height: 235px;
-    }
-  }
-}
-@media (min-width:992px) and (max-width: 1024px) {
-  .info-card {
-    .info-card-body {
-      height: 290px;
-    }
-    p{
-      height: 165px;
     }
   }
 }

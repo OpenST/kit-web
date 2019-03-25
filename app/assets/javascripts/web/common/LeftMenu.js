@@ -31,18 +31,7 @@
 
       $.extend( oThis, config );
       oThis.bindEvents();
-      oThis.initWhitelistUserForm();
       oThis.initTooltip();
-    },
-
-    initWhitelistUserForm: function() {
-      $("#whitelist_user_form").formHelper({
-        success: function ( response ) {
-          if ( response.success ) {
-            oThis.onRequestWhitelistUserSuccess( response );
-          }
-        }
-      });
     },
 
     initTooltip: function() {

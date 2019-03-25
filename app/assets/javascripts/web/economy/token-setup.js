@@ -108,6 +108,12 @@
                   
                     oThis.initConfirmFlow();
                     ost.coverElements.show("#metamaskConfirmAccount");
+                },
+              
+                onSendAsync : function ( options, err, result ) {
+                  if ( !err && !result ) {
+                    ost.coverElements.show("#process_failure_error_cover");
+                  }
                 }
 
             });

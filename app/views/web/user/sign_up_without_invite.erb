@@ -6,10 +6,10 @@
           <form id="sign_up_form" class="user-form"
                 action="<%=GlobalConstant::RoutesMap.getApis()[:api_sign_up] %>" method="POST">
 
-            <h3 class="text-center pt-3" style="font-size: 2rem;">Register
+            <h3 class="text-center pt-2" style="font-size: 2rem;">Register
             </h3>
 
-            <p class="text-center small">
+            <p class="text-center small mb-0">
               Access is currently available to whitelisted accounts. To request access please <a href="https://goo.gl/forms/26zom9yYqZ1IJQbD3" target="_blank">submit this form</a>. If you are on the whitelist please register below.
             </p>
 
@@ -47,32 +47,50 @@
               <div class="zxcvbn-group mb-3"></div>
             </div>
 
-            <div class="form-group has-error mb-2" id="tosFormGrp">
+            <div class="form-group has-error mb-0" id="tosFormGrp">
               <div class="form-check p-0">
                 <input id="tos" class="checkbox-custom form-check-input" name="agreed_terms_of_service"
                        type="checkbox" required
                        data-msg-required="Please indicate that you have read and agreed to the Terms of Service and Privacy Policy."
                 />
                 <label for="tos" class="checkbox-custom-label form-check-label">
-            <span class="tos-text">By checking this box, you agree to our
-              <a href="https://drive.google.com/file/d/1QTZ7_EYpbo5Cr7sLdqkKbuwZu-tmZHzD/view" target="_blank"
-                 class="font-weight-normal">Terms of Service</a>&nbsp;&amp; acknowledge and consent to our
-              <a href="//ost.com/privacy" target="_blank"
-                 class="font-weight-normal">Privacy Policy</a>.
-            </span>
+                  <span class="tos-text">By checking this box, you agree to our
+                    <a href="https://drive.google.com/file/d/1QTZ7_EYpbo5Cr7sLdqkKbuwZu-tmZHzD/view" target="_blank"
+                       class="font-weight-normal">Terms of Service</a>&nbsp;&amp; acknowledge and consent to our
+                    <a href="//ost.com/privacy" target="_blank"
+                       class="font-weight-normal">Privacy Policy</a>.
+                  </span>
                 </label>
                 <div class="invalid-feedback" data-forid="agreed_terms_of_service">&nbsp;</div>
               </div>
 
             </div>
-            <div class="form-group text-center">
+
+            <div class="form-group has-error mb-2" id="marcommFormGrp">
+              <div class="form-check p-0">
+                <input id="marcomm" class="checkbox-custom form-check-input" name="marcomm"
+                       type="checkbox" required
+                       data-msg-required="Please indicate that you have read and agreed to the Terms of Service and Privacy Policy."
+                  />
+                <label for="marcomm" class="checkbox-custom-label form-check-label">
+                  <span class="tos-text">I agree to OST sending me marketing communications, as described in our
+                    <a href="//ost.com/privacy" target="_blank"
+                       class="font-weight-normal">Privacy Policy</a>.
+                  </span>
+                </label>
+                <div class="invalid-feedback" data-forid="agreed_terms_of_service">&nbsp;</div>
+              </div>
+
+            </div>
+
+            <div class="form-group text-center mb-1">
               <div class="g-recaptcha mx-auto  form-recapcha-wrap d-inline-block" id="myid" data-sitekey="<%= GlobalConstant::Base.recaptcha['site_key'] %>"></div>
               <div class="recaptcha-submit-error invalid-feedback">&nbsp;</div>
             </div>
 
             <div class="form-group text-center" >
               <button type="submit" id="register-btn"  class="btn btn-gold" data-submiting="Registering">Register</button>
-              <small class="form-text text-muted" style="line-height: 40px">Have an account already?</small>
+              <small class="form-text text-muted" style="line-height: 30px">Have an account already?</small>
               <a href="/login" class="btn ost-btn-secondary" title="Login">Login</a>
             </div>
           </form>

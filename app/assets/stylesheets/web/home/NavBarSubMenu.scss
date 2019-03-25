@@ -74,40 +74,32 @@
 
   #toggle-menu{
     font-size: 0;
-    //border-radius: 0;
-    padding: 1rem;
+    border-radius: 0;
+    padding: 1.8rem 1rem;
     background-color: #F4F8F9;
-    //.toggle-menu{
-    //  width: 30px;
-    //  height: 3px;
-    //  transition: .5s;
-    //  position: relative;
-    //  display: inline-block;
-    //  background-color: #34445b;
-    //  &:after,
-    //  &:before{
-    //    content: '';
-    //    width: 30px;
-    //    height: 3px;
-    //    transition: .5s;
-    //    position: absolute;
-    //    background-color: #34445b;
-    //  }
-    //  &:before{
-    //    top: -8px;
-    //  }
-    //  &:after{
-    //    top: 8px;
-    //  }
-    //}
-  }
-
-  #toggle-menu[aria-expanded] path{
-    transition: d 0.25s;
-  }
-
-  #toggle-menu[aria-expanded="true"] path{
-    d: path("M1,1 9,9 M5,5 5,5 M1,9 9,1");
+    .toggle-menu{
+      width: 30px;
+      height: 3px;
+      transition: .5s;
+      position: relative;
+      display: inline-block;
+      background-color: #34445b;
+      &:after,
+      &:before{
+        content: '';
+        width: 30px;
+        height: 3px;
+        transition: .5s;
+        position: absolute;
+        background-color: #34445b;
+      }
+      &:before{
+        top: -8px;
+      }
+      &:after{
+        top: 8px;
+      }
+    }
   }
 
   label.drop-icon {

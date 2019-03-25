@@ -37,9 +37,9 @@ Rails.application.routes.draw do
     get '/' => :developer, as: 'developer'
   end
 
-  namespace 'devadmin' do
+  namespace "#{GlobalConstant::Environment.url_prefix}" do
     # ST Api sidekiq web interface endpoint
-    mount ApiSidekiqServer => '/api-sidekiq'
+    mount ApiSidekiqServer => '/sidekiq-admin-interface'
   end
 
   # Route not found handler. Should be the last entry here

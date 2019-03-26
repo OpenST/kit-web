@@ -55,7 +55,7 @@
         }
         
         location /testnet/api/ {
-            proxy_pass http://kit.developmentost.com:4001/testnet/api/;
+            proxy_pass http://kit.developmentost.com:4001/testnet/api;
         }
 
         location / {

@@ -110,24 +110,37 @@
 
   label.drop-icon,
   span.drop-icon {
-    &:after{
-      border: none;
-      content: "";
-      display: inline-block;
-      background: url('data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMiAxMiI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOm5vbmU7c3Ryb2tlOiMzNDQ0NWI7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS13aWR0aDoycHg7fTwvc3R5bGU+PC9kZWZzPjx0aXRsZT5kcm9wLWRvd24tYXJyb3c8L3RpdGxlPjxnIGlkPSJvc3RLWUMtbW9iaWxlLS0tTWVudSI+PGcgaWQ9Ikdyb3VwLTE3Ij48ZyBpZD0iR3JvdXAtMyI+PHBvbHlsaW5lIGlkPSJkcm9wLWRvd24tYXJyb3ciIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIxIDEuNTYgMTEgMTEgMjEgMSIvPjwvZz48L2c+PC9nPjwvc3ZnPg==') no-repeat center;
-      height: 18px;
-      width: 18px;
-      position: relative;
-      top: 0;
-      left: calc(100% - 1rem);
-    }
+    //&:after{
+    //  border: none;
+    //  content: "";
+    //  display: inline-block;
+    //  height: 18px;
+    //  width: 18px;
+    //  position: relative;
+    //  top: 0;
+    //  left: calc(100% - 1rem);
+    //}
     &.drop-icon-right{
       &:after{
+        content: "";
+        background: url('data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMiAxMiI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOm5vbmU7c3Ryb2tlOiMzNDQ0NWI7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS13aWR0aDoycHg7fTwvc3R5bGU+PC9kZWZzPjx0aXRsZT5kcm9wLWRvd24tYXJyb3c8L3RpdGxlPjxnIGlkPSJvc3RLWUMtbW9iaWxlLS0tTWVudSI+PGcgaWQ9Ikdyb3VwLTE3Ij48ZyBpZD0iR3JvdXAtMyI+PHBvbHlsaW5lIGlkPSJkcm9wLWRvd24tYXJyb3ciIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIxIDEuNTYgMTEgMTEgMjEgMSIvPjwvZz48L2c+PC9nPjwvc3ZnPg==') no-repeat center;
         height: 12px;
         width: 12px;
         position: absolute;
         left: calc(100% - 16px);
         top: -2px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px){
+    .main-nav-item{
+      .navbar-toggler{
+        top: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
       }
     }
   }

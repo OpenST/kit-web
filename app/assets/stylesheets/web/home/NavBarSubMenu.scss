@@ -110,16 +110,6 @@
 
   label.drop-icon,
   span.drop-icon {
-    //&:after{
-    //  border: none;
-    //  content: "";
-    //  display: inline-block;
-    //  height: 18px;
-    //  width: 18px;
-    //  position: relative;
-    //  top: 0;
-    //  left: calc(100% - 1rem);
-    //}
     &.drop-icon-right{
       &:after{
         content: "";

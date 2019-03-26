@@ -1,6 +1,5 @@
 .container-subscribe {
-  h1{
-    font-weight: 400 !important;
+  h2{
     color: #438bad;
   }
   .error{
@@ -13,7 +12,6 @@
     .form-group{
       width:100%;
       input.form-control{
-        width: 65%;
         display: inline-block;
         font-size: 16px;
         height: 48px;
@@ -24,6 +22,12 @@
           box-shadow: none;
           -webkit-box-shadow: none;
         }
+      }
+    }
+    .label-cbx{
+      .checkbox{
+        top: 0;
+        left: 0;
       }
     }
   }

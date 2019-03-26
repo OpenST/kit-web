@@ -1,6 +1,8 @@
 html,
 body{
   font-family: 'Quasimoda', sans-serif !important;
+  // This line is for home page explicitly
+  -webkit-font-smoothing: antialiased;
 }
 .container-jumbotron{
   h2{

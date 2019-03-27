@@ -67,7 +67,7 @@ class Web::BaseController < ApplicationController
     return unless request.get?
     response.headers['Pragma'] = 'no-cache'
     response.headers['Cache-Control'] = 'no-store, no-cache, max-age=0, must-revalidate, post-check=0, pre-check=0'
-    response.headers['Vary'] = '*'
+    #response.headers['Vary'] = '*'
     response.headers['Expires'] = '-1'
     response.headers['Last-Modified'] = "#{Time.now.gmtime.strftime("%a, %d %b %Y %T GMT")}"
   end

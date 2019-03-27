@@ -51,7 +51,8 @@
       <p>
         In order to use OST Platform APIs you will have to authenticate your account by including an API signature in every request. Signatures validate the authenticity of the account which interacts with OST Platform and ensures that the message sent has not been tampered.
         <br/>
-        Please make sure to never share your API Secret Key and to keep it private and secure. You can always generate a new set of API Keys. Once new keys are generated, you can choose to delete the old keys immediately or allow it to expire in 24 hours.
+        <br/>
+        Please make sure to never share your API Secret Key and to keep it private and secure. You can always generate a new set of API keys. Once new keys are generated, you can choose to delete the old keys immediately or allow them to expire in 24 hours.
       </p>
       <button type="button" class="btn btn-primary mt-3 show-keys-btn" data-submiting="Fetching..." >Show Keys</button>
       <button type="button" class="btn btn-primary mt-3 generate-key-btn" data-submiting="Creating...">Create New Keys</button>
@@ -69,7 +70,7 @@
       </p>
       <div class="text-left">
         <!--        TODO: Add links to icons-->
-        <a class="d-inline" href="https://dev.stagingost.com/kit/docs/getting_started/introduction/" target="_blank">
+        <a class="d-inline" href="<%= GlobalConstant::CompanyOtherProductUrls.dev_ost_root_url %>platform" target="_blank" title="OST Platform - Guides">
           <svg class="icon ios-icon" style="height: 60px;width: 150px;">
             <switch>
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#guides-icon"></use>
@@ -91,14 +92,14 @@
       </p>
       <div class="text-left">
         <!--        TODO: Add links to icons-->
-        <a class="d-inline" href="#">
+        <a class="d-inline" href="<%= GlobalConstant::CompanyOtherProductUrls.dev_ost_root_url %>platform/docs/wallet_sdk_setup/iOS/" target="_blank" title="OST Platform - iOS Wallet SDK">
           <svg class="icon ios-icon" style="height: 60px;width: 150px;">
             <switch>
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ios-icon"></use>
             </switch>
           </svg>
         </a>
-        <a class="d-inline" href="#">
+        <a class="d-inline" href="<%= GlobalConstant::CompanyOtherProductUrls.dev_ost_root_url %>platform/docs/wallet_sdk_setup/android/" target="_blank" title="OST Platform - Android Wallet SDK">
           <svg class="icon android-icon" style="height: 60px;width: 150px;">
             <switch>
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#android-icon"></use>
@@ -120,14 +121,14 @@
         The quick start guides below will help you get quickly started with integrating the Server side SDK into your app.
       </p>
       <div class="text-left">
-        <a class="d-inline" href="#">
-          <svg class="icon developer_ruby_logo" style="height: 60px;width: 150px;">
-            <switch>
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#developer_ruby_logo"></use>
-            </switch>
-          </svg>
-        </a>
-        <a class="d-inline" href="#">
+<!--        <a class="d-inline" href="#">-->
+<!--          <svg class="icon developer_ruby_logo" style="height: 60px;width: 150px;">-->
+<!--            <switch>-->
+<!--              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#developer_ruby_logo"></use>-->
+<!--            </switch>-->
+<!--          </svg>-->
+<!--        </a>-->
+        <a class="d-inline" href="<%= GlobalConstant::CompanyOtherProductUrls.dev_ost_root_url %>platform/docs/server_sdk_setup/php/" target="_blank" title="OST Platform - Server Side SDK">
           <svg class="icon developer_php_logo" style="height: 60px;width: 150px;">
             <switch>
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#developer_php_logo"></use>

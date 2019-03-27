@@ -2,6 +2,7 @@
   <div class="container">
     <div class="row">
       <h3 class="mt-4  col-12 pl-0">Invite Team Member</h3>
+      <P class="mb-0">Only enter business email addresses of people who work at your company. Invites to to generic domains will not work.</P>
       <hr class="mb-3 col-12"/>
     </div>
     <div class="row">
@@ -20,14 +21,14 @@
                 <input class="form-check-input radio-button"
                        id="user-type-admin" type="radio" name="is_super_admin" value="0" checked/>
                 <label class="form-check-label radio-button-label" for="user-type-admin">
-                  <span class="radio-button-circle"></span>Admin (Will be able to access Dashboard and Developers documentation)</label>
+                  <span class="radio-button-circle"></span>Admin (Can access the OST Platform Dashboard, API Keys, and Developers documentation)</label>
               </div>
               <div class="col-12 form-check form-check-inline">
                 <input class="form-check-input radio-button"
                        id="user-type-super-admin" type="radio" name="is_super_admin" value="1"/>
                 <label class="form-check-label radio-button-label" for="user-type-super-admin">
                   <span class="radio-button-circle"></span>
-                  Super Admin (Will be able to access and rotate API Keys, Mint Tokens, And Invite Team Members)
+                  Super Admin (Can also rotate API Keys, Mint Tokens, and Invite Team Members)
                 </label>
               </div>
               <div class="invalid-feedback" data-forid="is_super_admin">&nbsp;</div>

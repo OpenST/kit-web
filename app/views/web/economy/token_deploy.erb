@@ -20,7 +20,7 @@
 
   <div class="token-deploy-in-progress token-deploy-content mx-auto">
     <h3 class="mt-6">Your Brand Token is being setup</h3>
-    <p class="font-weight-light mb-5 mt-3">OST is deploying the smart contracts needed to launch your economy. This process will require several minutes.</p>
+    <p class="font-weight-light mb-5 mt-3">OST Platform is deploying the smart contracts needed to launch your economy. This process will require several minutes.</p>
     <div class="token-deploy-progress-wrapper  mx-auto">
       <%= render :partial => "shared/web/common/progress_bar" %>
     </div>
@@ -40,7 +40,7 @@
           </switch>
         </svg>
 
-        <p class="mb-0 ml-2">You can now mint your first brand tokens</p>
+        <p class="mb-0 ml-2">You can now mint your first Brand Tokens</p>
       </div>
       <div class="col-4 my-auto text-right">
         <a class="btn btn-primary d-inline" href="<%=mint_token_url %>">
@@ -90,7 +90,7 @@
         Invite team members to the OST Platform
       </p>
       <div class="col-4">
-        <a class="btn btn-secondary" href="<%= invite_team_url %>">
+        <a class="btn btn-secondary" href="<%= invite_team_url %>" title="Invite Team">
           Invite Team
         </a>
       </div>
@@ -108,7 +108,7 @@
         Start integrating with your app
       </p>
       <div class="col-4">
-        <a class="btn btn-secondary"  href="<%=developer_url %>">
+        <a class="btn btn-secondary"  href="<%=developer_url %>" title="Get API Keys">
           Get API Keys
         </a>
 
@@ -126,12 +126,12 @@
 
       </div>
       <p class="col-7 text-left my-auto">
-        Check out the developer documentation
+        Review the developer documentation
       </p>
       <div class="col-4">
-        <button class="btn btn-secondary">
-          Read Docs
-        </button>
+        <a class="btn btn-secondary" href="<%= GlobalConstant::CompanyOtherProductUrls.dev_ost_root_url %>" title="OST GUIDES">
+          Ost Guides
+        </a>
 
       </div>
 

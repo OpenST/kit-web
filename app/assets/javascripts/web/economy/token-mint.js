@@ -326,6 +326,7 @@
       oThis.mintDonuteChart = new GoogleCharts();
       oThis.initSupplyPieChart( ostToStake );
       $('.total-ost-available').text( PriceOracle.toPrecessionOst( ost ) );  //No mocker so set via precession
+      $('.ost-mocker-value.total-ost-available').text( oThis.ostAvailableOnBtChange( btToMint )) ;
       oThis.updateSlider( ost );
       oThis.showSection(  oThis.jStakeMintProcess ) ;
     },

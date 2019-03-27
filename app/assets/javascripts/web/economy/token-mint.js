@@ -327,7 +327,8 @@
       oThis.initSupplyPieChart( ostToStake );
       $('.total-ost-available').text( PriceOracle.toPrecessionOst( ost ) );  //No mocker so set via precession
       var ostBalance = oThis.ostAvailableOnBtChange( btToMint ) ;
-      $('.ost-mocker-value.total-ost-available').text( ostBalance  ) ;
+      ostBalance = ostBalance && ostBalance.toString();
+      $('.ost-mocker-value.total-ost-available').text( PriceOracle.toPrecessionOst( ostBalance ) ) ;
       oThis.updateSlider( ost );
       oThis.showSection(  oThis.jStakeMintProcess ) ;
     },

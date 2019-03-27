@@ -46,15 +46,13 @@
     setTooltipPosition: function (percent_completion) {
       var oThis = this,
           tooltipWidth = oThis.progressBarTooltip.width(),
-          progressBarFullWidth = oThis.progressBarFull.width();
-
+          progressBarFullWidth = oThis.progressBarFull.width(),
+          rounder = ( !percent_completion || percent_completion == 0 ) ? 2 : 5
+      ;
       oThis.progressBarTooltipText.text(percent_completion + "%");
       oThis.progressBarTooltip.css({
-        left: (percent_completion/100)*progressBarFullWidth+'px'
+        left: ((( percent_completion * progressBarFullWidth)/100) - rounder ) + 'px'
       });
-      // oThis.progressBarTooltipArrow.css({
-      //   left: tooltipWidth / 2 - oThis.arrowHalfLength
-      // });
     },
 
     updateProgressBar: function (res) {

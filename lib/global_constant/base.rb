@@ -59,7 +59,7 @@ module GlobalConstant
       end
 
       def is_public_launch_done?
-        false
+        true
       end
 
       def recaptcha

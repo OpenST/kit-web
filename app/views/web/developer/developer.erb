@@ -6,37 +6,37 @@
       {
           "label" => "Account Owner Address:",
           "key_name" => "account_owner_address",
-          "description" => "The Member Reserve address is the initial holder of your minted branded tokens, from which tokens are transferred to different accounts in your economy."
+          "description" => "This address is the owner of the Company Token Holder Contract which holds the minted brand tokens. This address was associated with the account during the initial setup."
       },
       {
           "label" => "Company Token Holder Address:",
           "key_name" => "token_holder_address",
-          "description" => "The Member Reserve address is the initial holder of your minted branded tokens, from which tokens are transferred to different accounts in your economy."
+          "description" => "The Company Token Holder Contract is a Smart Contract holding your Brand Tokens after minting. This contract allows distributing Brand Tokens to different addresses to supporty the economy."
       },
       {
-          "label" => "Utility Branded Token Address:",
+          "label" => "Utility Branded Token Address",
           "key_name" => "utility_branded_token_contract",
-          "description" => "In addition, you will find the Airdrop contract and the Budget Holder addresses for your Branded Token. After the Branded Token and Airdrop contracts are deployed, airdrop tokens are transferred from the Member Reserve Address to the Budget Holder Address."
+          "description" => "The Utility Branded Token (UBT) is a representation of the Branded Token on a utility sidechain."
       },
       {
-          "label" => "Branded Token Address:",
+          "label" => "Branded Token Address",
           "key_name" => "branded_token_contract",
-          "description" => "Your Branded Token's Budget Holder Address will reserve the tokens to be airdropped. The Airdrop contract will manage transactions within your economy."
+          "description" => "This is a contract on the value chain which holds Brand Tokens that are backed by OST at a fixed conversion rate."
       },
       {
-          "label" => "OST⍺ ERC20 contract address:",
+          "label" => "OST-Test ERC20 contract address",
           "key_name" => "erc20_contract_address",
-          "description" => "Below you will find OST⍺ ERC20 contract address on the Ropsten Test Network and your company's Universally Unique Identifier (UUID). Company UUID is required as a parameter in order to execute transactions between the company and users using APIs."
+          "description" => "OST-Test ERC20 token contract address on the value chain."
       },
       {
-          "label" => "Company UUID:",
+          "label" => "Company UUID",
           "key_name" => "company_user_id",
-          "description" => "Your Branded Token's Budget Holder Address will reserve the tokens to be airdropped. The Airdrop contract will manage transactions within your economy."
+          "description" => "Company UUID is a parameter needed to execute transactions between the company and users when using API calls."
       },
       {
-          "label" => "Gateway UX Composer address:",
+          "label" => "Gateway UX Composer address",
           "key_name" => "gateway_composer_address",
-          "description" => "Below you will find OST⍺ ERC20 contract address on the Ropsten Test Network and your company's Universally Unique Identifier (UUID). Company UUID is required as a parameter in order to execute transactions between the company and users using APIs."
+          "description" => "This contract is deployed on the value chain. It optimizes the transactions required to perform the stake and mint process."
       }
   ]
 %>
@@ -51,7 +51,8 @@
       <p>
         In order to use OST Platform APIs you will have to authenticate your account by including an API signature in every request. Signatures validate the authenticity of the account which interacts with OST Platform and ensures that the message sent has not been tampered.
         <br/>
-        Please make sure to never share your API Secret Key and to keep it private and secure. You can generate a new set of API Keys, with the previous set automatically to expire in 24 hours. You can also manually delete old keys.
+        <br/>
+        Please make sure to never share your API Secret Key and to keep it private and secure. You can always generate a new set of API keys. Once new keys are generated, you can choose to delete the old keys immediately or allow them to expire in 24 hours.
       </p>
       <button type="button" class="btn btn-primary mt-3 show-keys-btn" data-submiting="Fetching..." >Show Keys</button>
       <button type="button" class="btn btn-primary mt-3 generate-key-btn" data-submiting="Creating...">Create New Keys</button>
@@ -60,13 +61,15 @@
     </div>
 
     <div>
-      <h4 class="mb-3">Developer Docs</h4>
+      <h4 class="mb-3">Developer Resources</h4>
       <p>
-        OST Platform gives you all the tools to run your blockchain-powered brand economy. You can find quick start guides, platform overview, UX guides and more.
+        The OST Platform provides:
+        <span class="d-block my-2">* APIs, SDKs and Development tools for easy integration and deployment.</span>
+        <span class="d-block mb-2">* Wallet solution to facilitate end-user adoption.</span>
+        We've designed and created guides to help you get familiar with the the platform, giving you a quick and clean approach for getting up and running.
       </p>
       <div class="text-left">
-        <!--        TODO: Add links to icons-->
-        <a class="d-inline" href="https://dev.stagingost.com/kit/docs/getting_started/introduction/" target="_blank">
+        <a class="d-inline" href="<%= GlobalConstant::CompanyOtherProductUrls.dev_ost_root_url %>platform/docs/getting_started/introduction/" target="_blank" title="OST Platform - Guides">
           <svg class="icon ios-icon" style="height: 60px;width: 150px;">
             <switch>
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#guides-icon"></use>
@@ -81,21 +84,20 @@
     <div class=" mt-5">
       <h4 class="mb-3">Wallet SDKs</h4>
       <p>
-        The Wallet SDK makes it easy to integrate full wallet experience inside your app.
+        The Wallet SDK makes it easy to integrate full wallet experience inside your app. It consists of authentication, private key management and recovery modules.
       </p>
       <p>
-        The quick start guides below will help you get familiar with requirements and process of integrating the Wallet SDK into your app. If you're looking for more detailed information about any class in the SDKs, feel free to explore our SDK Github Repository. Links to the repositories can be found in the quick start guides.
+        The quick start guides below will help you get familiar with requirements and process of integrating the Wallet SDK into your app.
       </p>
       <div class="text-left">
-        <!--        TODO: Add links to icons-->
-        <a class="d-inline" href="#">
+        <a class="d-inline" href="<%= GlobalConstant::CompanyOtherProductUrls.dev_ost_root_url %>platform/docs/wallet_sdk_setup/iOS/" target="_blank" title="OST Platform - iOS Wallet SDK">
           <svg class="icon ios-icon" style="height: 60px;width: 150px;">
             <switch>
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ios-icon"></use>
             </switch>
           </svg>
         </a>
-        <a class="d-inline" href="#">
+        <a class="d-inline" href="<%= GlobalConstant::CompanyOtherProductUrls.dev_ost_root_url %>platform/docs/wallet_sdk_setup/android/" target="_blank" title="OST Platform - Android Wallet SDK">
           <svg class="icon android-icon" style="height: 60px;width: 150px;">
             <switch>
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#android-icon"></use>
@@ -111,20 +113,20 @@
         Server Side SDKs
       </h4>
       <p>
-        The OST SDK makes it easy to build an excellent tokenization experience in your application. It provides powerful services to use out-of-the-box to create and run your token economy.
+        A number of platform-specific SDKs are available to integrate OST APIs into your apps. Server Side SDKs provide a safe and secure way to quickly implement token economy within your app.
       </p>
       <p>
-        The Quick start guide links below will take you all the way from integrating our SDK to creating users, airdropping and transferring tokens among these users. If you're looking for more detailed information about any class in the SDKs, feel free to explore our SDK Github Repository. Links to the github repository of respective SDK are provided in the quick start guides.
+        The quick start guides below will help you get quickly started with integrating the Server side SDK into your app.
       </p>
       <div class="text-left">
-        <a class="d-inline" href="#">
-          <svg class="icon developer_ruby_logo" style="height: 60px;width: 150px;">
-            <switch>
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#developer_ruby_logo"></use>
-            </switch>
-          </svg>
-        </a>
-        <a class="d-inline" href="#">
+<!--        <a class="d-inline" href="#">-->
+<!--          <svg class="icon developer_ruby_logo" style="height: 60px;width: 150px;">-->
+<!--            <switch>-->
+<!--              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#developer_ruby_logo"></use>-->
+<!--            </switch>-->
+<!--          </svg>-->
+<!--        </a>-->
+        <a class="d-inline" href="<%= GlobalConstant::CompanyOtherProductUrls.dev_ost_root_url %>platform/docs/server_sdk_setup/php/" target="_blank" title="OST Platform - Server Side SDK">
           <svg class="icon developer_php_logo" style="height: 60px;width: 150px;">
             <switch>
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#developer_php_logo"></use>
@@ -135,10 +137,12 @@
     </div>
     <div class="mt-5">
       <h4>
-        Your Brand Economy Addresses on Utility Chain
+        Your Brand Economy Addresses
       </h4>
       <p>
-        Below you will find your Company Token Holder Address, Branded Token Addresses and OST⍺ ERC20 contract address.
+        The OST Platform is built on OpenST Protocol for deploying Brand Token economies. The OpenST Protocol is a framework consisting of Smart Contracts.
+        <br/>
+        This section lists out some of the addresses used in the OpenST Protocol framework that will be useful to run and monitor your economy.
       </p>
       <% developer_addresses_config.each do |address| %>
         <% if developer_page_addresses && developer_page_addresses.data[address['key_name']] %>

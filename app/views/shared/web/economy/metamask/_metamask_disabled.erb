@@ -6,7 +6,7 @@
 <div class="row ost__planner">
   <div class="col-12 col-md-6 ml-auto mr-auto">
     <div class="text-center">
-      <p class="font-weight-light mb-5 text-muted">Simply open MetaMask and follow the instructions to unlock and enable it and click the button below once you are done.</p>
+      <p class="font-weight-light mb-5 text-muted">Please open the MetaMask extension and follow the instructions to unlock your wallet.</p>
       <div class="mb-5">
         <button id="metamask_unlocked" type="button" class="btn btn-gold" onclick="javascript:window.location.reload()">I have enabled metamask</button>
       </div>
@@ -24,16 +24,16 @@
       <%=
         faqs_data = [
           {
-            title: 'Why do I need to use Chrome and install MetaMask?',
-            url: 'https://help.ost.com/support/solutions/articles/35000059263-why-do-i-need-to-install-metamask-'
+            title: 'What is an Account Owner address?',
+            url: 'https://help.ost.com/solution/articles/35000117643-what-is-an-account-owner-address-'
           },
           {
-            title: 'How do I unlock MetaMask?',
-            url: 'https://help.ost.com/support/solutions/articles/35000059264-how-do-i-unlock-metamask-'
+            title: 'Why do I need to install MetaMask?',
+            url: 'https://help.ost.com/support/solutions/articles/35000117644-why-do-i-need-to-install-metamask-'
           },
           {
-            title: 'Why can I use only one MetaMask account with OST KIT?',
-            url: 'https://help.ost.com/support/solutions/articles/35000059265-why-can-i-use-only-one-metamask-account-with-ost-kit%E2%8D%BA-'
+            title: 'Would I need one MetaMask account on both environments?',
+            url: 'https://help.ost.com/support/solutions/articles/35000117644-why-do-i-need-to-install-metamask-'
           }
         ]
         render :partial => "shared/web/common/faqs",

@@ -39,7 +39,9 @@ class Web::BaseController < ApplicationController
   #
   def basic_auth
 
-    return if Rails.env.development? || Rails.env.production?
+    return if Rails.env.development?
+
+    return if Rails.env.production? && GlobalConstant::Base.is_public_launch_done?
 
     users = {
       GlobalConstant::BasicAuth.username => GlobalConstant::BasicAuth.password
@@ -65,7 +67,7 @@ class Web::BaseController < ApplicationController
     return unless request.get?
     response.headers['Pragma'] = 'no-cache'
     response.headers['Cache-Control'] = 'no-store, no-cache, max-age=0, must-revalidate, post-check=0, pre-check=0'
-    response.headers['Vary'] = '*'
+    #response.headers['Vary'] = '*'
     response.headers['Expires'] = '-1'
     response.headers['Last-Modified'] = "#{Time.now.gmtime.strftime("%a, %d %b %Y %T GMT")}"
   end

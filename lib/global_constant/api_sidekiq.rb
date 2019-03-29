@@ -6,7 +6,7 @@ module GlobalConstant
     class << self
 
       def namespace
-        "ca_api_sidekiq:#{Rails.env}"
+        "ka_api_sidekiq:#{Rails.env}"
       end
 
       def redis_endpoint

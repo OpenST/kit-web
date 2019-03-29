@@ -25,7 +25,7 @@
     jAllowStakeAndMintMsgWrapper    :   $('.jAllowStakeAndMintWrapper'),
     jAutorizeStakeAndMintMsgWrapper :   $('.jAutorizeStakeAndMintWrapper'),
     jSignClientErrorBtnWrap         :   $('.jSignClientErrorBtnWrap'),
-    jStakeAndMintSignServerError    :   $('.jStakeAndMintSignServerError'),
+    jStakeAndMintSignServerError    :   $('#jStakeAndMintSignServerError'),
     jGoBackBtn                      :   $('.jGoBackBtn'),
     jClientRetryBtn                 :   $('.jClientRetryBtn'),
     jEtherText                      :   $('.ether-text'),
@@ -69,7 +69,7 @@
   
     //General error msg start
     genericErrorMessage             :   'Something went wrong!',
-    getOstError                     :   "Not able to grant OST right now, try again later.",
+    getOstError                     :   "Not able to grant OST-Test right now. Please contact support.",
     stakeAndMintError               :   "Looks like there was an issue in the minting process, Please connect with customer support with the 2 transaction hash.",
     //General error msg end
 
@@ -213,6 +213,12 @@
           if(oThis.isSuperAdmin) {
             oThis.validateAccount();
           }
+        },
+  
+        onSendAsync : function ( options, err, result ) {
+          if ( !err && !result ) {
+            ost.coverElements.show("#process_failure_error_cover");
+          }
         }
       });
     },
@@ -320,6 +326,9 @@
       oThis.mintDonuteChart = new GoogleCharts();
       oThis.initSupplyPieChart( ostToStake );
       $('.total-ost-available').text( PriceOracle.toPrecessionOst( ost ) );  //No mocker so set via precession
+      var ostBalance = oThis.ostAvailableOnBtChange( btToMint ) ;
+      ostBalance = ostBalance && ostBalance.toString();
+      $('.ost-mocker-value.total-ost-available').text( PriceOracle.toPrecessionOst( ostBalance ) ) ;
       oThis.updateSlider( ost );
       oThis.showSection(  oThis.jStakeMintProcess ) ;
     },
@@ -568,7 +577,7 @@
         data: [
           ['Type', 'Tokens'],
           ['OSTStaked', ostToStake],
-          ['OSTAvailable', ostAvailable],
+          ['OSTAvailable', ostAvailable]
         ],
         selector: '#ostSupplyInAccountPie',
         type: 'PieChart',

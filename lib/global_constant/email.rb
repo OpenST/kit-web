@@ -22,7 +22,7 @@ module GlobalConstant
       end
 
       def subject_prefix
-        "[OST-Kit-Web-#{Rails.env}-#{GlobalConstant::Base.sub_environment}] :: "
+        "[Platform Web] :: #{Rails.env} - #{GlobalConstant::Base.sub_environment} :: "
       end
 
     end

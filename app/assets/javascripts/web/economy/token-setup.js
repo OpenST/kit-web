@@ -61,12 +61,14 @@
           var jEL = $('.j-bt-to-fiat-val'),
               jInputEl = $('#'+oThis.ostToBtId),
               val = jInputEl.val() ,
-              fiatVal = PriceOracle.btToFiatPrecession( 1 )
+              btFiatVal = PriceOracle.btToFiatPrecession( 1 ) ,
+              ostFiatVal = PriceOracle.ostToFiat( 1 )
           ;
+          ostFiatVal = PriceOracle.toPrecessionFiat( ostFiatVal );
           jEL.data("ost-mock-element" , "#"+ oThis.ostToBtId );
           jEL.ostMocker();
-          jEL.text( fiatVal );
-          $('.j-fiat-value').text( fiatVal );
+          jEL.text( btFiatVal );
+          $('.j-fiat-value').text( ostFiatVal );
         },
 
         setupMetamask: function(){
@@ -106,6 +108,12 @@
                   
                     oThis.initConfirmFlow();
                     ost.coverElements.show("#metamaskConfirmAccount");
+                },
+              
+                onSendAsync : function ( options, err, result ) {
+                  if ( !err && !result ) {
+                    ost.coverElements.show("#process_failure_error_cover");
+                  }
                 }
 
             });

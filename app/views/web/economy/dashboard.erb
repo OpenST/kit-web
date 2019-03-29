@@ -1,3 +1,32 @@
+<%
+  dashboard_links = [
+      {
+        svg: "#invite-team-icon",
+        desc: "Invite team members to the OST Platform",
+        btn_txt: "invite team".upcase,
+        href: GlobalConstant::RoutesMap.getRoutes()[:team] + "?" + get_go_back_url_query_param,
+        target: ""
+      },
+      {
+        svg: "#get-api-keys-icon",
+        desc: "Start integrating with your app",
+        btn_txt: "get api keys".upcase,
+        href: GlobalConstant::RoutesMap.getRoutes()[:developer] + "?" + get_go_back_url_query_param,
+        target: ""
+      },
+      {
+        svg: "#ost-guides-icon",
+        desc: "Review the developer documentation",
+        btn_txt: "ost guides".upcase,
+        href: GlobalConstant::CompanyOtherProductUrls.dev_ost_root_url + 'platform/docs/getting_started/introduction/',
+        target: "_blank"
+      }
+  ]
+
+  is_whitelisted_user = @presenter_obj.sub_env_payloads.is_mainnet_whitelisted?
+  is_mainnet_whitelisting_requested = @presenter_obj.sub_env_payloads.is_mainnet_whitelisting_requested?
+%>
+
 <div class="container my-6 dashboard">
   <div class="row mb-5">
     <div class="col-12">
@@ -5,14 +34,14 @@
         <div class="col-4 text-center">
           <div class="stats-col p-3">
             <h6 class="title">total supply</h6>
-            <div class="gold"><%= @presenter_obj.client_token_symbol%>&nbsp;<%= @presenter_obj.dashboard_details.total_supply %></div>
+            <div class="gold text-uppercase"><%= @presenter_obj.client_token_symbol%>&nbsp;<%= @presenter_obj.dashboard_details.total_supply %></div>
             <div class="gold">$<%= @presenter_obj.dashboard_details.total_supply_dollar %></div>
           </div>
         </div>
         <div class="col-4 text-center">
           <div class="stats-col p-3">
             <h6 class="title">circulating supply</h6>
-            <div class="gold"><%= @presenter_obj.client_token_symbol%>&nbsp;<%= @presenter_obj.dashboard_details.circulating_supply %></div>
+            <div class="gold text-uppercase"><%= @presenter_obj.client_token_symbol%>&nbsp;<%= @presenter_obj.dashboard_details.circulating_supply %></div>
             <div class="gold">$<%= @presenter_obj.dashboard_details.circulating_supply_dollar %></div>
           </div>
         </div>
@@ -44,6 +73,19 @@
 
   <div class="row transaction_by_type my-6">
     <div class="col-12">
+      <div class="card card-planner">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="mb-4">Welcome to OST Platform</h3>
+              <ul class="list-unstyled m-0">
+                <% if !is_whitelisted_user %>
+                  <li class="list-items">
+                    <svg style="width: 20px;height: 20px;">
+                      <switch>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#complete-kyc-icon"></use>
+                      </switch>
+                    </svg>
       <div class="d-flex graph-header">
         <div class="mr-auto p-2">No. of Transactions By Type</div>
         <div class="p-2 interval active" data-interval="day">1 D</div>
@@ -73,6 +115,29 @@
           <div class="col-9 graph-container pr-0" id="lineChart"></div>
           <div class="col-3 graph-container pie-chart-container">
 
+                    <span style="display: <%= is_mainnet_whitelisting_requested ? "block" : "none" %>"
+                          class="display-3 ml-2 whitelisting_requested w-100">Request for Production environment access has been sent</span>
+                    <div style="display: <%= !is_mainnet_whitelisting_requested ? "flex" : "none" %>"  class="w-100 align-items-center">
+                      <span class="display-3 ml-2 whitelisting_not_requested">Production environment request</span>
+                      <button class="btn btn-secondary ml-auto" id="dashboard-complete-kyc" title="SEND Request">send request</button>
+                    </div>
+                  </li>
+                <% end %>
+                <% dashboard_links.each_with_index do|data, index| %>
+                  <li class="list-items">
+                    <svg style="width: 20px;height: 20px;">
+                      <switch>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<%= data[:svg] %>"></use>
+                      </switch>
+                    </svg>
+                    <span class="display-3 ml-2"><%= data[:desc] %></span>
+                    <a href="<%= data[:href] %>" class="btn btn-secondary ml-auto" title="<%= data[:btn_txt] %>" target="<%= data[:target] %>"><%= data[:btn_txt] %></a>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="col-5">
+              <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-dashboard-hero-illustration@2x.png" class="img-fluid" alt="OST Platform">
             <div class="mx-auto">
               <div class="text-center my-2 typeChartSubHeading">
                 Volume of Transactions

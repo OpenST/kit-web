@@ -3,69 +3,69 @@ en:
   web/home:
     index:
       :meta:
-        :title: 'OST KIT | The Complete Blockchain Toolkit for Business'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | The Future of Brand Loyalty'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'index, follow'
         :og:
-          :title: 'OST KIT | The Complete Blockchain Toolkit for Business'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | The Future of Brand Loyalty'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | The Complete Blockchain Toolkit for Business'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | The Future of Brand Loyalty'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 1
         :specific_js_required: 1
 
     unsupported_client:
       :meta:
-        :title: 'OST KIT | Chrome Desktop Browser Required'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Chrome Desktop Browser Required'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, nofollow'
         :og:
-          :title: 'OST KIT | Chrome Desktop Browser Required'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Chrome Desktop Browser Required'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Chrome Desktop Browser Required'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Chrome Desktop Browser Required'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 0
         :specific_js_required: 0
 
     service_unavailable:
       :meta:
-        :title: 'OST KIT | Service Currently Unavailable'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Service Currently Unavailable'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, nofollow'
         :og:
-          :title: 'OST KIT | Service Currently Unavailable'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Service Currently Unavailable'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Service Currently Unavailable'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Service Currently Unavailable'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 1
         :specific_js_required: 0
@@ -73,23 +73,23 @@ en:
   web/user_setting:
     team:
       :meta:
-        :title: 'OST KIT | Team'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Team'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, nofollow'
         :og:
-          :title: 'OST KIT | Team'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Team'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Team'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Team'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 1
         :specific_js_required: 1
@@ -97,207 +97,207 @@ en:
   web/user:
     login:
       :meta:
-        :title: 'OST KIT | Login'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Login'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, nofollow'
         :og:
-          :title: 'OST KIT | Login'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Login'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Login'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Login'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 1
         :specific_js_required: 1
 
     logout:
       :meta:
-        :title: 'OST KIT | Logout'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Logout'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, nofollow'
         :og:
-          :title: 'OST KIT | Logout'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Logout'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Logout'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Logout'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 0
         :specific_js_required: 0
 
     reset_password:
       :meta:
-        :title: 'OST KIT | Reset Password'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Reset Password'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, nofollow'
         :og:
-          :title: 'OST KIT | Reset Password'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Reset Password'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Reset Password'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Reset Password'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 1
         :specific_js_required: 1
 
     update_password:
       :meta:
-        :title: 'OST KIT | Update Password'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Update Password'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, noindex'
         :og:
-          :title: 'OST KIT | Update Password'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Update Password'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Update Password'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Update Password'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 1
         :specific_js_required: 1
 
     verify_email:
       :meta:
-        :title: 'OST KIT | Verify Email'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Verify Email'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, noindex'
         :og:
-          :title: 'OST KIT | Verify Email'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Verify Email'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Verify Email'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Verify Email'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 0
         :specific_js_required: 0
 
     sign_up:
       :meta:
-        :title: 'OST KIT | Sign Up'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Sign Up'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, nofollow'
         :og:
-          :title: 'OST KIT | Sign Up'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Sign Up'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Sign Up'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Sign Up'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 1
         :specific_js_required: 1
 
     mfa:
       :meta:
-        :title: 'OST KIT | Sign Up'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Two Factor Authentication'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, nofollow'
         :og:
-          :title: 'OST KIT | Sign Up'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Two Factor Authentication'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Sign Up'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Two Factor Authentication'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 1
-        :specific_js_required: 0
+        :specific_js_required: 1
 
     admin_invite:
       :meta:
-        :title: 'OST KIT | Sign Up'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Invite Team Member'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, nofollow'
         :og:
-          :title: 'OST KIT | Sign Up'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Invite Team Member'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Sign Up'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Invite Team Member'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 0
         :specific_js_required: 1
 
     invalid_token:
       :meta:
-        :title: 'OST KIT | Invalid Token'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Invalid Token'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, nofollow'
         :og:
-          :title: 'OST KIT | Sign Up'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Invalid Token'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Sign Up'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Invalid Token'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 0
         :specific_js_required: 0
@@ -305,139 +305,139 @@ en:
   web/economy:
     dashboard:
       :meta:
-        :title: 'OST KIT | Dashboard'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Dashboard'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, nofollow'
         :og:
-          :title: 'OST KIT | Dashboard'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Dashboard'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Dashboard'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Dashboard'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 1
         :specific_js_required: 1
 
     token_setup:
       :meta:
-        :title: 'OST KIT | Economy Planner - Step One'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Brand Token Setup'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, nofollow'
         :og:
-          :title: 'OST KIT | Economy Planner - Step One'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Brand Token Setup'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Economy Planner - Step One'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Brand Token Setup'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 1
         :specific_js_required: 1
 
     token_deploy:
       :meta:
-        :title: 'OST KIT | Economy Planner - Step One'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Brand Token Deployment'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, nofollow'
         :og:
-          :title: 'OST KIT | Economy Planner - Step One'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Brand Token Deployment'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Economy Planner - Step One'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Brand Token Deployment'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 1
         :specific_js_required: 1
 
     token_mint:
       :meta:
-        :title: 'OST KIT | Economy Planner - Step One'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Mint Brand Tokens'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, nofollow'
         :og:
-          :title: 'OST KIT | Economy Planner - Step One'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Mint Brand Tokens'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Economy Planner - Step One'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Mint Brand Tokens'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 1
         :specific_js_required: 1
 
     token_mint_progress:
       :meta:
-        :title: 'OST KIT | Stake and Mint OST Alpha'
-        :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+        :title: 'OST Platform | Brand Tokens Minting'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
         :canonical: '%{canonical}'
         :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
         :name: 'OST'
         :robots: 'noindex, nofollow'
         :og:
-          :title: 'OST KIT | Stake and Mint OST Alpha'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
+          :title: 'OST Platform | Brand Tokens Minting'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
           :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
           :url: '%{og_url}'
         :twitter:
           :card: 'summary_large_image'
-          :title: 'OST KIT | Stake and Mint OST Alpha'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
+          :title: 'OST Platform | Brand Tokens Minting'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 1
         :specific_js_required: 1
 
   web/developer:
-      developer:
-        :meta:
-          :title: 'OST KIT | Developer'
-          :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-          :canonical: '%{canonical}'
-          :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
-          :name: 'OST'
-          :robots: 'noindex, nofollow'
-          :og:
-            :title: 'OST KIT | Developer'
-            :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-            :type: 'website'
-            :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
-            :url: '%{og_url}'
-          :twitter:
-            :card: 'summary_large_image'
-            :title: 'OST KIT | Developer'
-            :description: 'OST KIT gives you all the tools you need to run your blockchain-powered economy on scalable OpenST sidechains, without requiring in-house blockchain developers.'
-            :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-og-image-1.jpg'
-        :assets:
-          :specific_css_required: 1
-          :specific_js_required: 1
+    developer:
+      :meta:
+        :title: 'OST Platform | Developer'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+        :canonical: '%{canonical}'
+        :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
+        :name: 'OST'
+        :robots: 'noindex, nofollow'
+        :og:
+          :title: 'OST Platform | Developer'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :type: 'website'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
+          :url: '%{og_url}'
+        :twitter:
+          :card: 'summary_large_image'
+          :title: 'OST Platform | Developer'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
+      :assets:
+        :specific_css_required: 1
+        :specific_js_required: 1

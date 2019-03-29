@@ -1,141 +1,159 @@
 <section class="container-fluid side-by-side">
-  <div class="copy d-sm-none text-center pt-5">
-    <h2>Design Your Token</h2>
-    <p>Name your token (e.g. 'App Coin' or 'Happy Token" ) and customize the ticker symbol, color, and icon.</p>
-  </div>
-  <div class="row align-items-center py-4 side-by-side">
-    <div class="col-12 col-md-6">
-      <div class="copy w-50 mx-auto d-none d-sm-block">
-        <h2>Design Your Token</h2>
-        <p>Your brand, your way. Establish your brand online with a custom token names and design. With instant access to hundreds of the best looking token icons and designs get complete control over your token look and feel.</p>
-      </div>
-    </div>
-    <div class="col-12 col-md-6 p-md-0">
-      <div class="image">
-        <img class="img-fluid responsively-lazy"
-             src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-token-design-image.png"
-             data-srcset="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-token-design-image.png"
-             srcset="<%= GlobalConstant::Base.placeholder_image_src %>"
-             alt="OST - Design Your Token"
-             title=""/>
-      </div>
-    </div>
-  </div>
-  <div class="row align-items-center py-4 token-planner">
-    <div class="col-12 col-md-4 mx-auto order-sm-12">
-      <div class="copy">
-        <h2 class="text-center text-sm-left">Token Economy Planner</h2>
-        <p class="mb-4 text-center text-sm-left">A flexible token planning interface that helps you plan your token economy by answering just a couple questions. Designed to bring clarity to your economy goals as well as to micro-planning.</p>
-      </div>
-      <div class="media mb-3">
-        <img class="mr-3 responsively-lazy"
-             src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ostkit-priceoracle@2x.png"
-             data-srcset="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ostkit-priceoracle@2x.png"
-             srcset="<%= GlobalConstant::Base.placeholder_image_src %>"
-             alt="Price Oracle"
-             style="width: 100px;" />
 
-        <div class="media-body">
-          <h6 class="mt-0">OST Price Oracle</h6>
-          <span class="lead-2">Enables you to set transaction prices in fiat and automatically convert them to the Branded Token amount.</span>
-        </div>
-      </div>
-      <div class="media">
-        <img class="mr-3 responsively-lazy"
-             src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ostkit-pricer@2x.png"
-             data-srcset="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ostkit-pricer@2x.png"
-             srcset="<%= GlobalConstant::Base.placeholder_image_src %>"
-             alt="Pricer" style="width: 100px;" />
-        <div class="media-body">
-          <h6 class="mt-0">OST Pricer</h6>
-          <p class="lead-2">Enables you to collect commmissions & revenue for certain transaction types.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-md-6 p-md-0 order-sm-1">
-      <div class="image">
-        <img class="img-fluid responsively-lazy"
-             src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-economy-planner-image-v1.png"
-             data-srcset="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-economy-planner-image-v1.png"
-             srcset="<%= GlobalConstant::Base.placeholder_image_src %>"
-             alt="OST - Economy Planner"/>
-      </div>
-    </div>
+  <div class="row">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="svg-edge">
+      <polygon points="0,100 100,0 100,100" fill="#35445b" stroke="#35445b"></polygon>
+    </svg>
   </div>
-  <div class="row align-items-center py-4">
-    <div class="col-12 col-md-3 mx-auto">
+
+  <div class="row align-items-center py-5 midnight-blue">
+    <div class="col-12 col-md-6 col-lg-5 col-xl-4 mx-auto">
       <div class="copy">
-        <h2 class="text-center text-sm-left">Flexible Transaction Types</h2>
-        <p class="mb-4 text-center text-sm-left">Setup various types of transactions such as peer-to-peer payments, company-to-user rewards, and user-to-company purchases.</p>
+        <h5 class="mb-3">Design Your Brand Token</h5>
+        <p>OST Platform provides easy to use management dashboards for token economy setup. Mint your tokens first in Sandbox mode to quickly explore, learn, and test.</p>
+        <a href="<%= GlobalConstant::CompanyOtherProductUrls.kit_root_url %>sign-up" class="btn btn-primary mt-3" title="Get Started">Get Started</a>
       </div>
-      <ul class="list-unstyled">
-        <li class="clearfix">
-          <span class="float-left">Airdrop Tokens</span>
-          <span class="float-right">
-            <svg class="svg icon-checkmark">
-              <switch>
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-checkmark-gold"></use>
-              </switch>
-            </svg>
-          </span>
-        </li>
-        <li class="clearfix">
-          <span class="float-left">User-to-User</span>
-          <span class="float-right">
-            <svg class="svg icon-checkmark">
-              <switch>
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-checkmark-gold"></use>
-              </switch>
-            </svg>
-          </span>
-        </li>
-        <li class="clearfix">
-          <span class="float-left">Company-to-User</span>
-          <span class="float-right">
-            <svg class="svg icon-checkmark">
-              <switch>
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-checkmark-gold"></use>
-              </switch>
-            </svg>
-          </span>
-        </li>
-        <li class="clearfix">
-          <span class="float-left">User-to-Company</span>
-          <span class="float-right">
-            <svg class="svg icon-checkmark">
-              <switch>
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-checkmark-gold"></use>
-              </switch>
-            </svg>
-          </span>
-        </li>
-        <li class="clearfix">
-          <span class="float-left">Create New Types using our API</span>
-          <span class="float-right">
-            <svg class="svg icon-checkmark">
-              <switch>
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-checkmark-gold"></use>
-              </switch>
-            </svg>
-          </span>
-        </li>
-      </ul>
     </div>
-    <div class="col-12 col-md-6 p-md-0">
-      <div class="image">
-        <img class="img-fluid responsively-lazy"
-             src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-transaction-types-image-v1.png"
-             data-srcset="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-transaction-types-image-v1.png"
-             srcset="<%= GlobalConstant::Base.placeholder_image_src %>"
-             alt="OST - Transaction Types" title=""/>
-      </div>
+    <div class="col-12 col-md-6 pr-0 mt-5 mt-md-0">
+      <img class="img-fluid responsively-lazy"
+           src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/home-page/ost-platform-hp-token-setup-4@2x.png"
+           data-srcset="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/home-page/ost-platform-hp-token-setup-4@2x.png"
+           srcset="<%= GlobalConstant::Base.placeholder_image_src %>"
+           alt="OST - Design Your Brand Token"
+         />
     </div>
   </div>
 
-  <div class="row my-4">
-    <div class="col-12 mx-auto text-center">
-      <a href="<%= GlobalConstant::CompanyOtherProductUrls.kit_root_url %>login" class="btn btn-primary" title="Explore OST KIT⍺">Explore OST KIT⍺</a>
+  <div class="row align-items-center py-5">
+
+    <div class="col-12 col-md-6 col-lg-5 col-xl-4 mx-auto order-md-2">
+      <div class="copy mr-auto">
+        <h5 class="mb-3">Integrate Easily into Any App</h5>
+        <p class="mb-0">Use our robust RESTful APIs and SDKs to integrate your Brand Token into your applications with ease while observing the highest security standards. OST Platform makes it simple to test and deploy your brand currency without requiring in-house blockchain developers.</p>
+      </div>
     </div>
+
+    <div class="col-12 col-md-6 order-md-1 pl-0 mt-5 mt-md-0">
+      <img class="img-fluid responsively-lazy"
+         src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/home-page/ost-platform-hp-integrate-easily-1@2x.png"
+         data-srcset="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/home-page/ost-platform-hp-integrate-easily-1@2x.png"
+         srcset="<%= GlobalConstant::Base.placeholder_image_src %>"
+         alt="OST - Integrate Easily into Any App"
+       />
+    </div>
+
+  </div>
+
+</section>
+
+<section class="container container-managedash-elements">
+  <div class="row container-powered-containers">
+    <div class="col col-lg-11 mx-md-auto">
+      <div class="row">
+        <div class="col-sm-12 col-md-4 d-flex my-3 my-md-5">
+          <div class=" rounded p-4 d-flex flex-column">
+            <div style="flex: 1 1 auto">
+              <div class="align-items-center d-flex">
+                <svg width="28" height="28">
+                  <switch>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#platform-hp-docs"></use>
+                  </switch>
+                </svg>
+                <h5 class="d-inline-block ml-1 mb-0">DOCs</h5>
+              </div>
+              <p class="my-2">Follow our Developer Guides and documentation to learn best practices for Brand Token integration and security.</p>
+            </div>
+            <div>
+              <a href="<%= GlobalConstant::CompanyOtherProductUrls.dev_ost_root_url %>platform/docs/getting_started/introduction/" class="text-link" target="_blank" title="Read More">Read More</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 d-flex my-3 my-md-5">
+          <div class=" rounded p-4 d-flex flex-column">
+            <div style="flex: 1 1 auto">
+              <div class="align-items-center d-flex">
+                <svg width="28" height="28">
+                  <switch>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#platform-hp-sdk"></use>
+                  </switch>
+                </svg>
+                <h5 class="d-inline-block ml-1 mb-0">SDKs</h5>
+              </div>
+              <p class="my-2">OST Platform includes SDKs for Ruby, JavaScript, PHP, Java, iOS and Android. Use the OST Wallet SDK to add full functionality for your Brand Token into your native apps while adhering to the high security standards.</p>
+            </div>
+            <div>
+              <a href="<%= GlobalConstant::CompanyOtherProductUrls.dev_ost_root_url %>platform/docs/sdk/getting_started/overview/" class="text-link" target="_blank" title="Read More">Read More</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 d-flex my-3 my-md-5">
+          <div class=" rounded p-4 d-flex flex-column">
+            <div style="flex: 1 1 auto">
+              <div class="align-items-center d-flex">
+                <svg width="28" height="28">
+                  <switch>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#platform-hp-apis"></use>
+                  </switch>
+                </svg>
+                <h5 class="d-inline-block ml-1 mb-0">APIs</h5>
+              </div>
+              <p class="my-2">Our RESTful APIs help you easily setup users, transactions, and easily integrate your token economy into your existing apps, without requiring any blockchain coding expertise.</p>
+            </div>
+            <div>
+              <a href="<%= GlobalConstant::CompanyOtherProductUrls.dev_ost_root_url %>platform/docs/api/#introduction" class="text-link" target="_blank" title="Read More">Read More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container-fluid side-by-side">
+
+  <div class="row">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="svg-edge">
+      <polygon points="0,0 100,100 0,100" fill="#438BAD" stroke="#438BAD"></polygon>
+    </svg>
+  </div>
+
+  <div class="row align-items-center py-5 denim-blue">
+    <div class="col-12 col-md-6 col-lg-5 col-xl-4 mx-auto">
+      <div class="copy">
+        <h5 class="mb-3">Analyze & Iterate</h5>
+        <p>OST Platform Analytics provide detailed insights into your brand token economy, enabling you to learn and adjust as you innovate.</p>
+        <a href="<%= GlobalConstant::CompanyOtherProductUrls.kit_root_url %>sign-up" class="btn btn-primary mt-3" title="Try It Now">Try It Now</a>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 pr-0 mt-5 mt-md-0">
+      <img class="img-fluid responsively-lazy"
+           src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/home-page/ost-platform-hp-dashboard-1@2x.png"
+           data-srcset="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/home-page/ost-platform-hp-dashboard-1@2x.png"
+           srcset="<%= GlobalConstant::Base.placeholder_image_src %>"
+           alt="OST - Analyze & Iterate"
+         />
+    </div>
+  </div>
+
+  <div class="row align-items-center py-5">
+
+    <div class="col-12 col-md-6 col-lg-5 col-xl-4 mx-auto order-md-2">
+      <div class="copy mr-auto">
+        <h5 class="mb-3">Connect to the OST Network</h5>
+        <p>The future of brand loyalty is open, transparent, and interconnected. OST Platform enables you to choose from a wide range of places for your users to redeem their tokens. OST also enables you to earn fees on every redemption.</p>
+        <a href="<%= GlobalConstant::CompanyOtherProductUrls.kit_root_url %>sign-up" class="btn btn-primary mt-3" title="Join Ost Network">Join Ost Network</a>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 order-md-1 pl-0 mt-5 mt-md-0">
+      <img class="img-fluid responsively-lazy"
+           src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/home-page/ost-platform-hp-redemptions-2@2x.png"
+           data-srcset="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/home-page/ost-platform-hp-redemptions-2@2x.png"
+           srcset="<%= GlobalConstant::Base.placeholder_image_src %>"
+           alt="OST - Connect to the OST Network"
+        />
+    </div>
+
   </div>
 
 </section>

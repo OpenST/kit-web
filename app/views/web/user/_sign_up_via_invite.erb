@@ -13,8 +13,8 @@
           >
 
 <!--            <h3 class="text-center">Hi, <%#= invited_receiver %> </h3>-->
-            <h3 class="text-center">Welcome to OST Platform</h3>
-            <p class="text-center mb-5 font-weight-light"> <%= invite_sender %> has invited you to join your team on OST Platform.  Please set a password to create your account.</p>
+            <h3 class="text-center">Welcome to OST Platform Sandbox</h3>
+            <p class="text-center mb-5 font-weight-light"> <%= invite_sender %> has invited you to join your team on OST Platform Sandbox.  Please set a password to create your account.</p>
             <div class="form-group mb-2">
               <div class="clearfix">
                 <label class="form-label float-left" for="password">Password</label>
@@ -22,7 +22,7 @@
               </div>
               <div class="input-group">
                 <input type="password" class="form-control form-control-input-group" placeholder="Password"
-                       id="password" name="password" required minlength="8" />
+                       id="password" name="password" title="Password" required minlength="8" />
                 <div class="input-group-append">
                   <span class="input-group-text input-group-inline input-group-eye">
                     <svg class="icon">
@@ -38,8 +38,45 @@
             </div>
             <div class="form-group mb-2">
               <label class="form-label" for="confirm_password">Confirm Password</label>
-              <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required minlength="8" />
+              <input type="password" class="form-control" id="confirm_password" title="Confirm password"
+                     name="confirm_password" placeholder="Confirm Password" required minlength="8" />
               <div class="invalid-feedback" data-forid="password">&nbsp;</div>
+            </div>
+
+            <div class="form-group has-error mb-0" id="tosFormGrp">
+              <div class="form-check p-0">
+                <input id="tos" class="checkbox-custom form-check-input" name="agreed_terms_of_service"
+                       type="checkbox" required
+                       data-msg-required="Please indicate that you have read and agreed to the Terms of Service and Privacy Policy."
+                />
+                <label for="tos" class="checkbox-custom-label form-check-label">
+                  <span class="tos-text">By checking this box, you agree to our
+                    <a href="https://drive.google.com/file/d/1QTZ7_EYpbo5Cr7sLdqkKbuwZu-tmZHzD/view" target="_blank"
+                       class="font-weight-normal">Terms of Service</a>&nbsp;&amp; acknowledge and consent to our
+                    <a href="//ost.com/privacy" target="_blank"
+                       class="font-weight-normal">Privacy Policy</a>.
+                  </span>
+                </label>
+                <div class="invalid-feedback" data-forid="agreed_terms_of_service">&nbsp;</div>
+              </div>
+
+            </div>
+
+            <div class="form-group has-error mb-2" id="marcommFormGrp">
+              <div class="form-check p-0">
+                <input id="marcomm" class="checkbox-custom form-check-input" name="marcomm"
+                       type="checkbox"
+                       data-msg-required="Please indicate that you have read and agreed to the Terms of Service and Privacy Policy."
+                />
+                <label for="marcomm" class="checkbox-custom-label form-check-label">
+                  <span class="tos-text">I agree to OST sending me marketing communications, as described in our
+                    <a href="//ost.com/privacy" target="_blank"
+                       class="font-weight-normal">Privacy Policy</a>.
+                  </span>
+                </label>
+                <div class="invalid-feedback" data-forid="agreed_terms_of_service">&nbsp;</div>
+              </div>
+
             </div>
 
 

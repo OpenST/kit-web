@@ -1,13 +1,16 @@
 html,
 body{
   font-family: 'Quasimoda', sans-serif !important;
+  // This line is for home page explicitly
+  -webkit-font-smoothing: antialiased;
 }
 .container-jumbotron{
-  h1{
-    color: #438bad;
+  h2{
+    font-size: 2.25rem;
+    color: #34445b;
   }
   p{
-    color: #597a84;
+    color: #34445b;
     font-weight: 300;
     line-height: 1.6rem;
   }

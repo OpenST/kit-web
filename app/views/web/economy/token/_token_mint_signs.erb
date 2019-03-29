@@ -7,8 +7,8 @@
     <div class="col-10 mx-auto text-center">
 
       <div class="jMetamaskHeaderWrapper jSignHeader" >
-        <h3 class="col-8 mx-auto mt-6 metamask-confirmation-header">Minting Requires Two Signatures.</h3>
-        <div class="text-muted font-weight-light  metamask-confirmation-desc mb-5">Please open the MetaMask extension and confirm the two transactions in order to proceed..</div>
+        <h3 class="col-8 mx-auto mt-6 metamask-confirmation-header">Minting requires two signatures</h3>
+        <div class="text-muted font-weight-light  metamask-confirmation-desc mb-5">Please open MetaMask and confirm the two transactions in order to proceed</div>
       </div>
 
       <div class="jMetamaskClientRejectErrorWrapper jSignHeader" style="display: none;">
@@ -46,7 +46,7 @@
             </span>
 
             <span class="ml-3 align-middle text-muted font-weight-light">
-              Allow the contract Stake
+              Approve staking
               <span data-type="ost"  data-ost-mock-parser="ost.tokenMint.ostToStakeOnBtChange"
                                             data-ost-mock-element="<%=bt_to_mint_selector%>"></span>
               <%= ost_currency_symbol %> to Mint
@@ -83,7 +83,7 @@
                 </switch>
               </svg>
             </span>
-            <span class="ml-3 align-middle text-muted font-weight-light">Authorize Contract to Start the Minting Process</span>
+            <span class="ml-3 align-middle text-muted font-weight-light">Approve running the staking process.</span>
           </div>
         </div>
       </div>
@@ -95,9 +95,9 @@
         </span>
       </div>
 
-      <div class="row mt-4">
-        <div class="invalid-feedback general_error"></div>
-      </div>
+      <!--<div class="row mt-4">-->
+        <!--<div class="invalid-feedback general_error"></div>-->
+      <!--</div>-->
 
     </div>
   </div>
@@ -110,51 +110,49 @@
   <div class="row">
     <div class="col-10 mx-auto text-center">
 
-      <span class="row">
-          <svg class="svg icon-checkmark" style="width: 40px;height: 40px">
-            <switch>
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-error"></use>
-            </switch>
-          </svg>
-       </span>
-
-      <div class="row mt-3" >
-        <h3 class="col-8 mx-auto mt-6 metamask-confirmation-header">
-          There was a issue while updating your transactions details.
-        </h3>
-        <div class="text-muted font-weight-light metamask-confirmation-desc mb-5">
-          Your transactions are processed via metamask, but somehow havn’t reached OSTKIT.
-          You can retry or contact <b>support@ost.com</b> with the transaction hashes displayed below.
-        </div>
-      </div>
-
       <div class="row">
+
+        <svg class="svg icon-checkmark mt-4 mx-auto" style="width: 40px;height: 40px">
+          <switch>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-error"></use>
+          </switch>
+        </svg>
+
+        <div  >
+          <h3 class="col-8 mx-auto mt-4 metamask-confirmation-header">
+            There was a issue while updating your transactions details.
+          </h3>
+          <div class="text-muted font-weight-light metamask-confirmation-desc mb-5">
+            Your transactions are processed via metamask, but somehow havn’t reached OST Platform.
+            You can retry or contact <b>support@ost.com</b> with the transaction hashes displayed below.
+          </div>
+        </div>
+
         <div class="col-10 mx-auto text-left rounded border-0">
           <div class="alert alert-secondary align-items-center d-flex" role="alert">
 
-            <span class="ml-3 align-middle text-muted font-weight-light jApproveTransactionHash">
-            </span>
+          <span class="ml-3 align-middle text-muted font-weight-light jApproveTransactionHash">
+          </span>
           </div>
         </div>
-      </div>
 
-      <div class="row">
         <div class="col-10 mx-auto text-left rounded border-0">
           <div class="alert alert-secondary align-items-center d-flex" role="alert">
 
-            <span class="ml-3 align-middle text-muted font-weight-light jRequestStakeTransactionHash">
-            </span>
+          <span class="ml-3 align-middle text-muted font-weight-light jRequestStakeTransactionHash">
+          </span>
           </div>
         </div>
-      </div>
 
-
-      <div class="mt-5">
-        <span class="mx-auto">
+        <div class="mt-5 mx-auto">
+        <span class="">
           <a href="mailto:support@ost.com?Subject=Urgent%20|%20Support%20needed%20for%20transaction%20error." target="_top" class="btn btn-primary">
             Contact customer support
           </a>
         </span>
+        </div>
+
+
       </div>
 
     </div>

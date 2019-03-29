@@ -39,13 +39,13 @@
 
 <div id="stake-mint-start" class="col-9 mx-auto mt-6 jMintSections" style="display: <%= is_workflow ? "none" : "block" %>">
   <div class="card text-center p-6 card-planner border-0">
-    <h3 class="mb-0">Power Your Economy</h3>
+    <h3 class="mb-0">Mint Your Brand Tokens</h3>
     <div class="simulator-image-wrapper my-4">
       <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-start-minting@2x.png" width="150" class="img-fluid"/>
     </div>
-    <div class="token-supply-infotext mb-4 col-5 mx-auto">Mint <%=@presenter_obj.client_token_symbol %> tokens to increase your token supply and power your economy.</div>
+    <div class="token-supply-infotext mb-4 col-5 mx-auto">Mint <%=@presenter_obj.client_token_symbol %> tokens to increase your token supply and power your economy</div>
     <div class="run-transaction-btn-wrapper">
-      <button id="mint-tokens" class="btn btn-gold" data-submiting="Loading...">Mint Tokens</button>
+      <button id="mint-tokens" class="btn btn-gold" data-submiting="Setting up ...">Setup Minting</button>
     </div>
   </div>
 </div>
@@ -68,7 +68,7 @@
                            }
                 %>
                 <div class="col-6 text-left pl-0">
-                  <span class="text-muted font-weight-light">Please make sure the Account Owner Address previously associated with this account is selected in MetaMask.</span>
+                  <span class="text-muted font-weight-light">Your Account Owner Address is used to authorize the minting of your Brand Tokens</span>
                 </div>
               </div>
               <div class="row">
@@ -138,7 +138,7 @@
 
             </div>
           </div>
-          <button type="submit" data-submiting="Proceeding...." class="btn btn-primary d-inline-block">Proceed</button>
+          <button type="submit" data-submiting="Minting...." class="btn btn-primary d-inline-block">MINT TOKENS</button>
           <div class="invalid-feedback general_error">&nbsp;</div>
         </div>
       </div>
@@ -210,16 +210,13 @@
                     </svg>
                     <div style="overflow: auto;" class="text-muted font-weight-light">
                         <span class="low-bal ether-text" style="display: none;">
-                          Looks like the account selected in metamask does not have enough <%= ether_text %> to pay gas for Minting Tokens.
-                          <%= is_buy_ost ? 'Buy' : 'Get' %> <%= ether_text %> to continue.
+                          Your selected address does not have enough <%= ether_text %>.
                         </span>
                       <span class="low-bal ost-text" style="display: none;">
-                          Looks like the account selected in metamask does not have enough <%= ost_currency_symbol %> to Mint Tokens.
-                        <%= is_buy_ost ? 'Buy' : 'Get' %> <%= ost_currency_symbol %> to continue.
+                          Your selected address does not have enough OST tokens.
                         </span>
                       <span class="low-bal eth-ost-text" style="display: none;">
-                          Looks like the account selected in metamask does not have enough <%= ether_text %> and <%= ost_currency_symbol %> to Mint Tokens.
-                        <%= is_buy_ost ? 'Buy' : 'Get' %> <%= ether_text %> and <%= ost_currency_symbol %> to continue.
+                          Your selected address does not have enough <%= ether_text %> or OST tokens to Mint Tokens.
                         </span>
                     </div>
                   </div>
@@ -231,7 +228,8 @@
                    class="btn btn-primary buy-ost-btn" style="display: none;">Buy Ost</a>
               <% else %>
                 <div class="card-header p-0"></div>
-                <div class="text-muted font-weight-light mt-2 mb-3">Will fund <%=initial_ost_funding%> <%= ost_currency_symbol %> and minimum required <%= ether_text %> in to your selected MetaMask wallet to get you started.</div>
+                <div class="text-muted font-weight-light mt-2 mb-3">
+                  Will fund <%=initial_ost_funding%>&nbsp;<%= ost_currency_symbol %> and minimum required <%= ether_text %> in to your selected MetaMask wallet to get you started.</div>
                 <button id="get-ost-btn" type="submit" data-submiting="Getting <%= ost_currency_symbol %>..."
                         class="btn btn-primary d-inline-block">Get&nbsp;<%= ost_currency_symbol %>
                 </button>

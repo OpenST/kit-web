@@ -3,8 +3,9 @@
 
   var parentNS = ns("ost.user")
     , ost = ns("ost")
+    , oThis
   ;
-
+  
   parentNS.signup = oThis = {
     jForm: null
     , formHelper : null
@@ -16,8 +17,7 @@
       $('#register-btn').on('click',function () {
         oThis.isCaptchaValid = ost.utilities.validateCaptcha(
           oThis.jForm,
-          $('.recaptcha-submit-error'),
-          "Please select the captcha"
+          $('.recaptcha-submit-error')
         );
 
         if(!oThis.isCaptchaValid){

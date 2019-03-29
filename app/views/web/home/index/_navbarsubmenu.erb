@@ -14,51 +14,17 @@
 <input type="checkbox" id="tm">
 <ul class="main-menu clearfix m-0 p-0 list-unstyled collapse" id="navbarToggler">
 
-<li><a href="javascript:void(0)" class="main-nav-item">Products<span class="drop-icon"></span>
-  <label title="Toggle Drop-down" class="drop-icon navbar-toggler" for="products" data-toggle="collapse" data-target="#navbarToggler2" aria-controls="navbarToggler2" aria-expanded="false" aria-label="Toggle navigation"></label>
-</a>
-  <input type="checkbox" id="products">
-  <ul class="sub-menu arrow-icon-top list-unstyled pt-0 pt-md-2 px-1 mx-2 mx-md-0 collapse" id="navbarToggler2">
-    <li>
-      <a href="<%= GlobalConstant::CompanyOtherProductUrls.kit_root_url %>" class="p-0" title="OST - KIT">
-        <svg class="d-block mb-1" width="80" height="16">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ost-kit-brand-nav-menu"></use>
-          </switch>
-        </svg>
-        Launch your own Branded Tokens and turn your business into a dynamic ecosystem.
-      </a>
-    </li>
-    <li>
-      <a href="<%= GlobalConstant::CompanyOtherProductUrls.view_root_url %>" class="p-0" title="OST - VIEW" target="_blank">
-        <svg class="d-block mb-1" width="86" height="16">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ost-view-brand-nav-menu"></use>
-          </switch>
-        </svg>
-        View and analyze transactions across the OpenST side blockchains for a macro view of the OpenST ecosystem.
-      </a>
-    </li>
-    <li>
-      <a href="<%= GlobalConstant::CompanyOtherProductUrls.kyc_root_url %>" class="p-0" title="OST - KYC">
-        <svg class="d-block mb-1" width="80" height="16">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ost-kyc-brand-nav-menu"></use>
-          </switch>
-        </svg>
-        The one place for your team to quickly review and process the KYC applications.
-      </a>
-    </li>
-  </ul>
+<li>
+  <a href="/" class="main-nav-item" title="Product">Product</a>
 </li>
 
-<li><a href="javascript:void(0)" class="main-nav-item">Developers<span class="drop-icon"></span>
-  <label title="Toggle Drop-down" class="drop-icon navbar-toggler" for="developers" data-toggle="collapse" data-target="#navbarToggler3" aria-controls="navbarToggler3" aria-expanded="false" aria-label="Toggle navigation"></label>
+<li><a href="javascript:void(0)" class="main-nav-item">Developers
+  <label title="Toggle Drop-down" class="navbar-toggler p-0 m-0" for="developers" data-toggle="collapse" data-target="#navbarToggler3" aria-controls="navbarToggler3" aria-expanded="false" aria-label="Toggle navigation"></label>
 </a>
   <input type="checkbox" id="developers">
   <ul class="sub-menu arrow-icon-top list-unstyled pt-0 pt-md-2 px-1 mx-2 mx-md-0 collapse" id="navbarToggler3">
     <li>
-      <a href="https://dev.ost.com" target="_blank" class="nav-svg-link d-flex align-items-center" title="API Reference">
+      <a href="<%= GlobalConstant::CompanyOtherProductUrls.dev_ost_root_url %>" target="_blank" class="nav-svg-link d-flex align-items-center" title="API Reference">
         <svg class="nav-svg">
           <switch>
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#dropdown-api-reference-icon"></use>
@@ -149,16 +115,6 @@
         </li>
       </ul>
     </li>
-<!--    <li>-->
-<!--      <a href="https://github.com/OpenSTFoundation" target="_blank" class="nav-svg-link d-flex align-items-center" title="Github">-->
-<!--        <svg class="nav-svg">-->
-<!--          <switch>-->
-<!--            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#dropdown-github-icon"></use>-->
-<!--          </switch>-->
-<!--        </svg>-->
-<!--        <span class="pl-1"></span>-->
-<!--      </a>-->
-<!--    </li>-->
     <li>
       <a href="https://gitter.im/OpenSTFoundation/SimpleToken" target="_blank" class="nav-svg-link d-flex align-items-center" title="Developer Chat">
         <svg class="nav-svg">
@@ -173,8 +129,8 @@
 </li>
 
 
-<li><a href="javascript:void(0)" class="main-nav-item">Company<span class="drop-icon"></span>
-  <label title="Toggle Drop-down" class="drop-icon navbar-toggler" for="company" data-toggle="collapse" data-target="#navbarToggler5" aria-controls="navbarToggler5" aria-expanded="false" aria-label="Toggle navigation"></label>
+<li><a href="javascript:void(0)" class="main-nav-item">Company
+  <label title="Toggle Drop-down" class="navbar-toggler p-0 m-0" for="company" data-toggle="collapse" data-target="#navbarToggler5" aria-controls="navbarToggler5" aria-expanded="false" aria-label="Toggle navigation"></label>
 </a>
   <input type="checkbox" id="company">
   <ul class="sub-menu arrow-icon-top list-unstyled pt-0 pt-md-2 px-1 mx-2 mx-md-0 collapse" id="navbarToggler5">
@@ -228,26 +184,6 @@
         <span class="pl-1">Support</span>
       </a>
     </li>
-    <li>
-      <a href="<%= GlobalConstant::Base.root_url %>documents" class="nav-svg-link d-flex align-items-center" title="Documents">
-        <svg class="nav-svg">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#dropdown-documents-icon"></use>
-          </switch>
-        </svg>
-        <span class="pl-1">Documents</span>
-      </a>
-    </li>
-<!--    <li>-->
-<!--      <a href="<%#= GlobalConstant::CompanyOtherProductUrls.token_sale_url %>" class="nav-svg-link d-flex align-items-center" title="Token Sale">-->
-<!--        <svg class="nav-svg">-->
-<!--          <switch>-->
-<!--            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#dropdown-token-sale-icon"></use>-->
-<!--          </switch>-->
-<!--        </svg>-->
-<!--        <span class="pl-1">Token Sale</span>-->
-<!--      </a>-->
-<!--    </li>-->
   </ul>
 </li>
 

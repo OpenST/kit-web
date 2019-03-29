@@ -6,6 +6,7 @@
   
     generalErrorMsg : "Something went wrong, try again later." ,
     authorizationErrMsg : "Not authorised to perform this action",
+    captchaError : "Please complete the captcha in order to continue." ,
     /*
      * Validate Re-Captcha within form
      *
@@ -13,11 +14,11 @@
      * jError: jQuery object of error element
      * errorText: Error message to be displayed
      */
-    validateCaptcha : function (jForm, jError, errorText) {
+    validateCaptcha : function (jForm, jError) {
       if( jForm.find('.g-recaptcha')[0] !== undefined && typeof grecaptcha !== 'undefined'){
 
         if(  grecaptcha.getResponse() === '' ){
-          $(jError).text(errorText);
+          $(jError).text(oThis.captchaError);
           $(jError).addClass("is-invalid");
 
           return false;

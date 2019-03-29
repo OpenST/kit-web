@@ -19,8 +19,7 @@
       $('#login-btn').on('click',function () {
         oThis.isCaptchaValid = ost.utilities.validateCaptcha(
           oThis.jForm,
-          $('.recaptcha-submit-error'),
-          "Please select the captcha"
+          $('.recaptcha-submit-error')
         );
         if(!oThis.isCaptchaValid){
           event.preventDefault();

@@ -20,6 +20,7 @@
     type: null,
     tsUnixToJs: true,
     noDataHTML: '<div class="noDataHTML">No data to populate graphs</div>',
+    errorHTML: '<div class="errorHTML">Something went wrong!</div>',
     loadingHTML: '<div style="width:60px;font-size:12px;margin:0 auto">Loading...</div>',
     loadingClass: 'blur-content-5',
 
@@ -81,8 +82,18 @@
               } else {
                 oThis.render();
               }
+            } else {
+              oThis.renderError();
             }
             callback && callback( response );
+          },
+          error: function (jqxhr, error) {
+            // if error code != 404 then show error screen, else blank screen
+            if(jqxhr.status !== 404) {
+              oThis.renderError();
+            } else {
+              oThis.renderBlank();
+            }
           }
         };
         $.extend( ajaxObj, oThis.ajax );
@@ -141,6 +152,11 @@
     renderBlank: function(){
       var oThis = this;
       $(oThis.selector).html(oThis.noDataHTML);
+    },
+
+    renderError: function(){
+      var oThis = this;
+      $(oThis.selector).html(oThis.errorHTML);
     },
 
     /*

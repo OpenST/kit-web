@@ -167,6 +167,20 @@
     font-style: normal;
     color: #438BAD;
   }
+.info-text{
+  position: absolute;
 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  &.transactions-ost-volume{
+    top: 63%;
+  }
+  &.transaction-by-type{
+    top:70%;
+  }
+  &.transaction-by-name{
+    top:65%;
+  }
+}
 
 }

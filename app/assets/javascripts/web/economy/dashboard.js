@@ -49,7 +49,7 @@
 
       },
 
-      setAxisConfiguration: function(config, filter) {
+      setAxisConfiguration: function(config, filter, res) {
         if(filter){
           var hAxis = utilities.deepGet( config , 'options.hAxis' ),
             gridlines = hAxis['gridlines'] ,
@@ -59,6 +59,19 @@
           hAxis['format']=filterOptionsMap[filter].format;
           columns[0] = filterOptionsMap[filter].columns_1;
         }
+
+        if( res && filter == "week" ){
+          var result_type = utilities.deepGet(res ,  'data.result_type'),
+              ticks = []
+          ;
+          if(result_type) {
+            res.data[result_type].forEach(function (elem) {
+              ticks.push(new Date(elem.timestamp * 1000));
+            });
+            hAxis.ticks = ticks;
+          }
+        }
+
       },
 
       drawTransactionAndOstVolumeGraph: function (filter) {
@@ -67,10 +80,15 @@
             ajax = utilities.deepGet( config , 'ajax' )
         ;
         ajax['url'] = url ;
+        var ajaxCallback = GoogleCharts.prototype.ajaxCallback;
+        oThis.transactionAndOstVolumeGraph.ajaxCallback = function( rawData ){
+          var gCThis = this ;
+          oThis.setAxisConfiguration( config, filter, rawData );
+          $.extend( true , gCThis ,  config  );
+          return ajaxCallback.call( gCThis , rawData );
+        };
 
-        oThis.setAxisConfiguration( config, filter);
-
-        oThis.transactionAndOstVolumeGraph.draw( config );
+        oThis.transactionAndOstVolumeGraph.draw(config);
       },
 
       drawTransactionByTypeLineGraph: function(filter){
@@ -79,7 +97,14 @@
           ajax = utilities.deepGet( config , 'ajax' )
         ;
         ajax['url'] = url ;
-        oThis.setAxisConfiguration( config, filter);
+        var ajaxCallback = GoogleCharts.prototype.ajaxCallback;
+        oThis.transactionByTypeLineGraph.ajaxCallback = function( rawData ){
+          var gCThis = this ;
+          oThis.setAxisConfiguration( config, filter, rawData );
+          $.extend( true , gCThis ,  config  );
+          return ajaxCallback.call( gCThis , rawData );
+        };
+
         oThis.transactionByTypeLineGraph.draw( config, function( res ){
           oThis.drawTransactionByTypePieChart( res );
           var jWrapper = $(oThis.transactionByTypeLineGraph.selector) ;
@@ -159,12 +184,12 @@
         $(sDateContainer).html(displayDate);
       },
 
-      getAjaxUrl: function (api ,  val ) {
+      getAjaxUrl: function (apis ,  val ) {
          if(!val ){
-           var url = api['day'];
+           var url = apis['day'];
            return url;
          }else {
-           var url = api[val];
+           var url = apis[val];
            return url;
          }
       },

@@ -144,9 +144,9 @@
         ;
         sDateContainer = $('.date-container');
         startDate = moment(data['startTimestamp'] * 1000).format("D MMM [']YY");
-        if( filter && filter.toLowerCase() != "day" ){
+        //if( filter && filter.toLowerCase() != "day" ){
           endDate = moment(data['endTimestamp'] * 1000).format("D MMM [']YY");
-        }
+        //}
         displayDate = startDate;
         if( endDate ){
           displayDate += " - "+ endDate;

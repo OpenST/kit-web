@@ -155,11 +155,11 @@
       },
 
       getAjaxUrl: function (api ,  val ) {
-         if(!val && api.indexOf('graph_duration') < 0 ){
-           var url = api + '?graph_duration=day';
+         if(!val ){
+           var url = api['day'];
            return url;
          }else {
-           var url = api + '?graph_duration=' + val;
+           var url = api[val];
            return url;
          }
       },

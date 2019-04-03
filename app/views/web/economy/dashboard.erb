@@ -1,3 +1,9 @@
+<%
+  graph_urls = @presenter_obj.graph_urls.data
+  column_chart_url = graph_urls['total_tx']
+  tx_by_type_url = graph_urls['tx_by_type']
+  tx_by_name_url = graph_urls['tx_by_name']
+%>
 <div class="container my-6 dashboard">
   <div class="row mb-5">
     <div class="col-12">
@@ -32,7 +38,6 @@
       <h3 class="mb-3">Economic Indicators </h3>
       <div class="d-flex graph-header">
         <div class="mr-auto p-2">No. of Transactions vs. OST Volume</div>
-        <!--          <div class="p-2 interval partition" data-interval="hour">1 H</div>-->
         <div class="p-2 interval active" data-interval="day">1 D</div>
         <div class="p-2 interval" data-interval="week">1 W</div>
         <div class="p-2 interval" data-interval="month">1 M</div>
@@ -123,14 +128,29 @@
       you have associated name with are executed</h6>
     <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-graph-transactions-by-name-1.png" class="d-block mx-auto w-100" />
   </div>
+
+  <div id="transactionsAnsOstVolumeErrorHTML" style="display: none;" class="my-6 position-relative">
+    <h6 class="text-center info-text transactions-ost-volume">Something went wrong!</h6>
+    <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-graph-transactions-ost-volume-1.png" class="d-block mx-auto w-100" />
+  </div>
+
+  <div id="transactionByTypeErrorHTML" style="display: none;" class="my-6 position-relative">
+    <h6 class="text-center info-text transaction-by-type">Something went wrong!</h6>
+    <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-graph-transactions-by-type-1.png" class="d-block mx-auto w-100" />
+  </div>
+
+  <div id="transactionByNameErrorHTML" style="display: none;" class="my-6 position-relative">
+    <h6 class="text-center info-text transaction-by-name" >Something went wrong!</h6>
+    <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-graph-transactions-by-name-1.png" class="d-block mx-auto w-100" />
+  </div>
 </div>
 <% content_for :end_js do %>
   <script type="text/javascript">
     $(function () {
       ost.dashboard.init({
-        transactions_and_ost_volume_url: "/combo_dummy.json",
-        transaction_by_type_url: "/line_dummy.json",
-        transaction_by_name_url: "/columnChartDummy.json"
+        transactions_and_ost_volume_url: <%= raw column_chart_url.to_json() %>,
+        transaction_by_type_url: <%= raw tx_by_type_url.to_json() %>,
+        transaction_by_name_url: <%= raw tx_by_name_url.to_json() %>
       });
     });
   </script>

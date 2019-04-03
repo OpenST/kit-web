@@ -9,6 +9,7 @@
     selector: '#transactionByNameChart',
     type: 'ColumnChart',
     noDataHTML: $('#transactionByNameNodataHTML').html(),
+    errorHTML: $('#transactionByNameErrorHTML').html(),
     loadingHTML: "<div class='loader'></div>",
     columns: [
       {
@@ -76,7 +77,8 @@
     selector: '#tx_by_type',
     graphSelector: '#lineChart',
     type: 'LineChart',
-    noDataHTML: $('#transactionByTypeNodataHTML').html(), //TODO
+    noDataHTML: $('#transactionByTypeNodataHTML').html(),
+    errorHTML: $('#transactionByTypeErrorHTML').html(),
     loadingHTML: "<div class='loader'></div>",
     columns: [
       {
@@ -87,17 +89,17 @@
       {
         type: 'number',
         opt_label: 'User to User',
-        opt_id: 'user_to_user_transfer'
+        opt_id: 'user_to_user'
       },
       {
         type: 'number',
         opt_label: 'Company To User',
-        opt_id: 'company_to_user_transfer'
+        opt_id: 'company_to_user'
       },
       {
         type: 'number',
         opt_label: 'User to Company',
-        opt_id: 'user_to_company_transfer'
+        opt_id: 'user_to_company'
       }
     ],
     options: {
@@ -146,7 +148,6 @@
   dashboardGraphConfig.transaction_by_type_pie_chart = {
     selector: '#pieChart',
     type: 'PieChart',
-    noDataHTML: $('#transactionsbytype').html(), //TODO
     loadingHTML: "<div class='loader'></div>",
     columns:[
       {
@@ -182,6 +183,7 @@
       selector: '#comboChart',
       type: 'ComboChart',
       noDataHTML: $('#transactionsAnsOstVolumeNodataHTML').html(),
+      errorHTML: $('#transactionsAnsOstVolumeErrorHTML').html(),
       loadingHTML: "<div class='loader'></div>",
       columns: [
         {

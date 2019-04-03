@@ -179,6 +179,7 @@
     },
 
     dataParser: function(response_data){
+      if(!response_data || response_data.length === 0) return;
       var oThis = this;
       var data = [];
       var header_temp = Object.keys(response_data[0]);

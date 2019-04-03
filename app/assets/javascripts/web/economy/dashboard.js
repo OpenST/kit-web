@@ -49,6 +49,18 @@
 
       },
 
+      setAxisConfiguration: function(config, filter) {
+        if(filter){
+          var hAxis = utilities.deepGet( config , 'options.hAxis' ),
+            gridlines = hAxis['gridlines'] ,
+            columns = config['columns']
+          ;
+          gridlines['count'] = filterOptionsMap[filter].count;
+          hAxis['format']=filterOptionsMap[filter].format;
+          columns[0] = filterOptionsMap[filter].columns_1;
+        }
+      },
+
       drawTransactionAndOstVolumeGraph: function (filter) {
         var config = $.extend(true , {} , transactions_and_ost_volume ),
             url = oThis.getAjaxUrl( oThis.transactions_and_ost_volume_url , filter) ,
@@ -56,15 +68,7 @@
         ;
         ajax['url'] = url ;
 
-        if(filter){
-          var hAxis = utilities.deepGet( config , 'options.hAxis' ),
-              gridlines = hAxis['gridlines'] ,
-              columns = config['columns']
-          ;
-          gridlines['count'] = filterOptionsMap[filter].count;
-          hAxis['format']=filterOptionsMap[filter].format;
-          columns[0] = filterOptionsMap[filter].columns_1;
-        }
+        oThis.setAxisConfiguration( config, filter);
 
         oThis.transactionAndOstVolumeGraph.draw( config );
       },
@@ -75,15 +79,16 @@
           ajax = utilities.deepGet( config , 'ajax' )
         ;
         ajax['url'] = url ;
+        oThis.setAxisConfiguration( config, filter);
         oThis.transactionByTypeLineGraph.draw( config, function( res ){
-          oThis.drawTransactionByTypePieChart( res );
+          oThis.drawTransactionByTypePieChart( res, filter);
           var jWrapper = $(oThis.transactionByTypeLineGraph.selector) ;
           jWrapper.find('.loading-wrapper').remove();
           jWrapper.find('.'+oThis.transactionByTypeLineGraph.loadingClass).removeClass( oThis.transactionByTypeLineGraph.loadingClass );
         });
       },
 
-      drawTransactionByTypePieChart: function( response ){
+      drawTransactionByTypePieChart: function( response, filter ){
         var config = $.extend(true , {} , transaction_by_type_pie_chart ),
             data   = response.data['transaction_volume'],
             total  = 0
@@ -99,6 +104,7 @@
         jTotalTransactions.text( total );
 
         config.data = oThis.transactionByTypePieChart.dataParser(data);
+        oThis.setAxisConfiguration( config, filter);
         oThis.transactionByTypePieChart.draw( config  );
 
       },
@@ -132,6 +138,8 @@
           ajax = utilities.deepGet( config , 'ajax' )
         ;
         ajax['url'] = url ;
+
+        oThis.setAxisConfiguration( config, filter);
 
         oThis.transactionByNameGraph.draw( config  , function ( res ) {
           oThis.setDate( res, filter );

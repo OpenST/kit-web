@@ -94,7 +94,7 @@
 
         oThis.transactionByTypePieChart = new GoogleCharts( config );
         data.forEach(function ( item ) {
-          total +=  item['value'];
+          total +=  Number(item['value']);
         });
         jTotalTransactions.text( total );
 

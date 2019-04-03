@@ -81,14 +81,14 @@
         ajax['url'] = url ;
         oThis.setAxisConfiguration( config, filter);
         oThis.transactionByTypeLineGraph.draw( config, function( res ){
-          oThis.drawTransactionByTypePieChart( res, filter);
+          oThis.drawTransactionByTypePieChart( res );
           var jWrapper = $(oThis.transactionByTypeLineGraph.selector) ;
           jWrapper.find('.loading-wrapper').remove();
           jWrapper.find('.'+oThis.transactionByTypeLineGraph.loadingClass).removeClass( oThis.transactionByTypeLineGraph.loadingClass );
         });
       },
 
-      drawTransactionByTypePieChart: function( response, filter ){
+      drawTransactionByTypePieChart: function( response ){
         var config = $.extend(true , {} , transaction_by_type_pie_chart ),
             data   = response.data['transaction_volume'],
             total  = 0
@@ -104,7 +104,6 @@
         jTotalTransactions.text( total );
 
         config.data = oThis.transactionByTypePieChart.dataParser(data);
-        oThis.setAxisConfiguration( config, filter);
         oThis.transactionByTypePieChart.draw( config  );
 
       },
@@ -138,9 +137,7 @@
           ajax = utilities.deepGet( config , 'ajax' )
         ;
         ajax['url'] = url ;
-
-        oThis.setAxisConfiguration( config, filter);
-
+        
         oThis.transactionByNameGraph.draw( config  , function ( res ) {
           oThis.setDate( res, filter );
         });

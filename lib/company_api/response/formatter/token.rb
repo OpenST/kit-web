@@ -6,7 +6,7 @@ module CompanyApi
 
       class Token < CompanyApi::Response::Formatter::Base
 
-        attr_reader :min_eth_in_wei, :min_ost_in_wei, :workflow_payload, :developer_page_addresses, :dashboard_details
+        attr_reader :min_eth_in_wei, :min_ost_in_wei, :workflow_payload, :developer_page_addresses, :dashboard_details, :graph_urls
 
         # Initialize
         #
@@ -45,6 +45,7 @@ module CompanyApi
           set_sub_env_payload(@data['sub_env_payloads']) if @data['sub_env_payloads'].present?
           set_developer_page_addresses(@data['developer_page_addresses']) if @data['developer_page_addresses'].present?
           set_dashboard_details(@data['dashboard_details']) if @data['dashboard_details'].present?
+          set_graph_urls(@data['graph_urls']) if @data['graph_urls'].present?
         end
 
         private
@@ -67,6 +68,10 @@ module CompanyApi
 
         def set_dashboard_details(data)
           @dashboard_details = CompanyApi::Response::Entity::DashboardDetails.new(data)
+        end
+
+        def set_graph_urls(data)
+          @graph_urls = CompanyApi::Response::Entity::GraphUrls.new(data)
         end
 
       end

@@ -75,7 +75,7 @@
     showGeneralError : function ( jWrapper , res , msg ) {
       if(!jWrapper) return ;
       msg = oThis.getGeneralError( res ) || msg || oThis.generalErrorMsg ;
-      jWrapper.find('.general_error').text( msg ).addClass('is-invalid');
+      jWrapper.find('.general_error').html( msg ).addClass('is-invalid');
     },
     
     clearErrors : function ( jWrapper ) {

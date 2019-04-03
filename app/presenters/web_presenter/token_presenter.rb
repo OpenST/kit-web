@@ -157,6 +157,17 @@ module WebPresenter
       end
     end
 
+    # Token Dashboard Graph URLs in presenter object
+    #
+    # * Author: Dhananjay
+    # * Date: 02/04/2019
+    # * Reviewed By: Sunil
+    #
+    def graph_urls
+      @graph_urls ||= begin
+        formatter_obj.present? ? formatter_obj.graph_urls : nil
+      end
+    end
 
   end
 

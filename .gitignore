@@ -22,7 +22,8 @@
 !/log/.keep
 !/tmp/.keep
 
-/node_modules
+# Ignore all npm packages
+node_modules/
 /yarn-error.log
 
 # Ignore Byebug command history file.

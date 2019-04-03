@@ -45,6 +45,12 @@ module CompanyApi
         get('deploy', {})
       end
 
+      # Get token dashboard details
+      #
+      # * Author: Dhananjay
+      # * Date: 02/04/2019
+      # * Reviewed By: Sunil
+      #
       def dashboard
         get('dashboard', {})
       end

@@ -69,7 +69,7 @@
   
     //General error msg start
     genericErrorMessage             :   'Something went wrong!',
-    getOstError                     :   "Not able to grant OST-Test right now. Please contact support.",
+    getOstError                     :   'Not able to grant OST-Test right now. Please <a href="https://help.ost.com/support/home" target="_blank">contact support</a>.',
     stakeAndMintError               :   "Looks like there was an issue in the minting process, Please connect with customer support with the 2 transaction hash.",
     //General error msg end
 

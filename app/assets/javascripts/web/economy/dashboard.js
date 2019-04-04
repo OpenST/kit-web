@@ -118,14 +118,19 @@
             data   = response.data['transaction_volume'],
             total  = 0
         ;
+  
+        data = data.map(function ( item ) {
+          var val =  PriceOracle.fromWei( item['value']  );
+          val = Number( val );
+          item['value'] = val ;
+          total += val;
+          return item;
+        });
 
         oThis.updateLegend( data );
         config.readyHandler = oThis.readyHandler;
 
         oThis.transactionByTypePieChart = new GoogleCharts( config );
-        data.forEach(function ( item ) {
-          total +=  Number(item['value']);
-        });
         jTotalTransactions.text( total );
 
         config.data = oThis.transactionByTypePieChart.dataParser(data);

@@ -30,10 +30,9 @@
         jTransactionsAndOstVolumeIntervals = $('.transactions_and_ost_volume .interval'),
         jTransactionsByNameIntervals       = $('.transaction_by_name .interval'),
         jTransactionsByTypeIntervals       = $('.transaction_by_type .interval'),
-        jTotalTransactions                 = $('.total-transactions-value'),
         jPieChartContainer                 = $('.pie-chart-container');
     
-    var precision = 5 ;
+    var preHtml , precision = 5 ;
     
     var oThis = ost.dashboard = {
       init: function (config) {
@@ -43,13 +42,13 @@
       },
 
       initCharts: function(){
+        preHtml  = $('#tx_by_type').html() ;
         oThis.transactionAndOstVolumeGraph = new GoogleCharts();
         oThis.transactionByNameGraph = new GoogleCharts();
         oThis.transactionByTypeLineGraph = new GoogleCharts();
         oThis.drawTransactionAndOstVolumeGraph() ;
         oThis.drawTransactionByTypeLineGraph() ;
         oThis.drawTransactionByNameGraph() ;
-
       },
 
       setAxisConfiguration: function(config, filter, res) {
@@ -114,9 +113,7 @@
             var gCThis = this ,
                 jEL =  $(gCThis.selector)
             ;
-            jEL.html("");
-            jEL.append('<div id="lineChart"></div>');
-            jEL.append('<div id="pieChart"></div>');
+            jEL.html(preHtml);
             render.call( gCThis );
         };
 
@@ -147,19 +144,17 @@
         });
   
         if( isAllZero ){
-          jPieChartContainer.find('#noVolumeHTML').css({display:'block'});
-          jPieChartContainer.find('.pie-chart-wrapper').css({display:'none'});
-          jPieChartContainer.css({opacity:1});
+          jPieChartContainer.find('#noVolumeHTML').show();
+          jPieChartContainer.find('.pie-chart-wrapper').hide();
           return false;
         }
 
-        jPieChartContainer.find('#noVolumeHTML').css({display:'none'});
-        jPieChartContainer.find('.pie-chart-wrapper').css({display:'block'});
-        total = total.toFixed( precision );
+        jPieChartContainer.find('#noVolumeHTML').hide();
+        total = Number( total );
         oThis.updateLegend( data );
         config.readyHandler = oThis.readyHandler;
         oThis.transactionByTypePieChart = new GoogleCharts( config );
-        jTotalTransactions.text( total );
+        $('.total-transactions-value').text( total );
         config.data = oThis.transactionByTypePieChart.dataParser(data);
         oThis.transactionByTypePieChart.draw( config  );
       },
@@ -183,7 +178,7 @@
       },
 
       readyHandler:function () {
-        jPieChartContainer.css({opacity:1});
+        jPieChartContainer.find('.pie-chart-wrapper').show();
       },
 
       drawTransactionByNameGraph : function (filter) {

@@ -76,7 +76,7 @@
         </div>
         <div class="row">
           <div class="col-9 graph-container pr-0" id="lineChart"></div>
-          <div class="col-3 graph-container pie-chart-container">
+          <div class="col-3 graph-container pie-chart-container p-0">
             <div class="text-center" id="noVolumeHTML" style="display:none;">
               Insignificant volume to display
             </div>
@@ -159,9 +159,9 @@
   </script>
   <script type="text/x-handlebars-template" id="ostTransactionsPieChart">
     {{#each data}}
-    <div class="row m-3">
-      <div class="col-6 text-wrap p-0">{{label}}</div>
-      <div class="col-6 mb-1 my-auto p-0 text-left">
+    <div class="row my-3 mx-2">
+      <div class="col-8 text-wrap p-0">{{label}}</div>
+      <div class="col-4 mb-1 my-auto p-0 text-left">
         <span class="color-bar {{class}} ml-auto mr-2"></span>
         <span>{{value}}</span>
       </div>

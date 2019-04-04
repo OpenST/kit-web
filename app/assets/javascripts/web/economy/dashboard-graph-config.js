@@ -119,8 +119,8 @@
       },
       legend: 'none',
       chartArea: {
-        width: '80%',
-        height: '80%'
+        width: '90%',
+        height: '90%'
       },
       hAxis: {
         textStyle: {
@@ -162,12 +162,11 @@
       }
     ],
     options: {
-      pieHole: 0.7,
+      pieHole: 0.8,
       pieSliceText: 'none',
       pieSliceBorderColor: 'none',
       colors: ['f6c62b','ff5f5a','84d1d4'],
       backgroundColor: 'transparent',
-      enableInteractivity: false,
       legend: 'none',
       chartArea: {
         width: 200,

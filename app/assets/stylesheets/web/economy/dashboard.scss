@@ -123,6 +123,12 @@
     .text-wrap{
       word-wrap: break-word;
     }
+    #pieChart{
+      min-width: 180px!important;
+      svg{
+        overflow: visible!important;
+      }
+    }
   }
 
 

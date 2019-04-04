@@ -77,8 +77,10 @@
         <div class="row">
           <div class="col-9 graph-container pr-0" id="lineChart"></div>
           <div class="col-3 graph-container pie-chart-container">
-
-            <div class="mx-auto">
+            <div class="text-center" id="noVolumeHTML" style="display:none;">
+              Insignificant volume to display
+            </div>
+            <div class="mx-auto" class="pie-chart-wrapper">
               <div class="text-center my-2 typeChartSubHeading">
                 Volume of Transactions
               </div>
@@ -143,6 +145,7 @@
     <h6 class="text-center info-text transaction-by-name" >Something went wrong!</h6>
     <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-graph-transactions-by-name-1.png" class="d-block mx-auto w-100" />
   </div>
+
 </div>
 <% content_for :end_js do %>
   <script type="text/javascript">

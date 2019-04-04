@@ -33,7 +33,7 @@
         jTotalTransactions                 = $('.total-transactions-value'),
         jPieChartContainer                 = $('.pie-chart-container');
     
-    var precession = 5 ;
+    var precision = 5 ;
     
     var oThis = ost.dashboard = {
       init: function (config) {
@@ -127,7 +127,7 @@
           var weiVal = String( item['value'] ) ,
               val =  PriceOracle.fromWei( weiVal )
           ;
-          val = BigNumber( val ).toFixed( precession );
+          val = BigNumber( val ).toFixed( precision );
           val =  Number( val );
           item['value'] = val ;
           total =  total.plus(val );
@@ -140,13 +140,14 @@
         });
   
         if( isAllZero ){
-          //Render No significant mock
-          
+          jPieChartContainer.find('#noVolumeHTML').css({display:'block'});
           return false;
+        } else{
+          jPieChartContainer.find('#noVolumeHTML').css({display:'none'});
         }
         
         
-        total = total.toFixed( precession );
+        total = total.toFixed( precision );
         oThis.updateLegend( data );
         config.readyHandler = oThis.readyHandler;
         oThis.transactionByTypePieChart = new GoogleCharts( config );
@@ -174,7 +175,7 @@
       },
 
       readyHandler:function () {
-        jPieChartContainer.css({opacity:1});
+        jPieChartContainer.find('.pie-chart-wrapper').css({opacity:1});
       },
 
       drawTransactionByNameGraph : function (filter) {

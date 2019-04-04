@@ -111,8 +111,9 @@
   .pie-chart-container{
     background-color: #f9fafa;
     border-radius: 10px;
-    opacity: 0;
-
+    .pie-chart-wrapper{
+      opacity: 0;
+    }
     .total-transactions{
       position: absolute;
       top: 50%;

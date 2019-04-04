@@ -44,8 +44,8 @@
         groupWidth: 30
       },
       chartArea: {
-        width: '100%',
-        height: '100%'
+        width: '90%',
+        height: '80%'
       },
       hAxis: {
         textStyle: {
@@ -218,11 +218,17 @@
         },
         vAxes: {
           0: {
-            title: ''
+            title: '',
+            gridlines: {
+              color: 'e3eef3'
+            }
           },
           1: {
             title: '',
-            format: 'short'
+            format: 'short',
+            gridlines: {
+              color: 'e3eef3'
+            }
           }
         },
         lineWidth: 2,
@@ -249,6 +255,9 @@
         vAxis: {
           gridlines: {
             color: 'e3eef3'
+          },
+          minorGridlines: {
+            count: 0
           },
           textStyle: {color: '597a84',fontSize: 10}
         }

@@ -120,7 +120,8 @@
         ;
   
         data = data.map(function ( item ) {
-          var val =  PriceOracle.fromWei( item['value']  );
+          var weiVal = String( item['value'] ) ,
+              val =  PriceOracle.fromWei( weiVal );
           val = Number( val );
           item['value'] = val ;
           total += val;

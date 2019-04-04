@@ -124,7 +124,7 @@
         ;
   
         data = data.map(function ( item ) {
-          var val = String( item['value'] ) ;
+          var val =  item['value'] ;
           val =  Number( val );
           item['value'] = val ;
           total +=  val ;

@@ -100,12 +100,24 @@
           ajax = utilities.deepGet( config , 'ajax' )
         ;
         ajax['url'] = url ;
-        var ajaxCallback = GoogleCharts.prototype.ajaxCallback;
+        var ajaxCallback = GoogleCharts.prototype.ajaxCallback ,
+            render =  GoogleCharts.prototype.render
+        ;
         oThis.transactionByTypeLineGraph.ajaxCallback = function( rawData ){
           var gCThis = this ;
           oThis.setAxisConfiguration( config, filter, rawData );
           $.extend( true , gCThis ,  config  );
           return ajaxCallback.call( gCThis , rawData );
+        };
+
+        oThis.transactionByTypeLineGraph.render = function(  ){
+            var gCThis = this ,
+                jEL =  $(oThis.selector)
+            ;
+            jEL.html("");
+            jEL.append('<div id="lineChart"></div>');
+            jEL.append('<div id="pieChart"></div>');
+            render.call( gCThis );
         };
 
         oThis.transactionByTypeLineGraph.draw( config, function( res ){

@@ -130,7 +130,7 @@
         gridlines: {
           color: "#e3eef3"
         },
-        format: 'MMM d'
+        format:'h aa'
       },
       vAxis: {
         textStyle: {

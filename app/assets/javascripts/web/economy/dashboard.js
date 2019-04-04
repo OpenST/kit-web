@@ -1,22 +1,22 @@
 ;
 (function (window,$) {
 
-  var pieChartConstants = {
-    legendsLabelAndClass: {
-      "user_to_user" : {
-        label : "User to User",
-        class : 'color-bar-yellow'
-      },
-      "company_to_user" : {
-        label : 'Company to User',
-        class : 'color-bar-red'
-      },
-      "user_to_company" : {
-        label : "User to Company",
-        class : 'color-bar-blue'
+    var pieChartConstants = {
+      legendsLabelAndClass: {
+        "user_to_user" : {
+          label : "User to User",
+          class : 'color-bar-yellow'
+        },
+        "company_to_user" : {
+          label : 'Company to User',
+          class : 'color-bar-red'
+        },
+        "user_to_company" : {
+          label : "User to Company",
+          class : 'color-bar-blue'
+        }
       }
-    }
-  };
+    };
 
     var ost = ns('ost'),
         graphConfig = ost.dashboardGraphConfig,
@@ -26,11 +26,10 @@
         transaction_by_type_pie_chart  = graphConfig.transaction_by_type_pie_chart,
         transaction_by_name            = graphConfig.transaction_by_name,
         utilities                      = ns("ost.utilities"),
-
-        jTransactionsAndOstVolumeIntervals = $('.transactions_and_ost_volume .interval'),
-        jTransactionsByNameIntervals       = $('.transaction_by_name .interval'),
-        jTransactionsByTypeIntervals       = $('.transaction_by_type .interval'),
-        jPieChartContainer                 = $('.pie-chart-container');
+      
+        sPieChartWrapper = '.pie-chart-wrapper',
+        sNoVolumeHTML    = '#noVolumeHTML'
+    ;
     
     var preHtml , precision = 5 ;
     
@@ -42,7 +41,7 @@
       },
 
       initCharts: function(){
-        preHtml  = $('#tx_by_type').html() ;
+        preHtml = $('#tx_by_type').html() ;
         oThis.transactionAndOstVolumeGraph = new GoogleCharts();
         oThis.transactionByNameGraph = new GoogleCharts();
         oThis.transactionByTypeLineGraph = new GoogleCharts();
@@ -126,7 +125,9 @@
       },
 
       drawTransactionByTypePieChart: function( response ){
-        var config = $.extend(true , {} , transaction_by_type_pie_chart ),
+        
+        var jPieChartContainer = $('.pie-chart-container'),
+            config = $.extend(true , {} , transaction_by_type_pie_chart ),
             data   = response.data['transaction_volume'],
             total  =  0 ,
             isAllZero = true
@@ -144,17 +145,19 @@
         });
   
         if( isAllZero ){
-          jPieChartContainer.find('#noVolumeHTML').show();
-          jPieChartContainer.find('.pie-chart-wrapper').hide();
+          jPieChartContainer.find(sNoVolumeHTML).show();
+          jPieChartContainer.find(sPieChartWrapper).hide();
           return false;
         }
-
-        jPieChartContainer.find('#noVolumeHTML').hide();
-        total = Number( total );
+  
         oThis.updateLegend( data );
-        config.readyHandler = oThis.readyHandler;
-        oThis.transactionByTypePieChart = new GoogleCharts( config );
+        total = Number( total );
+        jPieChartContainer.find(sNoVolumeHTML).hide();
         $('.total-transactions-value').text( total );
+        config.readyHandler = function () {
+          jPieChartContainer.find(sPieChartWrapper).show();
+        };
+        oThis.transactionByTypePieChart = new GoogleCharts( config );
         config.data = oThis.transactionByTypePieChart.dataParser(data);
         oThis.transactionByTypePieChart.draw( config  );
       },
@@ -163,7 +166,7 @@
         var source = document.getElementById("ostTransactionsPieChart").innerHTML,
             template = Handlebars.compile(source),
             context = {},
-            html
+            markUp
         ;
 
         context['data'] = JSON.parse(JSON.stringify(data));
@@ -172,13 +175,8 @@
           value['label'] = config['label'];
           value['class'] = config['class'];
         });
-        html = template( context );
-        $('.pieChartLegend').empty();
-        $(".pieChartLegend").append(html);
-      },
-
-      readyHandler:function () {
-        jPieChartContainer.find('.pie-chart-wrapper').show();
+        markUp = template( context );
+        $('.pieChartLegend').html( markUp );
       },
 
       drawTransactionByNameGraph : function (filter) {
@@ -200,9 +198,7 @@
         ;
         sDateContainer = $('.date-container');
         startDate = moment(data['startTimestamp'] * 1000).format("D MMM [']YY");
-        //if( filter && filter.toLowerCase() != "day" ){
-          endDate = moment(data['endTimestamp'] * 1000).format("D MMM [']YY");
-        //}
+        endDate = moment(data['endTimestamp'] * 1000).format("D MMM [']YY");
         displayDate = startDate;
         if( endDate ){
           displayDate += " - "+ endDate;
@@ -220,8 +216,11 @@
          }
       },
 
-
       bindActions :function () {
+       var  jTransactionsAndOstVolumeIntervals = $('.transactions_and_ost_volume .interval'),
+            jTransactionsByNameIntervals       = $('.transaction_by_name .interval'),
+            jTransactionsByTypeIntervals       = $('.transaction_by_type .interval')
+       ;
         jTransactionsAndOstVolumeIntervals.on('click',function (event) {
           jTransactionsAndOstVolumeIntervals.removeClass('active');
           $(this).addClass('active');
@@ -240,14 +239,6 @@
           oThis.drawTransactionByTypeLineGraph($(this).data('interval'));
         });
       }
-
-
-
-
     }
-
-
-
-
   }(window,jQuery)
 )

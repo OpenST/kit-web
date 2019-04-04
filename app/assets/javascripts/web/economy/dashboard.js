@@ -119,23 +119,18 @@
       drawTransactionByTypePieChart: function( response ){
         var config = $.extend(true , {} , transaction_by_type_pie_chart ),
             data   = response.data['transaction_volume'],
-            total  = BigNumber( 0 ),
+            total  =  0 ,
             isAllZero = true
         ;
   
         data = data.map(function ( item ) {
-          var weiVal = String( item['value'] ) ,
-              val =  PriceOracle.fromWei( weiVal )
-          ;
-          val = BigNumber( val ).toFixed( precision , 4);
+          var val = String( item['value'] ) ;
           val =  Number( val );
           item['value'] = val ;
-          total =  total.plus(val );
-          
+          total +=  val ;
           if( val > 0 ){
             isAllZero = false;
           }
-          
           return item;
         });
   
@@ -145,10 +140,10 @@
           jPieChartContainer.css({opacity:1});
           return false;
         }
-        
+
         jPieChartContainer.find('#noVolumeHTML').css({display:'none'});
         jPieChartContainer.find('.pie-chart-wrapper').css({display:'block'});
-        total = total.toFixed( precision , 4);
+        total = total.toFixed( precision );
         oThis.updateLegend( data );
         config.readyHandler = oThis.readyHandler;
         oThis.transactionByTypePieChart = new GoogleCharts( config );

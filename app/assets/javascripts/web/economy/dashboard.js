@@ -112,7 +112,7 @@
 
         oThis.transactionByTypeLineGraph.render = function(  ){
             var gCThis = this ,
-                jEL =  $(oThis.selector)
+                jEL =  $(gCThis.selector)
             ;
             jEL.html("");
             jEL.append('<div id="lineChart"></div>');

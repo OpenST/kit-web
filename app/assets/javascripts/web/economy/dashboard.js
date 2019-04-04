@@ -32,6 +32,9 @@
         jTransactionsByTypeIntervals       = $('.transaction_by_type .interval'),
         jTotalTransactions                 = $('.total-transactions-value'),
         jPieChartContainer                 = $('.pie-chart-container');
+    
+    var precession = 5 ;
+    
     var oThis = ost.dashboard = {
       init: function (config) {
           $.extend(oThis,config);
@@ -116,27 +119,40 @@
       drawTransactionByTypePieChart: function( response ){
         var config = $.extend(true , {} , transaction_by_type_pie_chart ),
             data   = response.data['transaction_volume'],
-            total  = 0
+            total  = BigNumber( 0 ),
+            isAllZero = true
         ;
   
         data = data.map(function ( item ) {
           var weiVal = String( item['value'] ) ,
-              val =  PriceOracle.fromWei( weiVal );
-          val = Number( val );
+              val =  PriceOracle.fromWei( weiVal )
+          ;
+          val = BigNumber( val ).toFixed( precession );
+          val =  Number( val );
           item['value'] = val ;
-          total += val;
+          total =  total.plus(val );
+          
+          if( val > 0 ){
+            isAllZero = false;
+          }
+          
           return item;
         });
-
+  
+        if( isAllZero ){
+          //Render No significant mock
+          
+          return false;
+        }
+        
+        
+        total = total.toFixed( precession );
         oThis.updateLegend( data );
         config.readyHandler = oThis.readyHandler;
-
         oThis.transactionByTypePieChart = new GoogleCharts( config );
         jTotalTransactions.text( total );
-
         config.data = oThis.transactionByTypePieChart.dataParser(data);
         oThis.transactionByTypePieChart.draw( config  );
-
       },
 
       updateLegend: function( data ) {

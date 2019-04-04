@@ -80,7 +80,7 @@
             <div class="text-center" id="noVolumeHTML" style="display:none;">
               Insignificant volume to display
             </div>
-            <div class="mx-auto" class="pie-chart-wrapper">
+            <div class="mx-auto pie-chart-wrapper">
               <div class="text-center my-2 typeChartSubHeading">
                 Volume of Transactions
               </div>
@@ -159,9 +159,9 @@
   </script>
   <script type="text/x-handlebars-template" id="ostTransactionsPieChart">
     {{#each data}}
-    <div class="row m-3 ">
-      <div class="col-9 text-wrap">{{label}}</div>
-      <div class="col-3 mb-1 my-auto">
+    <div class="row m-3">
+      <div class="col-6 text-wrap p-0">{{label}}</div>
+      <div class="col-6 mb-1 my-auto p-0 text-left">
         <span class="color-bar {{class}} ml-auto mr-2"></span>
         <span>{{value}}</span>
       </div>

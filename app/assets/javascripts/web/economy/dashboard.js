@@ -127,7 +127,7 @@
           var weiVal = String( item['value'] ) ,
               val =  PriceOracle.fromWei( weiVal )
           ;
-          val = BigNumber( val ).toFixed( precision );
+          val = BigNumber( val ).toFixed( precision , 4);
           val =  Number( val );
           item['value'] = val ;
           total =  total.plus(val );
@@ -141,13 +141,14 @@
   
         if( isAllZero ){
           jPieChartContainer.find('#noVolumeHTML').css({display:'block'});
+          jPieChartContainer.find('.pie-chart-wrapper').css({display:'none'});
+          jPieChartContainer.css({opacity:1});
           return false;
-        } else{
-          jPieChartContainer.find('#noVolumeHTML').css({display:'none'});
         }
         
-        
-        total = total.toFixed( precision );
+        jPieChartContainer.find('#noVolumeHTML').css({display:'none'});
+        jPieChartContainer.find('.pie-chart-wrapper').css({display:'block'});
+        total = total.toFixed( precision , 4);
         oThis.updateLegend( data );
         config.readyHandler = oThis.readyHandler;
         oThis.transactionByTypePieChart = new GoogleCharts( config );
@@ -175,7 +176,7 @@
       },
 
       readyHandler:function () {
-        jPieChartContainer.find('.pie-chart-wrapper').css({opacity:1});
+        jPieChartContainer.css({opacity:1});
       },
 
       drawTransactionByNameGraph : function (filter) {

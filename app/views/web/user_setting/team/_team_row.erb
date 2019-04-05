@@ -12,17 +12,18 @@
 
 <script type="text/x-handlebars-template" data-row-template>
   <div class="row align-items-center mt-1 mb-3 rounded ost-table-row cell" data-user-id="{{id}}">
-    <div class="col-5">
+    <div class="col-4">
       {{manager.email}}<br/>
       <small class="font-weight-light">
         {{ getUserRoleText privileges }}
       </small>
     </div>
-    <div class="col-3 text-uppercase">{{manager.status}}</div>
+    <div class="col-4 text-uppercase" style="font-size: 14px;">{{manager.name}}</div>
+    <div class="col-2 text-uppercase" style="font-size: 14px">{{manager.status}}</div>
     <% if @presenter_obj.is_super_admin? %>
 
       {{#notLoginedUser id}}
-        <div class="col-4 ">
+        <div class="col-2">
           <select class="form-control selectpicker">
             <option value="" selected disabled>ACTIONS</option>
             <option value="delete">DELETE USER</option>

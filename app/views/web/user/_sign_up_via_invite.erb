@@ -15,6 +15,24 @@
 <!--            <h3 class="text-center">Hi, <%#= invited_receiver %> </h3>-->
             <h3 class="text-center">Welcome to OST Platform Sandbox</h3>
             <p class="text-center mb-5 font-weight-light"> <%= invite_sender %> has invited you to join your team on OST Platform Sandbox.  Please set a password to create your account.</p>
+            <div class="form-group mb-2" id="emailFormGrp">
+              <div class="row">
+                <div class="col-6">
+                  <label class="form-label" data-forid="email">First Name</label>
+
+                  <input id="first-name" type="text" name="first_Name" class="form-control" title="First Name"
+                         aria-describedby="emailHelp" placeholder="First Name" required autofocus/>
+                  <div class="invalid-feedback" data-forid="first_Name">&nbsp;</div>
+                </div>
+                <div class="col-6">
+                  <label class="form-label" data-forid="email">Last Name</label>
+
+                  <input id="last-name" type="text" name="last_name" class="form-control" title="Last Name"
+                         aria-describedby="emailHelp" placeholder="Last Name" required />
+                  <div class="invalid-feedback" data-forid="last_name">&nbsp;</div>
+                </div>
+              </div>
+            </div>
             <div class="form-group mb-2">
               <div class="clearfix">
                 <label class="form-label float-left" for="password">Password</label>

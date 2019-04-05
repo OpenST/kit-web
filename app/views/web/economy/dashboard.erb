@@ -3,6 +3,11 @@
   column_chart_url = graph_urls['total_tx']
   tx_by_type_url = graph_urls['tx_by_type']
   tx_by_name_url = graph_urls['tx_by_name']
+  client_token_symbol = @presenter_obj.client_token_symbol
+  total_supply = @presenter_obj.dashboard_details.total_supply
+  circulating_supply = @presenter_obj.dashboard_details.circulating_supply
+  economy_users = @presenter_obj.dashboard_details.economy_users
+
 %>
 <div class="container my-6 dashboard">
   <div class="row mb-5">
@@ -11,22 +16,19 @@
         <div class="col-4 text-center">
           <div class="stats-col p-3">
             <h6 class="title">total supply</h6>
-            <div class="gold"><%= @presenter_obj.client_token_symbol%>&nbsp;<%= @presenter_obj.dashboard_details.total_supply %></div>
-            <div class="gold">$<%= @presenter_obj.dashboard_details.total_supply_dollar %></div>
+            <div class="gold"><%= client_token_symbol %>&nbsp;<%= total_supply %></div>
           </div>
         </div>
         <div class="col-4 text-center">
           <div class="stats-col p-3">
             <h6 class="title">circulating supply</h6>
-            <div class="gold"><%= @presenter_obj.client_token_symbol%>&nbsp;<%= @presenter_obj.dashboard_details.circulating_supply %></div>
-            <div class="gold">$<%= @presenter_obj.dashboard_details.circulating_supply_dollar %></div>
+            <div class="gold"><%= client_token_symbol %>&nbsp;<%= circulating_supply %></div>
           </div>
         </div>
         <div class="col-4 text-center">
           <div class="stats-col p-3">
-            <h6 class="title">total volume</h6>
-            <div class="gold"><%= ost_currency_symbol %>&nbsp;<%= @presenter_obj.dashboard_details.total_volume %></div>
-            <div class="gold">$<%= @presenter_obj.dashboard_details.total_volume_dollar %></div>
+            <h6 class="title">Economy Users</h6>
+            <div class="gold"><%= @presenter_obj.dashboard_details.economy_users %></div>
           </div>
         </div>
       </div>

@@ -3,6 +3,11 @@
   column_chart_url = graph_urls['total_tx']
   tx_by_type_url = graph_urls['tx_by_type']
   tx_by_name_url = graph_urls['tx_by_name']
+  client_token_symbol = @presenter_obj.client_token_symbol
+  total_supply = @presenter_obj.dashboard_details.total_supply
+  circulating_supply = @presenter_obj.dashboard_details.circulating_supply
+  economy_users = @presenter_obj.dashboard_details.economy_users
+
 %>
 <div class="container my-6 dashboard">
   <div class="row mb-5">
@@ -11,22 +16,19 @@
         <div class="col-4 text-center">
           <div class="stats-col p-3">
             <h6 class="title">total supply</h6>
-            <div class="gold"><%= @presenter_obj.client_token_symbol%>&nbsp;<%= @presenter_obj.dashboard_details.total_supply %></div>
-            <div class="gold">$<%= @presenter_obj.dashboard_details.total_supply_dollar %></div>
+            <div class="gold"><%= client_token_symbol %>&nbsp;<%= total_supply %></div>
           </div>
         </div>
         <div class="col-4 text-center">
           <div class="stats-col p-3">
             <h6 class="title">circulating supply</h6>
-            <div class="gold"><%= @presenter_obj.client_token_symbol%>&nbsp;<%= @presenter_obj.dashboard_details.circulating_supply %></div>
-            <div class="gold">$<%= @presenter_obj.dashboard_details.circulating_supply_dollar %></div>
+            <div class="gold"><%= client_token_symbol %>&nbsp;<%= circulating_supply %></div>
           </div>
         </div>
         <div class="col-4 text-center">
           <div class="stats-col p-3">
-            <h6 class="title">total volume</h6>
-            <div class="gold"><%= ost_currency_symbol %>&nbsp;<%= @presenter_obj.dashboard_details.total_volume %></div>
-            <div class="gold">$<%= @presenter_obj.dashboard_details.total_volume_dollar %></div>
+            <h6 class="title">Economy Users</h6>
+            <div class="gold"><%= @presenter_obj.dashboard_details.economy_users %></div>
           </div>
         </div>
       </div>
@@ -77,7 +79,7 @@
         <div class="row">
           <div class="col-9 graph-container pr-0" id="lineChart"></div>
           <div class="col-3 graph-container pie-chart-container p-0">
-            <div class="text-center" id="noVolumeHTML" style="display:none;">
+            <div class="mx-auto" id="noVolumeHTML" style="display:none;">
               Insignificant volume to display
             </div>
             <div class="mx-auto pie-chart-wrapper">
@@ -151,9 +153,9 @@
   <script type="text/javascript">
     $(function () {
       ost.dashboard.init({
-        transactions_and_ost_volume_url: {"day":"https://s3.amazonaws.com/graphs.stagingost.com/s6-main/graphs/1065/total-transactions-by-day.json?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIG7G5KJ53INDY36A%2F20190404%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20190404T143053Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=5b0a511f76e73761264fd8eeb64e8a26d3f45cf62c98807a4b1c4ed04a6fcd45","week":"https://s3.amazonaws.com/graphs.stagingost.com/s6-main/graphs/1065/total-transactions-by-week.json?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIG7G5KJ53INDY36A%2F20190404%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20190404T143053Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=f8f08f17dd28734b0d1364ec137619b4b24da6fd00dcb2484d9fe8bb52dd2fe8","month":"https://s3.amazonaws.com/graphs.stagingost.com/s6-main/graphs/1065/total-transactions-by-month.json?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIG7G5KJ53INDY36A%2F20190404%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20190404T143053Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=93f36391a2334b65fdaef67897dccc7afb399c22b2a0725d14731874aa2b6d1c","year":"https://s3.amazonaws.com/graphs.stagingost.com/s6-main/graphs/1065/total-transactions-by-year.json?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIG7G5KJ53INDY36A%2F20190404%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20190404T143053Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=696c8b9cba8835cd777a930660f6eb8dcbead40f7bee52eb4a89e1837490c545"},
-        transaction_by_type_url: {"day":"https://s3.amazonaws.com/graphs.stagingost.com/s6-main/graphs/1065/transactions-by-type-by-day.json?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIG7G5KJ53INDY36A%2F20190404%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20190404T143053Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=b3fcec1230a7ae6496d9bb6e9576b79a12a952ddcc1b5e6cf827a20c44e6c70d","week":"https://s3.amazonaws.com/graphs.stagingost.com/s6-main/graphs/1065/transactions-by-type-by-week.json?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIG7G5KJ53INDY36A%2F20190404%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20190404T143053Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=9263e0d27b1ba255660fea5b26b37d00d2828daf47c3cc91308f44fef11152ec","month":"https://s3.amazonaws.com/graphs.stagingost.com/s6-main/graphs/1065/transactions-by-type-by-month.json?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIG7G5KJ53INDY36A%2F20190404%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20190404T143053Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=01fbace79216e7524b404ef75ef20b4510777db7fe87b58887481b423f4391f9","year":"https://s3.amazonaws.com/graphs.stagingost.com/s6-main/graphs/1065/transactions-by-type-by-year.json?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIG7G5KJ53INDY36A%2F20190404%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20190404T143053Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=165910ae58185e4c89cb5400562244f7ed32e48787387f6a093477574046b57a"},
-        transaction_by_name_url: {"day":"https://s3.amazonaws.com/graphs.stagingost.com/s6-main/graphs/1065/transactions-by-name-by-day.json?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIG7G5KJ53INDY36A%2F20190404%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20190404T143053Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=34ac5b24185803cbe15041155be74190613e04cf8e5791d25786837e52c0c59d","week":"https://s3.amazonaws.com/graphs.stagingost.com/s6-main/graphs/1065/transactions-by-name-by-week.json?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIG7G5KJ53INDY36A%2F20190404%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20190404T143053Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=47839ede69878d43e346b48711bb8fd369e4b91398d39f0cc38fabe59ef07060","month":"https://s3.amazonaws.com/graphs.stagingost.com/s6-main/graphs/1065/transactions-by-name-by-month.json?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIG7G5KJ53INDY36A%2F20190404%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20190404T143053Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=7e177f9185211a0819c98f041ea5a5956bfd701b203279389d51e0851d8114b8","year":"https://s3.amazonaws.com/graphs.stagingost.com/s6-main/graphs/1065/transactions-by-name-by-year.json?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=AKIAIG7G5KJ53INDY36A%2F20190404%2Fus-east-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20190404T143053Z\u0026X-Amz-Expires=7200\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=8b60c841f621d6ef18fe923b1de47d9e5f026035da24fbd703166da0c9fc1a0b"}
+        transactions_and_ost_volume_url: <%= raw column_chart_url.to_json() %>,
+        transaction_by_type_url: <%= raw tx_by_type_url.to_json() %>,
+        transaction_by_name_url: <%= raw tx_by_name_url.to_json() %>
       });
     });
   </script>

@@ -153,7 +153,7 @@
       {
         type: 'string',
         opt_label: 'Category',
-        opt_id: 'category'
+        opt_id: 'category_label'
       },
       {
         type: 'number',

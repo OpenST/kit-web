@@ -140,7 +140,10 @@
         ;
   
         data = data.map(function ( item ) {
-          var val =  item['value'] ;
+          var val =  item['value'] ,
+              category = item['category']
+          ;
+          item['category_label']  = category && category.replace(/_/g, ' ');
           val =  Number( val );
           item['value'] = val ;
           total +=  val ;

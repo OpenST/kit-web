@@ -151,7 +151,7 @@
         }
   
         oThis.updateLegend( data );
-        total = Number( total );
+        total = BigNumber( String( total ) ).decimalPlaces( precision ).toString();
         jPieChartContainer.find(sNoVolumeHTML).hide();
         $('.total-transactions-value').text( total );
         config.readyHandler = function () {

@@ -42,12 +42,18 @@
 
       initCharts: function(){
         preHtml = $('#tx_by_type').html() ;
+        oThis.updateTransactionAndOstVolumeGraphConfig();
         oThis.transactionAndOstVolumeGraph = new GoogleCharts();
         oThis.transactionByNameGraph = new GoogleCharts();
         oThis.transactionByTypeLineGraph = new GoogleCharts();
         oThis.drawTransactionAndOstVolumeGraph() ;
         oThis.drawTransactionByTypeLineGraph() ;
         oThis.drawTransactionByNameGraph() ;
+      },
+
+      updateTransactionAndOstVolumeGraphConfig: function(){
+        var seriesConfig = utilities.deepGet(transactions_and_ost_volume,'options.series');
+        seriesConfig[1].labelInLegend = 'Volume of Transactions in '+ oThis.token_symbol+' (right axis)';
       },
 
       setAxisConfiguration: function(config, filter, res) {

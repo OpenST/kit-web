@@ -26,7 +26,7 @@
     options:{
       series: {
         0: {
-          labelInLegend: 'Type  of Transaction',
+          labelInLegend: 'Name of Transactions',
           color: 'f6c62b'
         }
 

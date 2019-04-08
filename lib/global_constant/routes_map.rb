@@ -16,9 +16,9 @@ module GlobalConstant
           token_mint_progress:  "/#{GlobalConstant::Environment.url_prefix}/token/mint-progress/",
           developer:            "/#{GlobalConstant::Environment.url_prefix}/developer/",
           team:                 "/settings/team/",
+          company_information:  "/settings/company-information/",
           setup_mfa:            "/mfa/",
           authenticate_mfa:     "/mfa/",
-          company_information:  "/settings/company-information/",
           service_unavailable:  "/service-unavailable/",
           verify_email:         "/verify-email/",
           login:                "/login/",
@@ -44,13 +44,13 @@ module GlobalConstant
             reset_mfa_endpoint:   "/api/setting/team/reset-mfa",
             resend_admin_invite:  "/api/setting/team/resend-admin-invite",
             api_invite_admin:     "/api/setting/team/invite-admin",
+            api_save_company_info:"/api/setting/company-information",
             api_sign_up:          "/api/sign-up",
             api_send_verify_email_link:"/api/verify-email/request-link",
             api_login:            "/api/login",
             api_mfa:              "/api/mfa",
             api_reset_password:   "/api/reset-password",
-            api_send_reset_password_link:"/api/reset-password/request-link",
-            api_save_company_info:"/api/company-information"
+            api_send_reset_password_link:"/api/reset-password/request-link"
         }
       end
 

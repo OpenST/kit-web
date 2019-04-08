@@ -4,7 +4,13 @@
       <div class="col-6 mx-auto">
         <h3 class="mb-2 text-center">Welcome to OST Platform</h3>
         <div class="mb-3 text-center company-info-sub-header">We need some additional information to help you get started</div>
-        <form id="company_info_form" class="user-form" action="<%= GlobalConstant::RoutesMap.getApis()[:api_save_company_info] %>" method="POST">
+        <form
+          id="company_info_form"
+          class="user-form"
+          action="<%= GlobalConstant::RoutesMap.getApis()[:api_save_company_info] %>"
+          method="POST"
+          data-ost-formhelper
+        >
           <div class="form-group" >
             <label class="form-label text-uppercase" data-forid="company_name">COMPANY NAME</label>
             <input id="company_name" type="text"

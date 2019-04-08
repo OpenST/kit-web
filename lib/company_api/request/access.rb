@@ -77,8 +77,8 @@ module CompanyApi
       # * Date: 08/04/2019
       # * Reviewed By:
       #
-      def company_information
-        get('company-information')
+      def company_information(params)
+        get('company-information',params)
       end
 
     end

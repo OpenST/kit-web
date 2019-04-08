@@ -18,7 +18,7 @@
         {{ getUserRoleText privileges }}
       </small>
     </div>
-    <div class="col-4 text-uppercase" style="font-size: 14px;">{{manager.name}}</div>
+    <div class="col-4 text-uppercase" style="font-size: 14px;">{{#if manager.first_name}}{{manager.first_name}} {{manager.last_name}}{{else}}&mdash; &mdash;{{/if}}</div>
     <div class="col-2 text-uppercase" style="font-size: 14px">{{manager.status}}</div>
     <% if @presenter_obj.is_super_admin? %>
 

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get '/update-password' => :update_password
     get '/verify-email' => :verify_email
     get '/mfa' => :mfa
+    get '/company-information' => :company_information
     get '/invalid-token' => :invalid_token
   end
 

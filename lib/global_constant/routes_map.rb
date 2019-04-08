@@ -18,6 +18,7 @@ module GlobalConstant
           team:                 "/settings/team/",
           setup_mfa:            "/mfa/",
           authenticate_mfa:     "/mfa/",
+          company_information:  "/company-information/",
           service_unavailable:  "/service-unavailable/",
           verify_email:         "/verify-email/",
           login:                "/login/",
@@ -48,7 +49,8 @@ module GlobalConstant
             api_login:            "/api/login",
             api_mfa:              "/api/mfa",
             api_reset_password:   "/api/reset-password",
-            api_send_reset_password_link:"/api/reset-password/request-link"
+            api_send_reset_password_link:"/api/reset-password/request-link",
+            api_save_company_info:"/api/company-information"
         }
       end
 

@@ -173,6 +173,10 @@ module WebPresenter
       @params[:controller]
     end
 
+    def is_company_information_route?
+      ['company_information'].include?(action) && ['web/user'].include?(controller)
+    end
+
     def is_dashboard_route?
       ['dashboard'].include?(action) && ['web/economy'].include?(controller)
     end

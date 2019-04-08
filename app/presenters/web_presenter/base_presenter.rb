@@ -94,6 +94,18 @@ module WebPresenter
         end
       end
     end
+    
+    def first_name_for_client_manager
+      @first_name ||= begin
+        manager.present? ? manager.first_name : nil
+      end
+    end
+
+    def last_name_for_client_manager
+      @last_name ||= begin
+        manager.present? ? manager.last_name : nil
+      end
+    end
 
     def client_token_name
       @c_t_nam ||= begin

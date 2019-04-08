@@ -37,7 +37,7 @@ class Web::UserSettingController < Web::BaseController
   # * Reviewed By: Kedar
   #
   def company_information
-    @response = CompanyApi::Request::Access.new(
+    @response = CompanyApi::Request::Setting.new(
         CompanyApi::Response::Formatter::Manager,
         request.cookies,
         {"User-Agent" => http_user_agent}

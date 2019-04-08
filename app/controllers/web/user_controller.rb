@@ -86,7 +86,7 @@ class Web::UserController < Web::BaseController
   end
 
   def company_information
-
+    render 'company_information'
   end
 
   # Kit Login

@@ -31,7 +31,7 @@
         sNoVolumeHTML    = '#noVolumeHTML'
     ;
     
-    var preHtml , precision = 5 ;
+    var preHtml , precision = 5 ,  defaultFilter = "week";
     
     var oThis = ost.dashboard = {
       init: function (config) {
@@ -57,17 +57,16 @@
       },
 
       setAxisConfiguration: function(config, filter, res) {
-        if(filter){
-          var hAxis = utilities.deepGet( config , 'options.hAxis' ),
-            gridlines = hAxis['gridlines'] ,
-            columns = config['columns']
-          ;
-          gridlines['count'] = filterOptionsMap[filter].count;
-          hAxis['format']=filterOptionsMap[filter].format;
-          columns[0] = filterOptionsMap[filter].columns_1;
-        }
-
-        if( res && filter == "week" ){
+        filter = filter || defaultFilter ;
+        var hAxis = utilities.deepGet( config , 'options.hAxis' ),
+          gridlines = hAxis['gridlines'] ,
+          columns = config['columns']
+        ;
+        gridlines['count'] = filterOptionsMap[filter].count;
+        hAxis['format']=filterOptionsMap[filter].format;
+        columns[0] = filterOptionsMap[filter].columns_1;
+        
+        if( res && filter == defaultFilter  ){
           var result_type = utilities.deepGet(res ,  'data.result_type'),
               ticks = []
           ;
@@ -215,14 +214,9 @@
         $(sDateContainer).html(displayDate);
       },
 
-      getAjaxUrl: function (apis ,  val ) {
-         if(!val ){
-           var url = apis['day'];
-           return url;
-         }else {
-           var url = apis[val];
-           return url;
-         }
+      getAjaxUrl: function (apis , filter ) {
+        filter =  filter || defaultFilter ;
+        return apis[filter];
       },
 
       bindActions :function () {

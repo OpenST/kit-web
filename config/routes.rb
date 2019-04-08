@@ -18,12 +18,12 @@ Rails.application.routes.draw do
     get '/update-password' => :update_password
     get '/verify-email' => :verify_email
     get '/mfa' => :mfa
-    get '/company-information' => :company_information
     get '/invalid-token' => :invalid_token
   end
 
   scope 'settings', controller: 'web/user_setting', :format => false do
     get '/team' => :team
+    get '/company-information' => :company_information
   end
 
   scope "#{GlobalConstant::Environment.url_prefix}", controller: 'web/economy', :format => false do

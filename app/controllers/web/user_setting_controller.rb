@@ -30,5 +30,25 @@ class Web::UserSettingController < Web::BaseController
     @fe_no_nav = true
   end
 
+  # Kit Company Information Page
+  #
+  # * Author: Puneet
+  # * Date: 03/01/2019
+  # * Reviewed By: Kedar
+  #
+  def company_information
+    @response = CompanyApi::Request::Access.new(
+        CompanyApi::Response::Formatter::Manager,
+        request.cookies,
+        {"User-Agent" => http_user_agent}
+    ).company_information({})
+
+    unless @response.success?
+      return handle_temporary_redirects(@response)
+    end
+
+    @presenter_obj = ::WebPresenter::ManagerPresenter.new(@response, params)
+  end
+
 
 end

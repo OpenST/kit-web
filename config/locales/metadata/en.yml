@@ -94,6 +94,29 @@ en:
         :specific_css_required: 1
         :specific_js_required: 1
 
+    company_information:
+      :meta:
+        :title: 'OST Platform | Company Information'
+        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+        :canonical: '%{canonical}'
+        :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
+        :name: 'OST'
+        :robots: 'noindex, nofollow'
+        :og:
+          :title: 'OST Platform | Company Information'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :type: 'website'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
+          :url: '%{og_url}'
+        :twitter:
+          :card: 'summary_large_image'
+          :title: 'OST Platform | Company Information'
+          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
+          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
+      :assets:
+        :specific_css_required: 1
+        :specific_js_required: 0
+
   web/user:
     login:
       :meta:
@@ -255,29 +278,6 @@ en:
       :assets:
         :specific_css_required: 1
         :specific_js_required: 1
-
-    company_information:
-      :meta:
-        :title: 'OST Platform | Company Information'
-        :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
-        :canonical: '%{canonical}'
-        :keywords: 'OST, Simple Token, Utility Chain, Blockchain'
-        :name: 'OST'
-        :robots: 'noindex, nofollow'
-        :og:
-          :title: 'OST Platform | Company Information'
-          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
-          :type: 'website'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
-          :url: '%{og_url}'
-        :twitter:
-          :card: 'summary_large_image'
-          :title: 'OST Platform | Company Information'
-          :description: 'The OST Platform enables you to easily add brand currency into any app to strengthen direct-to-consumer relationships'
-          :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
-      :assets:
-        :specific_css_required: 0
-        :specific_js_required: 0
 
     admin_invite:
       :meta:

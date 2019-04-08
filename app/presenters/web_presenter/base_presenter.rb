@@ -174,7 +174,7 @@ module WebPresenter
     end
 
     def is_company_information_route?
-      ['company_information'].include?(action) && ['web/user'].include?(controller)
+      ['company_information'].include?(action) && ['web/user_setting'].include?(controller)
     end
 
     def is_dashboard_route?

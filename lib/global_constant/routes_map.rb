@@ -18,7 +18,7 @@ module GlobalConstant
           team:                 "/settings/team/",
           setup_mfa:            "/mfa/",
           authenticate_mfa:     "/mfa/",
-          company_information:  "/company-information/",
+          company_information:  "/settings/company-information/",
           service_unavailable:  "/service-unavailable/",
           verify_email:         "/verify-email/",
           login:                "/login/",

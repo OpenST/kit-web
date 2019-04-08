@@ -89,6 +89,16 @@
     background-color: transparent;
     color: #9ec2d3;
   }
+  &.grey-out{
+    color: $white;
+    background-color: $mystic;
+    .slider.round {
+      background-color: $white;
+    }
+    .slider.round::before{
+      background-color: $mystic;
+    }
+  }
 }
 
 /* Sandbox Test Data Banner starts */

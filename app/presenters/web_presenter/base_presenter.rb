@@ -119,6 +119,12 @@ module WebPresenter
       end
     end
 
+    def client_token_ubt_address
+      @c_t_ubt ||= begin
+        client_token.present? ? client_token.ubt_address : nil
+      end
+    end
+
     def client_token_conversion_factor
       @c_t_cfac ||= begin
         client_token.present? ? client_token.conversion_factor : nil

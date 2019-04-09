@@ -48,6 +48,10 @@ module CompanyApi
           data["total_volume_dollar"]
         end
 
+        def economy_users
+          data["economy_users"]
+        end
+        
       end
 
     end

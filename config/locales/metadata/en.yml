@@ -347,7 +347,7 @@ en:
           :image: 'https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/og-images/ost-platform-og-image-new-1.png'
       :assets:
         :specific_css_required: 1
-        :specific_js_required: 0
+        :specific_js_required: 1
 
     token_setup:
       :meta:

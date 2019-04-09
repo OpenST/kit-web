@@ -20,10 +20,9 @@
     type: null,
     tsUnixToJs: true,
     noDataHTML: '<div class="noDataHTML">No data to populate graphs</div>',
+    errorHTML: '<div class="errorHTML">Something went wrong!</div>',
     loadingHTML: '<div style="width:60px;font-size:12px;margin:0 auto">Loading...</div>',
-    loadingCSS: {
-      'filter' : 'blur(5px)'
-    },
+    loadingClass: 'blur-content-5',
 
     /*
      * Initiates Google Charts by google.charts.load
@@ -38,13 +37,25 @@
       }
     },
 
+    showHideLoading : function( isToBlur ){
+      var oThis =this,
+          jELBlur = $(oThis.selector).find('> div');
+      if( jELBlur && oThis.loadingClass ) {
+        isToBlur ?  jELBlur.addClass( oThis.loadingClass ) : jELBlur.removeClass( oThis.loadingClass );
+      }
+      $(oThis.selector).prepend('<span class="loading-wrapper" style="position:absolute;left:0;z-index:1;width:100%;">'+oThis.loadingHTML+'</span>');
+    },
+
     /*
      * Draw method to be called externally
      * Can pass config here
      */
-    draw: function(config){
+    draw: function(config , callback ){
       var oThis = this;
-      $.extend( oThis, config );
+
+      if( config ){
+        $.extend( oThis, config );
+      }
 
       if ( ($.isEmptyObject(oThis.data) && $.isEmptyObject(oThis.ajax)) || !oThis.selector || !oThis.type ){
         console.warn('Mandatory inputs for Google charts are missing [data OR ajax, options, selector, type]');
@@ -56,27 +67,37 @@
         return false;
       }
 
-      var jELBlur = $(oThis.selector).find('> div');
-      if( jELBlur && oThis.loadingCSS ) {
-        jELBlur.css( oThis.loadingCSS );
-      }
-
-      $(oThis.selector).prepend('<div style="position:absolute;left:0;z-index:1;width:100%;">'+oThis.loadingHTML+'</div>');
-
       if(!$.isEmptyObject(oThis.ajax)){
         var ajaxObj = {
-          success: function(response){
-            oThis.data = oThis.ajaxCallback(response);
-            console.log('AJAX data: ', oThis.data);
-            console.log('Drawing chart using AJAX data and callback...');
-            if(oThis.data.length === 0){
-              oThis.renderBlank();
+          beforeSend: function(){
+            oThis.showHideLoading( true );
+          },
+          success: function(response) {
+            if( response.success ){
+              oThis.data = oThis.ajaxCallback(response);
+              console.log('AJAX data: ', oThis.data);
+              console.log('Drawing chart using AJAX data and callback...');
+              if(oThis.data.length === 0){
+                oThis.renderBlank();
+              } else {
+                oThis.render();
+              }
             } else {
-              oThis.render();
+              oThis.renderError();
+            }
+            callback && callback( response );
+          },
+          error: function (jqxhr, error) {
+            // if error code != 404 then show error screen, else blank screen
+            if(jqxhr.status !== 404) {
+              oThis.renderError();
+            } else {
+              oThis.renderBlank();
             }
           }
         };
         $.extend( ajaxObj, oThis.ajax );
+
         $.ajax(ajaxObj);
       } else {
         console.log('Drawing chart using using data...');
@@ -110,19 +131,32 @@
     /*
      * Rendering chart
      */
-    render: function(){
+    render: function( ){
       var oThis = this;
       google.charts.setOnLoadCallback(function(){
-        var data = oThis.makeData(oThis.data);
-        console.log('Drawing '+oThis.type+' chart in '+oThis.selector);
-        var chart = new google.visualization[oThis.type]($(oThis.selector)[0]);
+        var data = oThis.makeData(oThis.data),
+          sSelector = oThis.graphSelector || oThis.selector
+        ;
+        $(oThis.selector).find('.loader').hide();
+        console.log('Drawing '+oThis.type+' chart in '+sSelector);
+        var chart = new google.visualization[oThis.type]($(sSelector)[0]);
+        google.visualization.events.addListener(chart, 'ready', oThis.readyHandler);
         chart.draw(data, oThis.options);
       });
+    },
+
+    readyHandler: function(){
+      console.log("Override this method");
     },
 
     renderBlank: function(){
       var oThis = this;
       $(oThis.selector).html(oThis.noDataHTML);
+    },
+
+    renderError: function(){
+      var oThis = this;
+      $(oThis.selector).html(oThis.errorHTML);
     },
 
     /*
@@ -141,6 +175,12 @@
       if($.isEmptyObject(response_data)){
         return [];
       }
+      return oThis.dataParser(response_data);
+    },
+
+    dataParser: function(response_data){
+      if(!response_data || response_data.length === 0) return;
+      var oThis = this;
       var data = [];
       var header_temp = Object.keys(response_data[0]);
       var header = [];
@@ -153,7 +193,7 @@
           }
         });
       } else {
-        var header = header_temp;
+        header = header_temp;
       }
       data.push(header);
       $.each( response_data, function( index, value ) {

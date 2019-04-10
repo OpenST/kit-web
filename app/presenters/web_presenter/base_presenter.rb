@@ -121,13 +121,13 @@ module WebPresenter
 
     def client_token_ubt_address
       @c_t_ubt ||= begin
-        client_token.present? ? client_token.ubt_address : nil
+        client_token.present? ? client_token.ubt_address : '' #optional variable. Thus assigning empty string
       end
     end
 
     def client_aux_chain_id
       @c_t_aci ||= begin
-        client_token.present? ? client_token.aux_chain_id : nil
+        client_token.present? ? client_token.aux_chain_id : '' #optional variable. Thus assigning empty string
       end
     end
 

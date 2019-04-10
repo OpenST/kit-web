@@ -125,6 +125,12 @@ module WebPresenter
       end
     end
 
+    def client_aux_chain_id
+      @c_t_aci ||= begin
+        client_token.present? ? client_token.aux_chain_id : nil
+      end
+    end
+
     def client_token_conversion_factor
       @c_t_cfac ||= begin
         client_token.present? ? client_token.conversion_factor : nil

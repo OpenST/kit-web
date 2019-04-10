@@ -12,6 +12,10 @@
   sandbox_token_name = @presenter_obj.client_token_name
   sandbox_token_symbol = @presenter_obj.client_token_symbol
   is_super_admin = true #@presenter_obj.is_super_admin?
+
+  aux_chain_id = @presenter_obj.client_aux_chain_id
+  token_address = @presenter_obj.client_token_ubt_address
+  view_token_url = "/token/ec-"+aux_chain_id+"-"+token_address
 %>
 <%= render :partial => "/shared/web/common/sidebar-icons.svg" %>
 
@@ -78,7 +82,8 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_client_token_deployed? ? '' : 'disabled to-enable-on-setup' %>"  href="<%= GlobalConstant::CompanyOtherProductUrls.view_root_url %>" target="_blank">
+      <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_client_token_deployed? ? '' : 'disabled to-enable-on-setup' %>"
+         href="<%= GlobalConstant::CompanyOtherProductUrls.view_root_url + view_token_url %>" target="_blank">
         <svg class="icon">
           <switch>
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-bt-explorer"></use>

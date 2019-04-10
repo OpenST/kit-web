@@ -127,7 +127,7 @@ module WebPresenter
 
     def client_aux_chain_id
       @c_t_aci ||= begin
-        client_token.present? ? client_token.aux_chain_id : nil
+        client_token.present? ? client_token.aux_chain_id.to_s : nil
       end
     end
 

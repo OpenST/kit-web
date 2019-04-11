@@ -218,6 +218,10 @@ module WebPresenter
         formatter_obj.present? ? formatter_obj.sub_env_payloads : nil
       end
     end
+    
+    def is_setup_mfa_present
+      formatter_obj.manager.properties.include?('has_setup_mfa')
+    end
 
   end
 

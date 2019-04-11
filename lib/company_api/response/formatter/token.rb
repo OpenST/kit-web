@@ -31,6 +31,7 @@ module CompanyApi
         def perform
           set_token(@data['token'])
           set_price_points(@data['price_points'])
+          set_manager(@data['manager']) if @data['manager'].present?
           set_client_manager(@data['client_manager'])
           set_contract_details(@data['contract_details'])
           set_gas_price(@data['gas_price'])

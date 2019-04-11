@@ -2,8 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-6 mx-auto">
-        <h3 class="mb-2 text-center">Welcome to OST Platform</h3>
-        <div class="mb-3 text-center company-info-sub-header">We need some additional information to help you get started</div>
+        <h3 class="mb-4 text-center company-info-header">Help Us Optimize your OST Platform Experience</h3>
         <form
           id="company_info_form"
           class="user-form"
@@ -18,7 +17,7 @@
             <div class="invalid-feedback" data-forid="company_name">&nbsp;</div>
           </div>
           <div class="form-group" >
-            <label class="form-label text-uppercase mb-0" data-forid="mobile_app_flag_yes">DO YOU HAVE A MOBILE APP?</label>
+            <label class="form-label text-uppercase mb-0" data-forid="mobile_app_flag_yes">DO YOU HAVE A iOS OR ANDROID MOBILE APP?</label>
             <div class="row">
               <div class="col-2">
                 <input class="form-check-input radio-button"
@@ -35,23 +34,23 @@
             </div>
           </div>
           <div class="form-group" >
-            <label class="form-label text-uppercase mb-0" data-forid="one_m_users_flag_yes">DO YOU HAVE >1 MONTHLY ACTIVE USERS?</label>
+            <label class="form-label text-uppercase mb-0" data-forid="one_m_users_flag_yes">HOW MANY MONTHLY USERS DO YOU HAVE?</label>
             <div class="row">
-              <div class="col-2">
+              <div class="col-2 pr-0">
                 <input class="form-check-input radio-button"
-                       id="one_m_users_flag_yes" type="radio" name="one_m_users_flag" value="1" checked/>
+                       id="one_m_users_flag_yes" type="radio" name="one_m_users_flag" value="0" checked/>
                 <label class="form-check-label radio-button-label" for="one_m_users_flag_yes">
-                  <span class="radio-button-circle"></span>Yes</label>
+                  <span class="radio-button-circle"></span>< 1M</label>
               </div>
-              <div class="col-2">
+              <div class="col-2 pr-0">
                 <input class="form-check-input radio-button"
-                       id="one_m_users_flag_no" type="radio" name="one_m_users_flag" value="0"/>
+                       id="one_m_users_flag_no" type="radio" name="one_m_users_flag" value="1"/>
                 <label class="form-check-label radio-button-label" for="one_m_users_flag_no">
-                  <span class="radio-button-circle"></span>No</label>
+                  <span class="radio-button-circle"></span>> 1M</label>
               </div>
             </div>
           </div>
-          <div class="row mt-4">
+          <div class="row mt-5">
             <div class="col-12">
               <button id="save_company_info_form" type="submit" data-submiting="Saving..."
                       class="mt-1 btn btn-gold d-inline-block float-left">Save</button>

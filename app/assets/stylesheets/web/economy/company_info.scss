@@ -4,7 +4,8 @@
 // Import theme variables
 @import "../Starboy/variables";
 
-.company-info-sub-header{
-  color: $blue-700;
-  font-weight: $font-weight-light;
+.company-info-header{
+  color: $cyan;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-sm;
 }

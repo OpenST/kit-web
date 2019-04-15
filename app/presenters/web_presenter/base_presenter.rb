@@ -94,6 +94,18 @@ module WebPresenter
         end
       end
     end
+    
+    def first_name_for_client_manager
+      @first_name ||= begin
+        manager.present? ? manager.first_name : nil
+      end
+    end
+
+    def last_name_for_client_manager
+      @last_name ||= begin
+        manager.present? ? manager.last_name : nil
+      end
+    end
 
     def client_token_name
       @c_t_nam ||= begin
@@ -104,6 +116,18 @@ module WebPresenter
     def client_token_symbol
       @c_t_sym ||= begin
         client_token.present? ? client_token.symbol : nil
+      end
+    end
+
+    def client_token_ubt_address
+      @c_t_ubt ||= begin
+        client_token.present? ? client_token.ubt_address : '' #optional variable. Thus assigning empty string
+      end
+    end
+
+    def client_aux_chain_id
+      @c_t_aci ||= begin
+        client_token.present? ? client_token.aux_chain_id : '' #optional variable. Thus assigning empty string
       end
     end
 
@@ -161,6 +185,10 @@ module WebPresenter
       @params[:controller]
     end
 
+    def is_company_information_route?
+      ['company_information'].include?(action) && ['web/user_setting'].include?(controller)
+    end
+
     def is_dashboard_route?
       ['dashboard'].include?(action) && ['web/economy'].include?(controller)
     end
@@ -189,6 +217,10 @@ module WebPresenter
       @s_env_pl ||= begin
         formatter_obj.present? ? formatter_obj.sub_env_payloads : nil
       end
+    end
+    
+    def is_setup_mfa_present
+      formatter_obj.manager.properties.include?('has_setup_mfa')
     end
 
   end

@@ -7,7 +7,7 @@ module CompanyApi
       class Base
 
         attr_reader :manager, :client, :client_token, :oracle_price_points, :chain_interaction_params,
-                    :client_token_planner, :client_balances, :token_supply_details, :pending_critical_interactions,
+                    :client_token_planner, :client_balances, :first_name, :last_name, :token_supply_details, :pending_critical_interactions,
                     :client_manager, :contract_details, :gas_price, :auxiliary_addresses, :origin_addresses,
                     :workflow, :workflow_current_step, :sign_messages, :sub_env_payloads
 
@@ -111,6 +111,35 @@ module CompanyApi
           @client_balances = CompanyApi::Response::Entity::ClientBalances.new(client_balances_data, @client_token)
         end
 
+        # Set first name for manager
+        #
+        # * Author: Dhananjay
+        # * Date: 05/04/2019
+        # * Reviewed By:
+        #
+        # @param [Hash] manager_data (mandatory) - manager_data name
+        #
+        # Sets @first_name
+        #
+        def set_first_name(manager_data)
+          @first_name = CompanyApi::Response::Entity::Manager.new(manager_data)
+        end
+
+        # Set last name for manager
+        #
+        # * Author: Dhananjay
+        # * Date: 02/02/2018
+        # * Reviewed By:
+        #
+        # @param [Hash] manager_data (mandatory) - manager_data
+        #
+        # Sets @last_name
+        #
+        def set_last_name(manager_data)
+          @last_name = CompanyApi::Response::Entity::Manager.new(manager_data)
+        end
+        
+        
         # Set token supply details
         #
         # * Author: Puneet

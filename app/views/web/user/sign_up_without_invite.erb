@@ -1,25 +1,43 @@
 <div class="container-fluid m-auto" style="overflow-y: scroll">
   <div class="row">
     <div class="container">
-      <div class="row">
+      <div class="row py-6">
         <div class="col-md-6 mx-auto">
           <form id="sign_up_form" class="user-form"
                 action="<%=GlobalConstant::RoutesMap.getApis()[:api_sign_up] %>" method="POST">
 
-            <h3 class="text-center pt-2" style="font-size: 2rem;">Register
-            </h3>
+            <h3 class="text-center pt-2" style="font-size: 2rem;">Register</h3>
 
-            <p class="text-center small mb-0">
-              Access is currently available to whitelisted accounts. To request access please <a href="https://goo.gl/forms/26zom9yYqZ1IJQbD3" target="_blank">submit this form</a>. If you are on the whitelist please register below.
-            </p>
+<!--            <p class="text-center small mb-0">-->
+<!--              Access is currently available to whitelisted accounts. To request access please <a href="https://goo.gl/forms/26zom9yYqZ1IJQbD3" target="_blank">submit this form</a>. If you are on the whitelist please register below.-->
+<!--            </p>-->
 
             <div class="general_error invalid-feedback" data-forid="sign_up_form">&nbsp;</div>
+
+            <div class="form-group mb-2">
+              <div class="row">
+                <div class="col-6">
+                  <label class="form-label" data-forid="first_name">First Name</label>
+
+                  <input id="first-name" maxlength="30" minlength="3" type="text" name="first_name" class="form-control" title="First Name"
+                         aria-describedby="emailHelp" placeholder="First Name" required autofocus/>
+                  <div class="invalid-feedback" data-forid="first_name">&nbsp;</div>
+                </div>
+                <div class="col-6">
+                  <label class="form-label" data-forid="last_name">Last Name</label>
+
+                  <input id="last-name" maxlength="30" minlength="3" type="text" name="last_name" class="form-control" title="Last Name"
+                         aria-describedby="emailHelp" placeholder="Last Name" required />
+                  <div class="invalid-feedback" data-forid="last_name">&nbsp;</div>
+                </div>
+              </div>
+            </div>
 
             <div class="form-group mb-2" id="emailFormGrp">
               <label class="form-label" data-forid="email">Email address</label>
 
               <input id="user-email" type="email" name="email" class="form-control" title="Email"
-                     aria-describedby="emailHelp" placeholder="Enter email" required autofocus/>
+                     aria-describedby="emailHelp" placeholder="Enter email" required/>
               <div class="invalid-feedback" data-forid="email">&nbsp;</div>
             </div>
 

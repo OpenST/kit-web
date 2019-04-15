@@ -1,6 +1,7 @@
 <%
   bt_symbol = @presenter_obj.client_token_symbol
   activate_test_economy_api_route =  GlobalConstant::RoutesMap.getApis()[:api_activate_test_economy]
+  api_invite_to_test_economy = GlobalConstant::RoutesMap.getApis()[:api_invite_to_test_economy]
   has_setup_test_economy = @presenter_obj.client.has_setup_test_economy?
 %>
 
@@ -37,11 +38,14 @@
                 </switch>
               </svg>
             </div>
-            <div class="col-8 pl-0 my-auto">
+            <div class="col-5 pl-0 my-auto">
               <p class="mb-0">Get OST demo App and Scan QR code to join the economy</p>
             </div>
             <div class="col-3 my-auto">
-              <a href="" class="btn btn-secondary">  download ost</a>
+              <a href="" class="btn btn-secondary">download(ios)</a>
+            </div>
+            <div class="col-3 my-auto">
+              <a href="" class="btn btn-secondary">download(Android)</a>
             </div>
           </div>
         </div>
@@ -60,7 +64,37 @@
               <p class="mb-0">Invite Economy users via Email</p>
             </div>
             <div class="col-3 my-auto">
-              <a href="" class="btn btn-secondary">Send OR code</a>
+              <button type="button" data-toggle="modal" data-target="#invite-economy-modal" class="btn btn-secondary">Send OR code</button>
+
+              <!-- invite economy modal -->
+              <div class="modal fade" id="invite-economy-modal" tabindex="-1" role="dialog" aria-labelledby="inviteEconomyLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="inviteEconomyLabel">Invite Economy</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form id="invite-economy-form" action="<%= api_invite_to_test_economy %>" method="POST">
+                        <div>
+                          <div class="form-group">
+                            <label class="form-label float-left" for="emailAddresses">Password</label>
+                            <input type="text" name="email-addresses" class="form-control form-control-input-group" placeholder="Email addresses">
+                          </div>
+                          <div class="form-group">
+                            <button type="submit" id="submit-email-addresses-btn" class="btn btn-primary" data-submiting="Submitting...">Submit</button>
+                          </div>
+                            <div class="invalid-feedback" data-forid="password">&nbsp;</div>
+                            <div class="general_error invalid-feedback"></div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- modal ends -->
             </div>
           </div>
         </div>
@@ -84,13 +118,14 @@
                 <p class="mb-0 shadow-box-info-text">Set up your test economy with OST servers</p>
               </div>
               <div class="col-4 my-auto text-right">
-
                 <button type="submit" id="launch-test-economy" data-submiting="Launching setup.." class="btn btn-primary d-inline">
                   Launch  setup
                 </button>
               </div>
             </div>
           </div>
+          <div class="invalid-feedback" data-forid="password">&nbsp;</div>
+          <div class="general_error invalid-feedback"></div>
         </div>
       </form>
     </div>
@@ -102,10 +137,7 @@
 <% content_for :end_js do %>
   <script type="text/javascript">
     $(function () {
-      ost.test_economy.init({
-
-
-      })
+      ost.test_economy.init();
     });
   </script>
 <% end %>

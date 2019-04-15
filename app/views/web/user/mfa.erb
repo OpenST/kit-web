@@ -4,6 +4,9 @@
   else
     qr_code_token = nil
   end
+
+  is_whitelisted_user = @presenter_obj.present? && @presenter_obj.sub_env_payloads.present? &&
+      @presenter_obj.sub_env_payloads.is_mainnet_whitelisted?
 %>
 
 <div class="container-fluid pt-6 mfa-wrapper">
@@ -48,7 +51,7 @@
               <div class="invalid-feedback">&nbsp;</div>
             </div>
 
-            <% if qr_code_token && false %>
+            <% if qr_code_token && !is_whitelisted_user %>
               <a class="btn btn-secondary" href="<%=GlobalConstant::RoutesMap.getRoutes()[:token_setup]%>">Set later</a>
             <%end%>
 

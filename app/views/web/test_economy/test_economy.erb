@@ -1,91 +1,104 @@
 <%
   bt_symbol = @presenter_obj.client_token_symbol
-  launch_setup_api_route =  GlobalConstant::RoutesMap.getApis()[:api_login]
+  activate_test_economy_api_route =  GlobalConstant::RoutesMap.getApis()[:api_activate_test_economy]
+  has_setup_test_economy = @presenter_obj.client.has_setup_test_economy?
 %>
+
 <div class="test-economy-container">
+
   <h3 class="text-center mt-5"> Test Your Branded Token Economy </h3>
-  <div class="test-economy-pre-setup ">
-    <form id="launch-setup-form" action="<%= launch_setup_api_route %>" method="POST">
-      <div class="row mt-5">
-        <div class="col-7 shadow-box mx-auto p-4">
+
+  <% if has_setup_test_economy %>
+
+    <div class="test-economy-post-setup d-block">
+      <div class="row mt-5  mb-6">
+        <div class="col-5 shadow-box mx-auto p-4 mb-6">
           <div class="row">
             <div class="col-8 my-auto">
-              <p class="mb-0 shadow-box-info-text">Set up your test economy with OST servers</p>
+              <p class="mb-0 shadow-box-info-text">Test economy successfully setup</p>
             </div>
-            <div class="col-4 my-auto text-right">
-
-              <button type="submit" id="launch-test-economy" data-submiting="Launching setup.." class="btn btn-primary d-inline">
-                Launch  setup
-              </button>
+            <div class="col-4 text-right">
+              <svg class="success-icon align-middle" style="width: 34px; height: 34px">
+                <switch>
+                  <use class="success-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
+                </switch>
+              </svg>
             </div>
           </div>
         </div>
       </div>
-    </form>
-  </div>
-  <div class="test-economy-post-setup d-block">
-    <div class="row mt-5  mb-6">
-      <div class="col-5 shadow-box mx-auto p-4 mb-6">
-        <div class="row">
-          <div class="col-8 my-auto">
-            <p class="mb-0 shadow-box-info-text">Test economy successfully setup</p>
-          </div>
-          <div class="col-4 text-right">
-            <svg class="success-icon align-middle" style="width: 34px; height: 34px">
-              <switch>
-                <use class="success-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
-              </switch>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row mt-5">
-      <div class="col-9 solid-background p-3 mx-auto">
-        <div class="row">
-          <div class="col-1 my-auto">
-            <svg class="get-ost-icon align-middle" style="width: 34px; height: 34px">
-              <switch>
-                <use class="get-ost-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#get-ost-icon"></use>
-              </switch>
-            </svg>
-          </div>
-          <div class="col-8 pl-0 my-auto">
-            <p class="mb-0">Get OST demo App and Scan QR code to join the economy</p>
-          </div>
-          <div class="col-3 my-auto">
-            <a href="" class="btn btn-secondary">  download ost</a>
+      <div class="row mt-5">
+        <div class="col-9 solid-background p-3 mx-auto">
+          <div class="row">
+            <div class="col-1 my-auto">
+              <svg class="get-ost-icon align-middle" style="width: 34px; height: 34px">
+                <switch>
+                  <use class="get-ost-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#get-ost-icon"></use>
+                </switch>
+              </svg>
+            </div>
+            <div class="col-8 pl-0 my-auto">
+              <p class="mb-0">Get OST demo App and Scan QR code to join the economy</p>
+            </div>
+            <div class="col-3 my-auto">
+              <a href="" class="btn btn-secondary">  download ost</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="row mt-5">
-      <div class="col-9 solid-background p-3 mx-auto">
-        <div class="row">
-          <div class="col-1 my-auto">
-            <svg class="invite-team-icon align-middle" style="width: 34px; height: 34px">
-              <switch>
-                <use class="invite-team-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#invite-team-icon"></use>
-              </switch>
-            </svg>
-          </div>
-          <div class="col-8 pl-0 my-auto">
-            <p class="mb-0">Invite Economy users via Email</p>
-          </div>
-          <div class="col-3 my-auto">
-            <a href="" class="btn btn-secondary">Send OR code</a>
+      <div class="row mt-5">
+        <div class="col-9 solid-background p-3 mx-auto">
+          <div class="row">
+            <div class="col-1 my-auto">
+              <svg class="invite-team-icon align-middle" style="width: 34px; height: 34px">
+                <switch>
+                  <use class="invite-team-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#invite-team-icon"></use>
+                </switch>
+              </svg>
+            </div>
+            <div class="col-8 pl-0 my-auto">
+              <p class="mb-0">Invite Economy users via Email</p>
+            </div>
+            <div class="col-3 my-auto">
+              <a href="" class="btn btn-secondary">Send OR code</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="qr-code-section">
-      <img class="qr-code my-5 col-2 mx-auto" src="">
+      <div class="qr-code-section">
+        <img class="qr-code my-5 col-2 mx-auto" src="">
 
 
-      <h3 class="text-center">Scan  and  Join <%= bt_symbol %> Test Economy! </h3>
+        <h3 class="text-center">Scan  and  Join <%= bt_symbol %> Test Economy! </h3>
+      </div>
     </div>
-  </div>
+
+  <% else %>
+
+    <div class="test-economy-pre-setup ">
+      <form id="launch-setup-form" action="<%= activate_test_economy_api_route %>" method="POST">
+        <div class="row mt-5">
+          <div class="col-7 shadow-box mx-auto p-4">
+            <div class="row">
+              <div class="col-8 my-auto">
+                <p class="mb-0 shadow-box-info-text">Set up your test economy with OST servers</p>
+              </div>
+              <div class="col-4 my-auto text-right">
+
+                <button type="submit" id="launch-test-economy" data-submiting="Launching setup.." class="btn btn-primary d-inline">
+                  Launch  setup
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  <% end %>
+
 </div>
+
 <% content_for :end_js do %>
   <script type="text/javascript">
     $(function () {

@@ -40,6 +40,8 @@ module GlobalConstant
             api_gateway_composer: "/#{GlobalConstant::Environment.url_prefix}/api/contracts/gateway-composer",
             get_api_keys:         "/#{GlobalConstant::Environment.url_prefix}/api/developer/api-keys",
             delete_api_key:       "/#{GlobalConstant::Environment.url_prefix}/api/developer/api-keys/delete",
+            api_activate_test_economy: "/#{GlobalConstant::Environment.url_prefix}/api/test-economy",
+            api_invite_to_test_economy: "/#{GlobalConstant::Environment.url_prefix}/api/test-economy/invite",
             api_list_admins:      "/api/setting/team/list",
             delete_admin_endpoint:"/api/setting/team/delete-admin",
             update_role_endpoint: "/api/setting/team/update-super-admin-role",

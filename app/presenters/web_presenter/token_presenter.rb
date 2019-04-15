@@ -169,6 +169,18 @@ module WebPresenter
       end
     end
 
+    # Test economy details in presenter object
+    #
+    # * Author: Puneet
+    # * Date: 15/04/2019
+    # * Reviewed By:
+    #
+    def test_economy_details
+      @test_economy_details ||= begin
+        formatter_obj.present? ? formatter_obj.test_economy_details : nil
+      end
+    end
+
   end
 
 end

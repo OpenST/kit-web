@@ -38,10 +38,10 @@ Rails.application.routes.draw do
     get '/' => :developer, as: 'developer'
   end
 
-  scope "#{GlobalConstant::Environment.url_prefix}", controller: 'web/test_economy', :format => false do
+  # Enabling this route only for Sandbox ENV
+  scope "#{GlobalConstant::Environment.sandbox_sub_url_prefix}", controller: 'web/test_economy', :format => false do
     get '/test-economy' => :test_economy, as: 'test_economy'
   end
-
 
   namespace "#{GlobalConstant::Environment.url_prefix}" do
     # ST Api sidekiq web interface endpoint

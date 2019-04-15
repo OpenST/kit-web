@@ -27,7 +27,7 @@
           <div class="dropdown-arrow"></div>
           <a class="dropdown-item py-2 text-capitalize" href="<%=GlobalConstant::RoutesMap.getRoutes()[:team] %>?<%= get_go_back_url_query_param %>">Team Dashboard</a>
           <%if @presenter_obj.manager.properties.exclude?('has_setup_mfa') %>
-            <a class="dropdown-item py-2 text-capitalize" href="<%=GlobalConstant::RoutesMap.getRoutes()[:setup_mfa] %>">Setup mfa</a>
+            <a class="dropdown-item py-2 text-capitalize" href="<%=GlobalConstant::RoutesMap.getRoutes()[:setup_mfa] %>">Set 2FA</a>
           <%end%>
           <a class="dropdown-item py-2 text-capitalize" href="https://help.ost.com/support/home" target="_blank">Help</a>
           <div class="dropdown-divider"></div>

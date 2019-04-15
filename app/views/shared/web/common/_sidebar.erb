@@ -3,6 +3,7 @@
   mint_token_url = GlobalConstant::RoutesMap.getRoutes()[:token_mint]
   developer_url = GlobalConstant::RoutesMap.getRoutes()[:developer]
   dashboard_url = GlobalConstant::RoutesMap.getRoutes()[:token_dashboard]
+  test_economy_url = GlobalConstant::RoutesMap.getRoutes()[:test_economy]
   api_request_whitelist = GlobalConstant::RoutesMap.getApis()[:api_request_whitelist]
   is_whitelisted_user = @presenter_obj.sub_env_payloads.is_mainnet_whitelisted?
   is_mainnet_whitelisting_requested = @presenter_obj.sub_env_payloads.is_mainnet_whitelisting_requested?
@@ -85,6 +86,16 @@
           </switch>
         </svg>
         <span class="label">Block Explorer</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_client_token_deployed? ? '' : 'disabled to-enable-on-setup' %>"  href="<%= test_economy_url %>">
+        <svg class="icon">
+          <switch>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-bt-explorer"></use>
+          </switch>
+        </svg>
+        <span class="label">Test Economy </span>
       </a>
     </li>
   </ul>

@@ -15,6 +15,7 @@ module GlobalConstant
           token_mint:           "/#{GlobalConstant::Environment.url_prefix}/token/mint/",
           token_mint_progress:  "/#{GlobalConstant::Environment.url_prefix}/token/mint-progress/",
           developer:            "/#{GlobalConstant::Environment.url_prefix}/developer/",
+          test_economy:         "/#{GlobalConstant::Environment.url_prefix}/test-economy",
           team:                 "/settings/team/",
           setup_mfa:            "/mfa/",
           authenticate_mfa:     "/mfa/",
@@ -22,6 +23,7 @@ module GlobalConstant
           verify_email:         "/verify-email/",
           login:                "/login/",
           logout:                "/logout/"
+
         }
       end
 

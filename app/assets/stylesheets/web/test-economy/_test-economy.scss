@@ -1,0 +1,28 @@
+// Import functions as variables depend on functions
+@import "plugins/bootstrap/scss/functions";
+
+// Import theme variables
+@import "web/Starboy/variables";
+
+.test-economy-container{
+  .shadow-box{
+    box-shadow:0 0 12px 1.5px rgba(0, 0, 0, 0.08) ;
+    border-radius: $border-radius-lg;
+    width: 700px;
+    .shadow-box-info-text{
+      font-size: $h6-font-size
+    }
+  }
+  .solid-background{
+    background-color: $alice-blue;
+    border-radius: $border-radius-lg;
+  }
+  .qr-code-section{
+    .qr-code{
+      img{
+        width: 150px;
+        height: 150px;
+      }
+    }
+  }
+}

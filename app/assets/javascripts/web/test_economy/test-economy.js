@@ -17,15 +17,11 @@
       $('#invite-economy').on('click',function () {
           oThis.jInviteEconomyModal.modal('show');
       });
-
     },
+
     onLaunchSetupSuccess : function () {
 
-      if( !oThis.jLaunchSetupForm ){
-        oThis.jLaunchSetupForm = $('#launch-setup-form') ;
-      }
-
-      oThis.jLaunchSetupForm.formHelper({
+      $('#launch-setup-form').formHelper({
         success:function(response){
           if(response && response.success){
             var qrUrl = utilities.deepGet( response ,  'data.test_economy_details.qr_code_url');

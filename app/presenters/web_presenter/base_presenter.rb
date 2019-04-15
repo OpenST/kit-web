@@ -205,6 +205,10 @@ module WebPresenter
       ['developer'].include?(action) && ['web/developer'].include?(controller)
     end
 
+    def is_test_economy_route?
+      ['developer'].include?(action) && ['web/developer'].include?(controller)
+    end
+
     def is_settings_route?
       ['web/user_setting'].include?(controller)
     end

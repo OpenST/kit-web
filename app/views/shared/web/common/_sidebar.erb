@@ -94,7 +94,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_client_token_deployed? ? '' : 'disabled to-enable-on-setup' %>"  href="<%= test_economy_url %>">
+      <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_client_token_deployed? ? '' : 'disabled to-enable-on-setup' %> <%= @presenter_obj.is_test_economy_route? ? 'active': '' %>"  href="<%= test_economy_url %>">
         <svg class="icon">
           <switch>
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-bt-explorer"></use>

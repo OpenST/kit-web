@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   scope 'settings', controller: 'web/user_setting', :format => false do
     get '/team' => :team
+    get '/company-information' => :company_information
   end
 
   scope "#{GlobalConstant::Environment.url_prefix}", controller: 'web/economy', :format => false do

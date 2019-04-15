@@ -32,6 +32,14 @@ module CompanyApi
           @data['symbol']
         end
 
+        def ubt_address
+          @data['ubt_address'] ||= '' #ubt address may not be present
+        end
+
+        def aux_chain_id
+          @data['aux_chain_id'] ||= '' #aux chain id may not be present
+        end
+
         def conversion_factor
           @data['conversion_factor']
         end

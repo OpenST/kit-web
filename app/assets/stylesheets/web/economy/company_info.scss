@@ -1,0 +1,11 @@
+// Import functions as variables depend on functions
+@import "../../plugins/bootstrap/scss/functions";
+
+// Import theme variables
+@import "../Starboy/variables";
+
+.company-info-header{
+  color: $cyan;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-sm;
+}

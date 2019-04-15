@@ -149,7 +149,7 @@
       else {
         errMsg = utilities.getGeneralError( error );
       }
-      jEl.text( errMsg );
+      jEl.html( errMsg );
     },
 
     appendKeysInfoToDOM: function(){

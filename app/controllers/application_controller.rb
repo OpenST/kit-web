@@ -168,6 +168,8 @@ class ApplicationController < ActionController::Base
         redirect_to :logout and return
       when 'developer'
         redirect_to :developer and return
+      when 'company_information'
+        redirect_to :company_information and return
       else
         render_error_response_for(service_response)
     end

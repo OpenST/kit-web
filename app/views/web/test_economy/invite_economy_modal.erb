@@ -1,0 +1,27 @@
+<div class="modal fade" id="invite-economy-modal" tabindex="-1" role="dialog" aria-labelledby="inviteEconomyLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="inviteEconomyLabel">Invite Economy</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="invite-economy-form" action="<%= api_invite_to_test_economy %>" method="POST">
+          <div>
+            <div class="form-group">
+              <label class="form-label float-left" for="emailAddresses">Email Addresses</label>
+              <input type="text" name="email_addresses" class="form-control form-control-input-group" placeholder="Email addresses">
+              <div class="invalid-feedback" data-forid="email-addresses">&nbsp;</div>
+            </div>
+            <div class="form-group">
+              <button type="submit" id="submit-email-addresses-btn" class="btn btn-primary" data-submiting="Submitting...">Submit</button>
+            </div>
+            <div class="general_error invalid-feedback"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

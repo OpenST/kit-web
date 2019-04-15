@@ -1,9 +1,10 @@
 ;
 (function(window,$){
-  var parentNS = ns('ost')
+  var parentNS = ns('ost'),
+      utilities   = ns('ost.utilities')
       ;
 
-  oThis = parentNS.test_economy = {
+  var oThis = parentNS.test_economy = {
     jLaunchSetupForm      : $('#launch-setup-form'),
     jInviteEconomyForm    : $("#invite-economy-form"),
     jTestEconomyPostSetup : $('.test-economy-post-setup'),
@@ -22,20 +23,24 @@
     },
     bindEvents : function () {
       oThis.jInviteEconomyBtn.on('click',function () {
-          oThis.jInviteEconomyModal.show();
+          oThis.jInviteEconomyModal.modal('show');
       });
 
     },
     onLaunchSetupSuccess : function () {
 
+      if( !oThis.jLaunchSetupForm ){
+        oThis.jLaunchSetupForm = $('#launch-setup-form') ;
+      }
+
+
       oThis.jLaunchSetupForm.formHelper({
         success:function(response){
           if(response && response.success){
-            oThis.jTestEconomyPostSetup.show();
+            var qrUrl = utilities.deepGet( response ,  'data.test_economy_details.qr_code_url');
             oThis.jTestEconomyPreSetup.hide();
-            //set img source here
-            //var qrSrcUrl = response.something
-            // jQrCode.attr('src','qrSrcUrl');
+            oThis.jTestEconomyPostSetup.show();
+            oThis.jQrCode.attr('src' , qrUrl );
           }
         }
       });
@@ -43,13 +48,12 @@
       oThis.jInviteEconomyForm.formHelper({
         success:function(response){
           if(response && response.success){
-            oThis.jInviteEconomyModal.hide();
-            alert("success");
+            oThis.jInviteEconomyModal.modal('hide');
           }
         }
       });
 
     }
   }
-})(window,jQuery)
+})(window,jQuery) ;
 

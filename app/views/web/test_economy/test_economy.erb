@@ -3,15 +3,16 @@
   activate_test_economy_api_route =  GlobalConstant::RoutesMap.getApis()[:api_activate_test_economy]
   api_invite_to_test_economy = GlobalConstant::RoutesMap.getApis()[:api_invite_to_test_economy]
   has_setup_test_economy = @presenter_obj.client.has_setup_test_economy?
+  qr_code_url = @presenter_obj.test_economy_details.qr_code_url
+  ios_app_download_link = @presenter_obj.test_economy_details.ios_app_download_link
+  android_app_download_link = @presenter_obj.test_economy_details.android_app_download_link
 %>
 
 <div class="test-economy-container">
 
   <h3 class="text-center mt-5"> Test Your Branded Token Economy </h3>
 
-  <% if has_setup_test_economy %>
-
-    <div class="test-economy-post-setup d-block">
+    <div class="test-economy-post-setup" style="display: <%= has_setup_test_economy ? 'block': 'none'%>">
       <div class="row mt-5  mb-6">
         <div class="col-5 shadow-box mx-auto p-4 mb-6">
           <div class="row">
@@ -42,10 +43,10 @@
               <p class="mb-0">Get OST demo App and Scan QR code to join the economy</p>
             </div>
             <div class="col-3 my-auto">
-              <a href="" class="btn btn-secondary">download(ios)</a>
+              <a href="<%= ios_app_download_link %>" class="btn btn-secondary">download(ios)</a>
             </div>
             <div class="col-3 my-auto">
-              <a href="" class="btn btn-secondary">download(Android)</a>
+              <a href="<%= android_app_download_link %>" class="btn btn-secondary">download(Android)</a>
             </div>
           </div>
         </div>
@@ -65,51 +66,20 @@
             </div>
             <div class="col-3 my-auto">
               <button type="button" data-toggle="modal" data-target="#invite-economy-modal" class="btn btn-secondary">Send OR code</button>
-
-              <!-- invite economy modal -->
-              <div class="modal fade" id="invite-economy-modal" tabindex="-1" role="dialog" aria-labelledby="inviteEconomyLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="inviteEconomyLabel">Invite Economy</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <form id="invite-economy-form" action="<%= api_invite_to_test_economy %>" method="POST">
-                        <div>
-                          <div class="form-group">
-                            <label class="form-label float-left" for="emailAddresses">Email Addresses</label>
-                            <input type="text" name="email-addresses" class="form-control form-control-input-group" placeholder="Email addresses">
-                            <div class="invalid-feedback" data-forid="email-addresses">&nbsp;</div>
-                          </div>
-                          <div class="form-group">
-                            <button type="submit" id="submit-email-addresses-btn" class="btn btn-primary" data-submiting="Submitting...">Submit</button>
-                          </div>
-                          <div class="general_error invalid-feedback"></div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- modal ends -->
             </div>
           </div>
         </div>
       </div>
       <div class="qr-code-section">
-        <img class="qr-code my-5 col-2 mx-auto" src="">
+        <img class="qr-code my-5 col-2 mx-auto" src="<%=qr_code_url%>">
 
 
         <h3 class="text-center">Scan  and  Join <%= bt_symbol %> Test Economy! </h3>
       </div>
     </div>
 
-  <% else %>
 
-    <div class="test-economy-pre-setup ">
+    <div class="test-economy-pre-setup " style="display: <%= !has_setup_test_economy ? 'block': 'none'%>">
       <form id="launch-setup-form" action="<%= activate_test_economy_api_route %>" method="POST">
         <div class="row mt-5">
           <div class="col-7 shadow-box mx-auto p-4">
@@ -130,7 +100,6 @@
       </form>
     </div>
 
-  <% end %>
 
 </div>
 
@@ -141,3 +110,36 @@
     });
   </script>
 <% end %>
+
+
+<% content_for :popups do %>
+  <!-- invite economy modal -->
+  <div class="modal fade" id="invite-economy-modal" tabindex="-1" role="dialog" aria-labelledby="inviteEconomyLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="inviteEconomyLabel">Invite Economy</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="invite-economy-form" action="<%= api_invite_to_test_economy %>" method="POST">
+            <div>
+              <div class="form-group">
+                <label class="form-label float-left" for="emailAddresses">Email Addresses</label>
+                <input type="text" name="email_addresses" class="form-control form-control-input-group" placeholder="Email addresses">
+                <div class="invalid-feedback" data-forid="email-addresses">&nbsp;</div>
+              </div>
+              <div class="form-group">
+                <button type="submit" id="submit-email-addresses-btn" class="btn btn-primary" data-submiting="Submitting...">Submit</button>
+              </div>
+              <div class="general_error invalid-feedback"></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal ends -->
+<%end%>

@@ -288,6 +288,16 @@ module CompanyApi
           @pending_critical_interactions = CompanyApi::Response::Entity::PendingCriticalInteractions.new(pending_critical_interactions_data)
         end
 
+        # set_sub_env_payload
+        #
+        # * Author: Ankit
+        # * Date: 02/02/2018
+        # * Reviewed By:
+        #
+        # @param [Hash] data (mandatory)
+        #
+        # Sets @pending_critical_interactions
+        #
         def set_sub_env_payload(data)
           @sub_env_payloads = CompanyApi::Response::Entity::SubEnvPayloads.new(data)
         end

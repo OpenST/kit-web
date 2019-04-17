@@ -223,6 +223,14 @@ module WebPresenter
       formatter_obj.manager.properties.include?('has_setup_mfa')
     end
 
+    def is_ost_managed_owner?
+      @is_ost_managed ||= begin
+        if formatter_obj.present? && formatter_obj.client_token.present?
+          formatter_obj.client_token.properties.include?(GlobalConstant::Token.has_ost_managed_owner)
+        end
+      end
+    end
+
   end
 
 end

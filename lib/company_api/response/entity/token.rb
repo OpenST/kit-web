@@ -52,6 +52,10 @@ module CompanyApi
           @data['status']
         end
 
+        def properties
+          @data['properties']
+        end
+
       end
 
     end

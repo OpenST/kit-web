@@ -206,7 +206,7 @@ module WebPresenter
     end
 
     def is_test_economy_route?
-      ['developer'].include?(action) && ['web/developer'].include?(controller)
+      ['test_economy'].include?(action) && ['web/test_economy'].include?(controller)
     end
 
     def is_settings_route?

@@ -54,18 +54,25 @@
     },
 
     btnSubmittingState : function ( jEl ) {
-      var preText = jEl.text(),
-          submittingText = jEl.data('submiting')
-      ;
-      jEl.data("pre-text", preText );
-      jEl.text( submittingText );
-      jEl.prop("disabled" ,  true );
+      for( var cnt = 0 ; cnt < jEl.length ; cnt++ ){
+        var jElCurr =  jEl.eq( cnt ),
+          preText = jElCurr.data('pre-text') || jElCurr.text(),
+          submittingText = jElCurr.data('submiting')
+        ;
+        jElCurr.data("pre-text", preText );
+        jElCurr.text( submittingText );
+        jElCurr.prop("disabled" ,  true );
+      }
     },
 
     btnSubmitCompleteState : function ( jEl ) {
-      var preText =  jEl.data('pre-text');
-      jEl.text( preText );
-      jEl.prop("disabled" ,  false );
+      for( var cnt = 0 ; cnt < jEl.length ; cnt++ ) {
+        var jElCurr =  jEl.eq( cnt ),
+          preText = jElCurr.data('pre-text')
+        ;
+        jElCurr.text(preText);
+        jElCurr.prop("disabled", false);
+      }
     },
     
     getGeneralError : function ( res ) {

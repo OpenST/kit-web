@@ -128,6 +128,9 @@
       if ( oThis.isNaN( bt ) ) {
         return NaN;
       }
+      
+      bt = String( bt );
+      
       bt = BigNumber( bt );
       return bt.toString();
     },
@@ -149,6 +152,8 @@
       if ( oThis.isNaN( ost ) ) {
         return "";
       }
+  
+      ost = String( ost );
       
       ost = BigNumber( ost ) ;
       return ost.toString( );
@@ -171,7 +176,9 @@
       if ( oThis.isNaN( fiat ) ) {
         return NaN;
       }
-  
+    
+      fiat = String( fiat );
+      
       fiat = BigNumber( fiat );
       return  fiat.toString( );
     },

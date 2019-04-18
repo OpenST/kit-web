@@ -1,292 +1,354 @@
 ;
 (function (window, $) {
-
-    var ost         = ns("ost"),
-        formHelper  = window.FormHelper.prototype,
-        redirectMap = window.redirectMap ,
-        utilities   = ns('ost.utilities')
-    ;
-
-    var oThis = ost.tokenSetup = {
-
-        jTokenForm                  :  $('#economy-planner'),
-        jConfirmAccountCover        :  $('#metamaskConfirmAccount'),
-        genericErrorMessage         :  'Something went wrong!',
-        metamask                    :  null,
-        walletAssociation           :  null ,
-
-        jDefaultStateWrapper         :  $('#default-state-wrapper'),
-        jGeneralErrorState           :  $('#general-error-state'),
-        jRejectedSignErrorState      :  $('#rejected-sign-error-state'),
-        jAssociateAddressErrorState  :  $('#associate-address-error-state'),
-        jConfirmAccountSection       :  $('.confirm-account-section'),
-        jDeploymentErrorState        :  $('#deployment-error-state'),
-        jTokenSetupAdminErrorModal  :  $('#token_setup_admin_error'),
-
-        init: function( config ){
-            $.extend(oThis, config);
-            oThis.bindActions();
-            oThis.jTokenForm.formHelper().success = oThis.tokenSuccess;
-            PriceOracle.init({
-              'ost_to_fiat' : config['ost_to_fiat'],
-              'ost_to_bt' : config['ost_to_bt'],
-              'P_FIAT': 5
-            });
-            oThis.initDisplayFiatValue() ;
-            // oThis.inputSpinner();
-        },
-
-        bindActions : function(){
-
-          $("#advance-options-accordion").on('show.bs.collapse',function () {
-              $(".slider-recommendation").hide();
-              $(".header-recommendation").show();
-          })
-
-          $('#mm-reconnect').off('click').on('click', function(){
-              oThis.metamask.enable();
-          });
-        },
   
-        btToFiat  : function ( conversionFactor ) {
-          if( !conversionFactor || !BigNumber) return conversionFactor;
-          conversionFactor = BigNumber( conversionFactor );
-          var fiatBN = BigNumber( oThis.ost_to_fiat ) ,
-            oneBTToFiat = fiatBN.dividedBy(  conversionFactor )
-          ;
-          return PriceOracle.toFiat( oneBTToFiat );
-        },
+  var ost = ns("ost"),
+    formHelper = window.FormHelper.prototype,
+    redirectMap = window.redirectMap,
+    utilities = ns('ost.utilities')
+  ;
   
-        initDisplayFiatValue : function () {
-          var jEL = $('.j-bt-to-fiat-val'),
-              jInputEl = $('#'+oThis.ostToBtId),
-              val = jInputEl.val() ,
-              btFiatVal = PriceOracle.btToFiatPrecession( 1 ) ,
-              ostFiatVal = PriceOracle.ostToFiat( 1 )
-          ;
-          ostFiatVal = PriceOracle.toPrecessionFiat( ostFiatVal );
-          jEL.data("ost-mock-element" , "#"+ oThis.ostToBtId );
-          jEL.ostMocker();
-          jEL.text( btFiatVal );
-          $('.j-fiat-value').text( ostFiatVal );
+  var oThis = ost.tokenSetup = {
+    
+    jTokenForm: $('#economy-planner'),
+    jConfirmAccountCover: $('#metamaskConfirmAccount'),
+    jDefaultStateWrapper: $('#default-state-wrapper'),
+    jGeneralErrorState: $('#general-error-state'),
+    jRejectedSignErrorState: $('#rejected-sign-error-state'),
+    jAssociateAddressErrorState: $('#associate-address-error-state'),
+    jConfirmAccountSection: $('.confirm-account-section'),
+    jDeploymentErrorState: $('#deployment-error-state'),
+    jTokenSetupAdminErrorModal: $('#token_setup_admin_error'),
+    
+    
+    jTokenSetupOstBtn : null,
+    jMetamaskConfirmAddressBtn : null ,
+  
+    addressGenerationApi: null,
+    addressesEndPoint: null,
+    deploymentEndpoint: null,
+    deployRoute: null,
+  
+    metamask: null,
+    walletAssociation: null,
+    chainId: null,
+  
+    ost_to_fiat: null,
+    ost_to_bt: null,
+    ostToBtId: null,
+    
+    isMainnet: null,
+    
+    
+    init: function (config) {
+      $.extend(oThis, config);
+      oThis.bindActions();
+      oThis.jTokenForm.formHelper().success = oThis.tokenSuccess;
+      PriceOracle.init({
+        'ost_to_fiat': config['ost_to_fiat'],  //TODO change for stable coin
+        'ost_to_bt': config['ost_to_bt'],      //TODO change for stable coin
+        'P_FIAT': 5
+      });
+      oThis.initDisplayFiatValue();
+    },
+    
+    bindActions: function () {
+      
+      $("#advance-options-accordion").on('show.bs.collapse', function () {
+        $(".slider-recommendation").hide();
+        $(".header-recommendation").show();
+      });
+      
+      $('#mm-reconnect').off('click').on('click', function () {
+        oThis.metamask.enable();
+      });
+      
+    },
+    
+    btToFiat: function (conversionFactor) {
+      if (!conversionFactor || !BigNumber) return conversionFactor;
+      conversionFactor = BigNumber(conversionFactor);
+      var fiatBN = BigNumber(oThis.ost_to_fiat),
+        oneBTToFiat = fiatBN.dividedBy(conversionFactor)
+      ;
+      return PriceOracle.toFiat(oneBTToFiat);
+    },
+    
+    initDisplayFiatValue: function () {
+      var jEL = $('.j-bt-to-fiat-val'),
+        jInputEl = $('#' + oThis.ostToBtId),
+        val = jInputEl.val(),
+        btFiatVal = PriceOracle.btToFiatPrecession(1),
+        ostFiatVal = PriceOracle.ostToFiat(1)
+      ;
+      ostFiatVal = PriceOracle.toPrecessionFiat(ostFiatVal);
+      jEL.data("ost-mock-element", "#" + oThis.ostToBtId);
+      jEL.ostMocker();
+      jEL.text(btFiatVal);
+      $('.j-fiat-value').text(ostFiatVal);
+    },
+    
+    tokenSuccess: function (res) {
+      if (res.success) {
+        oThis.initTokenSetupFlow();
+      } else {
+        oThis.tokenSetUpNonAdminError( res ) ;
+      }
+    },
+  
+    initTokenSetupFlow : function (  ) {
+      if ( oThis.isMainnet ) {
+        oThis.initMainnetFlow();
+      } else {
+        oThis.initTestnetFlow();
+      }
+    },
+    
+    initMainnetFlow: function () {
+      oThis.initMetamask();
+    },
+    
+    initTestnetFlow: function () {
+      oThis.showTestnetTokenSetupCover();
+      oThis.bindTestnetFlow();
+    },
+    
+    showTestnetTokenSetupCover: function () {
+      //TODO show cover element
+    },
+    
+    bindTestnetFlow: function () {
+      oThis.jTokenSetupOstBtn = $('#jTokenSetupOstBtn');
+     
+      oThis.jTokenSetupOstBtn.on('click', function () {
+        oThis.tokenSetupViaOst();
+      });
+      
+      $('#jTokenSetupMetamaskBtn').on('click', function () {
+        oThis.tokenSetupViaMetamask();
+      });
+    },
+    
+    tokenSetupViaOst: function () {
+      oThis.generateAddress();
+    },
+  
+    generateAddress : function () {
+      $.ajax({
+        url: oThis.addressGenerationApi,
+        method: 'POST',
+        beforeSend: function () {
+          utilities.btnSubmittingState( oThis.jTokenSetupOstBtn );
         },
-
-        setupMetamask: function(){
-
-            oThis.metamask = new Metamask({
-                desiredNetwork: oThis.chainId,
-
-                onNotDapp: function(){
-                    ost.coverElements.show("#installMetamaskCover");
-                },
-
-                onNotMetamask: function(){
-                    ost.coverElements.show("#installMetamaskCover");
-                },
-
-                onWaitingEnable: function(){
-                    ost.coverElements.show("#metamaskLockedCover");
-                },
-
-                onUserRejectedProviderAccess: function(){
-                    ost.coverElements.show("#metamaskConnectRequestRejected");
-                },
-
-                onNotDesiredNetwork: function(){
-                    ost.coverElements.show("#metamaskWrongNetworkCover");
-                },
-
-                onNotDesiredAccount: function(){
-                    ost.coverElements.show("#metamaskWrongAccountCover");
-                },
-
-                onDesiredAccount: function(){
-                    ost.coverElements.show("#metamaskSignTransaction");
-                },
-
-                onNewAccount: function(){
-                  
-                    oThis.initConfirmFlow();
-                    ost.coverElements.show("#metamaskConfirmAccount");
-                },
-              
-                onSendAsync : function ( options, err, result ) {
-                  if ( !err && !result ) {
-                    ost.coverElements.show("#process_failure_error_cover");
-                  }
-                }
-
-            });
-
+        success: function ( res ) {
+          if( res && res.success ){
+            oThis.onAddressGenerationSuccess( res );
+          }else {
+            oThis.onTokenDeploymentErrorViaOst( res );
+          }
         },
-
-        tokenSuccess: function( res ){
-           if( res.success ){
-             oThis.setupMetamask();
-             oThis.metamask.enable();
-           } else {
-             var errorMsg = utilities.deepGet(res, "err.display_text") ;
-             if( errorMsg && errorMsg.toLowerCase() == utilities.authorizationErrMsg.toLowerCase() ){ //Temp change it later.
-               oThis.jTokenSetupAdminErrorModal.modal('show');
-             }
-           }
+        error: function ( jqXHr , err ) {
+          oThis.onTokenDeploymentErrorViaOst( err );
+        }
+      })
+    },
+  
+    onAddressGenerationSuccess : function ( res ) {
+      oThis.startTokenDeployment( oThis.jTokenSetupOstBtn ,  oThis.onTokenDeploymentErrorViaOst.bind( oThis ));
+    },
+  
+    onTokenDeploymentErrorViaOst : function ( err  ) {
+      utilities.btnSubmitCompleteState( oThis.jTokenSetupOstBtn  );
+      if( !oThis.tokenSetUpNonAdminError( err )){
+        utilities.showGeneralError( $('.jTokenSetupViaOstWrapper') , err );
+      }
+    },
+    
+    tokenSetupViaMetamask: function () {
+      oThis.initMetamask();
+    },
+    
+    initMetamask: function () {
+      oThis.setupMetamask();
+      oThis.metamask.enable();
+    },
+  
+    onMetamaskValidationSuccess: function () {
+      oThis.jConfirmAccountCover.find(".confirm-address").text(oThis.metamask.getWalletAddress());
+      oThis.personalSign(oThis.walletAssociation);
+    },
+    
+    personalSign: function (message) {
+      if (!message) return;
+      
+      oThis.jConfirmAccountSection.hide();
+      oThis.jDefaultStateWrapper.show();
+      
+      var from = oThis.metamask.getWalletAddress();
+      
+      oThis.jMetamaskConfirmAddressBtn = oThis.jConfirmAccountCover.find(".btn-confirm") ;
+      
+      oThis.jMetamaskConfirmAddressBtn.off('click').on('click', function (e) {
+        utilities.btnSubmittingState( oThis.jMetamaskConfirmAddressBtn );
+        oThis.metamask.sendAsync({
+          method: 'personal_sign',
+          params: [message, from],
+          from: from
+        }, function (err, result) {
+          if(err){
+            return oThis.showConfirmError(oThis.jGeneralErrorState);
+          }
+          if(result && result.error){
+            return oThis.showConfirmError(oThis.jRejectedSignErrorState);
+          } else {
+            oThis.associateAddress(result);
+          }
+          oThis.associateAddress(result);
+        });
+      });
+    },
+    
+    personalSignError : function ( ) {
+      utilities.btnSubmitCompleteState( oThis.jMetamaskConfirmAddressBtn );
+      oThis.showConfirmError(oThis.jGeneralErrorState);
+    },
+    
+    associateAddress: function (result) {
+      if (!result) return;
+      oThis.jConfirmAccountSection.hide();
+      oThis.jDefaultStateWrapper.show();
+      var from = oThis.metamask.getWalletAddress();
+      
+      $.ajax({
+        url: oThis.addressesEndPoint,
+        method: 'POST',
+        data: {
+          owner: from,
+          personal_sign: result.result
         },
-
-        initConfirmFlow: function(){
-            oThis.jConfirmAccountCover.find(".confirm-address").text(oThis.metamask.getWalletAddress());
-            oThis.personalSign( oThis.walletAssociation );
-        },
-
-        personalSign: function( message ){
-            if(!message) return;
-
-            oThis.jConfirmAccountSection.hide();
-            oThis.jDefaultStateWrapper.show();
-
-            var from = oThis.metamask.getWalletAddress();
-
-            oThis.jConfirmAccountCover.find(".btn-confirm").off('click').on('click', function(e){
-              $('.btn-confirm').text("confirming...").prop("disabled",true);
-                oThis.metamask.sendAsync({
-                    method: 'personal_sign',
-                    params: [message, from],
-                    from: from
-                }, function(err, result){
-                    if(err){
-                      return oThis.showConfirmError(oThis.jGeneralErrorState);
-                    }
-                    if(result && result.error){
-                      return oThis.showConfirmError(oThis.jRejectedSignErrorState);
-                    } else {
-                      oThis.associateAddress(result);
-                    }
-                });
-            });
-
-        },
-
-        associateAddress: function(result){
-
-          $('.btn-confirm').text("confirming...").prop("disabled",true);
-
-            if(!result) return;
-            oThis.jConfirmAccountSection.hide();
-            oThis.jDefaultStateWrapper.show();
-            var from = oThis.metamask.getWalletAddress();
-
-            $.ajax({
-                url: oThis.addressesEndPoint,
-                method: 'POST',
-                data: {
-                    owner: from,
-                    personal_sign: result.result
-                },
-                success: function(response){
-                    if(response.success){
-                        oThis.startTokenDeployment();
-                    } else {
-                      var errorData = utilities.deepGet( response ,  "err.error_data") || [];
-                        var errorMsg ;
-                      if(errorData.length > 0 ){
-                          errorMsg =  errorData[0].msg ;
-                          oThis.showConfirmError(oThis.jAssociateAddressErrorState);
-                        } else {
-                          errorMsg = utilities.deepGet( response ,  "err.display_text") ;
-                          oThis.showConfirmError(oThis.jGeneralErrorState);
-                        }
-                    }
-                },
-                error: function (response) {
-                  oThis.showConfirmError(oThis.jGeneralErrorState);
-                }
-            });
-        },
-        startTokenDeployment : function(){
-          $.ajax({
-            url : oThis.deploymentEndpoint,
-            method : 'POST',
-            success: function (response) {
-              oThis.jConfirmAccountCover.find(".btn-confirm").text("confirm Address").prop('disabled', false);
-              if(response && response.success){
-                var byScreenName = utilities.deepGet( response ,  "go_to.by_screen_name" );
-                if(byScreenName){
-                  window.location = redirectMap && redirectMap[byScreenName]
-                }
-                else{
-                  window.location = oThis.deployRoute;
-                }
-
-              }
-              else {
-
-                var errorData = utilities.deepGet(response , "err.error_data");
-                if(errorData.length > 0){
-                  oThis.showConfirmError(oThis.jDeploymentErrorState)
-                }
-                else{
-                  var errorMsg = utilities.deepGet(response, "err.display_text") ;
-                  if( errorMsg && errorMsg.toLowerCase() == utilities.authorizationErrMsg.toLowerCase() ){ //Temp change it later.
-                    oThis.jTokenSetupAdminErrorModal.modal('show');
-                  } else {
-                    oThis.showConfirmError(oThis.jGeneralErrorState);
-                  }
-                }
-
-              }
-            },
-            error: function (response) {
+        success: function (response) {
+          if (response.success) {
+            oThis.startTokenDeployment( oThis.jMetamaskConfirmAddressBtn , oThis.onTokenDeploymentRequestError.bind(oThis) );
+          } else {
+            var errorData = utilities.deepGet(response, "err.error_data") || [];
+            utilities.btnSubmitCompleteState( oThis.jMetamaskConfirmAddressBtn );
+            if (errorData.length > 0) {
+              oThis.showConfirmError(oThis.jAssociateAddressErrorState);
+            } else {
               oThis.showConfirmError(oThis.jGeneralErrorState);
             }
-          })
+          }
         },
-
-
-        showConfirmError : function(errorContext){
-          oThis.jConfirmAccountCover.find(".btn-confirm").text("confirm Address").prop('disabled', false);
-          oThis.jConfirmAccountSection.hide();
-          errorContext.show();
-        },
-
-        inputSpinner: function () {
-          $('<div class="quantity-nav">' +
-            '<span class="quantity-button quantity-up"><img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/spinner-up-arrow.svg" width="12" height="10" /></span>' +
-            '<span class="quantity-button quantity-down"><img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/spinner-down-arrow.svg" width="12" height="10" /></span>' +
-            '</div>').insertAfter('.quantity input');
-          $('.quantity').each(function() {
-            var spinner = $(this),
-              input = spinner.find('input[type="number"]'),
-              btnUp = spinner.find('.quantity-up'),
-              btnDown = spinner.find('.quantity-down'),
-              min = input.attr('min'),
-              max = input.attr('max'),
-              step = 0.00001;
-
-            btnUp.click(function() {
-              var oldValue = parseFloat(input.val());
-              if (oldValue >= max) {
-                var newVal = oldValue;
-              } else {
-                var newVal = (oldValue + step).toFixed(5);
-              }
-              spinner.find("input").val(newVal);
-              spinner.find("input").trigger("change");
-            });
-
-            btnDown.click(function() {
-              var oldValue = parseFloat(input.val());
-              if (oldValue <= min) {
-                var newVal = oldValue;
-              } else {
-                var newVal = (oldValue - step).toFixed(5);
-              }
-              spinner.find("input").val(newVal);
-              spinner.find("input").trigger("change");
-            });
-
-          });
+        error: function (response) {
+          utilities.btnSubmitCompleteState( oThis.jMetamaskConfirmAddressBtn );
+          oThis.showConfirmError(oThis.jGeneralErrorState);
         }
-
-    };
+      });
+    },
+  
+    startTokenDeployment : function ( jBtn , errorCallback) {
+      $.ajax({
+        url: oThis.deploymentEndpoint,
+        method: 'POST',
+        success: function (response) {
+          if( response && response.success ){
+            oThis.onTokenDeploymentRequestSuccess( response );
+          }else {
+            utilities.btnSubmitCompleteState( jBtn );
+            errorCallback( response  );
+          }
+        },
+        error: function (jQXhr , error ) {
+          utilities.btnSubmitCompleteState( jBtn );
+          errorCallback( error  );
+        }
+      })
+    },
     
-
+    onTokenDeploymentRequestSuccess : function ( response ) {
+      var byScreenName = utilities.deepGet(response, "go_to.by_screen_name");
+      if (byScreenName) {
+        window.location = redirectMap && redirectMap[byScreenName]
+      }
+      else {
+        window.location = oThis.deployRoute;
+      }
+    },
+  
+    onTokenDeploymentRequestError : function ( response ) {
+      var errorData = utilities.deepGet(response, "err.error_data");
+      if ( errorData.length > 0) {
+        oThis.showConfirmError( oThis.jDeploymentErrorState )
+      }
+      else {
+        if( !oThis.tokenSetUpNonAdminError( response )){
+          oThis.showConfirmError( oThis.jGeneralErrorState );
+        }
+      }
+    },
+    
+    showConfirmError: function (errorContext) {
+      utilities.btnSubmitCompleteState( oThis.jMetamaskConfirmAddressBtn );
+      oThis.jConfirmAccountSection.hide();
+      errorContext.show();
+    },
+    
+    setupMetamask: function () {
+      
+      oThis.metamask = new Metamask({
+        desiredNetwork: oThis.chainId,
+        
+        onNotDapp: function () {
+          ost.coverElements.show("#installMetamaskCover");
+        },
+        
+        onNotMetamask: function () {
+          ost.coverElements.show("#installMetamaskCover");
+        },
+        
+        onWaitingEnable: function () {
+          ost.coverElements.show("#metamaskLockedCover");
+        },
+        
+        onUserRejectedProviderAccess: function () {
+          ost.coverElements.show("#metamaskConnectRequestRejected");
+        },
+        
+        onNotDesiredNetwork: function () {
+          ost.coverElements.show("#metamaskWrongNetworkCover");
+        },
+        
+        onNotDesiredAccount: function () {
+          ost.coverElements.show("#metamaskWrongAccountCover");
+        },
+        
+        onDesiredAccount: function () {
+          ost.coverElements.show("#metamaskSignTransaction");
+        },
+        
+        onNewAccount: function () {
+          oThis.onMetamaskValidationSuccess();
+          ost.coverElements.show("#metamaskConfirmAccount");
+        },
+        
+        onSendAsync: function (options, err, result) {
+          if (!err && !result) {
+            ost.coverElements.show("#process_failure_error_cover");
+          }
+        }
+        
+      });
+    },
+  
+    tokenSetUpNonAdminError: function (res ) {
+      var errorMsg = utilities.deepGet(res, "err.display_text");
+      if (errorMsg && errorMsg.toLowerCase() == utilities.authorizationErrMsg.toLowerCase()) {
+        oThis.jTokenSetupAdminErrorModal.modal('show');
+        return true ;
+      }
+      return false ;
+    }
+    
+  };
+  
+  
 })(window, jQuery);

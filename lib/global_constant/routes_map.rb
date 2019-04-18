@@ -50,7 +50,8 @@ module GlobalConstant
             api_login:            "/api/login",
             api_mfa:              "/api/mfa",
             api_reset_password:   "/api/reset-password",
-            api_send_reset_password_link:"/api/reset-password/request-link"
+            api_send_reset_password_link:"/api/reset-password/request-link",
+            api_token_setup_address_generation: ""
         }
       end
 

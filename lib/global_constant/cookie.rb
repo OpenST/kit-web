@@ -18,6 +18,10 @@ module GlobalConstant
         'ost_platform_new_api_cookies'
       end
 
+      def utm_params_cookie_name
+        'ost_up'
+      end
+
     end
 
   end

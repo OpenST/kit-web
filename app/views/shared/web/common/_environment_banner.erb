@@ -1,0 +1,19 @@
+<%
+  sandbox_sub_url_prefix = GlobalConstant::Environment.sandbox_sub_url_prefix
+  current_env  = 'testnet'#GlobalConstant::Environment.url_prefix
+  if current_env == sandbox_sub_url_prefix
+    env_specific_namespace = 'test-net'
+    env_specific_text = 'Sandbox Data'
+  else
+    env_specific_namespace = 'production'
+    env_specific_text = 'Production Mode'
+  end
+%>
+
+
+  <div class="row environment-indicator-banner <%=env_specific_namespace %>-banner">
+    <div class="col-12 text-center" style="font-size: 0">
+      <span class="environment-indicator-text <%= env_specific_namespace %>-indicator-text"><%= env_specific_text %></span>
+    </div>
+  </div>
+  <div style="height: 25px"></div>

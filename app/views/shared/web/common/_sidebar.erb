@@ -8,7 +8,7 @@
   is_mainnet_whitelisting_requested = @presenter_obj.sub_env_payloads.is_mainnet_whitelisting_requested?
   sandbox_sub_url_prefix = GlobalConstant::Environment.sandbox_sub_url_prefix
   main_sub_env_url_prefix = GlobalConstant::Environment.main_sub_env_url_prefix
-  current_env  = 'mainnet'#GlobalConstant::Environment.url_prefix
+  current_env  = GlobalConstant::Environment.url_prefix
   sandbox_token_name = @presenter_obj.client_token_name
   sandbox_token_symbol = @presenter_obj.client_token_symbol
   is_super_admin = true #@presenter_obj.is_super_admin?

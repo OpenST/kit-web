@@ -113,7 +113,7 @@
     },
     
     showTestnetTokenSetupCover: function () {
-      //TODO show cover element
+      ost.coverElements.show("#token-setup-option-cover");
     },
     
     bindTestnetFlow: function () {

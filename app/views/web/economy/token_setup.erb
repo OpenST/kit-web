@@ -22,14 +22,14 @@
     ost_to_bt_id = "ost_to_bt_id"
 
     is_mainnet = true # TODO revert # current_env == sandbox_sub_url_prefix
-    is_metamask_whitelisted_browser = true
+    is_metamask_whitelisted_browser = false
 
 %>
 
 
 <% if is_mainnet && !is_metamask_whitelisted_browser %>
   <div class="planner-container text-center mt-6">
-    <!---Not supported browser render partial--->
+    <%= render :partial => "web/economy/token/browser_not_supported"%>
   </div>
 <%else%>
 
@@ -106,11 +106,11 @@
                 <div class="" id="advance-options-header">
                   <p class="text-left slider-recommendation m-3 ">
                     We recommend keeping it simple and setting the conversion rate to
-                      <span class="text-different-color">1</span>
+                      <span class="conversion-rate">1</span>
                          <b> <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>  =</b>
-                      <span class="text-different-color">1</span>
+                      <span class="conversion-rate">1</span>
                          <b> OST =</b>
-                      <span class="text-different-color j-fiat-value">$<%= ost_to_fiat %></span>
+                      <span class="conversion-rate j-fiat-value">$<%= ost_to_fiat %></span>
                          <b>USD</b>
                       <span class="edit-collapse ml-1" data-toggle="collapse"
                             data-target="#collapsable-element"
@@ -127,7 +127,7 @@
                           <div class="col-4 right-border m-0 card">
                             <label class="form-label mb-2">SET CONVERSION RATE</label>
                             <div class="d-flex align-items-center">
-                              <span class="text-different-color mr-1">1</span> OST
+                              <span class="conversion-rate mr-1">1</span> OST
                               <span class="equal-to-sign mx-2 font-weight-bold">=</span>
                               <span class="quantity">
                                 <input type="number" min="<%=bt_to_ost_min%>" max="<%= bt_to_ost_max %>"
@@ -143,9 +143,9 @@
                           <div class="col-4 right-border m-0 card">
                             <label class="form-label mb-2">AT CURRENT CONVERSION RATE</label>
                             <div class="d-flex align-items-center">
-                              <span class="text-different-color mr-1">1</span> <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
+                              <span class="conversion-rate mr-1">1</span> <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
                               <span class="equal-to-sign mx-2 font-weight-bold">=</span> $
-                              <span class="ost-mocker-value text-different-color j-bt-to-fiat-val text-truncate"
+                              <span class="ost-mocker-value conversion-rate j-bt-to-fiat-val text-truncate"
                                     data-type="fiat"  data-ost-mock-parser="ost.tokenSetup.btToFiat"> <%= ost_to_fiat %>
                                                 </span>
                             </div>
@@ -188,7 +188,7 @@
   <% content_for :cover_elements do %>
     <div id="token-setup-option-cover" class="cover-element">
       <div class="container">
-        <!----TODO token setup options cover element ----->
+        <%= render :partial => "web/economy/token/token_setup_options" %>
       </div>
     </div>
   <%end%>
@@ -201,7 +201,7 @@
 
                 walletAssociation : "<%= wallet_association%>",
                 chainId : '<%= chain_id %>',
-                isMainnet: '<%= is_mainnet%>',
+                isMainnet: <%= is_mainnet%>,
 
                 addressesEndPoint: '<%= addresses_api%>',
                 deploymentEndpoint : '<%=deployment_api %>' ,

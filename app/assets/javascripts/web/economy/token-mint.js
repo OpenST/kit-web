@@ -97,7 +97,7 @@
     },
     
     setProvider : function () {
-      var providerName = providerMap[oThis.stakeAndMintProvider],
+      var providerName = providerMap[oThis.stakeAndMintProvider] || "metamask",
           provider = ost[ providerName ] ;
       $.extend(true, oThis, provider );
     },

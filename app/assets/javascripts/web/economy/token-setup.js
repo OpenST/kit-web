@@ -238,7 +238,7 @@
             }
           }
         },
-        error: function (response) {
+        error: function (jQXhr , error ) {
           utilities.btnSubmitCompleteState( oThis.jMetamaskConfirmAddressBtn );
           oThis.showConfirmError(oThis.jGeneralErrorState);
         }

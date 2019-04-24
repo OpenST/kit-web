@@ -85,6 +85,6 @@
     
   };
   
-  ost.StakeAndMintOst  = new StakeAndMintOst();
+  ost.stakeAndMintOst  = new StakeAndMintOst();
   
 })(window , jQuery );

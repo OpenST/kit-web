@@ -95,6 +95,7 @@
     },
   
     onDesiredAccount : function () {
+      var oThis = this ;
       oThis.setStakerAddress();
       var workflowId = oThis.getWorkflowId() ;
       if( workflowId ){
@@ -105,6 +106,7 @@
     },
   
     validateAccount : function () {
+      var oThis = this ;
       var whitelisted = oThis.getWhitelistedAddress(),
         selectedAddress = oThis.getWalletAddress()
       ;
@@ -394,6 +396,6 @@
   
   };
   
-  ost.StakeAndMintMetamask  = new StakeAndMintMetamask();
+  ost.stakeAndMintMetamask  = new StakeAndMintMetamask();
   
 })(window , jQuery );

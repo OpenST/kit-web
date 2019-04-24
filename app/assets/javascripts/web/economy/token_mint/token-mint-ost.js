@@ -6,9 +6,7 @@
     utilities = ns("ost.utilities")
   ;
   
-  function StakeAndMintOst() {
-  
-  }
+  function StakeAndMintOst() {}
   
   StakeAndMintOst.prototype = {
   

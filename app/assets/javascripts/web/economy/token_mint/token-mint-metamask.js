@@ -6,9 +6,7 @@
     utilities = ns("ost.utilities")
   ;
   
-  function StakeAndMintMetamask() {
-  
-  }
+  function StakeAndMintMetamask() {}
   
   StakeAndMintMetamask.prototype = {
   
@@ -358,7 +356,7 @@
     },
   
     convertToBrandedTokens: function ( sucCallback ,  errCallback ) {
-    
+      var oThis = this ;
       var btToMint      = oThis.getBTtoMint() ,
         ostToStake    = PriceOracle.btToOst( btToMint ) ,
         ostToStakeWei = PriceOracle.toWei( ostToStake )

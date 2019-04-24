@@ -21,8 +21,11 @@
 
     ost_to_bt_id = "ost_to_bt_id"
 
+    # TODO START Ankit
+    staking_currency_symbol = "OST"
     is_mainnet = true # TODO revert # current_env == sandbox_sub_url_prefix
     is_metamask_whitelisted_browser = true
+    # TODO END  Ankit
 
 %>
 
@@ -34,6 +37,8 @@
 <%else%>
 
   <form data-ost-formhelper id="economy-planner" action="<%=GlobalConstant::RoutesMap.getApis()[:api_token]%>" method="POST"> <!-- #TODO URL -->
+    <input type="hidden" name="staking_currency_symbol" value="<%= staking_currency_symbol %>" />
+
     <div class="planner-container text-center mt-6">
 
       <% if !is_mainnet %>

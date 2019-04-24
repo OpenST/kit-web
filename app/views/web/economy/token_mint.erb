@@ -4,6 +4,8 @@
   get_ost_api =GlobalConstant::RoutesMap.getApis()[:api_grant]
   workflow_status_api =GlobalConstant::RoutesMap.getApis()[:api_workflow]
   gateway_composer_api =GlobalConstant::RoutesMap.getApis()[:api_gateway_composer]
+  pre_mint_api =GlobalConstant::RoutesMap.getApis()[:api_pre_mint]
+  get_balance_api = GlobalConstant::RoutesMap.getApis()[:api_get_balance]
   redirect_route = GlobalConstant::RoutesMap.getRoutes()[:token_progress]
 
   data_config = {
@@ -16,7 +18,8 @@
       gas_price: @presenter_obj.gas_price.data,
       workflow: @presenter_obj.workflow.data,
       min_ost_required: @presenter_obj.min_ost_in_wei.data,
-      min_eth_required: @presenter_obj.min_eth_in_wei.data
+      min_eth_required: @presenter_obj.min_eth_in_wei.data,
+      stake_address: ""  #TODO Ankit
   }
 
   is_buy_ost = GlobalConstant::Base.main_sub_environment?
@@ -26,36 +29,153 @@
   bt_to_mint_step = GlobalConstant::StakeAndMint.step_bt_to_mint
   is_super_admin = @presenter_obj.is_super_admin?
   bt_symbol = @presenter_obj.client_token_symbol;
+  bt_to_mint_value = bt_to_mint_min
+
+  # TODO START Ankit
+  is_mainnet = true  # current_env == sandbox_sub_url_prefix
+  is_metamask_whitelisted_browser = true
+  bt_to_mint_name = "bt_amount"
+  ost_to_stake_name = "ost_amount"
+  stake_and_mint_provider = "metamask"
+  # TODO END Ankit
 
   #FE specific
-  bt_to_mint_name = "bt_to_mint"
   bt_to_mint_id = "bt_to_mint"
-  bt_to_mint_value = bt_to_mint_min
+
   bt_to_mint_max = 1  #Its just a random value as the component needs it, the actual bt to min max will be set after getting the OST balance from metamask.
   staker_address_name = "staker_address"
   staker_address_selector = "[name='#{staker_address_name}']"
   ether_text = "ETH"
 %>
 
-<div id="stake-mint-start" class="col-9 mx-auto mt-6 jMintSections" style="display: <%= is_workflow ? "none" : "block" %>">
-  <div class="card text-center p-6 card-planner border-0">
-    <h3 class="mb-0">Mint Your Brand Tokens</h3>
-    <div class="simulator-image-wrapper my-4">
-      <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-start-minting@2x.png" width="150" class="img-fluid"/>
-    </div>
-    <div class="token-supply-infotext mb-4 col-5 mx-auto">Mint <%=@presenter_obj.client_token_symbol %> tokens to increase your token supply and power your economy</div>
-    <div class="run-transaction-btn-wrapper">
-      <button id="mint-tokens" class="btn btn-gold" data-submiting="Setting up ...">Setup Minting</button>
+<%if (is_mainnet &&  !is_metamask_whitelisted_browser) ||
+    ( stake_and_mint_provider == "metamask" && !is_metamask_whitelisted_browser)%>
+  <div class="text-center mt-6">
+    <%= render :partial => "web/economy/token/browser_not_supported"%>
+  </div>
+
+<%else%>
+
+  <div id="stake-mint-start" class="col-9 mx-auto mt-6 jMintSections" style="display: <%= is_workflow ? "none" : "block" %>">
+    <div class="card text-center p-6 card-planner border-0">
+      <h3 class="mb-0">Mint Your Brand Tokens</h3>
+      <div class="simulator-image-wrapper my-4">
+        <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-start-minting@2x.png" width="150" class="img-fluid"/>
+      </div>
+      <div class="token-supply-infotext mb-4 col-5 mx-auto">Mint <%=@presenter_obj.client_token_symbol %> tokens to increase your token supply and power your economy</div>
+      <div class="run-transaction-btn-wrapper">
+        <button id="mint-tokens" class="btn btn-gold" data-submiting="Setting up ...">Setup Minting</button>
+      </div>
     </div>
   </div>
-</div>
 
-<div id="stake-mint-process" class="jMintSections" style="display: none;">
-  <form action="<%= gateway_composer_api %>" data-ost-formhelper method="GET" id="stake-mint-confirm-form" >
+  <div id="stake-mint-process" class="jMintSections" style="display: none;">
+    <form action="<%= pre_mint_api %>" data-ost-formhelper method="GET" id="stake-mint-confirm-form" >
+      <div class="container">
+        <div class="row">
+          <div class="col-10 mx-auto user-form">
+            <div class="card card-planner mt-6 mb-5">
+              <div class="card-header text-left">
+                <h4 class="mb-0">Mint Tokens</h4>
+              </div>
+              <div class="card-body">
+                <div class="row mb-4">
+                  <%= render :partial => "/web/economy/token/stake_address",
+                             :locals => {
+                                 :name => staker_address_name,
+                                 :selector => staker_address_selector
+                             }
+                  %>
+                  <div class="col-6 text-left pl-0">
+                    <span class="text-muted font-weight-light">Your Account Owner Address is used to authorize the minting of your Brand Tokens</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                      <%= render partial: 'shared/web/common/slider_top',
+                               locals: {
+                                   label: "#{bt_symbol} Tokens to mint",
+                                   id: bt_to_mint_id,
+                                   name: "display_#{bt_to_mint_name}",
+                                   type: 'number',
+                                   min: bt_to_mint_min,
+                                   max: bt_to_mint_max,
+                                   step: bt_to_mint_step,
+                                   value: bt_to_mint_value,
+                                   tooltip: 'hide',
+                                   classes: 'slider-primary'
+                               }
+                      %>
+                    <div class="mt-4 mb-2">
+                      <%=
+                        render partial: 'shared/web/common/mocker',
+                               locals: {
+                                   :header => "TOKENS VALUE IN USD",
+                                   :mock_selector => "#" + bt_to_mint_id,
+                                   :mock_parser => "ost.tokenMint.btToFiat",
+                                   :mock_type => "ost",
+                                   :value_prefix => "$"
+                               }
+                      %>
+
+                    </div>
+                    <input type="hidden" name="<%= bt_to_mint_name %>"
+                            data-ost-mock-parser="PriceOracle.toWei"
+                            data-ost-mock-element="#<%= bt_to_mint_id %>" />
+                    <input type="hidden" name="<%= ost_to_stake_name %>"
+                           data-ost-mock-parser="ost.tokenMint.btToOstWei"
+                           data-ost-mock-element="#<%= bt_to_mint_id %>" />
+                  </div>
+                  <div class="col-8  form-group m-0">
+                    <div class="d-flex align-items-center">
+                      <div class="p-0 form-group m-0 position-relative">
+                        <div id="ostSupplyInAccountPie" class="pie-chat" style="width:200px; height: 200px"></div>
+                        <div class="total-ost">
+                          <span>Total OST tokens</span><br/>
+                          <span class="total-ost-available"></span>
+                        </div>
+                      </div>
+                      <ul class="p-0 m-0">
+                        <li class="d-flex align-items-center mb-3">
+                          <span class="ost-supply available"></span>
+                          <p class="m-0 ml-2">
+                            <small class="d-block" data-ost_available_key>OST tokens available after minting</small>
+                            <small><span class="ost-mocker-value total-ost-available"
+                                         data-type="ost" data-ost-mock-element="#<%= bt_to_mint_id %>"
+                                         data-ost-mock-parser="ost.tokenMint.ostAvailableOnBtChange"></span></small>
+                          </p>
+                        </li>
+                        <li class="d-flex align-items-center mb-3">
+                          <span class="ost-supply staked-minting"></span>
+                          <p class="m-0 ml-2">
+                            <small class="d-block" data-ost_staked_key>OST tokens used for minting</small>
+                            <small class="d-block" data-ost_staked_val>
+                                  <span class="ost-mocker-value" data-type="ost" data-ost-mock-element="#<%= bt_to_mint_id %>"
+                                        data-ost-mock-parser="ost.tokenMint.ostToStakeOnBtChange">
+                                </span>
+                            </small>
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <button id="stake-and-mint-btn" type="submit" data-submiting="Minting...." class="btn btn-primary d-inline-block">MINT TOKENS</button>
+            <div class="invalid-feedback general_error">&nbsp;</div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="jMintSections" id="jAddressNotWhitelistedSection" style="display: none;">
     <div class="container">
       <div class="row">
-        <div class="col-10 mx-auto user-form">
-          <div class="card card-planner mt-6 mb-5">
+        <div class="col-10 mx-auto">
+          <div class="card card-planner my-5">
             <div class="card-header text-left">
               <h4 class="mb-0">Mint Tokens</h4>
             </div>
@@ -67,209 +187,116 @@
                                :selector => staker_address_selector
                            }
                 %>
-                <div class="col-6 text-left pl-0">
-                  <span class="text-muted font-weight-light">Your Account Owner Address is used to authorize the minting of your Brand Tokens</span>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-4">
-                    <%= render partial: 'shared/web/common/slider_top',
-                             locals: {
-                                 label: "#{bt_symbol} Tokens to mint",
-                                 id: bt_to_mint_id,
-                                 name: bt_to_mint_name,
-                                 type: 'number',
-                                 min: bt_to_mint_min,
-                                 max: bt_to_mint_max,
-                                 step: bt_to_mint_step,
-                                 value: bt_to_mint_value,
-                                 tooltip: 'hide',
-                                 classes: 'slider-primary'
-                             }
-                    %>
-                  <div class="mt-4 mb-2">
-                    <%=
-                      render partial: 'shared/web/common/mocker',
-                             locals: {
-                                 :header => "TOKENS VALUE IN USD",
-                                 :mock_selector => "#" + bt_to_mint_id,
-                                 :mock_parser => "ost.tokenMint.btToFiat",
-                                 :mock_type => "ost",
-                                 :value_prefix => "$"
-                             }
-                    %>
-                  </div>
-
-                </div>
-                <div class="col-8  form-group m-0">
-                  <div class="d-flex align-items-center">
-                    <div class="p-0 form-group m-0 position-relative">
-                      <div id="ostSupplyInAccountPie" class="pie-chat" style="width:200px; height: 200px"></div>
-                      <div class="total-ost">
-                        <span>Total OST tokens</span><br/>
-                        <span class="total-ost-available"></span>
-                      </div>
-                    </div>
-                    <ul class="p-0 m-0">
-                      <li class="d-flex align-items-center mb-3">
-                        <span class="ost-supply available"></span>
-                        <p class="m-0 ml-2">
-                          <small class="d-block" data-ost_available_key>OST tokens available after minting</small>
-                          <small><span class="ost-mocker-value total-ost-available"
-                                       data-type="ost" data-ost-mock-element="#<%= bt_to_mint_id %>"
-                                       data-ost-mock-parser="ost.tokenMint.ostAvailableOnBtChange"></span></small>
-                        </p>
-                      </li>
-                      <li class="d-flex align-items-center mb-3">
-                        <span class="ost-supply staked-minting"></span>
-                        <p class="m-0 ml-2">
-                          <small class="d-block" data-ost_staked_key>OST tokens used for minting</small>
-                          <small class="d-block" data-ost_staked_val>
-                                <span class="ost-mocker-value" data-type="ost" data-ost-mock-element="#<%= bt_to_mint_id %>"
-                                      data-ost-mock-parser="ost.tokenMint.ostToStakeOnBtChange">
-                              </span>
-                          </small>
-                        </p>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <button type="submit" data-submiting="Minting...." class="btn btn-primary d-inline-block">MINT TOKENS</button>
-          <div class="invalid-feedback general_error">&nbsp;</div>
-        </div>
-      </div>
-    </div>
-  </form>
-</div>
-
-<div class="jMintSections" id="jAddressNotWhitelistedSection" style="display: none;">
-  <div class="container">
-    <div class="row">
-      <div class="col-10 mx-auto">
-        <div class="card card-planner my-5">
-          <div class="card-header text-left">
-            <h4 class="mb-0">Mint Tokens</h4>
-          </div>
-          <div class="card-body">
-            <div class="row mb-4">
-              <%= render :partial => "/web/economy/token/stake_address",
-                         :locals => {
-                             :name => staker_address_name,
-                             :selector => staker_address_selector
-                         }
-              %>
-              <div class="col-6 pl-0">
-                <div class="float-left">
-                  <svg class="svg mr-2" style="width: 25px;height: 25px">
-                    <switch>
-                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-error"></use>
-                    </switch>
-                  </svg>
-                </div>
-                <div style="overflow: auto" class="text-muted font-weight-light">
-                  Your selected account is not whitelisted with us. Please try changing the Metamask account.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<div class="jMintSections" id="jInsufficientBalSection" style="display: <%= is_workflow ? "block" : "none" %>">
-  <div class="container">
-    <form id="get-ost-form" action="<%= get_ost_api %>" method="GET">
-      <div class="row">
-        <div class="col-10 mx-auto">
-          <div class="card card-planner my-5">
-            <div class="card-header text-left">
-              <h4 class="mb-0">Mint Tokens</h4>
-            </div>
-            <div class="card-body pb-1">
-              <div class="row">
-                <%= render :partial => "/web/economy/token/stake_address",
-                           :locals => {
-                               :name => staker_address_name,
-                               :selector => staker_address_selector
-                           }
-                %>
-                <div class="col-6 align-self-top d-flex text-left pl-0 jStatusWrapper">
-                  <div class="status-message">
-                    <svg class="svg float-left mr-2" style="width: 25px;height: 25px">
+                <div class="col-6 pl-0">
+                  <div class="float-left">
+                    <svg class="svg mr-2" style="width: 25px;height: 25px">
                       <switch>
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<%= is_buy_ost ? '#icon-error' : '#icon-fund-wallet' %>"></use>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-error"></use>
                       </switch>
                     </svg>
-                    <div style="overflow: auto;" class="text-muted font-weight-light">
-                        <span class="low-bal ether-text" style="display: none;">
-                          Your selected address does not have enough <%= ether_text %>.
-                        </span>
-                      <span class="low-bal ost-text" style="display: none;">
-                          Your selected address does not have enough OST tokens.
-                        </span>
-                      <span class="low-bal eth-ost-text" style="display: none;">
-                          Your selected address does not have enough <%= ether_text %> or OST tokens to Mint Tokens.
-                        </span>
-                    </div>
+                  </div>
+                  <div style="overflow: auto" class="text-muted font-weight-light">
+                    Your selected account is not whitelisted with us. Please try changing the Metamask account.
                   </div>
                 </div>
               </div>
-              <% if is_buy_ost %>
-                <a href="https://openst.org/#token"
-                   target="_blank"
-                   class="btn btn-primary buy-ost-btn" style="display: none;">Buy Ost</a>
-              <% else %>
-                <div class="card-header p-0"></div>
-                <div class="text-muted font-weight-light mt-2 mb-3">
-                  Will fund <%=initial_ost_funding%>&nbsp;<%= ost_currency_symbol %> and minimum required <%= ether_text %> in to your selected MetaMask wallet to get you started.</div>
-                <button id="get-ost-btn" type="submit" data-submiting="Getting <%= ost_currency_symbol %>..."
-                        class="btn btn-primary d-inline-block">Get&nbsp;<%= ost_currency_symbol %>
-                </button>
-                <span class="jGetOstLoaderText ml-3 text-muted font-weight-light align-middle" style="display: none">
-                  <img src="//dxwfxs8b4lg24.cloudfront.net/ost-kit/images/processed-loader-1.gif" width="25" height="25"/>
-                  <span class="align-middle" style="font-size: 14px">Please wait while we transfer <%= ost_currency_symbol %> and <%= ether_text %> required</span>
-                </span>
-              <% end %>
-              <div class="invalid-feedback general_error mt-2 text-left" style="font-size: 12px">&nbsp;</div>
             </div>
           </div>
         </div>
       </div>
-    </form>
+    </div>
   </div>
-</div>
 
-<%= render :partial => "/web/economy/token/token_mint_signs",
-           :locals => {
-               :bt_to_mint_selector => "#" + bt_to_mint_id
-           } %>
+  <div class="jMintSections" id="jInsufficientBalSection" style="display: <%= is_workflow ? "block" : "none" %>">
+    <div class="container">
+      <form id="get-ost-form" action="<%= get_ost_api %>" method="GET">
+        <div class="row">
+          <div class="col-10 mx-auto">
+            <div class="card card-planner my-5">
+              <div class="card-header text-left">
+                <h4 class="mb-0">Mint Tokens</h4>
+              </div>
+              <div class="card-body pb-1">
+                <div class="row">
+                  <%= render :partial => "/web/economy/token/stake_address",
+                             :locals => {
+                                 :name => staker_address_name,
+                                 :selector => staker_address_selector
+                             }
+                  %>
+                  <div class="col-6 align-self-top d-flex text-left pl-0 jStatusWrapper">
+                    <div class="status-message">
+                      <svg class="svg float-left mr-2" style="width: 25px;height: 25px">
+                        <switch>
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<%= is_buy_ost ? '#icon-error' : '#icon-fund-wallet' %>"></use>
+                        </switch>
+                      </svg>
+                      <div style="overflow: auto;" class="text-muted font-weight-light">
+                          <span class="low-bal ether-text" style="display: none;">
+                            Your selected address does not have enough <%= ether_text %>.
+                          </span>
+                        <span class="low-bal ost-text" style="display: none;">
+                            Your selected address does not have enough OST tokens.
+                          </span>
+                        <span class="low-bal eth-ost-text" style="display: none;">
+                            Your selected address does not have enough <%= ether_text %> or OST tokens to Mint Tokens.
+                          </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% if is_buy_ost %>
+                  <a href="https://openst.org/#token"
+                     target="_blank"
+                     class="btn btn-primary buy-ost-btn" style="display: none;">Buy Ost</a>
+                <% else %>
+                  <div class="card-header p-0"></div>
+                  <div class="text-muted font-weight-light mt-2 mb-3">
+                    Will fund <%=initial_ost_funding%>&nbsp;<%= ost_currency_symbol %> and minimum required <%= ether_text %> in to your selected MetaMask wallet to get you started.</div>
+                  <button id="get-ost-btn" type="submit" data-submiting="Getting <%= ost_currency_symbol %>..."
+                          class="btn btn-primary d-inline-block">Get&nbsp;<%= ost_currency_symbol %>
+                  </button>
+                  <span class="jGetOstLoaderText ml-3 text-muted font-weight-light align-middle" style="display: none">
+                    <img src="//dxwfxs8b4lg24.cloudfront.net/ost-kit/images/processed-loader-1.gif" width="25" height="25"/>
+                    <span class="align-middle" style="font-size: 14px">Please wait while we transfer <%= ost_currency_symbol %> and <%= ether_text %> required</span>
+                  </span>
+                <% end %>
+                <div class="invalid-feedback general_error mt-2 text-left" style="font-size: 12px">&nbsp;</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <%= render :partial => "/web/economy/token/token_mint_signs",
+             :locals => {
+                 :bt_to_mint_selector => "#" + bt_to_mint_id
+             } %>
 
 
-<% content_for :popups do %>
-  <%= render partial: 'shared/web/modals/token_setup_admin_error' %>
-<% end %>
+  <% content_for :popups do %>
+    <%= render partial: 'shared/web/modals/token_setup_admin_error' %>
+  <% end %>
 
-<% content_for :end_js do %>
-  <script>
-    $(function () {
-      var dataConfig = JSON.parse('<%= raw data_config.to_json %>');
-      ost.tokenMint.init({
-        workFlowStatusApi: "<%= workflow_status_api %>",
-        mintApi: "<%= mint_api%>",
-        chainId: "<%= chain_id %>",
-        redirectRoute: "<%= redirect_route %>",
-        dataConfig: dataConfig,
-        btToMintId: "<%= bt_to_mint_id %>",
-        isSuperAdmin: <%= is_super_admin %>
+  <% content_for :end_js do %>
+    <script>
+      $(function () {
+        var dataConfig = JSON.parse('<%= raw data_config.to_json %>');
+        ost.tokenMint.init({
+          workFlowStatusApi: "<%= workflow_status_api %>",
+          getBalanceApi : "<%= get_balance_api%>",
+          mintApi: "<%= mint_api%>",
+          chainId: "<%= chain_id %>",
+          redirectRoute: "<%= redirect_route %>",
+          dataConfig: dataConfig,
+          btToMintId: "<%= bt_to_mint_id %>",
+          isSuperAdmin: <%= is_super_admin %>,
+          stakeAndMintProvider : '<%= stake_and_mint_provider%>'
+        });
       });
-    });
-  </script>
-<% end %>
+    </script>
+  <% end %>
+
+<%end%>

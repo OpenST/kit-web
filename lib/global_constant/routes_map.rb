@@ -36,6 +36,7 @@ module GlobalConstant
             api_workflow:         "/#{GlobalConstant::Environment.url_prefix}/api/workflow",
             api_grant:            "/#{GlobalConstant::Environment.url_prefix}/api/grant",
             api_gateway_composer: "/#{GlobalConstant::Environment.url_prefix}/api/contracts/gateway-composer",
+            api_pre_mint:         "/#{GlobalConstant::Environment.url_prefix}/api/token/pre-mint",
             get_api_keys:         "/#{GlobalConstant::Environment.url_prefix}/api/developer/api-keys",
             delete_api_key:       "/#{GlobalConstant::Environment.url_prefix}/api/developer/api-keys/delete",
             api_list_admins:      "/api/setting/team/list",
@@ -51,7 +52,8 @@ module GlobalConstant
             api_mfa:              "/api/mfa",
             api_reset_password:   "/api/reset-password",
             api_send_reset_password_link:"/api/reset-password/request-link",
-            api_token_setup_address_generation: ""
+            api_token_setup_address_generation: "/api/token/addresses/create-managed-address",
+            api_get_balance: "/api/token/balance"
         }
       end
 

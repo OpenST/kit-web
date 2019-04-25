@@ -30,3 +30,15 @@
     height: 5vw;
   }
 }
+
+.text-link{
+  font-weight: 500;
+  padding: 5px 0;
+  letter-spacing: 2.5px;
+  &.cyan{
+    color: #FBD764!important;
+    &:before, &:after{
+      background: #FBD764!important;
+    }
+  }
+}

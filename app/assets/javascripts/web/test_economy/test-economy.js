@@ -17,6 +17,14 @@
       $('#invite-economy').on('click',function () {
           oThis.jInviteEconomyModal.modal('show');
       });
+      $('#invite-users-btn').on('click',function () {
+        $(this).hide();
+        $('.send-invite-section').show();
+      });
+      $('#get-qr-code-btn').on('click',function () {
+        $(this).hide();
+        $('.qr-code-section').show();
+      });
     },
 
     onLaunchSetupSuccess : function () {
@@ -35,7 +43,7 @@
       $("#invite-economy-form").formHelper({
         success:function(response){
           if(response && response.success){
-            oThis.jInviteEconomyModal.modal('hide');
+           //invited successfully modal show
           }
         }
       });

@@ -10,44 +10,29 @@
 
 <div class="test-economy-container">
 
-  <h3 class="text-center mt-5"> Test Your Branded Token Economy </h3>
+  <h3 class="text-center mt-5"> Test Your <%=bt_symbol%> Token Economy </h3>
 
     <div class="test-economy-post-setup" style="display: <%= has_setup_test_economy ? 'block': 'none'%>">
-      <div class="row mt-5  mb-6">
-        <div class="col-5 shadow-box mx-auto p-4 mb-6">
-          <div class="row">
-            <div class="col-8 my-auto">
-              <p class="mb-0 shadow-box-info-text">Test economy successfully setup</p>
-            </div>
-            <div class="col-4 text-right">
-              <svg class="success-icon align-middle" style="width: 34px; height: 34px">
-                <switch>
-                  <use class="success-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
-                </switch>
-              </svg>
-            </div>
-          </div>
+      <div class="row mt-5">
+        <div class="col-9 shadow-box mx-auto p-4">
+          <svg class="success-icon align-middle d-inline" style="width: 34px; height: 34px">
+            <switch>
+              <use class="success-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
+            </switch>
+          </svg>
+          <p class="mb-0 font-weight-light text-muted d-inline align-middle ml-2">Your Test Economy backend has been successfully setup.</p>
         </div>
       </div>
       <div class="row mt-5">
-        <div class="col-9 solid-background p-3 mx-auto">
-          <div class="row">
-            <div class="col-1 my-auto">
-              <svg class="get-ost-icon align-middle" style="width: 34px; height: 34px">
-                <switch>
-                  <use class="get-ost-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#get-ost-icon"></use>
-                </switch>
-              </svg>
-            </div>
-            <div class="col-5 pl-0 my-auto">
-              <p class="mb-0">Get OST demo App and Scan QR code to join the economy</p>
-            </div>
-            <div class="col-3 my-auto">
-              <a href="<%= ios_app_download_link %>" class="btn btn-secondary">download(ios)</a>
-            </div>
-            <div class="col-3 my-auto">
-              <a href="<%= android_app_download_link %>" class="btn btn-secondary">download(Android)</a>
-            </div>
+        <div class="col-9 mx-auto shadow-box px-0">
+          <div class="card">
+            <h3 class="card-header">Get Demo App</h3>
+            <div class="card-body">
+              <p class="font-weight-light text-muted">Token Name is a way to set a unique identy for your token. Token symbol is broadly equivalent to a stock ticker, that helps identify the token..</p>
+              <div class="my-4">
+                <a href="<%#= ios_app_download_link %>" class="btn btn-secondary">download(ios)</a>
+                <a href="<%#= android_app_download_link %>" class="btn btn-secondary ml-3">download(Android)</a>
+              </div>
           </div>
         </div>
       </div>
@@ -69,33 +54,45 @@
             </div>
           </div>
         </div>
+<!--        <div class="col-9 mx-auto shadow-box px-0">-->
+<!--          <form id="invite-economy-form" action="<%#= api_invite_to_test_economy %>" method="POST">-->
+<!--            <div class="card shadow-box">-->
+<!--              <h3 class="card-header">Setup economy</h3>-->
+<!--              <div class="card-body">-->
+<!--                <p class="font-weight-light text-muted">Token Name is a way to set a unique identy for your token. Token symbol is broadly equivalent to a stock ticker, that helps identify the token..</p>-->
+<!--                <button type="submit" id="launch-test-economy" data-submiting="Setting up.." class="btn btn-primary">-->
+<!--                  Launch  setup-->
+<!--                </button>-->
+<!--                <div class="qr-code-section row">-->
+<!--                  <img class="qr-code my-5 col-2 mx-auto" src="<%#=qr_code_url%>">-->
+<!--                </div>-->
+<!--                <div class="invalid-feedback" data-forid="launch-test-economy">&nbsp;</div>-->
+<!--                <div class="general_error invalid-feedback"></div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
       </div>
-      <div class="qr-code-section row">
-        <img class="qr-code my-5 col-2 mx-auto" src="<%=qr_code_url%>">
-      </div>
-      <h3 class="text-center">Scan  and  Join <%= bt_symbol %> Test Economy! </h3>
     </div>
 
-
-    <div class="test-economy-pre-setup " style="display: <%= !has_setup_test_economy ? 'block': 'none'%>">
-      <form id="launch-setup-form" action="<%= activate_test_economy_api_route %>" method="POST">
-        <div class="row mt-5">
-          <div class="col-7 shadow-box mx-auto p-4">
-            <div class="row">
-              <div class="col-8 my-auto">
-                <p class="mb-0 shadow-box-info-text">Set up your test economy with OST servers</p>
-              </div>
-              <div class="col-4 my-auto text-right">
-                <button type="submit" id="launch-test-economy" data-submiting="Launching setup.." class="btn btn-primary d-inline">
+    <div class="test-economy-pre-setup mt-5" style="display: <%= !has_setup_test_economy ? 'block': 'none'%>">
+      <div class="row">
+        <div class="col-9 mx-auto shadow-box px-0">
+          <form id="launch-setup-form" action="<%= activate_test_economy_api_route %>" method="POST">
+            <div class="card shadow-box">
+              <h3 class="card-header">Setup economy</h3>
+              <div class="card-body">
+                <p class="font-weight-light text-muted">Token Name is a way to set a unique identy for your token. Token symbol is broadly equivalent to a stock ticker, that helps identify the token..</p>
+                <button type="submit" id="launch-test-economy" data-submiting="Setting up.." class="btn btn-primary">
                   Launch  setup
                 </button>
+                <div class="invalid-feedback" data-forid="launch-test-economy">&nbsp;</div>
+                <div class="general_error invalid-feedback"></div>
               </div>
             </div>
-          </div>
-          <div class="invalid-feedback" data-forid="launch-test-economy">&nbsp;</div>
-          <div class="general_error invalid-feedback"></div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
 
 

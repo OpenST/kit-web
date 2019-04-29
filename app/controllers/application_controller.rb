@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   include Sanitizer
   before_action :sanitize_params
   after_action :handle_whitelisted_api_cookies
+  after_action :create_utm_params_cookies
   after_action :set_response_headers
 
   include CookieConcern
@@ -78,6 +79,24 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Create utm params cookie if utm params found
+  #
+  # * Author: Aalpesh
+  # * Date: 16/04/2019
+  # * Reviewed By:
+  #
+  def create_utm_params_cookies
+    if params["utm_source"].present?
+      cookies[GlobalConstant::Cookie.utm_params_cookie_name.to_sym] = {
+        utm_source: params[:utm_source],
+        utm_type: params[:utm_type],
+        utm_medium: params[:utm_medium],
+        utm_term: params[:utm_term],
+        utm_campaign: params[:utm_campaign],
+        utm_content: params[:utm_content]
+      }.to_json
+    end
+  end
 
   # Set page meta info
   #

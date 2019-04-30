@@ -64,7 +64,10 @@
                 <form id="invite-economy-form" data-submiting="Sending…" action="<%= api_invite_to_test_economy %>" method="POST">
                   <div class="form-group">
                     <label for="user_email" class="form-label text-uppercase">Email Address</label>
-                    <input type="email" class="form-control" id="email_addresses" name="email_addresses"
+                    <input type="text" pattern="^([\w+-.%]+@[\w-.]+\.[A-Za-z]{2,4},*[\W]*)+$"
+                           title="Email"
+                           data-msg-pattern="Email is invalid."
+                           class="form-control" id="email_addresses" name="email_addresses"
                            placeholder="Email Addresses separated by commas" required/>
                     <div class="invalid-feedback" data-forid="email_addresses">&nbsp;</div>
                     <button type="submit" data-submiting="sending.." id="send-invite-btn" class="btn btn-primary mt-2">

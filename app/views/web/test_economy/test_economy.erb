@@ -28,19 +28,32 @@
         <div class="card">
           <h3 class="card-header">Get Demo App</h3>
           <div class="card-body">
-            <p class="font-weight-light text-muted">Token Name is a way to set a unique identy for your token. Token symbol is broadly equivalent to a stock ticker, that helps identify the token..</p>
+            <p class="font-weight-light text-muted">Token Name is a way to set a unique identy for your token. Token symbol is broadly equivalent to a stock ticker, that helps identify the token.</p>
             <div class="my-4">
-              <a href="<%= ios_app_download_link %>" target="_blank" class="btn btn-secondary">download(ios)</a>
-              <a href="<%= android_app_download_link %>" target="_blank" class="btn btn-secondary ml-3">download(Android)</a>
+              <a class="d-inline ml-3" href="<%= ios_app_download_link %>" target="_blank" title="Download ios App">
+                <svg class="icon ios-test-economy-icon" style="height: 60px;width: 150px;">
+                  <switch>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ios-test-economy-icon"></use>
+                  </switch>
+                </svg>
+              </a>
+              <a class="d-inline ml-3" href="<%= android_app_download_link %>" target="_blank" title="Download android App">
+                <svg class="icon android-test-economy-icon" style="height: 60px;width: 150px;">
+                  <switch>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#android-test-economy-icon"></use>
+                  </switch>
+                </svg>
+              </a>
             </div>
         </div>
       </div>
     </div>
     <div class="col-9 mx-auto shadow-box px-0 mt-5 mb-6">
       <div class="card">
-        <h3 class="card-header">Setup economy</h3>
+        <h3 class="card-header">Connect App to <%=bt_symbol%> economy</h3>
         <div class="card-body">
-          <p class="font-weight-light text-muted"> Scan and Join the LGBT Economy from demo app. Scan and Join the LGBT Economy from demo app.  Scan and Join the LGBT Economy from demo app</p>
+          <p class="font-weight-light get-qr-code-before-text text-muted" > Get OST Demo App on your Mobile. Token Name is a way to set a unique identy for your token. Token symbol is broadly equivalent to a stock ticker, that helps identify the token.</p>
+          <p class="font-weight-light get-qr-code-after-text text-muted" style="display: none"> Scan and Join the LGBT Economy from demo app. Scan and Join the LGBT Economy from demo app.  Scan and Join the LGBT Economy from demo app</p>
           <button type="button" id="get-qr-code-btn" class="btn btn-primary">
             GET QR CODE
           </button>
@@ -54,7 +67,7 @@
       <div class="card">
         <h3 class="card-header">Invite Users</h3>
         <div class="card-body">
-          <p class="font-weight-light text-muted">Token Name is a way to set a unique identy for your token. Token symbol is broadly equivalent to a stock ticker, that helps identify the token..</p>
+          <p class="font-weight-light text-muted">Get OST Demo App on your Mobile. Token Name is a way to set a unique identy for your token. Token symbol is broadly equivalent to a stock ticker, that helps identify the token.</p>
           <button type="button" id="invite-users-btn" class="btn btn-primary">
             INVITE USERS
           </button>

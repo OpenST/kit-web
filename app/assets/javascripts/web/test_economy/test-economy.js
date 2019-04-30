@@ -5,7 +5,7 @@
       ;
 
   var oThis = parentNS.test_economy = {
-    jInviteEconomyModal   : $('#invite-economy-modal'),
+    inviteEconomyForm : $("#invite-economy-form"),
     init: function (config) {
 
       $.extend(oThis,config);
@@ -14,15 +14,14 @@
 
     },
     bindEvents : function () {
-      $('#invite-economy').on('click',function () {
-          oThis.jInviteEconomyModal.modal('show');
-      });
       $('#invite-users-btn').on('click',function () {
         $(this).hide();
         $('.send-invite-section').show();
       });
       $('#get-qr-code-btn').on('click',function () {
         $(this).hide();
+        $('.get-qr-code-before-text').hide()
+        $('.get-qr-code-after-text').show()
         $('.qr-code-section').show();
       });
     },
@@ -40,9 +39,10 @@
         }
       });
 
-      $("#invite-economy-form").formHelper({
+      oThis.inviteEconomyForm.formHelper({
         success:function(response){
           if(response && response.success){
+            oThis.inviteEconomyForm[0].reset();
            $('#invite-success-modal').modal('show');
           }
         }

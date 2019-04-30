@@ -30,8 +30,8 @@
           <div class="card-body">
             <p class="font-weight-light text-muted">Token Name is a way to set a unique identy for your token. Token symbol is broadly equivalent to a stock ticker, that helps identify the token..</p>
             <div class="my-4">
-              <a href="<%#= ios_app_download_link %>" class="btn btn-secondary">download(ios)</a>
-              <a href="<%#= android_app_download_link %>" class="btn btn-secondary ml-3">download(Android)</a>
+              <a href="<%= ios_app_download_link %>" target="_blank" class="btn btn-secondary">download(ios)</a>
+              <a href="<%= android_app_download_link %>" target="_blank" class="btn btn-secondary ml-3">download(Android)</a>
             </div>
         </div>
       </div>
@@ -64,11 +64,14 @@
                 <form id="invite-economy-form" data-submiting="Sending…" action="<%= api_invite_to_test_economy %>" method="POST">
                   <div class="form-group">
                     <label for="user_email" class="form-label text-uppercase">Email Address</label>
-                    <input type="email" class="form-control mb-4" id="user_email" name="user_email" placeholder="Email Addresses separated by commas"/>
-                    <button type="submit" id="send-invite-btn" class="btn btn-primary">
+                    <input type="email" class="form-control" id="email_addresses" name="email_addresses"
+                           placeholder="Email Addresses separated by commas" required/>
+                    <div class="invalid-feedback" data-forid="email_addresses">&nbsp;</div>
+                    <button type="submit" id="send-invite-btn" class="btn btn-primary mt-2">
                       SEND INVITES
                     </button>
                   </div>
+                  <div class="general_error invalid-feedback" data-forid="invite-economy-form">&nbsp;</div>
                 </form>
               </div>
             </div>
@@ -110,5 +113,5 @@
 
 
 <% content_for :popups do %>
-  <%= render partial: 'web/test_economy/invite_economy_modal', :locals => { :api_invite_to_test_economy => api_invite_to_test_economy  } %>
+  <%= render partial: 'web/test_economy/invite_success_modal' %>
 <%end%>

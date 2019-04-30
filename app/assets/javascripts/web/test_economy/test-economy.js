@@ -43,7 +43,7 @@
       $("#invite-economy-form").formHelper({
         success:function(response){
           if(response && response.success){
-           //invited successfully modal show
+           $('#invite-success-modal').modal('show');
           }
         }
       });

@@ -191,6 +191,13 @@ module WebPresenter
       end
     end
 
+    def fetch_balance_for_currencies
+      @f_b_c ||= begin
+        currencies = ['ETH']
+        currencies.push(stake_currencies.id_obj_map[client_token.stake_currency_id].symbol)
+      end
+    end
+
   end
 
 end

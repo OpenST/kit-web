@@ -199,8 +199,6 @@
           }
           if(result && result.error){
             return oThis.showConfirmError(oThis.jRejectedSignErrorState);
-          } else {
-            oThis.associateAddress(result);
           }
           oThis.associateAddress(result);
         });

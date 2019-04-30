@@ -66,14 +66,18 @@
       var btToMint = oThis.getBTtoMint() ,
         ostToStake = PriceOracle.btToOstPrecession( btToMint ) //As it goes to backend and comes back as is.
       ;
-      return {
-        'staker_address' : oThis.getWalletAddress(),
+      //TODO get via form @Ashutosh
+      var data =  {
         'fe_bt_to_mint' : btToMint ,      //JUST FOR FE
         'fe_ost_to_stake' : ostToStake    //JUST FOR FE
-      }
+      };
+      var formData =  utilities.getFormData( $("#stake-mint-confirm-form") );
+      data = $.extend( data ,formData );
+      return data;
     },
   
     mintSuccess : function ( res ) {
+      var oThis = this;
       window.location = oThis.redirectRoute ;
     },
   

@@ -120,8 +120,8 @@
     onConfirmStakeMintSuccess : function ( res ) {
       var oThis =  this ,
         data = res && res.data ,
-        ostToStake = utilities.deepGet( res , "data.precise_amounts.OST"),
-        btToMint =   utilities.deepGet( res , "data.precise_amounts.BT" )
+        ostToStake = utilities.deepGet( res , "data.precise_amounts.stake_currency"),
+        btToMint =   utilities.deepGet( res , "data.precise_amounts.bt" )
       ;
       oThis.setDataInDataConfig( "gatewayComposerDetails" ,  data );
       oThis.showSection( oThis.jTokenStakeAndMintSignSection ) ;
@@ -218,7 +218,7 @@
         gatewayComposerTxParams['gas_limit'],
         gatewayComposerTxParams['staker_gateway_nonce']
       ];
-    
+
       // Create Encoded ABI using params
       var data = oThis.metamask.getContractEncodedABI(
         oThis.getGatewayComposerContractAddress(),
@@ -226,7 +226,7 @@
         params,
         oThis.getGatewayComposerABI()
       );
-    
+
       // Create options ABI using data
       var options = {
         method: 'eth_sendTransaction',
@@ -240,7 +240,7 @@
           }
         ]
       };
-    
+
       // If data then send transaction...
       if(data){
         oThis.metamask.sendAsync(options, function(err, result){
@@ -294,6 +294,7 @@
       return {
         'approve_transaction_hash'       : oThis.approve_transaction_hash,
         'request_stake_transaction_hash' : oThis.request_stake_transaction_hash,
+        //TODO get via form @Ashutosh
         'staker_address' : oThis.getWalletAddress(),
         'fe_bt_to_mint' : btToMint ,      //JUST FOR FE
         'fe_ost_to_stake' : ostToStake    //JUST FOR FE

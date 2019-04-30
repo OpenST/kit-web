@@ -43,6 +43,18 @@ module WebPresenter
       end
     end
 
+    def stake_currencies
+      @s_c ||= begin
+        formatter_obj.present? ? formatter_obj.stake_currencies : nil
+      end
+    end
+
+    def all_stake_currencies
+      @a_s_c ||= begin
+        formatter_obj.present? ? formatter_obj.all_stake_currencies : nil
+      end
+    end
+
     def oracle_price_points
       @o_p_p ||= begin
         formatter_obj.present? ? formatter_obj.oracle_price_points : nil

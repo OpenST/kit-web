@@ -1,8 +1,5 @@
 <%
 
-    sandbox_sub_url_prefix = GlobalConstant::Environment.sandbox_sub_url_prefix
-    current_env  = GlobalConstant::Environment.url_prefix
-
     wallet_association =  @presenter_obj.sign_messages.wallet_association
     ost_to_fiat =  @presenter_obj.oracle_price_points.to_fiat_conversion_factor("USD")
 
@@ -10,8 +7,9 @@
 
     addresses_api = GlobalConstant::RoutesMap.getApis()[:api_addresses]
     deployment_api = GlobalConstant::RoutesMap.getApis()[:api_deploy]
+    address_generation_api = GlobalConstant::RoutesMap.getApis()[:api_token_setup_address_generation]
+
     deploy_route = GlobalConstant::RoutesMap.getRoutes()[:token_deploy]
-    address_generation_api = GlobalConstant::RoutesMap.getRoutes()[:api_token_setup_address_generation]
 
     conversion_factor = @presenter_obj.client_token_conversion_factor || 1
     bt_to_ost_input_name = "conversion_factor"
@@ -21,11 +19,16 @@
 
     ost_to_bt_id = "ost_to_bt_id"
 
-    # TODO START Ankit
-    staking_currency_symbol = "OST"
-    is_mainnet = true # TODO revert # current_env == sandbox_sub_url_prefix
-    is_metamask_whitelisted_browser = true
-    # TODO END  Ankit
+    # stake_currency_symbol would be set only after token has been created on BE
+    # TODO: FE to use @presenter_obj.all_stake_currencies to show drop down or to pick a default and remove OST hardcoding below
+
+    stake_currency_symbol = 'OST'
+    if @presenter_obj.client_token.present? && @presenter_obj.client_token.stake_currency_id.present?
+      stake_currency_symbol = @presenter_obj.stake_currencies.id_obj_map[@presenter_obj.client_token.stake_currency_id].symbol
+    end
+
+    is_mainnet = GlobalConstant::Base.main_sub_environment?
+    is_metamask_whitelisted_browser = browser_supported_by_metamask?
 
 %>
 
@@ -37,7 +40,7 @@
 <%else%>
 
   <form data-ost-formhelper id="economy-planner" action="<%=GlobalConstant::RoutesMap.getApis()[:api_token]%>" method="POST"> <!-- #TODO URL -->
-    <input type="hidden" name="staking_currency_symbol" value="<%= staking_currency_symbol %>" />
+    <input type="hidden" name="stake_currency_symbol" value="<%= stake_currency_symbol %>" />
 
     <div class="planner-container text-center mt-6">
 

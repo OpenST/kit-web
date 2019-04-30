@@ -181,6 +181,16 @@ module WebPresenter
       end
     end
 
+    def key_provider
+      @k_p ||= begin
+        if formatter_obj.present?
+          formatter_obj.client_token.has_ost_managed_owner? ? 'ost' : 'metamask'
+        else
+          nil
+        end
+      end
+    end
+
   end
 
 end

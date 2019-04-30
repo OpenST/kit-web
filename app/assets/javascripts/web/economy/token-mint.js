@@ -73,7 +73,7 @@
     dataConfig: null,
     btToMintId: null,
     isSuperAdmin: false,
-    stakeAndMintProvider : null,
+    keyProvider : null,
     //Data from backend end
   
     //General error msg start
@@ -97,7 +97,7 @@
     },
     
     setProvider : function () {
-      var providerName = providerMap[oThis.stakeAndMintProvider] || "metamask",
+      var providerName = providerMap[oThis.keyProvider],
           provider = ost[ providerName ] ;
       $.extend(true, oThis, provider );
     },

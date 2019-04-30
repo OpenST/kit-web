@@ -3,7 +3,6 @@
   mint_api =GlobalConstant::RoutesMap.getApis()[:api_mint]
   get_ost_api =GlobalConstant::RoutesMap.getApis()[:api_grant]
   workflow_status_api =GlobalConstant::RoutesMap.getApis()[:api_workflow]
-  gateway_composer_api =GlobalConstant::RoutesMap.getApis()[:api_gateway_composer]
   pre_mint_api =GlobalConstant::RoutesMap.getApis()[:api_pre_mint]
   get_balance_api = GlobalConstant::RoutesMap.getApis()[:api_get_balance]
   redirect_route = GlobalConstant::RoutesMap.getRoutes()[:token_progress]
@@ -19,7 +18,7 @@
       workflow: @presenter_obj.workflow.data,
       min_ost_required: @presenter_obj.min_ost_in_wei.data,
       min_eth_required: @presenter_obj.min_eth_in_wei.data,
-      stake_address: ""  #TODO Ankit
+      stake_address: @presenter_obj.origin_addresses.owner
   }
 
   is_buy_ost = GlobalConstant::Base.main_sub_environment?
@@ -31,16 +30,13 @@
   bt_symbol = @presenter_obj.client_token_symbol;
   bt_to_mint_value = bt_to_mint_min
 
-  # TODO START Ankit
-  is_mainnet = true  # current_env == sandbox_sub_url_prefix
-  is_metamask_whitelisted_browser = true
+  is_mainnet = GlobalConstant::Base.main_sub_environment?
+  is_metamask_whitelisted_browser = browser_supported_by_metamask?
   bt_to_mint_name = "bt_amount"
   ost_to_stake_name = "ost_amount"
-  stake_and_mint_provider = "metamask"
-  # TODO END Ankit
+  key_provider = @presenter_obj.key_provider
 
   #FE specific
-  bt_to_mint_name = "bt_to_mint"
   bt_to_mint_id = "bt_to_mint"
 
   bt_to_mint_max = 1  #Its just a random value as the component needs it, the actual bt to min max will be set after getting the OST balance from metamask.
@@ -50,7 +46,7 @@
 %>
 
 <%if (is_mainnet &&  !is_metamask_whitelisted_browser) ||
-    ( stake_and_mint_provider == "metamask" && !is_metamask_whitelisted_browser)%>
+    ( key_provider == "metamask" && !is_metamask_whitelisted_browser)%>
   <div class="text-center mt-6">
     <%= render :partial => "web/economy/token/browser_not_supported"%>
   </div>
@@ -294,7 +290,7 @@
           dataConfig: dataConfig,
           btToMintId: "<%= bt_to_mint_id %>",
           isSuperAdmin: <%= is_super_admin %>,
-          stakeAndMintProvider : '<%= stake_and_mint_provider%>'
+          keyProvider : '<%= key_provider%>'
         });
       });
     </script>

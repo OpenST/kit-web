@@ -7,7 +7,7 @@ module CompanyApi
       class Token < CompanyApi::Response::Formatter::Base
 
         attr_reader :min_eth_in_wei, :min_ost_in_wei, :workflow_payload, :developer_page_addresses,
-                    :dashboard_details, :graph_urls, :test_economy_details
+                    :dashboard_details, :graph_urls, :test_economy_details, :all_stake_currencies
 
         # Initialize
         #
@@ -31,6 +31,8 @@ module CompanyApi
         #
         def perform
           set_token(@data['token'])
+          set_stake_currencies(@data['stake_currencies'])
+          set_all_stake_currencies(@data['all_stake_currencies']) if @data['all_stake_currencies'].present?
           set_price_points(@data['price_points'])
           set_manager(@data['manager']) if @data['manager'].present?
           set_client(@data['client']) if @data['client'].present?
@@ -53,6 +55,20 @@ module CompanyApi
         end
 
         private
+
+        # Set stake currencies
+        #
+        # * Author: Puneet
+        # * Date: 30/04/2019
+        # * Reviewed By:
+        #
+        # @param [Array] all_stake_currencies_data (mandatory) - all stake currencies array
+        #
+        # Sets @all_stake_currencies
+        #
+        def set_all_stake_currencies(all_stake_currencies_data)
+          @all_stake_currencies = CompanyApi::Response::Entity::AllStakeCurrencies.new(all_stake_currencies_data)
+        end
 
         def set_min_eth_in_wei(min_eth_data)
           @min_eth_in_wei = CompanyApi::Response::Entity::MinEthInWei.new(min_eth_data)

@@ -32,12 +32,13 @@ module GlobalConstant
         {
             api_token:            "/#{GlobalConstant::Environment.url_prefix}/api/token",
             api_addresses:        "/#{GlobalConstant::Environment.url_prefix}/api/token/addresses",
+            api_get_balance:      "/#{GlobalConstant::Environment.url_prefix}/api/token/balance",
+            api_token_setup_address_generation: "/#{GlobalConstant::Environment.url_prefix}/api/token/addresses/create-managed-address",
             api_request_whitelist:"/#{GlobalConstant::Environment.main_sub_env_url_prefix}/api/token/request-whitelist",
             api_deploy:           "/#{GlobalConstant::Environment.url_prefix}/api/token/deploy",
             api_mint:             "/#{GlobalConstant::Environment.url_prefix}/api/token/mint",
             api_workflow:         "/#{GlobalConstant::Environment.url_prefix}/api/workflow",
             api_grant:            "/#{GlobalConstant::Environment.url_prefix}/api/grant",
-            api_gateway_composer: "/#{GlobalConstant::Environment.url_prefix}/api/contracts/gateway-composer",
             api_pre_mint:         "/#{GlobalConstant::Environment.url_prefix}/api/token/pre-mint",
             get_api_keys:         "/#{GlobalConstant::Environment.url_prefix}/api/developer/api-keys",
             delete_api_key:       "/#{GlobalConstant::Environment.url_prefix}/api/developer/api-keys/delete",
@@ -55,9 +56,7 @@ module GlobalConstant
             api_login:            "/api/login",
             api_mfa:              "/api/mfa",
             api_reset_password:   "/api/reset-password",
-            api_send_reset_password_link:"/api/reset-password/request-link",
-            api_token_setup_address_generation: "/api/token/addresses/create-managed-address",
-            api_get_balance: "/api/token/balance"
+            api_send_reset_password_link:"/api/reset-password/request-link"
         }
       end
 

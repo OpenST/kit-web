@@ -34,7 +34,7 @@
   is_mainnet = GlobalConstant::Base.main_sub_environment?
   is_metamask_whitelisted_browser = browser_supported_by_metamask?
   bt_to_mint_name = "bt_amount"
-  ost_to_stake_name = "ost_amount"
+  ost_to_stake_name = "stake_amount"
   key_provider = @presenter_obj.key_provider
   fetch_balance_currencies = @presenter_obj.fetch_balance_for_currencies
 
@@ -293,7 +293,7 @@
           btToMintId: "<%= bt_to_mint_id %>",
           isSuperAdmin: <%= is_super_admin %>,
           keyProvider : '<%= key_provider%>',
-          fetchBalanceCurrencies : '<%=fetch_balance_currencies %>'
+          fetchBalanceCurrencies : '<%= raw fetch_balance_currencies.to_json %>'
         });
       });
     </script>

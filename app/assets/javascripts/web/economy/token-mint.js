@@ -222,11 +222,11 @@
         method: 'GET',
         data: {
           "address" : oThis.getWalletAddress(),
-          "currencies":oThis.fetchBalanceCurrencies
+          "currencies": JSON.parse(oThis.fetchBalanceCurrencies)
         },
         success: function ( res ) {
          if( res && res.success){
-           oThis.checkForBalSuccess();
+           oThis.checkForBalSuccess( res );
            return ;
          }
           oThis.checkForBalError();

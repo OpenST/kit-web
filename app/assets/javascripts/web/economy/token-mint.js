@@ -67,6 +67,7 @@
     mintApi : null,
     workFlowStatusApi: null,
     getBalanceApi : null,
+    fetchBalanceCurrencies : null,
     
     chainId : null,
     redirectRoute : null,
@@ -220,7 +221,8 @@
         url: oThis.getBalanceApi,
         method: 'GET',
         data: {
-          "address" : oThis.getWalletAddress()
+          "address" : oThis.getWalletAddress(),
+          "currencies":oThis.fetchBalanceCurrencies
         },
         success: function ( res ) {
          if( res && res.success){

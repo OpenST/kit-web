@@ -289,8 +289,8 @@
     getMintData : function () {
       var oThis = this ;
       var formData =  utilities.getFormData( $("#stake-mint-confirm-form") );
-      formData[approve_transaction_hash] = oThis.approve_transaction_hash;
-      formData[request_stake_transaction_hash] = oThis.request_stake_transaction_hash;
+      formData['approve_transaction_hash'] = oThis.approve_transaction_hash;
+      formData['request_stake_transaction_hash'] = oThis.request_stake_transaction_hash;
       return formData;
     },
   

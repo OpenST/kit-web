@@ -2,7 +2,7 @@
   workflow_id = @presenter_obj.workflow.id
   minting_status_api = GlobalConstant::RoutesMap.getApis()[:api_workflow]+"/#{workflow_id}"
   bt_symbol = @presenter_obj.client_token_symbol
-  stake_ost = @presenter_obj.workflow_payload.fe_ost_to_stake
+  stake_ost = @presenter_obj.workflow_payload.fe_stake_currency_to_stake
   total_mint_bt = @presenter_obj.workflow_payload.fe_bt_to_mint
   dashboard_url = GlobalConstant::RoutesMap.getRoutes()[:token_dashboard]
 %>

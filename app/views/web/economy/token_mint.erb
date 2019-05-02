@@ -33,8 +33,8 @@
 
   is_mainnet = GlobalConstant::Base.main_sub_environment?
   is_metamask_whitelisted_browser = browser_supported_by_metamask?
-  bt_to_mint_name = "bt_amount"
-  ost_to_stake_name = "stake_amount"
+  bt_to_mint_name = "bt_to_mint"
+  ost_to_stake_name = "stake_currency_to_stake"
   key_provider = @presenter_obj.key_provider
   fetch_balance_currencies = @presenter_obj.fetch_balance_for_currencies
 

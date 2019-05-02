@@ -69,7 +69,7 @@
       //TODO get via form @Ashutosh
       var data =  {
         'fe_bt_to_mint' : btToMint ,      //JUST FOR FE
-        'fe_ost_to_stake' : ostToStake    //JUST FOR FE
+        'fe_stake_currency_to_stake' : ostToStake    //JUST FOR FE
       };
       var formData =  utilities.getFormData( $("#stake-mint-confirm-form") );
       data = $.extend( data ,formData );

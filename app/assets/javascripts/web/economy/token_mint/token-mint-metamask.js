@@ -297,7 +297,7 @@
         //TODO get via form @Ashutosh
         'staker_address' : oThis.getWalletAddress(),
         'fe_bt_to_mint' : btToMint ,      //JUST FOR FE
-        'fe_ost_to_stake' : ostToStake    //JUST FOR FE
+        'fe_stake_currency_to_stake' : ostToStake    //JUST FOR FE
       }
     },
   

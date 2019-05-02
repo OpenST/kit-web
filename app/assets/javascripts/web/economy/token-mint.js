@@ -203,6 +203,14 @@
       oThis.jGoBackBtn.off('click').on('click' , function () {
         oThis.showSection( oThis.jStakeMintProcess );
       });
+
+      $('#'+oThis.btToMintId).on( 'keyup' ,function () {
+        var bt = $(this).val(),
+            ostToStake = PriceOracle.btToOst( bt ) ;
+        if( !PriceOracle.isNaN( oThis.totalOST ) ) {
+          oThis.updateSupplyPieChart( ostToStake ) ;
+        }
+      } );
       
     },
     
@@ -356,23 +364,6 @@
       ;
       oThis.jBtToMint.attr("max" , maxBT );
       jSlider.slider({"max" : maxBT }) ;
-    },
-    
-    ostToStakeOnBtChange : function ( val ) {
-      
-      var ostToStake = PriceOracle.btToOst( val ) ,
-          ost        = PriceOracle.toOst( ostToStake )
-      ;
-      if(  PriceOracle.isNaN( ost)  ){
-        return val;
-      }
-  
-      //THIS code should have been independent.
-      if( !PriceOracle.isNaN( oThis.totalOST ) ) {
-        oThis.updateSupplyPieChart( ostToStake ) ;
-      }
-      
-      return ost ;
     },
   
     ostAvailableOnBtChange : function ( val ) {

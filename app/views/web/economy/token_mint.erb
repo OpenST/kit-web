@@ -40,6 +40,8 @@
 
   #FE specific
   bt_to_mint_id = "bt_to_mint"
+  fe_bt_to_mint = "fe_bt_to_mint"
+  fe_stake_currency_to_stake = "fe_stake_currency_to_stake"
 
   bt_to_mint_max = 1  #Its just a random value as the component needs it, the actual bt to min max will be set after getting the OST balance from metamask.
   staker_address_name = "staker_address"
@@ -95,7 +97,7 @@
                                locals: {
                                    label: "#{bt_symbol} Tokens to mint",
                                    id: bt_to_mint_id,
-                                   name: "display_#{bt_to_mint_name}",
+                                   name: fe_bt_to_mint,
                                    type: 'number',
                                    min: bt_to_mint_min,
                                    max: bt_to_mint_max,
@@ -149,10 +151,13 @@
                           <p class="m-0 ml-2">
                             <small class="d-block" data-ost_staked_key>OST tokens used for minting</small>
                             <small class="d-block" data-ost_staked_val>
-                                  <span class="ost-mocker-value" data-type="ost" data-ost-mock-element="#<%= bt_to_mint_id %>"
-                                        data-ost-mock-parser="ost.tokenMint.ostToStakeOnBtChange">
+                                  <span class="ost-mocker-value" data-ost-mock-element="#<%= bt_to_mint_id %>"
+                                        data-ost-mock-parser="PriceOracle.btToOstPrecession">
                                 </span>
                             </small>
+                            <input type="hidden" name="<%= fe_stake_currency_to_stake%>"
+                                   data-ost-mock-parser="PriceOracle.btToOstPrecession"
+                                   data-ost-mock-element="#<%= bt_to_mint_id %>"  />
                           </p>
                         </li>
                       </ul>

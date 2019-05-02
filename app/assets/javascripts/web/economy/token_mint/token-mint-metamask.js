@@ -288,17 +288,10 @@
   
     getMintData : function () {
       var oThis = this ;
-      var btToMint = oThis.getBTtoMint() ,
-        ostToStake = PriceOracle.btToOstPrecession( btToMint ) //As it goes to backend and comes back as is.
-      ;
-      return {
-        'approve_transaction_hash'       : oThis.approve_transaction_hash,
-        'request_stake_transaction_hash' : oThis.request_stake_transaction_hash,
-        //TODO get via form @Ashutosh
-        'staker_address' : oThis.getWalletAddress(),
-        'fe_bt_to_mint' : btToMint ,      //JUST FOR FE
-        'fe_stake_currency_to_stake' : ostToStake    //JUST FOR FE
-      }
+      var formData =  utilities.getFormData( $("#stake-mint-confirm-form") );
+      formData[approve_transaction_hash] = oThis.approve_transaction_hash;
+      formData[request_stake_transaction_hash] = oThis.request_stake_transaction_hash;
+      return formData;
     },
   
     mintSuccess : function ( res ) {

@@ -22,7 +22,6 @@
     P_FIAT : null , //Keeping FIAT precession as configurable as it can be asked for
   
     init: function ( config ) {
-      var oThis = this;
       
       config = config || {};
       
@@ -46,8 +45,6 @@
   
       ost = BigNumber( ost );
       
-      var oThis = this ;
-      
       var result = ost.multipliedBy( OST_TO_FIAT );
       
       return oThis.toFiat( result );
@@ -58,8 +55,7 @@
   
       bt = BigNumber( bt );
   
-      var oThis = this ,
-          fiatBN = BigNumber( OST_TO_FIAT ) ,
+      var fiatBN = BigNumber( OST_TO_FIAT ) ,
           oneBTToFiat = fiatBN.dividedBy(  OST_TO_BT )
       ;
   
@@ -71,8 +67,6 @@
     btToFiatPrecession : function ( bt) {
       if( !bt ) return "";
   
-      var oThis = this ;
-  
       var fiat = oThis.btToFiat( bt );
   
       return oThis.toPrecessionFiat( fiat );
@@ -83,8 +77,6 @@
   
       ost = BigNumber( ost );
   
-      var oThis = this ;
-  
       var result = ost.multipliedBy( OST_TO_BT  );
   
       return oThis.toBT( result );
@@ -92,8 +84,6 @@
   
     ostToBtPrecession : function ( ost  ) {
       if( !ost ) return "";
-    
-      var oThis = this ;
   
       var result = oThis.ostToBt( ost );
     
@@ -105,8 +95,6 @@
   
       bt = BigNumber( bt );
       
-      var oThis = this ;
-      
       var result = bt.dividedBy( OST_TO_BT );
       
       return oThis.toOst( result ) ;
@@ -114,8 +102,6 @@
   
     btToOstPrecession : function (  bt ) {
       if( !bt ) return "";
-    
-      var oThis = this ;
       
       var result = oThis.btToOst( bt );
     
@@ -123,7 +109,6 @@
     },
   
     toBT: function ( bt ) {
-      var oThis = this;
       
       if ( oThis.isNaN( bt ) ) {
         return NaN;
@@ -136,7 +121,6 @@
     },
   
     toPrecessionBT : function ( bt ) {
-      var oThis = this;
   
       bt = oThis.toBT( bt );
       if ( ! bt  ) {
@@ -147,7 +131,6 @@
     },
   
     toOst: function ( ost ) {
-      var oThis = this;
       
       if ( oThis.isNaN( ost ) ) {
         return "";
@@ -160,7 +143,6 @@
     },
   
     toPrecessionOst: function ( ost ) {
-      var oThis = this;
   
       ost = oThis.toOst( ost );
       if ( !ost ) {
@@ -171,7 +153,6 @@
     },
     
     toFiat : function ( fiat ) {
-      var oThis = this;
   
       if ( oThis.isNaN( fiat ) ) {
         return NaN;
@@ -184,8 +165,7 @@
     },
     
     toPrecessionFiat : function ( fiat ) {
-      var oThis = this;
-  
+
       fiat = oThis.toFiat( fiat );
       
       if ( !fiat ) {
@@ -198,7 +178,6 @@
     },
   
     fromWei : function( val ) {
-      var oThis =  this ;
       if( window.web3 ){
         return window.web3.fromWei( val ) ;
       }else {
@@ -207,7 +186,6 @@
     },
   
     toWei : function( val ) {
-      var oThis =  this ;
       if( window.web3 ){
         return window.web3.toWei( val ) ;
       }else {
@@ -235,8 +213,7 @@
   
     //Private method START
     __fromWei__: function ( val ) {
-      var oThis = this,
-        exp
+      var  exp
       ;
     
       if ( oThis.isNaN( val ) ) {
@@ -249,8 +226,7 @@
     },
   
     __toWei__: function ( val ) {
-      var oThis = this,
-        exp
+      var exp
       ;
     
       if ( oThis.isNaN( val ) ) {

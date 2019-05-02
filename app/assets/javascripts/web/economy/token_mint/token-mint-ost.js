@@ -62,18 +62,9 @@
     },
   
     getMintData : function () {
-      var oThis = this ;
-      var btToMint = oThis.getBTtoMint() ,
-        ostToStake = PriceOracle.btToOstPrecession( btToMint ) //As it goes to backend and comes back as is.
-      ;
-      //TODO get via form @Ashutosh
-      var data =  {
-        'fe_bt_to_mint' : btToMint ,      //JUST FOR FE
-        'fe_stake_currency_to_stake' : ostToStake    //JUST FOR FE
-      };
+      var oThis = this;
       var formData =  utilities.getFormData( $("#stake-mint-confirm-form") );
-      data = $.extend( data ,formData );
-      return data;
+      return formData;
     },
   
     mintSuccess : function ( res ) {

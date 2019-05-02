@@ -31,7 +31,13 @@
     },
   
     onConfirmStakeMintSuccess : function ( res ) {
-      var oThis = this ;
+      var oThis =  this ,
+        data = res && res.data ,
+        ostToStake = utilities.deepGet( res , "data.precise_amounts.stake_currency"),
+        btToMint =   utilities.deepGet( res , "data.precise_amounts.bt" )
+      ;
+      oThis.setOstToStakeWei( ostToStake );
+      oThis.setBtToMintWei( btToMint );
        setTimeout( function () {
          utilities.btnSubmittingState(  $('#stake-and-mint-btn') );
          oThis.mint( );

@@ -10,6 +10,9 @@
     "metamask" : "stakeAndMintMetamask" ,
     "ost": "stakeAndMintOst"
   };
+
+  var ostToStakeWei = null ,
+      btToMintWei = null ;
   
   
   var oThis = ost.tokenMint = {
@@ -40,6 +43,11 @@
     jLowBal                         :   $('.low-bal'),
     jTokenSetupAdminErrorModal      :   $('#token_setup_admin_error'),
     //Static jQuery elements End
+
+    btToMintName                    : null,
+    ostToStakeName                  : null,
+    jBtToMintWei                    : null,
+    jOstToStakeWei                  : null,
   
     //Dynamic jQuery elements start
     jBtToMint                       :   null,
@@ -151,6 +159,8 @@
     },
     
     initUIValues: function() {
+      oThis.jBtToMintWei    = $("[name='" + oThis.btToMintName +"']") ;
+      oThis.jOstToStakeWei  = $("[name='" + oThis.ostToStakeName+ "']") ;
       oThis.jBtToMint = $("#"+oThis.btToMintId);
       oThis.jBtToMint.trigger('change');
       oThis.jBtToOstConversion.text(  oThis.getOstToBTConversion() );
@@ -484,6 +494,22 @@
     setDataInDataConfig : function ( key , data ) {
       if( !key ) return ;
       oThis.dataConfig[ key  ] = data ;
+    },
+
+    setOstToStakeWei: function( val ){
+      oThis.jOstToStakeWei.val( val );
+    },
+
+    getOstToStakeWei: function(  ){
+      return oThis.jOstToStakeWei.val( );
+    },
+
+    setBtToMintWei: function( val ){
+      oThis.jBtToMintWei.val( val );
+    },
+
+    getBtToMintWei: function(  ){
+      return  oThis.jBtToMintWei.val( );
     },
   
     btToFiat : function (val) {

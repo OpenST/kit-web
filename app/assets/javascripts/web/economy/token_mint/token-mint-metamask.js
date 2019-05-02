@@ -125,11 +125,17 @@
       ;
       oThis.setDataInDataConfig( "gatewayComposerDetails" ,  data );
       oThis.showSection( oThis.jTokenStakeAndMintSignSection ) ;
-      oThis.approve(ostToStake , btToMint );
+      oThis.setOstToStakeWei( ostToStake );
+      oThis.setBtToMintWei( btToMint );
+      oThis.approve( );
     },
   
-    approve: function (ostToStake , btToMint ) {
+    approve: function ( ) {
       var oThis = this  ;
+
+      var ostToStake = oThis.getOstToStakeWei() ,
+          btToMint = oThis.getBtToMintWei()
+      ;
       
       oThis.resetState();
       
@@ -168,7 +174,7 @@
           if(  err || ( result && result.error ) ){
             oThis.onApproveError( err );
           }else if( result ){
-            oThis.onApprove( result , ostToStake , btToMint );
+            oThis.onApprove( result );
           }
           err && console.error(err);
           result && console.log(result);
@@ -177,7 +183,7 @@
     
     },
   
-    onApprove: function ( res , ostToStake , btToMint ) {
+    onApprove: function ( res  ) {
       var oThis = this  ;
       oThis.walletAddress = oThis.getWalletAddress(); //Cache once approve transaction is confirmed from metamask.
       oThis.approve_transaction_hash = res['result'] ;
@@ -185,7 +191,7 @@
       oThis.updateIconState( oThis.jAllowStakeAndMintMsgWrapper,  '.processing-state-icon');
     
       setTimeout( function () { //Delay so that confirm metamask pop-up is visible
-        oThis.sendRequestStakeRequest(ostToStake , btToMint );
+        oThis.sendRequestStakeRequest(  );
       } , 500 )
     },
   
@@ -195,17 +201,21 @@
       oThis.jSignClientErrorBtnWrap.show();
     },
   
-    sendRequestStakeRequest : function (ostToStake , btToMint ) {
+    sendRequestStakeRequest : function () {
       var oThis = this ;
       oThis.updateIconState( oThis.jAutorizeStakeAndMintMsgWrapper,  '.pre-state-icon');
       oThis.jSignClientErrorBtnWrap.hide();
-      oThis.requestStake( ostToStake ,  btToMint );
+      oThis.requestStake( );
     },
   
-    requestStake: function ( ostToStakeWei , btToMintWei ) {
+    requestStake: function ( ) {
     
       var oThis = this ;
-      
+
+      var ostToStakeWei = oThis.getOstToStakeWei() ,
+        btToMintWei = oThis.getBtToMintWei()
+      ;
+
       var gatewayComposerTxParams = oThis.getGatewayComposerTxParams();
     
       // Build params for requestStake

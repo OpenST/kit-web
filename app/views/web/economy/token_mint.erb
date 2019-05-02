@@ -120,7 +120,7 @@
                       %>
 
                     </div>
-                    <input type="hidden" name="<%= bt_to_mint_name %>"
+                    <input type="hidden" name="<%= bt_to_mint_name %>" id=""
                             data-ost-mock-parser="PriceOracle.toWei"
                             data-ost-mock-element="#<%= bt_to_mint_id %>" />
                     <input type="hidden" name="<%= ost_to_stake_name %>"
@@ -298,7 +298,9 @@
           btToMintId: "<%= bt_to_mint_id %>",
           isSuperAdmin: <%= is_super_admin %>,
           keyProvider : '<%= key_provider%>',
-          fetchBalanceCurrencies : '<%= raw fetch_balance_currencies.to_json %>'
+          fetchBalanceCurrencies : '<%= raw fetch_balance_currencies.to_json %>',
+          btToMintName : '<%= bt_to_mint_name %>',
+          ostToStakeName : '<%= ost_to_stake_name %>'
         });
       });
     </script>

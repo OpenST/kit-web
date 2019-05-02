@@ -204,7 +204,7 @@
         oThis.showSection( oThis.jStakeMintProcess );
       });
 
-      $('#'+oThis.btToMintId).on( 'keyup' ,function () {
+      $('#'+oThis.btToMintId).on( 'keyup change' ,function () {
         var bt = $(this).val(),
             ostToStake = PriceOracle.btToOst( bt ) ;
         if( !PriceOracle.isNaN( oThis.totalOST ) ) {

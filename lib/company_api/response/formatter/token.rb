@@ -6,7 +6,8 @@ module CompanyApi
 
       class Token < CompanyApi::Response::Formatter::Base
 
-        attr_reader :min_eth_in_wei, :min_ost_in_wei, :workflow_payload, :developer_page_addresses, :dashboard_details, :graph_urls
+        attr_reader :min_eth_in_wei, :min_ost_in_wei, :workflow_payload, :developer_page_addresses,
+                    :dashboard_details, :graph_urls, :test_economy_details
 
         # Initialize
         #
@@ -32,6 +33,7 @@ module CompanyApi
           set_token(@data['token'])
           set_price_points(@data['price_points'])
           set_manager(@data['manager']) if @data['manager'].present?
+          set_client(@data['client']) if @data['client'].present?
           set_client_manager(@data['client_manager'])
           set_contract_details(@data['contract_details'])
           set_gas_price(@data['gas_price'])
@@ -47,6 +49,7 @@ module CompanyApi
           set_developer_page_addresses(@data['developer_page_addresses']) if @data['developer_page_addresses'].present?
           set_dashboard_details(@data['dashboard_details']) if @data['dashboard_details'].present?
           set_graph_urls(@data['graph_urls']) if @data['graph_urls'].present?
+          set_test_economy_details(@data['test_economy_details']) if @data['test_economy_details'].present?
         end
 
         private
@@ -73,6 +76,10 @@ module CompanyApi
 
         def set_graph_urls(data)
           @graph_urls = CompanyApi::Response::Entity::GraphUrls.new(data)
+        end
+
+        def set_test_economy_details(data)
+          @test_economy_details = CompanyApi::Response::Entity::TestEconomyDetails.new(data)
         end
 
       end

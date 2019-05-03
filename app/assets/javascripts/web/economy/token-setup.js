@@ -1,10 +1,11 @@
+
 ;
 (function (window, $) {
 
     var ost         = ns("ost"),
+        utilities   = ost.utilities ,
         formHelper  = window.FormHelper.prototype,
-        redirectMap = window.redirectMap ,
-        utilities   = ns('ost.utilities')
+        redirectMap = window.redirectMap
     ;
 
     var oThis = ost.tokenSetup = {

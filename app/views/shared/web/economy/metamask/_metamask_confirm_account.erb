@@ -1,9 +1,19 @@
+<%
+  sandbox_sub_url_prefix = GlobalConstant::Environment.sandbox_sub_url_prefix
+  main_sub_env_url_prefix = GlobalConstant::Environment.main_sub_env_url_prefix
+  current_env  = GlobalConstant::Environment.url_prefix
+%>
 <div class="metamask-confirm-account-container row">
   <div class="text-center col-12 col-md-8 mx-auto">
     <div id="default-state-wrapper" class="confirm-account-section" >
       <h3 class="text-center mt-6">Set your Account Owner address</h3>
       <p class="font-weight-light mb-5 text-muted">
+        <% if current_env == sandbox_sub_url_prefix%>
         The address displayed below will be set as the Account Owner address. This is the master admin address for this Sandbox OST account. Please make sure to safeguard this address.
+        <%end%>
+        <% if current_env == main_sub_env_url_prefix%>
+          The address displayed below will be set as the Account Owner address. This is the master admin address for this Production OST account. Please make sure to safeguard this address.
+        <%end%>
       </p>
 <!--      <p class="font-weight-light mb-3 text-muted container-box p-3">-->
 <!--        Would you like to use a different address? Simply open the MetaMask Extension and select the desired address.-->

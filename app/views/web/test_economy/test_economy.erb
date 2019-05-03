@@ -13,8 +13,8 @@
   <h3 class="text-center mt-5"> Test Your <%=bt_symbol%> Token Economy </h3>
 
   <div class="row">
-    <div class="col-9 mx-auto px-3 mt-3 font-weight-light text-muted display-2">
-      To experience a mock economy with your <%=bt_symbol%> token as an end-user and better specify your Brand Token economy project, launch a Test Economy. The steps here will simulate the different parts of integrating the Brand Token into your application.
+    <div class="col-9 mx-auto px-3 mt-3 font-weight-light text-muted">
+      <p>To experience a mock economy with your <%=bt_symbol%> token as an end-user and better specify your Brand Token economy project, launch a Test Economy. The steps here will simulate the different parts of integrating the Brand Token into your application.</p>
     </div>
   </div>
 
@@ -26,7 +26,7 @@
             <use class="success-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
           </switch>
         </svg>
-        <p class="mb-0 font-weight-light text-muted d-inline align-middle ml-2">Your Test Economy backend has been successfully setup.</p>
+        <p class="mb-0 font-weight-light text-muted d-inline align-middle ml-2">The servers for the <%=bt_symbol%> Test economy have been deployed. </p>
       </div>
     </div>
     <div class="row mt-5">
@@ -34,12 +34,11 @@
         <div class="card">
           <h3 class="card-header">Get Demo App</h3>
           <div class="card-body">
-            <p class="font-weight-light text-muted">Download an application via the Apple Enterprise program or &lt;Google Equivalent&gt;. Of course, your own application is more likely to be accessed via the App Store.
-              This Application represents most of the required and optional functionality supported by the OST Wallet SDK and includes our recommended implementations and therefore allows you to experience the App like an end-user and make more informed design decisions.
+            <p class="font-weight-light text-muted">Download an application via the <b>Apple Enterprise program</b> or <b>Android App URL</b>.Of course, your own application is more likely to be accessed via the respective App Stores.
               Using the application, you will be able to create a wallet and receive and send Brand Tokens to other users in the Brand Token economy.
             </p>
             <div class="my-4">
-              <a class="d-inline ml-3" href="<%= ios_app_download_link %>" target="_blank" title="Download ios App">
+              <a class="d-inline" href="<%= ios_app_download_link %>" target="_blank" title="Download ios App">
                 <svg class="icon ios-test-economy-icon" style="height: 60px;width: 150px;">
                   <switch>
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ios-test-economy-icon"></use>
@@ -63,7 +62,6 @@
         <div class="card-body">
           <p class="font-weight-light get-qr-code-before-text text-muted" > To connect the servers we've setup in Step 1 to the mobile application, scan a QR code.
             Since in your implementation, you control both the servers and the application, this step will not be required.</p>
-          <p class="font-weight-light get-qr-code-after-text text-muted" style="display: none"> Scan and Join the <%=bt_symbol%> Economy from demo app.</p>
           <button type="button" id="get-qr-code-btn" class="btn btn-primary">
             GET QR CODE
           </button>
@@ -84,7 +82,7 @@
           <div class="send-invite-section" style="display:none;">
             <div class="row">
               <div class="col-7">
-                <form id="invite-economy-form" data-submiting="Sending…" action="<%= api_invite_to_test_economy %>" method="POST">
+                <form id="invite-economy-form" class="user-form" data-submiting="Sending…" action="<%= api_invite_to_test_economy %>" method="POST">
                   <div class="form-group">
                     <label for="user_email" class="form-label text-uppercase">Email Address</label>
                     <input type="text" pattern="^([\w+-.%]+@[\w-.]+\.[A-Za-z]{2,4},*[\W]*)+$"

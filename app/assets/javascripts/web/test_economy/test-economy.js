@@ -20,8 +20,6 @@
       });
       $('#get-qr-code-btn').on('click',function () {
         $(this).hide();
-        $('.get-qr-code-before-text').hide()
-        $('.get-qr-code-after-text').show()
         $('.qr-code-section').show();
       });
     },

@@ -44,22 +44,22 @@
 
     <div class="planner-container text-center mt-6">
 
-      <% if !is_mainnet %>
-        <div class="container">
-          <div class="row">
-            <div class="card card-planner">
-              <div class="card-header text-left brand-curreny-bg border-0">
-                <div class="col-8 pr-5 pl-0">
-                  <h4 class="mb-2">Deploy Your Brand Currency</h4>
-                  <p class="font-weight-light mb-0">
-                    The journey of your Brand Token starts in Sandbox mode, where you will be able to safely experiment with a test token holding no real value. Use Sandbox to get familiar with OST Platform functionalities and run the necessary integration tests with your application. Once ready, you can submit a request to the OST team to launch your Brand Token on Production. Test without concern: No data will be transferred between Sandbox and Production.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <%# if !is_mainnet %>
+<!--        <div class="container">-->
+<!--          <div class="row">-->
+<!--            <div class="card card-planner">-->
+<!--              <div class="card-header text-left brand-curreny-bg border-0">-->
+<!--                <div class="col-8 pr-5 pl-0">-->
+<!--                  <h4 class="mb-2">Deploy Your Brand Currency</h4>-->
+<!--                  <p class="font-weight-light mb-0">-->
+<!--                    The journey of your Brand Token starts in Sandbox mode, where you will be able to safely experiment with a test token holding no real value. Use Sandbox to get familiar with OST Platform functionalities and run the necessary integration tests with your application. Once ready, you can submit a request to the OST team to launch your Brand Token on Production. Test without concern: No data will be transferred between Sandbox and Production.-->
+<!--                  </p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+      <%# end %>
 
       <div class="container">
         <div class="row my-5">
@@ -93,6 +93,51 @@
                     <div class="invalid-feedback" data-forid="symbol">&nbsp;</div>
                   </div>
                 </div>
+            </div>
+          </div>
+        </div>
+        <div class="row my-5">
+          <div class="card card-planner">
+            <div class="card-header text-left border-0">
+              <h4 class="mb-2">Staking Options</h4>
+              <p class="font-weight-light mb-0">
+                Choose your Token Name and 3-4 character Identifier. The Identifier acts as a short code for your token, similar to currency codes, such as EUR, GBP, USD, ETH, BTC.
+              </p>
+            </div>
+            <div class="card-body w-75 mx-auto py-0 position-relative">
+              <span class="staking-options-or">OR</span>
+              <div class="card-group">
+                <div class="card ost-card">
+                  <div class="card-body">
+                    <div class="stake-badge red">VOLATILE</div>
+                    <svg style="width: 75px;height: 75px;margin-top: 23px">
+                      <switch>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#staking-options-ost-icon"></use>
+                      </switch>
+                    </svg>
+                    <h5 class="my-3">Token to OST</h5>
+                    <p>Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam</p>
+                  </div>
+                  <div class="py-4">
+                    <a class="btn btn-secondary">USING OST</a>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <div class="stake-badge green">STABLE</div>
+                    <svg style="width: 75px;height: 75px;margin-top: 23px">
+                      <switch>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#staking-options-ost-icon"></use>
+                      </switch>
+                    </svg>
+                    <h5 class="my-3">Token to OST</h5>
+                    <p>Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam</p>
+                  </div>
+                  <div class="py-4">
+                    <a class="btn btn-secondary">USE USD COIN</a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

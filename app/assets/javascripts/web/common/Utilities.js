@@ -94,6 +94,10 @@
       return val.toUpperCase() || 'BT';
     },
 
+    mockerStakingOptions: function ( val ) {
+      return val.toUpperCase() || 'Token';
+    },
+
     getFormData : function($form){
       var unindexed_array = $form.serializeArray();
       var indexed_array = {};

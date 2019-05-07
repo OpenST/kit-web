@@ -33,7 +33,11 @@ module GlobalConstant
       end
 
       def is_main_production?
-        GlobalConstant::Base.main_sub_environment? && GlobalConstant::Base.environment_name == GlobalConstant::Environment.production_environment
+        GlobalConstant::Base.main_sub_environment? && is_production?
+      end
+
+      def is_production?
+        GlobalConstant::Base.environment_name == GlobalConstant::Environment.production_environment
       end
 
       # Get go back env url prefix remember page

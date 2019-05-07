@@ -38,6 +38,11 @@ Rails.application.routes.draw do
     get '/' => :developer, as: 'developer'
   end
 
+  # Enabling this route only for Non Production Sandbox ENV
+  scope "#{GlobalConstant::Environment.sandbox_sub_url_prefix}", controller: 'web/test_economy', :format => false do
+    get '/test-economy' => :test_economy, as: 'test_economy', constraints: lambda { |_| !GlobalConstant::Environment.is_production? }
+  end
+
   namespace "#{GlobalConstant::Environment.url_prefix}" do
     # ST Api sidekiq web interface endpoint
     mount ApiSidekiqServer => '/sidekiq-admin-interface'

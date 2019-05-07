@@ -3,12 +3,14 @@
   mint_token_url = GlobalConstant::RoutesMap.getRoutes()[:token_mint]
   developer_url = GlobalConstant::RoutesMap.getRoutes()[:developer]
   dashboard_url = GlobalConstant::RoutesMap.getRoutes()[:token_dashboard]
+  test_economy_url = GlobalConstant::RoutesMap.getRoutes()[:test_economy]
   api_request_whitelist = GlobalConstant::RoutesMap.getApis()[:api_request_whitelist]
   is_whitelisted_user = @presenter_obj.sub_env_payloads.is_mainnet_whitelisted?
   is_mainnet_whitelisting_requested = @presenter_obj.sub_env_payloads.is_mainnet_whitelisting_requested?
   sandbox_sub_url_prefix = GlobalConstant::Environment.sandbox_sub_url_prefix
   main_sub_env_url_prefix = GlobalConstant::Environment.main_sub_env_url_prefix
   current_env  = GlobalConstant::Environment.url_prefix
+  is_production_env = GlobalConstant::Environment.is_production?
   sandbox_token_name = @presenter_obj.client_token_name
   sandbox_token_symbol = @presenter_obj.client_token_symbol
   is_super_admin = true #@presenter_obj.is_super_admin?
@@ -92,6 +94,19 @@
         <span class="label">Block Explorer</span>
       </a>
     </li>
+    <%if !is_production_env && current_env != main_sub_env_url_prefix%>
+    <li class="nav-item">
+<!--      Need to check one more flag for if tokens are available to mint-->
+      <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_client_token_deployed? ? '' : 'disabled to-enable-on-setup' %> <%= @presenter_obj.is_test_economy_route? ? 'active': '' %>"  href="<%= test_economy_url %>">
+        <svg class="icon">
+          <switch>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-test-economy"></use>
+          </switch>
+        </svg>
+        <span class="label">Test Economy </span>
+      </a>
+    </li>
+    <% end %>
   </ul>
 
 </aside>

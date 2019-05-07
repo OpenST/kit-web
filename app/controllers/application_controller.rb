@@ -179,6 +179,8 @@ class ApplicationController < ActionController::Base
         redirect_to :token_mint and return
       when 'token_mint_progress'
         redirect_to :token_mint_progress and return
+      when 'test_economy'
+        redirect_to :test_economy and return
       when 'service_unavailable'
         redirect_to :service_unavailable and return
       when 'login'

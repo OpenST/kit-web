@@ -32,6 +32,10 @@ module CompanyApi
           @data['symbol']
         end
 
+        def stake_currency_id
+          @data['stake_currency_id'] ||= '' # stake currency id may not be present
+        end
+
         def ubt_address
           @data['ubt_address'] ||= '' #ubt address may not be present
         end
@@ -50,6 +54,14 @@ module CompanyApi
 
         def status
           @data['status']
+        end
+
+        def properties
+          @data['properties']
+        end
+
+        def has_ost_managed_owner?
+          properties.include?('hasOstManagedOwner')
         end
 
       end

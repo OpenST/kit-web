@@ -12,6 +12,13 @@ module ApplicationHelper
     @page_assets_data.present? ? !(@page_assets_data[:specific_js_required] == 0) : true
   end
 
+  # Checks if metamask is supported by the browser
+  # NOTE: This would not check on the basis of device, just the browser
+  #
+  def browser_supported_by_metamask?
+    browser.chrome? || browser.firefox?
+  end
+
   # get specific manifest path for css and js
   #
   def specific_manifest_file_path

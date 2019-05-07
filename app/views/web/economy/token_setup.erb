@@ -1,8 +1,9 @@
 <%
 
     sandbox_sub_url_prefix = GlobalConstant::Environment.sandbox_sub_url_prefix
-    main_sub_env_url_prefix = GlobalConstant::Environment.main_sub_env_url_prefix
     current_env  = GlobalConstant::Environment.url_prefix
+
+    is_mainnet = GlobalConstant::Base.main_sub_environment?
 
     wallet_association =  @presenter_obj.sign_messages.wallet_association
     ost_to_fiat =  @presenter_obj.oracle_price_points.to_fiat_conversion_factor("USD")
@@ -85,11 +86,10 @@
           <div class="card-header">
             <h4 class="mb-0 ">Advanced Options</h4>
             <p class="font-weight-light mb-0 mt-2">
-              <% if current_env == sandbox_sub_url_prefix%>
-                Set the fixed conversion rate between your Brand Token and the OST Token. Once you click "Proceed" on this page, this fixed conversation rate cannot be edited. Don't worry though, it's Sandbox -- this is just a test!
-              <%end%>
-              <% if current_env == main_sub_env_url_prefix%>
+              <% if is_mainnet%>
                 Set the fixed conversion rate between your Brand Token and the OST Token. Once you click "Proceed" on this page, this fixed conversation rate cannot be edited.
+              <% else %>
+                Set the fixed conversion rate between your Brand Token and the OST Token. Once you click "Proceed" on this page, this fixed conversation rate cannot be edited. Don't worry though, it's Sandbox -- this is just a test!
               <%end%>
               <span class="header-recommendation font-weight-bold">
               We recommend keeping it simple and setting the conversion rate to 1

@@ -1,9 +1,7 @@
 <%
   invited_receiver  = @presenter_obj.invitee_manager.email
   invite_sender = @presenter_obj.inviter_manager.email
-  sandbox_sub_url_prefix = GlobalConstant::Environment.sandbox_sub_url_prefix
-  main_sub_env_url_prefix = GlobalConstant::Environment.main_sub_env_url_prefix
-  current_env  = GlobalConstant::Environment.url_prefix
+  is_mainnet = GlobalConstant::Base.main_sub_environment?
 %>
 <div class="container-fluid py-6 cloud-bg h-100">
   <div class="row">
@@ -17,19 +15,17 @@
 
 <!--            <h3 class="text-center">Hi, <%#= invited_receiver %> </h3>-->
             <h3 class="text-center">
-              <% if current_env == sandbox_sub_url_prefix %>
-               Welcome to OST Platform Sandbox
-              <%end%>
-              <% if current_env == main_sub_env_url_prefix %>
+              <% if is_mainnet%>
                 Welcome to OST Platform
+              <% else %>
+                Welcome to OST Platform Sandbox
               <%end%>
             </h3>
             <p class="text-center mb-5 font-weight-light"> <%= invite_sender %>
-              <% if current_env == sandbox_sub_url_prefix %>
-                has invited you to join your team on OST Platform Sandbox.  Please set a password to create your account.
-              <%end%>
-              <% if current_env == main_sub_env_url_prefix %>
+              <% if is_mainnet%>
                 has invited you to join your team on OST Platform.  Please set a password to create your account.
+              <% else %>
+                has invited you to join your team on OST Platform Sandbox.  Please set a password to create your account.
               <%end%>
             </p>
             <div class="form-group mb-1" id="emailFormGrp">

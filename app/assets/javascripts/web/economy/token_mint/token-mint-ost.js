@@ -22,7 +22,7 @@
   
     getWalletAddress : function () {
       var oThis = this  ;
-      return utilities.deepGet( oThis.dataConfig ,  "staker_address"); //TODO confirm
+      return utilities.deepGet( oThis.dataConfig ,  "staker_address");
     },
   
     onMintToken: function () {
@@ -79,7 +79,8 @@
     },
   
     mintError : function ( error )  {
-      //TODO
+     var oThis = this ;
+     utilities.showGeneralError( oThis.jConfirmStakeMintForm , error );
     }
     
   };

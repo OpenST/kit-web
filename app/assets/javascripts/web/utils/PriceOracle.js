@@ -1,245 +1,222 @@
 ;
-(function ( window, $ ) {
-  
-  var P_OST = 5
-    , P_OST_ROUND_ROUNDING_MODE   = BigNumber.ROUND_HALF_UP
-  ;
-  
-  var P_BT = 5
-    , P_BT_ROUND_ROUNDING_MODE    = BigNumber.ROUND_HALF_UP
-  ;
-  
-  var P_FIAT = 2
-    , P_FIAT_ROUND_ROUNDING_MODE  = BigNumber.ROUND_HALF_UP
-  ;
-  
-  var OST_TO_FIAT = 1 ;
-  
-  var OST_TO_BT = 1 ;
-  
-  var oThis = window.PriceOracle = {
-  
-    P_FIAT : null , //Keeping FIAT precession as configurable as it can be asked for
-  
-    init: function ( config ) {
-      
-      config = config || {};
-      
-      if ( config.ost_to_fiat ) {
-        OST_TO_FIAT = String( config.ost_to_fiat );
+(function () {
+
+  var ost = ns('ost');
+
+  var P_SC = 5,
+    P_SC_ROUND_ROUNDING_MODE   = BigNumber.ROUND_HALF_UP ;
+
+  var P_BT = 5,
+    P_BT_ROUND_ROUNDING_MODE    = BigNumber.ROUND_HALF_UP ;
+
+  var P_FIAT = 2,
+    P_FIAT_ROUND_ROUNDING_MODE  = BigNumber.ROUND_HALF_UP ;
+
+
+  var PriceOracle = ost.PriceOracle =  function (config) {
+
+      if (!config || !config.sc_to_fiat || !config.decimals) {
+        console.log("Mandatory params not present!!!");
+        throw error;
       }
-  
-      if ( config.ost_to_bt ) {
-        OST_TO_BT = String( config.ost_to_bt );
+
+      if (config.sc_to_fiat) {
+        this.SC_TO_FIAT = String(config.sc_to_fiat);
       }
-      
-      $.extend( PriceOracle, config );
-      
-      oThis.ost_to_fiat && (delete oThis.ost_to_fiat);
-      oThis.ost_to_bt && (delete oThis.ost_to_bt);
-    
+
+      if (config.sc_to_bt) {
+        this.SC_TO_BT = String(config.ost_to_bt);
+      }
+
+      if (config.decimals) {
+        this.SC_DECIMALS = config.decimals;
+      }
+
+  };
+
+  PriceOracle.prototype = {
+
+    stakeCurrencyToFiat :  function ( stakeCurrency ) {
+      if( !stakeCurrency ) return "";
+
+      stakeCurrency = BigNumber( stakeCurrency );
+
+      var result = stakeCurrency.multipliedBy( this.SC_TO_FIAT );
+
+      return this.toFiat( result );
     },
-  
-    ostToFiat: function ( ost ) {
-      if( !ost ) return "";
-  
-      ost = BigNumber( ost );
-      
-      var result = ost.multipliedBy( OST_TO_FIAT );
-      
-      return oThis.toFiat( result );
-    },
-    
+
     btToFiat : function ( bt ) {
       if( !bt ) return "";
-  
+
       bt = BigNumber( bt );
-  
-      var fiatBN = BigNumber( OST_TO_FIAT ) ,
-          oneBTToFiat = fiatBN.dividedBy(  OST_TO_BT )
+
+      var fiatBN = BigNumber( this.SC_TO_FIAT ) ,
+        oneBTToFiat = fiatBN.dividedBy(  this.SC_TO_BT )
       ;
-  
+
       var result = oneBTToFiat.multipliedBy( bt );
-  
-      return oThis.toFiat( result );
+
+      return this.toFiat( result );
     },
-    
-    btToFiatPrecession : function ( bt) {
+
+    btToFiatPrecision : function ( bt) {
       if( !bt ) return "";
-  
-      var fiat = oThis.btToFiat( bt );
-  
-      return oThis.toPrecessionFiat( fiat );
+
+      var fiat = this.btToFiat( bt );
+
+      return this.toPrecisionFiat( fiat );
     },
-    
-    ostToBt : function ( ost  ) {
-      if( !ost ) return "";
-  
-      ost = BigNumber( ost );
-  
-      var result = ost.multipliedBy( OST_TO_BT  );
-  
-      return oThis.toBT( result );
+
+    stakeCurrencyToBt : function ( stakeCurrency  ) {
+      if( !stakeCurrency ) return "";
+
+      stakeCurrency = BigNumber( stakeCurrency );
+
+      var result = stakeCurrency.multipliedBy( this.SC_TO_BT  );
+
+      return this.toBT( result );
     },
-  
-    ostToBtPrecession : function ( ost  ) {
-      if( !ost ) return "";
-  
-      var result = oThis.ostToBt( ost );
-    
-      return oThis.toPrecessionBT( result );
+
+    stakeCurrencyToBtPrecision : function ( stakeCurrency  ) {
+      if( !stakeCurrency ) return "";
+
+      var result = this.stakeCurrencyToBt( stakeCurrency );
+
+      return this.toPrecisionBT( result );
     },
-    
-    btToOst : function (  bt ) {
+
+    btToStakeCurrency : function (  bt ) {
       if( !bt ) return "";
-  
+
       bt = BigNumber( bt );
-      
-      var result = bt.dividedBy( OST_TO_BT );
-      
-      return oThis.toOst( result ) ;
+
+      var result = bt.dividedBy( this.SC_TO_BT );
+
+      return this.toStakeCurrency( result ) ;
     },
-  
-    btToOstPrecession : function (  bt ) {
+
+    btToStakeCurrencyPrecision : function (  bt ) {
       if( !bt ) return "";
-      
-      var result = oThis.btToOst( bt );
-    
-      return oThis.toPrecessionOst( result ) ;
+
+      var result = this.btToStakeCurrency( bt );
+
+      return this.toPrecisionStakeCurrency( result ) ;
     },
-  
+
     toBT: function ( bt ) {
-      
-      if ( oThis.isNaN( bt ) ) {
+
+      if ( this.isNaN( bt ) ) {
         return NaN;
       }
-      
-      bt = String( bt );
-      
       bt = BigNumber( bt );
       return bt.toString();
     },
-  
-    toPrecessionBT : function ( bt ) {
-  
-      bt = oThis.toBT( bt );
+
+    toPrecisionBT : function ( bt ) {
+
+      bt = this.toBT( bt );
       if ( ! bt  ) {
         return "";
       }
       bt = BigNumber( bt );
       return  bt.toFixed( P_BT , P_BT_ROUND_ROUNDING_MODE );
     },
-  
-    toOst: function ( ost ) {
-      
-      if ( oThis.isNaN( ost ) ) {
+
+    toStakeCurrency: function ( stakeCurrency ) {
+
+      if ( this.isNaN( stakeCurrency ) ) {
         return "";
       }
-  
-      ost = String( ost );
-      
-      ost = BigNumber( ost ) ;
-      return ost.toString( );
+
+      stakeCurrency = BigNumber( stakeCurrency ) ;
+      return stakeCurrency.toString( );
     },
-  
-    toPrecessionOst: function ( ost ) {
-  
-      ost = oThis.toOst( ost );
-      if ( !ost ) {
+
+    toPrecisionStakeCurrency: function ( stakeCurrency ) {
+
+      stakeCurrency = this.toStakeCurrency( stakeCurrency );
+      if ( !stakeCurrency ) {
         return "";
       }
-      ost = BigNumber( ost );
-      return ost.toFixed( P_OST , P_OST_ROUND_ROUNDING_MODE);
+      stakeCurrency = BigNumber( stakeCurrency );
+      return stakeCurrency.toFixed( P_SC , P_SC_ROUND_ROUNDING_MODE);
     },
-    
+
     toFiat : function ( fiat ) {
-  
-      if ( oThis.isNaN( fiat ) ) {
+
+      if ( this.isNaN( fiat ) ) {
         return NaN;
       }
-    
-      fiat = String( fiat );
-      
+
       fiat = BigNumber( fiat );
       return  fiat.toString( );
     },
-    
-    toPrecessionFiat : function ( fiat ) {
 
-      fiat = oThis.toFiat( fiat );
-      
+    toPrecisionFiat : function ( fiat ) {
+
+      fiat = this.toFiat( fiat );
+
       if ( !fiat ) {
         return "";
       }
-      
+
       fiat = BigNumber( fiat );
-      var precession = oThis.getFiatPrecession();
-      return  fiat.toFixed( precession , P_FIAT_ROUND_ROUNDING_MODE);
+      var precision = P_FIAT;
+      return  fiat.toFixed( precision , P_FIAT_ROUND_ROUNDING_MODE);
     },
-  
-    fromWei : function( val ) {
-      if( window.web3 ){
-        return window.web3.fromWei( val ) ;
-      }else {
-        return oThis.__fromWei__( val );
-      }
-    },
-  
-    toWei : function( val ) {
-      if( window.web3 ){
-        return window.web3.toWei( val ) ;
-      }else {
-        return oThis.__toWei__( val );
-      }
-    },
-  
+
     isNaN : function ( val ) {
       return typeof val === "undefined" || val === "" || val === null || isNaN( val );
     },
-  
-    getOstPrecession : function () {
-      return P_OST ;
-    },
-  
-    //Keeping FIAT precession as configurable as it can be asked for
-    getFiatPrecession : function () {
-      return oThis.P_FIAT ||  P_FIAT ;
-    },
-  
-    getBtPrecession : function () {
-      return P_BT ;
-    },
-  
-  
-    //Private method START
-    __fromWei__: function ( val ) {
-      var  exp
-      ;
-    
-      if ( oThis.isNaN( val ) ) {
+
+    fromSmallestUnit: function ( val ) {
+
+      if ( this.isNaN( val ) ) {
         return NaN;
       }
-    
+
       val = BigNumber( val ) ;
-      exp = BigNumber(10).exponentiatedBy(18) ;
-      return val.dividedBy(exp).toString(10);
+      var exp = BigNumber(10).exponentiatedBy(this.SC_DECIMALS) ;
+      return val.dividedBy(exp).decimalPlaces(0).toString( 10 );
     },
-  
-    __toWei__: function ( val ) {
-      var exp
-      ;
-    
-      if ( oThis.isNaN( val ) ) {
+
+    toSmallestUnit: function ( val ) {
+
+      if ( this.isNaN( val ) ) {
         return NaN;
       }
-    
+
       val = BigNumber( val ) ;
-      exp = BigNumber(10).exponentiatedBy(18) ;
-      return val.multipliedBy(exp).toString(10);
+      var exp = BigNumber(10).exponentiatedBy(this.SC_DECIMALS) ;
+      return val.multipliedBy(exp).decimalPlaces(0).toString( 10 );
     }
-    //Private method END
-    
-  }
-  
-  
-})( window, jQuery );
+  };
+
+  //STATIC FUNCTIONS, DON'T USE "this" KEYWORD INSIDE THESE FUNCTIONS
+
+  PriceOracle.getStakeCurrencyPrecision = function(){
+    return P_SC ;
+  };
+
+  PriceOracle.getBtPrecision = function(){
+    return P_BT;
+  };
+
+  PriceOracle.getFiatPrecision = function(){
+    return P_FIAT;
+  };
+
+  PriceOracle.setStakeCurrencyPrecision = function( val ){
+    P_SC = val;
+  };
+
+  PriceOracle.setBtPrecision = function( val ){
+    P_BT = val;
+  };
+
+  PriceOracle.setFiatPrecision = function( val ){
+    P_FIAT = val;
+  };
+
+})();

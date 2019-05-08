@@ -9,7 +9,7 @@ module CompanyApi
         attr_reader :manager, :client, :client_token, :stake_currencies, :oracle_price_points, :chain_interaction_params,
                     :client_token_planner, :client_balances, :first_name, :last_name, :token_supply_details, :pending_critical_interactions,
                     :client_manager, :contract_details, :gas_price, :auxiliary_addresses, :origin_addresses,
-                    :workflow, :workflow_current_step, :sign_messages, :sub_env_payloads
+                    :workflow, :workflow_current_step, :sign_messages, :sub_env_payloads, :min_balances
 
         # Initialize
         #
@@ -302,7 +302,7 @@ module CompanyApi
           @pending_critical_interactions = CompanyApi::Response::Entity::PendingCriticalInteractions.new(pending_critical_interactions_data)
         end
 
-        # set_sub_env_payload
+        # Set_sub_env_payload
         #
         # * Author: Ankit
         # * Date: 02/02/2018
@@ -314,6 +314,19 @@ module CompanyApi
         #
         def set_sub_env_payload(data)
           @sub_env_payloads = CompanyApi::Response::Entity::SubEnvPayloads.new(data)
+        end
+
+        # Set min balances.
+        #
+        # * Author: Anagha
+        # * Date: 08/05/2019
+        # * Reviewed By:
+        #
+        # @param [Hash] data (mandatory)
+        # Sets @min_balances
+        #
+        def set_min_balances(data)
+          @min_balances = CompanyApi::Response::Entity::MinBalances.new(data)
         end
 
       end

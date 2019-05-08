@@ -67,6 +67,10 @@
           <div class="card card-planner">
             <div class="card-header text-left">
               <h4 class="mb-2 ">Token Details</h4>
+              <%= @presenter_obj.stake_currencies.to_json %>
+              <%= @presenter_obj.all_stake_currencies.to_json %>
+              <%= @presenter_obj.oracle_price_points.to_json %>
+              <%= @presenter_obj.client_token.to_json %>
               <p class="font-weight-light mb-0">
                 Choose your Token Name and 3-4 character Identifier. The Identifier acts as a short code for your token, similar to currency codes, such as EUR, GBP, USD, ETH, BTC.
               </p>

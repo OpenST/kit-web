@@ -25,7 +25,7 @@ module WebPresenter
       end
     end
 
-    # Contract details in presenter object
+    # contract details in presenter object
     #
     # * Author: Alpesh
     # * Date: 18/01/2019
@@ -37,7 +37,7 @@ module WebPresenter
       end
     end
 
-    # Gas price details in presenter object
+    # gas_price details in presenter object
     #
     # * Author: Alpesh
     # * Date: 18/01/2019
@@ -49,7 +49,7 @@ module WebPresenter
       end
     end
 
-    # Auxiliary addresses details in presenter object
+    # auxiliary_addresses details in presenter object
     #
     # * Author: Alpesh
     # * Date: 18/01/2019
@@ -61,7 +61,7 @@ module WebPresenter
       end
     end
 
-    # Origin addresses details in presenter object
+    # origin_addresses details in presenter object
     #
     # * Author: Alpesh
     # * Date: 18/01/2019
@@ -71,10 +71,9 @@ module WebPresenter
       @t_origin_addresses ||= begin
         formatter_obj.present? ? formatter_obj.origin_addresses : nil
       end
-
     end
 
-    # Workflow details in presenter object
+    # origin_addresses details in presenter object
     #
     # * Author: Alpesh
     # * Date: 18/01/2019
@@ -86,7 +85,7 @@ module WebPresenter
       end
     end
 
-    # Workflow payload in presenter object
+    # origin_addresses details in presenter object
     #
     # * Author: Alpesh
     # * Date: 18/01/2019
@@ -98,7 +97,7 @@ module WebPresenter
       end
     end
 
-    # Workflow current step in presenter object
+    # origin_addresses details in presenter object
     #
     # * Author: Alpesh
     # * Date: 18/01/2019
@@ -110,19 +109,19 @@ module WebPresenter
       end
     end
 
-    # Minimum stake currency in lower unit in presenter object.
+    # minimum ost in presenter object
     #
     # * Author: Alpesh
     # * Date: 18/01/2019
     # * Reviewed By:
     #
-    def min_stake_currency_in_lower_unit
+    def min_ost_in_wei
       @t_min_ost ||= begin
-        formatter_obj.present? ? formatter_obj.min_stake_currency_in_lower_unit : nil
+        formatter_obj.present? ? formatter_obj.min_ost_in_wei : nil
       end
     end
 
-    # Minimum eth in presenter object.
+    # minimum eth in presenter object
     #
     # * Author: Alpesh
     # * Date: 18/01/2019
@@ -134,7 +133,7 @@ module WebPresenter
       end
     end
 
-    # Developer page addresses in presenter object.
+    # Developer page addresses in presenter object
     #
     # * Author: Shlok
     # * Date: 04/03/2019
@@ -146,7 +145,7 @@ module WebPresenter
       end
     end
 
-    # Dashboard details in presenter object.
+    # Developer page addresses in presenter object
     #
     # * Author: Shlok
     # * Date: 04/03/2019
@@ -158,7 +157,7 @@ module WebPresenter
       end
     end
 
-    # Token Dashboard Graph URLs in presenter object.
+    # Token Dashboard Graph URLs in presenter object
     #
     # * Author: Dhananjay
     # * Date: 02/04/2019
@@ -170,7 +169,7 @@ module WebPresenter
       end
     end
 
-    # Test economy details in presenter object.
+    # Test economy details in presenter object
     #
     # * Author: Puneet
     # * Date: 15/04/2019
@@ -195,13 +194,7 @@ module WebPresenter
     def fetch_balance_for_currencies
       @f_b_c ||= begin
         currencies = ['ETH']
-        currencies.push(stake_currencies.symbol_obj_map.keys[0])
-      end
-    end
-
-    def min_balances
-      @min_balances ||= begin
-        formatter_obj.present? ? formatter_obj.min_balances : nil
+        currencies.push(stake_currencies.id_obj_map[client_token.stake_currency_id].symbol)
       end
     end
 

@@ -39,64 +39,15 @@
   </div>
 <%else%>
 
-  <form data-ost-formhelper id="economy-planner" action="<%=GlobalConstant::RoutesMap.getApis()[:api_token]%>" method="POST"> <!-- #TODO URL -->
+  <form data-ost-formhelper id="economy-planner" action="<%=GlobalConstant::RoutesMap.getApis()[:api_token]%>" method="POST">
     <input type="hidden" name="stake_currency_symbol" value="<%= stake_currency_symbol %>" />
 
     <div class="planner-container text-center mt-6">
 
-      <%# if !is_mainnet %>
-<!--        <div class="container">-->
-<!--          <div class="row">-->
-<!--            <div class="card card-planner">-->
-<!--              <div class="card-header text-left brand-curreny-bg border-0">-->
-<!--                <div class="col-8 pr-5 pl-0">-->
-<!--                  <h4 class="mb-2">Deploy Your Brand Currency</h4>-->
-<!--                  <p class="font-weight-light mb-0">-->
-<!--                    The journey of your Brand Token starts in Sandbox mode, where you will be able to safely experiment with a test token holding no real value. Use Sandbox to get familiar with OST Platform functionalities and run the necessary integration tests with your application. Once ready, you can submit a request to the OST team to launch your Brand Token on Production. Test without concern: No data will be transferred between Sandbox and Production.-->
-<!--                  </p>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-      <%# end %>
-
       <h3>Let's Design The Token To Launch Your Economy</h3>
       <div class="container">
-        <div class="row my-5">
-          <div class="card card-planner">
-            <div class="card-header text-left">
-              <h4 class="mb-2 ">Token Details</h4>
-              <p class="font-weight-light mb-0">
-                Choose your Token Name and 3-4 character Identifier. The Identifier acts as a short code for your token, similar to currency codes, such as EUR, GBP, USD, ETH, BTC.
-              </p>
-            </div>
-            <div class="card-body ">
-                <div class="user-form row text-left">
-                  <div class="form-group mb-2 d-inline-block col-3 mr-4">
-                    <label class="form-label" for="token_name">Token Name</label>
-                    <input type="text" class="form-control" id="name"
-                           value ="<%= @presenter_obj.client_token_name%>"
-                           placeholder="Token Name" name="name" title="Token name"
-                           minlength="4" maxlength="20" pattern="^[a-zA-Z][a-zA-Z0-9\s]+[a-zA-Z0-9\s]+[a-zA-Z0-9]" required
-                           autocomplete="off"  data-msg-pattern="Please enter letters, numbers and spaces only."
-                           tabindex="1" />
-                    <div class="invalid-feedback" data-forid="name">&nbsp;</div>
-                  </div>
-                  <div class="form-group mb-2 d-inline-block col-3">
-                    <label class="form-label" for="token_symbol">Token Identifier</label>
-                    <input type="text" class="form-control text-uppercase" id="symbol"
-                           value ="<%= @presenter_obj.client_token_symbol%>" title="Token identifier"
-                           placeholder="Token Identifier" name="symbol"
-                           minlength="3" maxlength="4" pattern="^[a-zA-Z][a-zA-Z0-9]+" required
-                           autocomplete="off" data-msg-pattern="Please enter letters and numbers only."
-                           tabindex="1" />
-                    <div class="invalid-feedback" data-forid="symbol">&nbsp;</div>
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
+
+        <%= render partial: '/web/economy/token-setup/token_details' %>
 
         <%= render partial: '/web/economy/token-setup/staking_options',
             :locals => {
@@ -114,149 +65,8 @@
              :conversion_factor => conversion_factor,
              :ost_to_fiat => ost_to_fiat
         } %>
-<!--        <div class="row my-5">-->
-<!--          <div class="card card-planner">-->
-<!--            <div class="card-header text-left border-0">-->
-<!--              <h4 class="mb-2">Staking Options</h4>-->
-<!--              <p class="font-weight-light mb-0">-->
-<!--                Choose your Token Name and 3-4 character Identifier. The Identifier acts as a short code for your token, similar to currency codes, such as EUR, GBP, USD, ETH, BTC.-->
-<!--              </p>-->
-<!--            </div>-->
-<!--            <div class="card-body w-75 mx-auto py-0 position-relative">-->
-<!--              <span class="staking-options-or">OR</span>-->
-<!--              <div class="card-group">-->
-<!--                <div class="card ost-card  <%#= stake_currency_symbol == "OST" ? "checkedlabel" : ""  %>">-->
-<!--                  <div class="card-body">-->
-<!--                    <div class="stake-badge red">VOLATILE</div>-->
-<!--                    <svg style="width: 50px;height: 50px;">-->
-<!--                      <switch>-->
-<!--                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#staking-options-ost-icon"></use>-->
-<!--                      </switch>-->
-<!--                    </svg>-->
-<!--                    <h5 class="my-3"><span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerStakingOptions">Token</span> to OST</h5>-->
-<!--                    <p>Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam</p>-->
-<!--                  </div>-->
-<!--                  <div class="py-4">-->
 
-<!--                    <label class="form-check-label radio-button-label" for="staking_options_ost">-->
-<!--                      <input id="staking_options_ost" hidden type="radio" name="staking_options" value="ost"/>-->
-<!--                      <div href="javascript:void(0)" class="btn btn-secondary">USING OST</div>-->
-<!--                    </label>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div class="card ost-card  <%#= stake_currency_symbol == "USDC" ? "checkedlabel" : ""  %>">-->
-<!--                  <div class="card-body">-->
-<!--                    <div class="stake-badge green">STABLE</div>-->
-<!--                    <svg style="width: 50px;height: 50px;">-->
-<!--                      <switch>-->
-<!--                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#staking-options-usdc-icon"></use>-->
-<!--                      </switch>-->
-<!--                    </svg>-->
-<!--                    <h5 class="my-3"><span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerStakingOptions">Token</span> to USDC</h5>-->
-<!--                    <p>Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam</p>-->
-<!--                  </div>-->
-<!--                  <div class="py-4">-->
-
-<!--                    <label class="form-check-label radio-button-label" for="staking_options_usdc">-->
-<!--                      <input id="staking_options_usdc" hidden type="radio" name="staking_options" value="usdc"/>-->
-<!--                      <div href="javascript:void(0)" class="btn btn-secondary">USE USD COIN</div>-->
-<!--                    </label>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="row card card-planner my-5">-->
-<!--          <div class="text-left">-->
-<!--            <div class="card-header">-->
-<!--              <h4 class="mb-0 ">Advanced Options</h4>-->
-<!--              <p class="font-weight-light mb-0 mt-2">-->
-                <%# if is_mainnet%>
-<!--                  Set the fixed conversion rate between your Brand Token and the OST Token. Once you click "Proceed" on this page, this fixed conversation rate cannot be edited.-->
-                <%# else %>
-<!--                  Set the fixed conversion rate between your Brand Token and the OST Token. Once you click "Proceed" on this page, this fixed conversation rate cannot be edited. Don't worry though, it's Sandbox -- this is just a test!-->
-                <%#end%>
-<!--                <span class="header-recommendation font-weight-bold">-->
-<!--                  We recommend keeping it simple and setting the conversion rate to 1-->
-<!--                  <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>-->
-<!--                  = 1 <span class="stake-currency-symbol"><%#= stake_currency_symbol %></span> = $<span class="j-fiat-value">-->
-<!--                  <span class="ost-sc-display-wrapper sc-display-wrapper <%#= stake_currency_symbol != "OST" ? "hide" : ""  %>"> OST TODO  &nbsp; </span>-->
-<!--                  <span class="usdc-sc-display-wrapper sc-display-wrapper <%#= stake_currency_symbol == "OST" ? "hide" : ""  %>"> USDC TODO &nbsp; </span>-->
-<!--                  </span>USD-->
-<!--                </span>-->
-<!--              </p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--            <div class="accordion" id="advance-options-accordion">-->
-<!--              <div class="text-left">-->
-<!--                <div class="" id="advance-options-header">-->
-<!--                  <p class="text-left slider-recommendation m-3 ">-->
-<!--                    We recommend keeping it simple and setting the conversion rate to-->
-<!--                      <span class="conversion-rate">1</span>-->
-<!--                         <b> <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>  =</b>-->
-<!--                      <span class="conversion-rate">1</span>-->
-<!--                         <b> <span class="stake-currency-symbol"><%#= stake_currency_symbol %></span> =</b>-->
-<!--                      <span class="conversion-rate j-fiat-value">$-->
-<!--                       <span class="ost-sc-display-wrapper sc-display-wrapper <%#= stake_currency_symbol != "OST" ? "hide" : ""  %>"> OST TODO  &nbsp; </span>-->
-<!--                       <span class="usdc-sc-display-wrapper sc-display-wrapper <%#= stake_currency_symbol == "OST" ? "hide" : ""  %>"> USDC TODO &nbsp; </span>-->
-<!--                      </span>-->
-<!--                         <b>USD</b>-->
-<!--                      <span class="edit-collapse ml-1" data-toggle="collapse"-->
-<!--                            data-target="#collapsable-element"-->
-<!--                            aria-expanded="true" aria-controls="collapsable-element">EDIT-->
-<!--                      </span>-->
-<!--                  </p>-->
-<!--                </div>-->
-<!--                <div id="collapsable-element" class="collapse"-->
-<!--                     aria-labelledby="advance-options-header" data-parent="#advance-options-accordion">-->
-<!--                  <div class="card-body pt-4 pb-0">-->
-<!--                    <div class="conversion-section user-form">-->
-<!--                      <div class="card-group">-->
-<!--                        <div class="row form-group">-->
-<!--                          <div class="col-4 right-border m-0 card">-->
-<!--                            <label class="form-label mb-2">SET CONVERSION RATE</label>-->
-<!--                            <div class="d-flex align-items-center">-->
-<!--                              <span class="conversion-rate mr-1">1</span> <span class="stake-currency-symbol"><%#= stake_currency_symbol %></span>-->
-<!--                              <span class="equal-to-sign mx-2 font-weight-bold">=</span>-->
-<!--                              <span class="quantity">-->
-<!--                                <input type="number" min="<%#=bt_to_ost_min%>" max="<%#= bt_to_ost_max %>"-->
-<!--                                       step="<%#= bt_to_ost_step%>" id="<%#= ost_to_bt_id %>"-->
-<!--                                       data-msg-min="Please enter a value greater than 0.00001."-->
-<!--                                       data-msg-max="The value entered must be less than or equal to <%#= bt_to_ost_max %>"-->
-<!--                                       name="conversion_factor" value="<%#= conversion_factor %>" title="Conversion rate value" required>-->
-<!--                              </span>-->
-<!--                              <span class="ost-mocker-value ml-1" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>-->
-<!--                            </div>-->
-
-<!--                          </div>-->
-<!--                          <div class="col-4 right-border m-0 card">-->
-<!--                            <label class="form-label mb-2">AT CURRENT CONVERSION RATE</label>-->
-<!--                            <div class="d-flex align-items-center">-->
-<!--                              <span class="conversion-rate mr-1">1</span>-->
-<!--                              <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>-->
-<!--                              <span class="equal-to-sign mx-2 font-weight-bold">=</span> $-->
-<!--                              <span class="ost-mocker-value conversion-rate j-bt-to-fiat-val text-truncate"-->
-<!--                                    data-type="fiat" data-ost-mock-element="#<%#=ost_to_bt_id%>"  data-ost-mock-parser="ost.tokenSetup.btToFiat"> <%#= ost_to_fiat %>-->
-<!--                                                </span>-->
-<!--                            </div>-->
-<!--                          </div>-->
-<!--                          <div class="col-4 instruction-text">-->
-<!--                            The conversion rate establishes a fixed rate of exchange between your Brand Token and the OST token.-->
-<!--                          </div>-->
-<!--                          <div class="invalid-feedback ml-3" style="font-size: 12px" data-for="conversion_factor" ></div>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                  </div>-->
-<!--                <div class="form-group">-->
-<!--                  <div class="invalid-feedback general_error mb-2" data-for="general_error"></div>-->
-<!--                </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-          </div>
+      </div>
 
       <footer>
         <div class="row sticky-footer">
@@ -269,6 +79,7 @@
         </div>
         <div class="pseudo-footer"></div>
       </footer>
+
     </div>
   </form>
 

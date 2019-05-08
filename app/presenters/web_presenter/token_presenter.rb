@@ -110,30 +110,6 @@ module WebPresenter
       end
     end
 
-    # Minimum stake currency in lower unit in presenter object.
-    #
-    # * Author: Alpesh
-    # * Date: 18/01/2019
-    # * Reviewed By:
-    #
-    def min_stake_currency_in_lower_unit
-      @t_min_ost ||= begin
-        formatter_obj.present? ? formatter_obj.min_stake_currency_in_lower_unit : nil
-      end
-    end
-
-    # Minimum eth in presenter object.
-    #
-    # * Author: Alpesh
-    # * Date: 18/01/2019
-    # * Reviewed By:
-    #
-    def min_eth_in_wei
-      @t_min_eth ||= begin
-        formatter_obj.present? ? formatter_obj.min_eth_in_wei : nil
-      end
-    end
-
     # Developer page addresses in presenter object.
     #
     # * Author: Shlok
@@ -192,6 +168,12 @@ module WebPresenter
       end
     end
 
+    # Fetch balances for currencies.
+    #
+    # * Author: Anagha
+    # * Date: 08/05/2019
+    # * Reviewed By:
+    #
     def fetch_balance_for_currencies
       @f_b_c ||= begin
         currencies = ['ETH']
@@ -199,6 +181,12 @@ module WebPresenter
       end
     end
 
+    # Min balances in presenter object.
+    #
+    # * Author: Anagha
+    # * Date: 08/05/2019
+    # * Reviewed By:
+    #
     def min_balances
       @min_balances ||= begin
         formatter_obj.present? ? formatter_obj.min_balances : nil

@@ -6,7 +6,7 @@ module CompanyApi
 
       class Token < CompanyApi::Response::Formatter::Base
 
-        attr_reader :min_eth_in_wei, :min_stake_currency_in_lower_unit, :workflow_payload, :developer_page_addresses,
+        attr_reader :workflow_payload, :developer_page_addresses,
                     :dashboard_details, :graph_urls, :test_economy_details, :all_stake_currencies
 
         # Initialize
@@ -44,8 +44,6 @@ module CompanyApi
           set_workflow(@data['workflow'])
           set_workflow_current_step(@data['workflow_current_step'])
           set_sign_messages(@data['sign_messages'])
-          set_min_eth_in_wei(@data['min_eth_in_wei'])
-          set_min_stake_currency_in_lower_unit(@data['min_stake_currency_in_lower_unit'])
           set_workflow_payload(@data['workflow_payload'])
           set_sub_env_payload(@data['sub_env_payloads']) if @data['sub_env_payloads'].present?
           set_developer_page_addresses(@data['developer_page_addresses']) if @data['developer_page_addresses'].present?
@@ -69,14 +67,6 @@ module CompanyApi
         #
         def set_all_stake_currencies(all_stake_currencies_data)
           @all_stake_currencies = CompanyApi::Response::Entity::AllStakeCurrencies.new(all_stake_currencies_data)
-        end
-
-        def set_min_eth_in_wei(min_eth_data)
-          @min_eth_in_wei = CompanyApi::Response::Entity::MinEthInWei.new(min_eth_data)
-        end
-
-        def set_min_stake_currency_in_lower_unit(min_ost_data)
-          @min_stake_currency_in_lower_unit = CompanyApi::Response::Entity::MinOstInWei.new(min_ost_data)
         end
 
         def set_workflow_payload(data)

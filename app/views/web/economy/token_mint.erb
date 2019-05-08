@@ -12,14 +12,14 @@
       auxiliary_addresses: @presenter_obj.auxiliary_addresses.data,
       contract_details: @presenter_obj.contract_details.data,
       token: @presenter_obj.client_token.data,
-      price_points: @presenter_obj.oracle_price_points.data,
+      price_points: @presenter_obj.price_points.data,
       client_manager: @presenter_obj.client_manager.data,
       gas_price: @presenter_obj.gas_price.data,
       workflow: @presenter_obj.workflow.data,
-      min_ost_required: @presenter_obj.min_stake_currency_in_lower_unit.data,
+      min_ost_required: @presenter_obj.min_ost_in_wei.data,
       min_eth_required: @presenter_obj.min_eth_in_wei.data,
-      staker_address:@presenter_obj.origin_addresses.data['owner'],
-      min_balances: @presenter_obj.min_balances.data
+      staker_address:@presenter_obj.origin_addresses.data['owner']
+
   }
 
   is_buy_ost = GlobalConstant::Base.main_sub_environment?
@@ -121,10 +121,10 @@
 
                     </div>
                     <input type="hidden" name="<%= bt_to_mint_name %>" id=""
-                            data-ost-mock-parser="PriceOracle.toWei"
+                            data-ost-mock-parser="ost.tokenMint.toDisplayWei"
                             data-ost-mock-element="#<%= bt_to_mint_id %>" />
                     <input type="hidden" name="<%= ost_to_stake_name %>"
-                           data-ost-mock-parser="ost.tokenMint.btToOstWei"
+                           data-ost-mock-parser="ost.tokenMint.btToStakeCurrencyWei"
                            data-ost-mock-element="#<%= bt_to_mint_id %>" />
                   </div>
                   <div class="col-8  form-group m-0">
@@ -142,7 +142,7 @@
                           <p class="m-0 ml-2">
                             <small class="d-block" data-ost_available_key>OST tokens available after minting</small>
                             <small><span class="ost-mocker-value total-ost-available"
-                                         data-type="ost" data-ost-mock-element="#<%= bt_to_mint_id %>"
+                                         data-type="sc" data-ost-mock-element="#<%= bt_to_mint_id %>"
                                          data-ost-mock-parser="ost.tokenMint.ostAvailableOnBtChange"></span></small>
                           </p>
                         </li>
@@ -152,11 +152,11 @@
                             <small class="d-block" data-ost_staked_key>OST tokens used for minting</small>
                             <small class="d-block" data-ost_staked_val>
                                   <span class="ost-mocker-value" data-ost-mock-element="#<%= bt_to_mint_id %>"
-                                        data-ost-mock-parser="PriceOracle.btToOstPrecession">
+                                        data-ost-mock-parser="ost.tokenMint.btToStakeCurrencyDisplayPrecision">
                                 </span>
                             </small>
                             <input type="hidden" name="<%= fe_stake_currency_to_stake%>"
-                                   data-ost-mock-parser="PriceOracle.btToOstPrecession"
+                                   data-ost-mock-parser="ost.tokenMint.btToStakeCurrencyDisplayPrecision"
                                    data-ost-mock-element="#<%= bt_to_mint_id %>"  />
                           </p>
                         </li>
@@ -239,10 +239,10 @@
                           <span class="low-bal ether-text" style="display: none;">
                             Your selected address does not have enough <%= ether_text %>.
                           </span>
-                        <span class="low-bal ost-text" style="display: none;">
+                        <span class="low-bal sc-text" style="display: none;">
                             Your selected address does not have enough OST tokens.
                           </span>
-                        <span class="low-bal eth-ost-text" style="display: none;">
+                        <span class="low-bal eth-sc-text" style="display: none;">
                             Your selected address does not have enough <%= ether_text %> or OST tokens to Mint Tokens.
                           </span>
                       </div>
@@ -257,7 +257,7 @@
                   <div class="card-header p-0"></div>
                   <div class="text-muted font-weight-light mt-2 mb-3">
                     Will fund <%=initial_ost_funding%>&nbsp;<%= ost_currency_symbol %> and minimum required <%= ether_text %> in to your selected MetaMask wallet to get you started.</div>
-                  <button id="get-ost-btn" type="submit" data-submiting="Getting <%= ost_currency_symbol %>..."
+                  <button id="get-sc-btn" type="submit" data-submiting="Getting <%= ost_currency_symbol %>..."
                           class="btn btn-primary d-inline-block">Get&nbsp;<%= ost_currency_symbol %>
                   </button>
                   <span class="jGetOstLoaderText ml-3 text-muted font-weight-light align-middle" style="display: none">
@@ -300,7 +300,7 @@
           keyProvider : '<%= key_provider%>',
           fetchBalanceCurrencies : '<%= raw fetch_balance_currencies.to_json %>',
           btToMintName : '<%= bt_to_mint_name %>',
-          ostToStakeName : '<%= ost_to_stake_name %>'
+          scToStakeName : '<%= ost_to_stake_name %>'
         });
       });
     </script>

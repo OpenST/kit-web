@@ -203,3 +203,19 @@
   font-weight: 600;
   transform: translate(-50%, -50%);
 }
+
+.checkedlabel{
+  border: 1px solid #5ebe55;
+  //transition: border .1s ease-in-out;
+  .btn{
+    background-color: $blue-800;
+    color: $white;
+  }
+  &:first-child{
+    border-right: 1px solid #5ebe55 !important;
+  }
+  &:last-child{
+    margin-left: -1px !important;
+    border-left: 1px solid #5ebe55 !important;
+  }
+}

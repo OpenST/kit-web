@@ -71,7 +71,7 @@
       ;
       
       if( toEthBT ){
-        $('.total-token-minted').text( PriceOracle.toPrecessionBT( toEthBT ) );
+        $('.total-token-minted').text( PriceOracle.toPrecisionBT( toEthBT ) );
       }
       oThis.showSection( oThis.jMintPollingSuccess );
     },

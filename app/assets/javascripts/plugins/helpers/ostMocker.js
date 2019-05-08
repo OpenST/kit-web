@@ -37,7 +37,7 @@
       var oThis = this;
 
       var numPrecisionMapping = oThis.getNumberPrecisionMapping()
-        , mockPrecession
+        , mockPrecision
       ;
 
       if ( !oThis.targetSelector || !oThis.jElement ) {
@@ -67,8 +67,8 @@
       } else if ( typeof valType === "string" ) {
         valType = valType.toLowerCase();
         if ( numPrecisionMapping[ valType ] ) {
-          mockPrecession = numPrecisionMapping[ valType ];
-          targertVal = $.number( targertVal, mockPrecession );
+          mockPrecision = numPrecisionMapping[ valType ];
+          targertVal = $.number( targertVal, mockPrecision );
         } else {
           console.log("Unknown type '", valType, "'. Kindly Check.");
         }
@@ -79,14 +79,14 @@
     , getNumberPrecisionMapping: function () {
       var numPrecisionMapping = {
         "number": 2
-        ,"ost"  : 5
+        ,"sc"  : 5
         ,"bt"   : 5
         ,"fiat" : 2
       };
       if ( typeof PriceOracle !== 'undefined' ) {
-        numPrecisionMapping["ost"]  = PriceOracle.getOstPrecession();
-        numPrecisionMapping["bt"]   = PriceOracle.getBtPrecession();
-        numPrecisionMapping["fiat"] = PriceOracle.getFiatPrecession();
+        numPrecisionMapping["sc"]   = PriceOracle.getStakeCurrencyPrecision();
+        numPrecisionMapping["bt"]   = PriceOracle.getBtPrecision();
+        numPrecisionMapping["fiat"] = PriceOracle.getFiatPrecision();
       }
       return numPrecisionMapping;
     }

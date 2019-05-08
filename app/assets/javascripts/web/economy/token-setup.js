@@ -77,10 +77,10 @@
       var jEL = $('.j-bt-to-fiat-val'),
         jInputEl = $('#' + oThis.ostToBtId),
         val = jInputEl.val(),
-        btFiatVal = PriceOracle.btToFiatPrecession(1),
-        ostFiatVal = PriceOracle.ostToFiat(1)
+        btFiatVal = PriceOracle.btToFiatPrecision(1),
+        ostFiatVal = PriceOracle.stakeCurrencyToFiat(1)
       ;
-      ostFiatVal = PriceOracle.toPrecessionFiat(ostFiatVal);
+      ostFiatVal = PriceOracle.toPrecisionFiat(ostFiatVal);
       jEL.data("ost-mock-element", "#" + oThis.ostToBtId);
       jEL.ostMocker();
       jEL.text(btFiatVal);

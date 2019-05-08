@@ -353,17 +353,17 @@
       var walletAddress = oThis.getWalletAddress(),
         simpleTokenContractAddress  =   oThis.getSimpleTokenContractAddress()
       ;
-      oThis.defOstBal = $.Deferred();
+      oThis.defScBal = $.Deferred();
       oThis.metamask.balanceOf( walletAddress , simpleTokenContractAddress , function ( ost ) {
-        oThis.defOstBal.resolve( ost );
+        oThis.defScBal.resolve( ost );
       });
     },
   
     convertToBrandedTokens: function ( sucCallback ,  errCallback ) {
       var oThis = this ;
       var btToMint      = oThis.getBTtoMint() ,
-        ostToStake    = PriceOracle.btToOst( btToMint ) ,
-        ostToStakeWei = PriceOracle.toWei( ostToStake )
+        ostToStake    = Pricer.btToStakeCurrency( btToMint ) ,
+        ostToStakeWei = Pricer.toWei( ostToStake )
       ;
     
       var options = {

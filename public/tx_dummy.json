@@ -40,7 +40,7 @@
       ]
     },
     "client_balances": {},
-    "price_points": {
+    "oracle_price_points": {
       "OST": {
         "USD": "0.3"
       }

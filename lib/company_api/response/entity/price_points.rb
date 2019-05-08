@@ -27,16 +27,22 @@ module CompanyApi
         end
 
         def to_fiat_conversion_factor(currency_pref)
-          conversion_factors(currency_pref)
+          conversion_factors[currency_pref]
         end
 
         private
 
-        def conversion_factors(currency_pref)
+        def conversion_factors
           @c_r ||= begin
-            @data[@client_token.stake_currency_symbol] = BigDecimal.new(@data[@client_token.stake_currency_symbol][currency_pref])
+            if @client_token.is_ost_based_token?
+              @data['OST'].each do |currency_symbol, conversion_factor|
+                @data['OST'][currency_symbol] = BigDecimal.new(conversion_factor)
+              end
+              @data['OST']
+            else
+              fail 'unsupported'
+            end
           end
-
         end
 
       end

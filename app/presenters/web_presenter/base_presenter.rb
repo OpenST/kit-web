@@ -55,9 +55,9 @@ module WebPresenter
       end
     end
 
-    def price_points
+    def oracle_price_points
       @o_p_p ||= begin
-        formatter_obj.present? ? formatter_obj.price_points : nil
+        formatter_obj.present? ? formatter_obj.oracle_price_points : nil
       end
     end
 

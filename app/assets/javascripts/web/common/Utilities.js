@@ -107,6 +107,26 @@
       });
 
       return indexed_array;
+    },
+
+    showStakeCurrencyWrappers : function (  scSymbol  , jWrapper ) {
+      if( !scSymbol ) return ;
+      var scClassName = 'sc-display-wrapper' ,
+          sHideEls = "."+scClassName ,
+          sShowEls = "."+ scSymbol + "-" + scClassName,
+          jHideEls , jShowEls
+      ;
+      if( jWrapper ){
+        jHideEls = jWrapper.find( sHideEls );
+        jShowEls = jWrapper.find( sShowEls );
+      }else {
+        jHideEls = $( sHideEls );
+        jShowEls =  $( sShowEls  );
+      }
+
+      jHideEls.hide();
+      jShowEls.show();
+
     }
   }
 

@@ -21,7 +21,7 @@
 
 
     getInstance : function( stakeCurrency ) {
-
+      stakeCurrency =  stakeCurrency && String( stakeCurrency ).toLowerCase();
       var pricerInstance = pricerInstanceMap && pricerInstanceMap[stakeCurrency]
       ;
 

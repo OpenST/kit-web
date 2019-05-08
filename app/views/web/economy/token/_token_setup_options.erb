@@ -58,7 +58,12 @@
         <p class="text-center mt-2 font-weight-bold small token-setup-option-metamask">METAMASK</p>
       </div>
       <div class="mx-4">
-        <p class="font-weight-light">Metamask provides a secure wallet to hold your OST-Test tokens. Your current browser does not support metamask. Please swtich to <a class="browser-link" href="#">Google chrome</a> or <a class="browser-link" href="#">Firefox</a> to continue</p>
+        <p class="font-weight-light">
+          <% if is_metamask_whitelisted_browser %>
+            Metamask provides a secure wallet to hold your OST-Test tokens. You can choose to install Metamask and continue.
+          <% else %>
+            Metamask provides a secure wallet to hold your OST-Test tokens. Your current browser does not support metamask. Please swtich to <a class="browser-link" href="#">Google chrome</a> or <a class="browser-link" href="#">Firefox</a> to continue</p>
+          <% end %>
       </div>
 
 

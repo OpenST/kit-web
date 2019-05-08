@@ -3,7 +3,8 @@
   var ost = ns("ost") ,
     Progressbar = ns("ost.ProgressBar") ,
     Polling = ns("ost.Polling") ,
-    utilities =  ns("ost.utilities")
+    utilities =  ns("ost.utilities"),
+    PricerFactory = ost.PricerFactory
   ;
 
   var oThis = ost.tokenMintProgress = {
@@ -24,12 +25,30 @@
 
     init : function ( config ) {
       $.extend( oThis , config );
+      oThis.initPricer( config );
       oThis.progressBar = new Progressbar({
         sParentEl : oThis.sProgressBarEl
       });
       oThis.progressBar.setTooltipPosition(0);
       oThis.getMintingStatus();
     },
+
+    initPricer : function( config ) {
+      var config = oThis.getPricerConfig();
+      PricerFactory.init( config );
+      Pricer = PricerFactory.getInstance( oThis.scSymbol );
+    },
+
+    getPricerConfig : function(){
+      var price_points = utilities.deepGet(oThis.dataConfig, 'price_points'),
+        stake_currencies = utilities.deepGet(oThis.dataConfig, 'stake_currencies'),
+        mergedConfig = {}
+      ;
+      $.extend(true,mergedConfig,price_points,stake_currencies);
+      mergedConfig[oThis.scSymbol].conversion_factor = utilities.deepGet(oThis.dataConfig, 'token.conversion_factor');
+      return mergedConfig[oThis.scSymbol];
+    },
+
 
     getMintingStatus : function() {
       if( !oThis.workflowId ) return ;
@@ -67,7 +86,7 @@
       oThis.polling.stopPolling();
       
       var amountMinted = utilities.deepGet( response , "data.workflow_payload.amountMinted" ) ,
-        toEthBT      = PriceOracle.fromWei( amountMinted )
+        toEthBT      = PriceOracle.fromSmallestUnit( amountMinted )
       ;
       
       if( toEthBT ){

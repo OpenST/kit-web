@@ -15,21 +15,21 @@
 
   var PriceOracle = ost.PriceOracle =  function (config) {
 
-      if (!config || !config.sc_to_fiat || !config.decimals) {
+      if (!config || !config.USD || !config.decimal) {
         console.error("Mandatory params not present for PriceOracle!!!");
         return ;
       }
 
-      if (config.sc_to_fiat) {
-        this.SC_TO_FIAT = String(config.sc_to_fiat);
+      if (config.USD) {
+        this.SC_TO_FIAT = String(config.USD);
       }
 
-      if (config.sc_to_bt) {
-        this.SC_TO_BT = String(config.ost_to_bt);
+      if (config.conversion_factor) {
+        this.SC_TO_BT = String(config.conversion_factor);
       }
 
-      if (config.decimals) {
-        this.SC_DECIMALS = config.decimals;
+      if (config.decimal) {
+        this.SC_DECIMALS = config.decimal;
       }
 
   };

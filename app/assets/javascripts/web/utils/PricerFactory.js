@@ -9,8 +9,6 @@
 
   ost.PricerFactory = {
 
-    config : null,
-
     init : function( config ) {
       if(!config){
         console.error("Mandatory params not present for PricerFactory!!!");
@@ -26,7 +24,7 @@
       ;
 
       if(!pricerInstance) {
-        var config = pricerConfig[ stakeCurrency ];
+        var config = pricerConfig;
         pricerInstance =  new ost.PriceOracle(config);
         pricerInstanceMap[stakeCurrency] = pricerInstance ;
       }

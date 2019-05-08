@@ -16,10 +16,14 @@
       client_manager: @presenter_obj.client_manager.data,
       gas_price: @presenter_obj.gas_price.data,
       workflow: @presenter_obj.workflow.data,
-      min_ost_required: @presenter_obj.min_ost_in_wei.data,
-      min_eth_required: @presenter_obj.min_eth_in_wei.data,
-      staker_address:@presenter_obj.origin_addresses.data['owner']
-
+      min_balances: {
+          OST: '1000',
+          USDC: '10',
+          ETH: '10'
+      },
+      staker_address:@presenter_obj.origin_addresses.data['owner'],
+      stake_currencies: {'OST':{'id':1, 'name':'Simple Token', 'symbol':'OST', 'decimal':18, 'contract_address':'0xaec5e9658e3b0ee12510cc7f5e5d914b71326a82'},
+                         'USDC':{'id':1, 'name':'Simple Token', 'symbol':'USDC', 'decimal':6, 'contract_address':'0xaec5e9658e3b0ee12510cc7f5e5d914b71326a82'}}
   }
 
   is_buy_ost = GlobalConstant::Base.main_sub_environment?
@@ -47,6 +51,11 @@
   staker_address_name = "staker_address"
   staker_address_selector = "[name='#{staker_address_name}']"
   ether_text = "ETH"
+
+  stake_currency_symbol = 'OST'
+  if @presenter_obj.client_token.present? && @presenter_obj.client_token.stake_currency_id.present?
+    stake_currency_symbol = @presenter_obj.stake_currencies.id_obj_map[@presenter_obj.client_token.stake_currency_id].symbol
+  end
 %>
 
 <%if (is_mainnet &&  !is_metamask_whitelisted_browser) ||
@@ -114,7 +123,7 @@
                                    :header => "TOKENS VALUE IN USD",
                                    :mock_selector => "#" + bt_to_mint_id,
                                    :mock_parser => "ost.tokenMint.btToFiat",
-                                   :mock_type => "ost",
+                                   :mock_type => "sc",
                                    :value_prefix => "$"
                                }
                       %>
@@ -213,7 +222,7 @@
 
   <div class="jMintSections" id="jInsufficientBalSection" style="display: <%= is_workflow ? "block" : "none" %>">
     <div class="container">
-      <form id="get-ost-form" action="<%= get_ost_api %>" method="GET">
+      <form id="get-sc-form" action="<%= get_ost_api %>" method="GET">
         <div class="row">
           <div class="col-10 mx-auto">
             <div class="card card-planner my-5">
@@ -300,7 +309,8 @@
           keyProvider : '<%= key_provider%>',
           fetchBalanceCurrencies : '<%= raw fetch_balance_currencies.to_json %>',
           btToMintName : '<%= bt_to_mint_name %>',
-          scToStakeName : '<%= ost_to_stake_name %>'
+          scToStakeName : '<%= ost_to_stake_name %>',
+          scSymbol : '<%= stake_currency_symbol %>'
         });
       });
     </script>

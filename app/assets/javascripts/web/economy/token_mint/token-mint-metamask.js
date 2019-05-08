@@ -363,7 +363,7 @@
       var oThis = this ;
       var btToMint      = oThis.getBTtoMint() ,
         ostToStake    = Pricer.btToStakeCurrency( btToMint ) ,
-        ostToStakeWei = Pricer.toWei( ostToStake )
+        ostToStakeWei = Pricer.toSmallestUnit( ostToStake )
       ;
     
       var options = {

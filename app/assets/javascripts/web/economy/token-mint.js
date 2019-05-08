@@ -108,7 +108,7 @@
       oThis.initFlow()
     },
     
-    setProvider : function () { //To ask
+    setProvider : function () {
       var providerName = providerMap[oThis.keyProvider],
           provider = ost[ providerName ] ;
       $.extend(true, oThis, provider );
@@ -157,8 +157,19 @@
 
 
     initPricer : function( config ) {
-      PricerFactory.init( config ); //TODO merge config logic here
-      Pricer = PricerFactory.getInstance( utilities.deepGet( oThis.dataConfig, "token.stake_currency_symbol") ) //TODO confrim path
+      var config = oThis.getPricerConfig();
+      PricerFactory.init( config );
+      Pricer = PricerFactory.getInstance( oThis.scSymbol );
+    },
+
+    getPricerConfig : function(){
+      var price_points = utilities.deepGet(oThis.dataConfig, 'price_points'),
+          stake_currencies = utilities.deepGet(oThis.dataConfig, 'stake_currencies'),
+          mergedConfig = {}
+      ;
+      $.extend(true,mergedConfig,price_points,stake_currencies);
+      mergedConfig[oThis.scSymbol].conversion_factor = utilities.deepGet(oThis.dataConfig, 'token.conversion_factor');
+      return mergedConfig[oThis.scSymbol];
     },
 
     initUIValues: function() {
@@ -294,7 +305,7 @@
         $('.buy-ost-btn').show();
         oThis.jScText.show();
       } else{
-        ost = Pricer.fromWei( ost );
+        ost = Pricer.fromSmallestUnit( ost );
         oThis.onValidationComplete( ost );
       }
     },
@@ -410,7 +421,7 @@
 
     btToStakeCurrencyWei : function ( val ) {
       if(!Pricer) return;
-      return Pricer.toWei( Pricer.btToStakeCurrency( val ));
+      return Pricer.toSmallestUnit( Pricer.btToStakeCurrency( val ));
     },
   
     getMinETHRequired : function () {

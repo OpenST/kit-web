@@ -5,7 +5,7 @@
     formHelper = window.FormHelper.prototype,
     Pricerfactory = ost.PricerFactory,
     redirectMap = window.redirectMap,
-    utilities = ns('ost.utilities')
+    utilities = ost.utilities
   ;
 
   var Pricer = null  ;
@@ -48,6 +48,7 @@
       oThis.bindActions();
       oThis.jTokenForm.formHelper().success = oThis.tokenSuccess;
       oThis.initDisplayFiatValue();
+      utilities.showStakeCurrencyWrappers( oThis.stakeCurrencySymbol );
     },
 
     initPricer : function( config ){

@@ -13,8 +13,8 @@
 
     init : function( config ) {
       if(!config){
-        console.log("Mandatory params not present!!!");
-        throw error;
+        console.error("Mandatory params not present for PricerFactory!!!");
+        return ;
       }
       pricerConfig = config;
     },

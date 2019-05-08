@@ -16,8 +16,8 @@
   var PriceOracle = ost.PriceOracle =  function (config) {
 
       if (!config || !config.sc_to_fiat || !config.decimals) {
-        console.log("Mandatory params not present!!!");
-        throw error;
+        console.error("Mandatory params not present for PriceOracle!!!");
+        return ;
       }
 
       if (config.sc_to_fiat) {

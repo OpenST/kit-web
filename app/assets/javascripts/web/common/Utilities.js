@@ -110,6 +110,7 @@
     },
 
     showStakeCurrencyWrappers : function (  scSymbol  , jWrapper ) {
+      scSymbol = scSymbol && String( scSymbol ).toLowerCase();
       if( !scSymbol ) return ;
       var scClassName = 'sc-display-wrapper' ,
           sHideEls = "."+scClassName ,
@@ -124,8 +125,8 @@
         jShowEls =  $( sShowEls  );
       }
 
-      jHideEls.hide();
-      jShowEls.show();
+      jHideEls.addClass('hide');
+      jShowEls.removeClass('hide');
 
     }
   }

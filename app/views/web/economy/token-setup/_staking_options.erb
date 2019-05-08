@@ -1,0 +1,61 @@
+<div class="row my-5">
+  <div class="card card-planner">
+    <div class="card-header text-left border-0">
+      <h4 class="mb-2">Staking Options</h4>
+      <p class="font-weight-light mb-0">
+        Choose your Token Name and 3-4 character Identifier. The Identifier acts as a short code for your token, similar to currency codes, such as EUR, GBP, USD, ETH, BTC.
+      </p>
+    </div>
+    <div class="card-body w-75 mx-auto py-0 position-relative">
+      <span class="staking-options-or">OR</span>
+      <div class="card-group">
+        <div class="card ost-card  <%= stake_currency_symbol == "OST" ? "checkedlabel" : ""  %>">
+          <div class="card-body px-5 pb-0">
+            <!--                    <div class="stake-badge red">VOLATILE</div>-->
+            <h5 class="my-3 d-inline-flex align-items-center">
+              <svg style="width: 50px;height: 50px;">
+                <switch>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#staking-options-ost-icon"></use>
+                </switch>
+              </svg>
+              <span class="ml-3">
+                <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerStakingOptions">Token</span> to OST
+              </span>
+            </h5>
+            <p>Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam</p>
+          </div>
+          <div class="py-4">
+
+            <label class="form-check-label radio-button-label" for="staking_options_ost">
+              <input id="staking_options_ost" hidden type="radio" name="staking_options" value="ost"/>
+              <div href="javascript:void(0)" class="btn btn-secondary">USING OST</div>
+            </label>
+          </div>
+        </div>
+        <div class="card ost-card  <%= stake_currency_symbol == "USDC" ? "checkedlabel" : ""  %>">
+          <div class="card-body px-5 pb-0">
+            <!--                    <div class="stake-badge green">STABLE</div>-->
+            <h5 class="my-3 d-inline-flex align-items-center">
+              <svg style="width: 50px;height: 50px;">
+                <switch>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#staking-options-usdc-icon"></use>
+                </switch>
+              </svg>
+              <span class="ml-3">
+                <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerStakingOptions">Token</span> to USDC
+              </span>
+            </h5>
+            <p>Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam</p>
+          </div>
+          <div class="py-4">
+
+            <label class="form-check-label radio-button-label" for="staking_options_usdc">
+              <input id="staking_options_usdc" hidden type="radio" name="staking_options" value="usdc"/>
+              <div href="javascript:void(0)" class="btn btn-secondary">USE USD COIN</div>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

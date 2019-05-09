@@ -6,17 +6,8 @@
   total_mint_bt = @presenter_obj.workflow_payload.fe_bt_to_mint
   dashboard_url = GlobalConstant::RoutesMap.getRoutes()[:token_dashboard]
   data_config = {
-      origin_addresses: @presenter_obj.origin_addresses.data,
-      auxiliary_addresses: @presenter_obj.auxiliary_addresses.data,
-      contract_details: @presenter_obj.contract_details.data,
       token: @presenter_obj.client_token.data,
       price_points: @presenter_obj.oracle_price_points.data,
-      client_manager: @presenter_obj.client_manager.data,
-      gas_price: @presenter_obj.gas_price.data,
-      workflow: @presenter_obj.workflow.data,
-      min_ost_required: @presenter_obj.min_ost_in_wei.data,
-      min_eth_required: @presenter_obj.min_eth_in_wei.data,
-      staker_address:@presenter_obj.origin_addresses.data['owner'],
       stake_currencies: {'OST':{'id':1, 'name':'Simple Token', 'symbol':'OST', 'decimal':18, 'contract_address':'0xaec5e9658e3b0ee12510cc7f5e5d914b71326a82'},
                          'USDC':{'id':1, 'name':'Simple Token', 'symbol':'USDC', 'decimal':6, 'contract_address':'0xaec5e9658e3b0ee12510cc7f5e5d914b71326a82'}}
   }
@@ -102,7 +93,8 @@
     $(function () {
       ost.tokenMintProgress.init({
         mintingStatusEndPoint:"<%=minting_status_api%>",
-        workflowId : "<%= workflow_id%>"
+        workflowId : "<%= workflow_id%>",
+        dataConfig : "<%= data_config %>"
       });
     });
   </script>

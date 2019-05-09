@@ -3,7 +3,7 @@
   
   var ost = ns("ost"),
     formHelper = window.FormHelper.prototype,
-    Pricerfactory = ost.PricerFactory,
+    PricerFactory = ost.PricerFactory,
     redirectMap = window.redirectMap,
     utilities = ost.utilities
   ;
@@ -34,10 +34,8 @@
     metamask: null,
     walletAssociation: null,
     chainId: null,
-  
-    ost_to_fiat: null,
-    ost_to_bt: null,
-    ostToBtId: null,
+
+    scToBtId: null,
     
     isMainnet: null,
     
@@ -51,11 +49,22 @@
       utilities.showStakeCurrencyWrappers( oThis.stakeCurrencySymbol );
     },
 
-    initPricer : function( config ){
-      var pricerConfig = null ; //TODO
-      Pricerfactory.init( pricerConfig );
-      Pricer = Pricerfactory.getInstance( oThis.stakeCurrencySymbol );
+    initPricer : function( config ) {
+      var config = oThis.getPricerConfig();
+      PricerFactory.init( config );
+      Pricer = PricerFactory.getInstance( oThis.stakeCurrencySymbol );
     },
+
+    getPricerConfig : function(){
+      var price_points = utilities.deepGet(oThis.dataConfig, 'price_points'),
+        stake_currencies = utilities.deepGet(oThis.dataConfig, 'stake_currencies'),
+        mergedConfig = {}
+      ;
+      $.extend(true,mergedConfig,price_points,stake_currencies);
+      mergedConfig[oThis.stakeCurrencySymbol].conversion_factor = utilities.deepGet(oThis.dataConfig, 'token.conversion_factor');
+      return mergedConfig[oThis.stakeCurrencySymbol];
+    },
+
 
     bindActions: function () {
       
@@ -81,13 +90,13 @@
     },
 
     updatePricer : function( val ){
-      Pricer = Pricerfactory.getInstance( oThis.val );
+      Pricer = PricerFactory.getInstance( val );
     },
     
     btToFiat: function (conversionFactor) {
       if (!conversionFactor || !BigNumber || !Pricer ) return conversionFactor;
       conversionFactor = BigNumber(conversionFactor);
-      var fiatBN = BigNumber(Pricer.sc_to_fiat),
+      var fiatBN = BigNumber(Pricer.SC_TO_FIAT),
         oneBTToFiat = fiatBN.dividedBy(conversionFactor)
       ;
       return Pricer.toFiat(oneBTToFiat);
@@ -95,7 +104,7 @@
     
     initDisplayFiatValue: function () {
       var jEL = $('.j-bt-to-fiat-val'),
-        jInputEl = $('#' + oThis.ostToBtId),
+        jInputEl = $('#' + oThis.scToBtId),
         val = jInputEl.val(),
         btFiatVal = Pricer.btToFiatPrecision(1),
         ostFiatVal = Pricer.stakeCurrencyToFiat(1)

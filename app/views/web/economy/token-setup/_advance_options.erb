@@ -51,10 +51,10 @@
                     <span class="conversion-rate mr-1">1</span> <span class="stake-currency-symbol"><%= stake_currency_symbol %></span>
                     <span class="equal-to-sign mx-2 font-weight-bold">=</span>
                     <span class="quantity">
-                                <input type="number" min="<%=bt_to_ost_min%>" max="<%= bt_to_ost_max %>"
-                                       step="<%= bt_to_ost_step%>" id="<%= ost_to_bt_id %>"
+                                <input type="number" min="<%=bt_to_sc_min%>" max="<%= bt_to_sc_max %>"
+                                       step="<%= bt_to_sc_step%>" id="<%= sc_to_bt_id %>"
                                        data-msg-min="Please enter a value greater than 0.00001."
-                                       data-msg-max="The value entered must be less than or equal to <%= bt_to_ost_max %>"
+                                       data-msg-max="The value entered must be less than or equal to <%= bt_to_sc_max %>"
                                        name="conversion_factor" value="<%= conversion_factor %>" title="Conversion rate value" required>
                               </span>
                     <span class="ost-mocker-value ml-1" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
@@ -68,7 +68,7 @@
                     <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
                     <span class="equal-to-sign mx-2 font-weight-bold">=</span> $
                     <span class="ost-mocker-value conversion-rate j-bt-to-fiat-val text-truncate"
-                          data-type="fiat" data-ost-mock-element="#<%=ost_to_bt_id%>"  data-ost-mock-parser="ost.tokenSetup.btToFiat"> <%= ost_to_fiat %>
+                          data-type="fiat" data-ost-mock-element="#<%=sc_to_bt_id%>"  data-ost-mock-parser="ost.tokenSetup.btToFiat"> <%= sc_to_fiat %>
                                                 </span>
                   </div>
                 </div>

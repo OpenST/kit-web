@@ -25,7 +25,7 @@
 
     init : function ( config ) {
       $.extend( oThis , config );
-      oThis.initPricer( config );
+      oThis.initPricer( oThis.dataConfig );
       oThis.progressBar = new Progressbar({
         sParentEl : oThis.sProgressBarEl
       });

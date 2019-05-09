@@ -29,12 +29,16 @@
       }
 
       if (config.decimal) {
-        this.SC_DECIMALS = config.decimal;
+        this.decimal = config.decimal;
       }
 
   };
 
   PriceOracle.prototype = {
+
+    SC_TO_FIAT : null ,
+    SC_TO_BT   : null ,
+    decimal    : null ,
 
     stakeCurrencyToFiat :  function ( stakeCurrency ) {
       if( !stakeCurrency ) return "";
@@ -49,6 +53,11 @@
     btToFiat : function ( bt ) {
       if( !bt ) return "";
 
+      if( this.isNaN( this.SC_TO_BT )){
+        console.error("Conversion rate for SC to BT is not set" , this.SC_TO_BT );
+        return ;
+      }
+
       bt = BigNumber( bt );
 
       var fiatBN = BigNumber( this.SC_TO_FIAT ) ,
@@ -60,7 +69,7 @@
       return this.toFiat( result );
     },
 
-    btToFiatPrecision : function ( bt) {
+    btToFiatPrecision : function ( bt ) {
       if( !bt ) return "";
 
       var fiat = this.btToFiat( bt );
@@ -70,6 +79,11 @@
 
     stakeCurrencyToBt : function ( stakeCurrency  ) {
       if( !stakeCurrency ) return "";
+
+      if( this.isNaN( this.SC_TO_BT )){
+        console.error("Conversion rate for SC to BT is not set" , this.SC_TO_BT );
+        return ;
+      }
 
       stakeCurrency = BigNumber( stakeCurrency );
 
@@ -88,6 +102,11 @@
 
     btToStakeCurrency : function (  bt ) {
       if( !bt ) return "";
+
+      if( this.isNaN( this.SC_TO_BT )){
+        console.error("Conversion rate for SC to BT is not set" , this.SC_TO_BT );
+        return ;
+      }
 
       bt = BigNumber( bt );
 
@@ -167,34 +186,21 @@
     },
 
     isNaN : function ( val ) {
-      return typeof val === "undefined" || val === "" || val === null || isNaN( val );
+      return __isNaN__( val );
     },
 
     fromSmallestUnit: function ( val ) {
-
-      if ( this.isNaN( val ) ) {
-        return NaN;
-      }
-
-      val = BigNumber( val ) ;
-      var exp = BigNumber(10).exponentiatedBy(this.SC_DECIMALS) ;
-      return val.dividedBy(exp).decimalPlaces(0).toString( 10 );
+      return __fromSmallestUnit__(val , this.decimal);
     },
 
     toSmallestUnit: function ( val ) {
-
-      if ( this.isNaN( val ) ) {
-        return NaN;
-      }
-
-      val = BigNumber( val ) ;
-      var exp = BigNumber(10).exponentiatedBy(this.SC_DECIMALS) ;
-      return val.multipliedBy(exp).decimalPlaces(0).toString( 10 );
+      return __toSmallestUnit__(val , this.decimal);
     }
   };
 
-  //STATIC FUNCTIONS, DON'T USE "this" KEYWORD INSIDE THESE FUNCTIONS
-
+  /*********************************************************************************************************
+   *                                              STATIC FUNCTIONS                                         *
+   *********************************************************************************************************/
   PriceOracle.getStakeCurrencyPrecision = function(){
     return P_SC ;
   };
@@ -218,5 +224,58 @@
   PriceOracle.setFiatPrecision = function( val ){
     P_FIAT = val;
   };
+
+  PriceOracle._toSmallestUnit = function ( value , decimal ) {
+    return __toSmallestUnit__(val , decimal);
+  };
+
+  PriceOracle._fromSmallestUnit = function (val , decimal ) {
+    return __fromSmallestUnit__(val , decimal);
+  };
+
+
+  /*********************************************************************************************************
+   *                                             Private FUNCTIONS                                         *
+   *********************************************************************************************************/
+
+  function __isNaN__( val ){
+    return typeof val === "undefined" || val === "" || val === null || isNaN( val );
+  }
+
+  function __fromSmallestUnit__( val , decimal ){
+    if(!val ){
+      console.error("Value is Mandatory param!!!");
+    }
+    if(!decimal){
+      console.error("Decimal is Mandatory param!!!");
+    }
+
+    if ( __isNaN__( val ) ) {
+      return NaN;
+    }
+
+    val = BigNumber( val ) ;
+    var exp = BigNumber(10).exponentiatedBy( decimal ) ;
+    return val.dividedBy(exp).decimalPlaces(0).toString( 10 );
+
+  }
+
+  function __toSmallestUnit__( val , decimal ){
+    if(!val ){
+      console.error("Value is Mandatory param!!!");
+    }
+    if(!decimal){
+      console.error("Decimal is Mandatory param!!!");
+    }
+
+    if ( __isNaN__( val ) ) {
+      return NaN;
+    }
+
+    val = BigNumber( val ) ;
+    var exp = BigNumber(10).exponentiatedBy( decimal ) ;
+    return val.multipliedBy(exp).decimalPlaces(0).toString( 10 );
+  }
+
 
 })();

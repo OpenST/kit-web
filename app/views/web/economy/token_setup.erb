@@ -1,7 +1,7 @@
 <%
 
     wallet_association =  @presenter_obj.sign_messages.wallet_association
-    ost_to_fiat =  @presenter_obj.oracle_price_points.to_fiat_conversion_factor("USD")
+    sc_to_fiat =  @presenter_obj.oracle_price_points.to_fiat_conversion_factor("USD")
 
     chain_id = GlobalConstant::Chain.origin_chain_id
 
@@ -12,12 +12,12 @@
     deploy_route = GlobalConstant::RoutesMap.getRoutes()[:token_deploy]
 
     conversion_factor = @presenter_obj.client_token_conversion_factor || 1
-    bt_to_ost_input_name = "conversion_factor"
-    bt_to_ost_min = GlobalConstant::ClientToken.bt_to_ost_min
-    bt_to_ost_step = GlobalConstant::ClientToken.bt_to_ost_step
-    bt_to_ost_max = GlobalConstant::ClientToken.bt_to_ost_max
+    # bt_to_sc_input_name = "conversion_factor"
+    bt_to_sc_min = GlobalConstant::ClientToken.bt_to_ost_min
+    bt_to_sc_step = GlobalConstant::ClientToken.bt_to_ost_step
+    bt_to_sc_max = GlobalConstant::ClientToken.bt_to_ost_max
 
-    ost_to_bt_id = "ost_to_bt_id"
+    sc_to_bt_id = "sc_to_bt_id"
 
     # stake_currency_symbol would be set only after token has been created on BE
     # TODO: FE to use @presenter_obj.all_stake_currencies to show drop down or to pick a default and remove OST hardcoding below
@@ -29,6 +29,13 @@
 
     is_mainnet = GlobalConstant::Base.main_sub_environment?
     is_metamask_whitelisted_browser = browser_supported_by_metamask?
+
+    data_config = {
+        token: @presenter_obj.client_token.data,
+        price_points: @presenter_obj.oracle_price_points.data,
+        stake_currencies: {'OST':{'id':1, 'name':'Simple Token', 'symbol':'OST', 'decimal':18, 'contract_address':'0xaec5e9658e3b0ee12510cc7f5e5d914b71326a82'},
+                           'USDC':{'id':1, 'name':'Simple Token', 'symbol':'USDC', 'decimal':6, 'contract_address':'0xaec5e9658e3b0ee12510cc7f5e5d914b71326a82'}}
+    }
 
 %>
 
@@ -58,12 +65,12 @@
              :locals => {
              :is_mainnet => is_mainnet,
              :stake_currency_symbol => stake_currency_symbol,
-             :bt_to_ost_min => bt_to_ost_min,
-             :bt_to_ost_max => bt_to_ost_max,
-             :bt_to_ost_step => bt_to_ost_step,
-             :ost_to_bt_id => ost_to_bt_id,
+             :bt_to_sc_min => bt_to_sc_min,
+             :bt_to_sc_max => bt_to_sc_max,
+             :bt_to_sc_step => bt_to_sc_step,
+             :sc_to_bt_id => sc_to_bt_id,
              :conversion_factor => conversion_factor,
-             :ost_to_fiat => ost_to_fiat
+             :sc_to_fiat => sc_to_fiat
         } %>
 
       </div>
@@ -99,6 +106,7 @@
     <script type="text/javascript">
     //  function awse(val){return val}  //Not sure why it was required
         $( function () {
+          var dataConfig = JSON.parse('<%= raw data_config.to_json %>');
             ost.tokenSetup.init({
 
                 walletAssociation : "<%= wallet_association%>",
@@ -109,12 +117,9 @@
                 deploymentEndpoint : '<%=deployment_api %>' ,
                 addressGenerationApi: '<%= address_generation_api%>',
                 deployRoute : '<%= deploy_route %>',
-
-                ost_to_fiat : '<%= ost_to_fiat %>',
-                ost_to_bt : '<%= conversion_factor %>',
-                ostToBtId : "<%= ost_to_bt_id %>",
-
-                stakeCurrencySymbol : "<%= stake_currency_symbol%>"
+                scToBtId : "<%= sc_to_bt_id %>",
+                stakeCurrencySymbol : "<%= stake_currency_symbol%>",
+                dataConfig : dataConfig
             });
         });
     </script>

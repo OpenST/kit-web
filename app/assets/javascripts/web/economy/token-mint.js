@@ -274,7 +274,7 @@
       var eth = utilities.deepGet( res , "data.balance.ETH"),//To ask
         ost = utilities.deepGet( res , "data.balance.OST"),
         ethBN = eth && BigNumber( eth ),
-        ostBN =  ost && `ost` && BigNumber( ost ),
+        ostBN =  ost && BigNumber( ost ),
         minETHRequire = oThis.getMinETHRequired(),
         minOstRequire = oThis.getMinOstRequired(),
         lowEth = !ethBN ||  ethBN.isLessThan( minETHRequire ),

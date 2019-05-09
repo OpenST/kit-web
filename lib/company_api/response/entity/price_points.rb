@@ -26,15 +26,27 @@ module CompanyApi
           @data
         end
 
-        def to_fiat_conversion_factor(currency_pref)
-          conversion_factors(currency_pref)
+        # Stake currency to fiat conversion factor value.
+        #
+        # * Author: Anagha
+        # * Date: 09/05/2018
+        # * Reviewed By:
+        #
+        # @param [String] stake_currency (mandatory)
+        # @param [String] fiat (mandatory)
+        #
+        # @return
+        #
+        def stake_currency_to_fiat_conversion_factor(stake_currency, fiat)
+            conversion_factors[stake_currency][fiat]
         end
 
         private
 
-        def conversion_factors(currency_pref)
+
+        def conversion_factors
           @c_r ||= begin
-            @data[@client_token.stake_currency_symbol] = BigDecimal.new(@data[@client_token.stake_currency_symbol][currency_pref])
+            @data
           end
 
         end

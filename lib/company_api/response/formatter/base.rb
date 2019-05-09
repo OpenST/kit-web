@@ -49,7 +49,7 @@ module CompanyApi
         #
         # @param [Hash] client_data (mandatory) - client token hash
         #
-        # Sets @client_token
+        # Sets @client
         #
         def set_client(client_data)
           @client = CompanyApi::Response::Entity::Client.new(client_data)
@@ -66,7 +66,9 @@ module CompanyApi
         # Sets @client_token
         #
         def set_token(client_token_data)
+          puts"client_token_data======= from base #{client_token_data}"
           @client_token = CompanyApi::Response::Entity::Token.new(client_token_data)
+          puts"@client_token ======= from base #{@client_token.inspect}"
         end
 
         # Set stake currencies
@@ -119,7 +121,7 @@ module CompanyApi
         #
         # @param [Hash] client_token_data (mandatory) - client token hash
         #
-        # Sets @client_token
+        # Sets @client_balances
         #
         def set_client_balances(client_balances_data)
           @client_balances = CompanyApi::Response::Entity::ClientBalances.new(client_balances_data, @client_token)
@@ -162,7 +164,7 @@ module CompanyApi
         #
         # @param [Hash] token_supply_details_data (mandatory) - token supply details hash
         #
-        # Sets @client_token_balance
+        # Sets @token_supply_details
         #
         def set_token_supply_details(token_supply_details_data)
           @token_supply_details = CompanyApi::Response::Entity::TokenSupplyDetails.new(token_supply_details_data)
@@ -176,7 +178,7 @@ module CompanyApi
         #
         # @param [Hash] token_supply_details_data (mandatory) - token supply details hash
         #
-        # Sets @client_token_balance
+        # Sets @sign_messages
         #
         def set_sign_messages(sign_messages_data)
           @sign_messages = CompanyApi::Response::Entity::SignMessages.new(sign_messages_data)
@@ -283,7 +285,7 @@ module CompanyApi
         #
         # @param [Hash] workflow_step_data (mandatory) - workflow_current_step data hash
         #
-        # Sets @origin_addresses
+        # Sets @workflow_current_step
         def set_workflow_current_step(workflow_step_data)
           @workflow_current_step = CompanyApi::Response::Entity::WorkflowCurrentStep.new(workflow_step_data)
         end
@@ -297,7 +299,6 @@ module CompanyApi
         # @param [Hash] pending_critical_interactions_data (mandatory)
         #
         # Sets @pending_critical_interactions
-        #
         def set_pending_critical_interactions(pending_critical_interactions_data)
           @pending_critical_interactions = CompanyApi::Response::Entity::PendingCriticalInteractions.new(pending_critical_interactions_data)
         end
@@ -323,8 +324,8 @@ module CompanyApi
         # * Reviewed By:
         #
         # @param [Hash] data (mandatory)
-        # Sets @min_balances
         #
+        # Sets @min_balances
         def set_min_balances(data)
           @min_balances = CompanyApi::Response::Entity::MinBalances.new(data)
         end

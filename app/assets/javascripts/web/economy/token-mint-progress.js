@@ -86,11 +86,11 @@
       oThis.polling.stopPolling();
       
       var amountMinted = utilities.deepGet( response , "data.workflow_payload.amountMinted" ) ,
-        toEthBT      = PriceOracle.fromSmallestUnit( amountMinted )
+        toEthBT      = Pricer.fromSmallestUnit( amountMinted )
       ;
       
       if( toEthBT ){
-        $('.total-token-minted').text( PriceOracle.toPrecisionBT( toEthBT ) );
+        $('.total-token-minted').text( Pricer.toPrecisionBT( toEthBT ) );
       }
       oThis.showSection( oThis.jMintPollingSuccess );
     },

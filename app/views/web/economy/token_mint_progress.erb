@@ -11,6 +11,11 @@
       stake_currencies: {'OST':{'id':1, 'name':'Simple Token', 'symbol':'OST', 'decimal':18, 'contract_address':'0xaec5e9658e3b0ee12510cc7f5e5d914b71326a82'},
                          'USDC':{'id':1, 'name':'Simple Token', 'symbol':'USDC', 'decimal':6, 'contract_address':'0xaec5e9658e3b0ee12510cc7f5e5d914b71326a82'}}
   }
+
+  stake_currency_symbol = 'OST'
+  if @presenter_obj.client_token.present? && @presenter_obj.client_token.stake_currency_id.present?
+    stake_currency_symbol = @presenter_obj.stake_currencies.id_obj_map[@presenter_obj.client_token.stake_currency_id].symbol
+  end
 %>
 
 <div class="container token-mint-progress-container">
@@ -91,10 +96,12 @@
 <% content_for :end_js do%>
   <script>
     $(function () {
+      var dataConfig = JSON.parse('<%= raw data_config.to_json %>');
       ost.tokenMintProgress.init({
         mintingStatusEndPoint:"<%=minting_status_api%>",
         workflowId : "<%= workflow_id%>",
-        dataConfig : "<%= data_config %>"
+        dataConfig : dataConfig,
+        scSymbol : '<%= stake_currency_symbol %>'
       });
     });
   </script>

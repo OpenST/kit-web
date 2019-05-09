@@ -38,7 +38,7 @@
   is_mainnet = GlobalConstant::Base.main_sub_environment?
   is_metamask_whitelisted_browser = browser_supported_by_metamask?
   bt_to_mint_name = "bt_to_mint"
-  ost_to_stake_name = "stake_currency_to_stake"
+  sc_to_stake_name = "stake_currency_to_stake"
   key_provider = @presenter_obj.key_provider
   fetch_balance_currencies = @presenter_obj.fetch_balance_for_currencies
 
@@ -130,10 +130,10 @@
 
                     </div>
                     <input type="hidden" name="<%= bt_to_mint_name %>" id=""
-                            data-ost-mock-parser="ost.tokenMint.toDisplayWei"
+                            data-ost-mock-parser="ost.tokenMint.toSmallestUnit"
                             data-ost-mock-element="#<%= bt_to_mint_id %>" />
-                    <input type="hidden" name="<%= ost_to_stake_name %>"
-                           data-ost-mock-parser="ost.tokenMint.btToStakeCurrencyWei"
+                    <input type="hidden" name="<%= sc_to_stake_name %>"
+                           data-ost-mock-parser="ost.tokenMint.btToStakeCurrencySmallestUnit"
                            data-ost-mock-element="#<%= bt_to_mint_id %>" />
                   </div>
                   <div class="col-8  form-group m-0">
@@ -309,7 +309,7 @@
           keyProvider : '<%= key_provider%>',
           fetchBalanceCurrencies : '<%= raw fetch_balance_currencies.to_json %>',
           btToMintName : '<%= bt_to_mint_name %>',
-          scToStakeName : '<%= ost_to_stake_name %>',
+          scToStakeName : '<%= sc_to_stake_name %>',
           scSymbol : '<%= stake_currency_symbol %>'
         });
       });

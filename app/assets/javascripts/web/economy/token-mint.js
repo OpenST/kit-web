@@ -192,13 +192,14 @@
       });
     },
 
-    btToStakeCurrencyDisplayPrecision : function( val ){
+    btToStakeCurrencySmallestUnit : function( val ){
       if(!Pricer) return val ;
       return Pricer.btToStakeCurrencyPrecision( val );
     },
 
-    toDisplayWei : function() {
-
+    toSmallestUnit : function( val ) {
+      if(!Pricer) return val ;
+      return Pricer.toSmallestUnit( val );
     },
     
     initGetScFormHelper: function () {

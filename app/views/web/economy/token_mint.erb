@@ -141,7 +141,7 @@
                       <div class="p-0 form-group m-0 position-relative">
                         <div id="ostSupplyInAccountPie" class="pie-chat" style="width:200px; height: 200px"></div>
                         <div class="total-ost">
-                          <span>Total OST tokens</span><br/>
+                          <span>Total <%= stake_currency_symbol %> tokens</span><br/>
                           <span class="total-ost-available"></span>
                         </div>
                       </div>
@@ -149,7 +149,7 @@
                         <li class="d-flex align-items-center mb-3">
                           <span class="ost-supply available"></span>
                           <p class="m-0 ml-2">
-                            <small class="d-block" data-ost_available_key>OST tokens available after minting</small>
+                            <small class="d-block" data-ost_available_key><%= stake_currency_symbol %> tokens available after minting</small>
                             <small><span class="ost-mocker-value total-ost-available"
                                          data-type="sc" data-ost-mock-element="#<%= bt_to_mint_id %>"
                                          data-ost-mock-parser="ost.tokenMint.ostAvailableOnBtChange"></span></small>
@@ -158,7 +158,7 @@
                         <li class="d-flex align-items-center mb-3">
                           <span class="ost-supply staked-minting"></span>
                           <p class="m-0 ml-2">
-                            <small class="d-block" data-ost_staked_key>OST tokens used for minting</small>
+                            <small class="d-block" data-ost_staked_key><%= stake_currency_symbol %> tokens used for minting</small>
                             <small class="d-block" data-ost_staked_val>
                                   <span class="ost-mocker-value" data-ost-mock-element="#<%= bt_to_mint_id %>"
                                         data-ost-mock-parser="ost.tokenMint.btToStakeCurrencyDisplayPrecision">
@@ -249,10 +249,10 @@
                             Your selected address does not have enough <%= ether_text %>.
                           </span>
                         <span class="low-bal sc-text" style="display: none;">
-                            Your selected address does not have enough OST tokens.
+                            Your selected address does not have enough <%= stake_currency_symbol %> tokens.
                           </span>
                         <span class="low-bal eth-sc-text" style="display: none;">
-                            Your selected address does not have enough <%= ether_text %> or OST tokens to Mint Tokens.
+                            Your selected address does not have enough <%= ether_text %> or <%= stake_currency_symbol %> tokens to Mint Tokens.
                           </span>
                       </div>
                     </div>
@@ -261,7 +261,7 @@
                 <% if is_buy_ost %>
                   <a href="https://openst.org/#token"
                      target="_blank"
-                     class="btn btn-primary buy-ost-btn" style="display: none;">Buy Ost</a>
+                     class="btn btn-primary buy-ost-btn" style="display: none;">Buy <%= stake_currency_symbol %></a>
                 <% else %>
                   <div class="card-header p-0"></div>
                   <div class="text-muted font-weight-light mt-2 mb-3">
@@ -271,7 +271,7 @@
                   </button>
                   <span class="jGetOstLoaderText ml-3 text-muted font-weight-light align-middle" style="display: none">
                     <img src="//dxwfxs8b4lg24.cloudfront.net/ost-kit/images/processed-loader-1.gif" width="25" height="25"/>
-                    <span class="align-middle" style="font-size: 14px">Please wait while we transfer <%= ost_currency_symbol %> and <%= ether_text %> required</span>
+                    <span class="align-middle" style="font-size: 14px">Please wait while we transfer <%= stake_currency_symbol %> and <%= ether_text %> required</span>
                   </span>
                 <% end %>
                 <div class="invalid-feedback general_error mt-2 text-left" style="font-size: 12px">&nbsp;</div>

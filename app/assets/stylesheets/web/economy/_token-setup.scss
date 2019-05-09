@@ -219,3 +219,24 @@
     border-left: 1px solid #5ebe55 !important;
   }
 }
+
+//.checkedlabel{
+//  .using-ost{
+//    &:after{
+//      content: 'Using OST';
+//      display: inline-block;
+//    }
+//  }
+//}
+
+input[type="radio"]:checked + div > span{
+  &:after{
+    content: 'Using';
+  }
+}
+
+input[type="radio"]:not(:checked) + div > span{
+  &:after{
+    content: 'Use';
+  }
+}

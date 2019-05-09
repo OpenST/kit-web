@@ -92,6 +92,10 @@
     updatePricer : function( val ){
       Pricer = PricerFactory.getInstance( val );
     },
+
+    getPricer : function() {
+      return Pricer;
+    },
     
     btToFiat: function (conversionFactor) {
       if (!conversionFactor || !BigNumber || !Pricer ) return conversionFactor;

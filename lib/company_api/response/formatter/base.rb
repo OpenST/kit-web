@@ -6,7 +6,7 @@ module CompanyApi
 
       class Base
 
-        attr_reader :manager, :client, :client_token, :stake_currencies, :oracle_price_points, :chain_interaction_params,
+        attr_reader :manager, :client, :client_token, :stake_currencies, :price_points, :chain_interaction_params,
                     :client_token_planner, :client_balances, :first_name, :last_name, :token_supply_details, :pending_critical_interactions,
                     :client_manager, :contract_details, :gas_price, :auxiliary_addresses, :origin_addresses,
                     :workflow, :workflow_current_step, :sign_messages, :sub_env_payloads, :min_balances
@@ -192,10 +192,10 @@ module CompanyApi
         #
         # @param [Hash] price_points_data (mandatory) - price oracle data hash
         #
-        # Sets @oracle_price_points
+        # Sets @price_points
         #
         def set_price_points(price_points_data)
-          @oracle_price_points = CompanyApi::Response::Entity::PricePoints.new(price_points_data, @client_token)
+          @price_points = CompanyApi::Response::Entity::PricePoints.new(price_points_data, @client_token)
         end
 
         # Set client manager data

@@ -198,6 +198,7 @@
     },
 
     toSmallestUnit : function( val ) {
+      if(!val) return;
       if(!Pricer) return val ;
       return Pricer.toSmallestUnit( val );
     },

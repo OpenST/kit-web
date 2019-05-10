@@ -76,7 +76,7 @@
         oThis.metamask.enable();
       });
 
-      $('input[name="staking_options"]').on("change", function(){
+      $('input[name="staking_currency_symbol"]').on("change", function(){
         var scSymbol = $(this).val() ;
         $(".ost-card").removeClass("checkedlabel");
         if($(this).is(":checked")) $(this).closest(".ost-card").addClass("checkedlabel");

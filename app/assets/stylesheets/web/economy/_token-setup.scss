@@ -229,13 +229,13 @@
 //  }
 //}
 
-input[name="staking_options"]:checked + div > span{
+input[name="staking_currency_symbol"]:checked + div > span{
   &:after{
     content: 'Using';
   }
 }
 
-input[name="staking_options"]:not(:checked) + div > span{
+input[name="staking_currency_symbol"]:not(:checked) + div > span{
   &:after{
     content: 'Use';
   }

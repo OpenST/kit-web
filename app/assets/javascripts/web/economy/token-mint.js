@@ -156,20 +156,20 @@
 
 
 
-    initPricer : function( config ) {
+    initPricer : function() {
       var config = oThis.getPricerConfig();
       PricerFactory.init( config );
-      Pricer = PricerFactory.getInstance( oThis.scSymbol );
+      Pricer = PricerFactory.getInstance( oThis.stakeCurrencySymbol );
     },
 
     getPricerConfig : function(){
       var price_points = utilities.deepGet(oThis.dataConfig, 'price_points'),
-          stake_currencies = utilities.deepGet(oThis.dataConfig, 'stake_currencies'),
-          mergedConfig = {}
+        stake_currencies = utilities.deepGet(oThis.dataConfig, 'stake_currencies'),
+        mergedConfig = {}
       ;
       $.extend(true,mergedConfig,price_points,stake_currencies);
-      mergedConfig[oThis.scSymbol].conversion_factor = utilities.deepGet(oThis.dataConfig, 'token.conversion_factor');
-      return mergedConfig[oThis.scSymbol];
+      mergedConfig[oThis.stakeCurrencySymbol].conversion_factor = utilities.deepGet(oThis.dataConfig, 'token.conversion_factor');
+      return mergedConfig;
     },
 
     initUIValues: function() {

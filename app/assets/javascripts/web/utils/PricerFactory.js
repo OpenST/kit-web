@@ -17,14 +17,13 @@
       pricerConfig = config;
     },
 
-
     getInstance : function( stakeCurrency ) {
-      stakeCurrency =  stakeCurrency && String( stakeCurrency ).toLowerCase();
+      stakeCurrency =  stakeCurrency && String( stakeCurrency ).toUpperCase();
       var pricerInstance = pricerInstanceMap && pricerInstanceMap[stakeCurrency]
       ;
 
       if(!pricerInstance) {
-        var config = pricerConfig;
+        var config = pricerConfig[stakeCurrency];
         pricerInstance =  new ost.PriceOracle(config);
         pricerInstanceMap[stakeCurrency] = pricerInstance ;
       }

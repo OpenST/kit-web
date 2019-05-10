@@ -42,14 +42,14 @@
     
     init: function (config) {
       $.extend(oThis, config);
-      oThis.initPricer( config );
+      oThis.initPricer();
       oThis.bindActions();
       oThis.jTokenForm.formHelper().success = oThis.tokenSuccess;
       oThis.initDisplayFiatValue();
       utilities.showStakeCurrencyWrappers( oThis.stakeCurrencySymbol );
     },
 
-    initPricer : function( config ) {
+    initPricer : function() {
       var config = oThis.getPricerConfig();
       PricerFactory.init( config );
       Pricer = PricerFactory.getInstance( oThis.stakeCurrencySymbol );
@@ -62,9 +62,8 @@
       ;
       $.extend(true,mergedConfig,price_points,stake_currencies);
       mergedConfig[oThis.stakeCurrencySymbol].conversion_factor = utilities.deepGet(oThis.dataConfig, 'token.conversion_factor');
-      return mergedConfig[oThis.stakeCurrencySymbol];
+      return mergedConfig;
     },
-
 
     bindActions: function () {
       
@@ -84,6 +83,7 @@
         $('.stake-currency-symbol').text($(this).val().toUpperCase());
         utilities.showStakeCurrencyWrappers( scSymbol );
         oThis.updatePricer( scSymbol );
+        oThis.initDisplayFiatValue();
       });
 
     },

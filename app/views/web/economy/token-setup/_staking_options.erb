@@ -9,7 +9,7 @@
     <div class="card-body mx-auto py-0 position-relative">
       <span class="staking-options-or">OR</span>
       <div class="card-group">
-        <div class="card ost-card  <%= stake_currency_symbol == "OST" ? "checkedlabel" : ""  %>">
+        <div class="card ost-card  <%= stake_currency_symbol == stake_currencies_constant_map['OST'] ? "checkedlabel" : ""  %>">
           <div class="card-body px-5 pb-0 text-left">
             <!--                    <div class="stake-badge red">VOLATILE</div>-->
             <h5 class="mb-3 d-inline-flex align-items-center">
@@ -26,12 +26,12 @@
           </div>
           <div class="py-4 px-5">
             <label class="form-check-label radio-button-label p-0 w-100" for="staking_options_ost">
-              <input id="staking_options_ost" checked="<%= stake_currency_symbol == "OST" ? "checked" : ""  %>" hidden type="radio" name="staking_options" value="ost"/>
+              <input id="staking_options_ost" <%= stake_currency_symbol == stake_currencies_constant_map['OST'] ? "checked" : ""  %> hidden type="radio" name="staking_options" value="ost"/>
               <div href="javascript:void(0)" class="btn btn-secondary w-100"><span class="using-ost"></span> OST</div>
             </label>
           </div>
         </div>
-        <div class="card ost-card  <%= stake_currency_symbol == "USDC" ? "checkedlabel" : ""  %>">
+        <div class="card ost-card  <%= stake_currency_symbol == stake_currencies_constant_map['USDC'] ? "checkedlabel" : ""  %>">
           <div class="card-body px-5 pb-0 text-left">
             <!--                    <div class="stake-badge green">STABLE</div>-->
             <h5 class="mb-3 d-inline-flex align-items-center">
@@ -48,7 +48,7 @@
           </div>
           <div class="py-4 px-5">
             <label class="form-check-label radio-button-label p-0 w-100" for="staking_options_usdc">
-              <input id="staking_options_usdc" hidden type="radio" name="staking_options" value="usdc"/>
+              <input id="staking_options_usdc" <%= stake_currency_symbol == stake_currencies_constant_map['USDC'] ? "checked" : ""  %> hidden type="radio" name="staking_options" value="usdc"/>
               <div href="javascript:void(0)" class="btn btn-secondary w-100"><span class="using-ost"></span> USD COIN</div>
             </label>
           </div>

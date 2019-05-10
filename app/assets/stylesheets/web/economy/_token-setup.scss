@@ -171,23 +171,6 @@
   background-size: contain !important;
 }
 
-//.stake-badge{
-//  position: absolute;
-//  right: 20px;
-//  padding: 2px 6px;
-//  font-size: 10px;
-//  letter-spacing: 0.5px;
-//  font-weight: 600;
-//  &.red{
-//    border: 2px solid #e82053;
-//    color: #e82053;
-//  }
-//  &.green{
-//    border: 2px solid #5ebe55;
-//    color: #5ebe55;
-//  }
-//}
-
 .staking-options-or{
   position: absolute;
   left: 50%;
@@ -206,7 +189,6 @@
 
 .checkedlabel{
   border: 1px solid #5ebe55;
-  //transition: border .1s ease-in-out;
   .btn{
     background-color: $blue-800;
     color: $white;
@@ -219,15 +201,6 @@
     border-left: 1px solid #5ebe55 !important;
   }
 }
-
-//.checkedlabel{
-//  .using-ost{
-//    &:after{
-//      content: 'Using OST';
-//      display: inline-block;
-//    }
-//  }
-//}
 
 input[name="stake_currency_symbol"]:checked + div > span{
   &:after{

@@ -43,6 +43,18 @@ module WebPresenter
       end
     end
 
+    def stake_currencies
+      @s_c ||= begin
+        formatter_obj.present? ? formatter_obj.stake_currencies : nil
+      end
+    end
+
+    def all_stake_currencies
+      @a_s_c ||= begin
+        formatter_obj.present? ? formatter_obj.all_stake_currencies : nil
+      end
+    end
+
     def oracle_price_points
       @o_p_p ||= begin
         formatter_obj.present? ? formatter_obj.oracle_price_points : nil
@@ -225,6 +237,14 @@ module WebPresenter
     
     def is_setup_mfa_present
       formatter_obj.manager.properties.include?('has_setup_mfa')
+    end
+
+    def is_ost_managed_owner?
+      @is_ost_managed ||= begin
+        if formatter_obj.present? && formatter_obj.client_token.present?
+          formatter_obj.client_token.properties.include?(GlobalConstant::Token.has_ost_managed_owner)
+        end
+      end
     end
 
   end

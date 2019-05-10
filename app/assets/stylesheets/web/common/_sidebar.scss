@@ -1,6 +1,6 @@
 .switch-mode {
   color: $cyan;
-  .sandbox-title{
+  .env-title{
     letter-spacing: 1px;
     font-size: 14px;
     text-transform: uppercase;
@@ -32,21 +32,34 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    &.slider-mainnet-background{
+      background-color: white;
+    }
+    &.slider-testnet-background{
+      background-color: #ccc;
+    }
     -webkit-transition: .4s;
     transition: .4s;
   }
 
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 10px;
-    width: 10px;
-    left: 4px;
-    bottom: 3px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+  .environment-slider{
+    &:before{
+      position: absolute;
+      content: "";
+      height: 10px;
+      width: 10px;
+      left: 4px;
+      bottom: 3px;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    &.testnet:before {
+      background-color: white;
+    }
+
+    &.mainnet:before {
+      background-color: #b9d190;
+    }
   }
 
   input:checked + .slider {
@@ -84,10 +97,9 @@
     color: $yellow-300;
     font-weight: 500;
   }
-
   &.unchecked{
-    background-color: transparent;
-    color: #9ec2d3;
+    background-color: #b9d190;
+    color:white;
   }
   &.grey-out{
     color: $white;
@@ -101,15 +113,20 @@
   }
 }
 
-/* Sandbox Test Data Banner starts */
-.test-net-banner{
-  background-color: $china-ivory;
+/* Environment Banner starts */
+.environment-indicator-banner{
   position: fixed;
   top: 60px;
   width: inherit;
   z-index: 1;
-  .test-data{
-    background-color: $yellow-300;
+
+  &.test-net-banner{
+    background-color: $china-ivory;
+  }
+  &.production-banner{
+    background-color:#eaeed3;
+  }
+  .environment-indicator-text{
     color: $white;
     text-transform: uppercase;
     font-size: 12px;
@@ -117,9 +134,16 @@
     display: inline-block;
     font-weight: 500;
     letter-spacing: 2px;
+
+    &.test-net-indicator-text{
+      background-color: $yellow-300;
+    }
+    &.production-indicator-text{
+      background-color: #b9d190;
+    }
   }
 }
-/* Sandbox Test Data Banner ends */
+/* Environment Banner ends */
 
 .tooltip{
   & .tooltip-inner{

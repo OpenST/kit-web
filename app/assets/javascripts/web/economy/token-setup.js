@@ -86,7 +86,6 @@
         oThis.updatePricer( scSymbol );
       });
 
-
     },
 
     updatePricer : function( val ){
@@ -108,11 +107,11 @@
         val = jInputEl.val();
       Pricer.SC_TO_BT = oThis.conversion_factor;
       var btFiatVal = Pricer.btToFiatPrecision(1),
-        ostFiatVal = Pricer.stakeCurrencyToFiat(1)
+        scFiatVal = Pricer.stakeCurrencyToFiat(1)
       ;
-      ostFiatVal = Pricer.toPrecisionFiat(ostFiatVal);
+      scFiatVal = Pricer.toPrecisionFiat(scFiatVal);
       jEL.text(btFiatVal);
-      $('.j-fiat-value').text(ostFiatVal);
+      $('.j-fiat-value').text(scFiatVal);
     },
     
     tokenSuccess: function (res) {

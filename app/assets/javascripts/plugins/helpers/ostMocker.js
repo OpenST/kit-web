@@ -8,6 +8,8 @@
     }
   }
 
+  var PriceOracle = null ;
+
   var jqDataNameSpace     = "ostMocker";
   var eventNameSpace      = "";
   var delegateAttr        = "data-ost-mock-delegate-element";
@@ -83,6 +85,11 @@
         ,"bt"   : 5
         ,"fiat" : 2
       };
+      if( !PriceOracle ){
+        var ost = ns('ost');
+        PriceOracle = ost.PriceOracle ;
+      }
+
       if ( typeof PriceOracle !== 'undefined' ) {
         numPrecisionMapping["sc"]   = PriceOracle.getStakeCurrencyPrecision();
         numPrecisionMapping["bt"]   = PriceOracle.getBtPrecision();

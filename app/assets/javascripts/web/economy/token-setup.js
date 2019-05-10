@@ -4,6 +4,7 @@
   var ost = ns("ost"),
     formHelper = window.FormHelper.prototype,
     PricerFactory = ost.PricerFactory,
+    PriceOracle = ost.PriceOracle,
     redirectMap = window.redirectMap,
     utilities = ost.utilities
   ;
@@ -52,6 +53,7 @@
     initPricer : function() {
       var config = oThis.getPricerConfig();
       PricerFactory.init( config );
+      PriceOracle.setFiatPrecision( 5 );
       Pricer = PricerFactory.getInstance( oThis.stakeCurrencySymbol );
     },
 

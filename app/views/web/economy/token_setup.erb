@@ -25,7 +25,7 @@
     # stake_currency_symbol would be set only after token has been created on BE
     # TODO: FE to use @presenter_obj.all_stake_currencies to show drop down or to pick a default and remove OST hardcoding below
 
-    stake_currency_symbol = 'PAX'
+    stake_currency_symbol = 'OST'
     # if @presenter_obj.client_token.present? && @presenter_obj.client_token.stake_currency_id.present?
     #   stake_currency_symbol = @presenter_obj.client_token.stake_currency_symbol
     # end
@@ -52,8 +52,6 @@
 <%else%>
 
   <form data-ost-formhelper id="economy-planner" action="<%=GlobalConstant::RoutesMap.getApis()[:api_token]%>" method="POST">
-    <input type="hidden" name="stake_currency_symbol" value="<%= stake_currency_symbol %>" />
-
     <div class="planner-container text-center mt-6">
 
       <h3>Let's Design The Token To Launch Your Economy</h3>

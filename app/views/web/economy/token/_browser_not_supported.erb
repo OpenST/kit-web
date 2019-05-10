@@ -1,0 +1,47 @@
+<div class="container browser-not-supported-container">
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <svg>
+        <switch>
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#switch-browser"></use>
+        </switch>
+      </svg>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <h3> Please change your browser and use Metamask to continue </h3>
+      <p class="mb-0">
+        Token Setup, Minting on OST Platform <span class="test-data px-1">Production Mode</span> requires you to use secure wallet like MetaMask.
+        We also suggest you to use a hardware wallet to connect with MetaMask and keep your OSTs
+        and Brand Tokens secure
+      </p>
+    </div>
+  </div>
+  <div class="text-center row">
+    <div class="col-8 mx-auto">
+      <%=
+
+        faqs_data = [
+            {
+                title: 'Why do I need to use Chrome and install MetaMask?',
+                url: 'https://help.ost.com/support/solutions/articles/35000059263-why-do-i-need-to-install-metamask-'
+            },
+            {
+                title: 'How do I unlock MetaMask?',
+                url: 'https://help.ost.com/support/solutions/articles/35000059264-how-do-i-unlock-metamask-'
+            },
+            {
+                title: 'Why can I use only one MetaMask account with OST Platform?',
+                url: 'https://help.ost.com/support/solutions/articles/35000059265-why-can-i-use-only-one-metamask-account-with-ost-kit%E2%8D%BA-'
+            }
+        ]
+        render :partial => "shared/web/common/faqs",
+               locals: {
+                   header: "FAQs",
+                   faqs: faqs_data
+               }
+      %>
+    </div>
+  </div>
+</div>

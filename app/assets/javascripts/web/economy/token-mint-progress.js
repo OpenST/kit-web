@@ -67,7 +67,7 @@
       oThis.polling.stopPolling();
       
       var amountMinted = utilities.deepGet( response , "data.workflow_payload.amountMinted" ) ,
-          toEthBT      = window.web3.fromWei( amountMinted , "ether")
+        toEthBT        = PriceOracle.fromWei( amountMinted )
       ;
       
       if( toEthBT ){

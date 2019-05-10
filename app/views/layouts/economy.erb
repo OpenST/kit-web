@@ -92,7 +92,7 @@
   <section id="content" class="container-fluid" style="<%= content_style %>">
       <style>#content #cover-container .cover-element{<%= cover_elem_style %>}</style>
       <%if params[:action] != 'team' && params[:action] != 'company_information' %>
-        <%= render :partial => "/shared/web/common/test_data_banner" %>
+        <%= render :partial => "/shared/web/common/environment_banner" %>
       <% end %>
       <%= yield %>
       <div class="row">

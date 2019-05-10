@@ -47,8 +47,8 @@
 
             <span class="ml-3 align-middle text-muted font-weight-light">
               Approve staking
-              <span data-type="ost"  data-ost-mock-parser="ost.tokenMint.ostToStakeOnBtChange"
-                                            data-ost-mock-element="<%=bt_to_mint_selector%>"></span>
+              <span data-type="ost"  data-ost-mock-parser="PriceOracle.btToOstPrecession"
+                                     data-ost-mock-element="<%=bt_to_mint_selector%>"></span>
               <%= ost_currency_symbol %> to Mint
               <span data-type="bt" data-ost-mock-element="<%=bt_to_mint_selector%>"></span> <%= bt_symbol %> Tokens
             </span>

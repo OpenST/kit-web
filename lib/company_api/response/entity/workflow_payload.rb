@@ -24,8 +24,8 @@ module CompanyApi
           @data
         end
 
-        def fe_ost_to_stake
-          data["fe_ost_to_stake"]
+        def fe_stake_currency_to_stake
+          data["fe_stake_currency_to_stake"]
         end
 
         def fe_bt_to_mint

@@ -36,7 +36,7 @@
     initPricer : function() {
       var config = oThis.getPricerConfig();
       PricerFactory.init( config );
-      Pricer = PricerFactory.getInstance( oThis.stakeCurrencySymbol );
+      Pricer = PricerFactory.getInstance( oThis.scSymbol );
     },
 
     getPricerConfig : function(){
@@ -45,7 +45,7 @@
         mergedConfig = {}
       ;
       $.extend(true,mergedConfig,price_points,stake_currencies);
-      mergedConfig[oThis.stakeCurrencySymbol].conversion_factor = utilities.deepGet(oThis.dataConfig, 'token.conversion_factor');
+      mergedConfig[oThis.scSymbol].conversion_factor = utilities.deepGet(oThis.dataConfig, 'token.conversion_factor');
       return mergedConfig;
     },
 

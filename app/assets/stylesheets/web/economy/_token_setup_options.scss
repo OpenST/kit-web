@@ -13,6 +13,13 @@
   }
   .section-seperator{
     border-top: solid 2px rgba(159, 192, 207, 0.2);;
+    .disabled-install-metamask{
+      background-color: $zumthor;
+      color: $white;
+      cursor: default;
+      pointer-events: none;
+      border-color: $zumthor;
+    }
   }
   .OR-section-seperator{
     border: solid 2.1px $blue-1000;

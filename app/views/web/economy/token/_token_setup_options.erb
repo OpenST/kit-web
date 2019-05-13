@@ -1,3 +1,5 @@
+<% is_metamask_whitelisted_browser = browser_supported_by_metamask? %>
+
 <div class="token-setup-options-conatiner mt-5">
   <div class="shadow-box d-flex flex-row align-items-center mx-5">
     <div class="m-2">
@@ -10,17 +12,18 @@
     <div class="mx-2 mr-4">
       <h4>We will start deploying your token soon</h4>
       <p class="font-weight-light">
-        Token Symbol : APP <span class="standing-line"> | </span> Conversion Rate :
+        Token Identifier :
+        <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
+        <span class="standing-line"> | </span> Conversion Rate :
         <span class="conversion-rate font-weight-bold">1</span>
         <span class="conversion-rate-unit font-weight-bold">OST</span>
         =
-        <span class="conversion-rate font-weight-bold">1</span>
+        <span class="ost-mocker-value conversion-rate font-weight-bold" data-ost-mock-element="#ost_to_bt_id">1</span>
         <span class="ost-mocker-value conversion-rate-unit font-weight-bold" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
         =
         <span class="conversion-rate j-fiat-value font-weight-bold">$</span>
         <span class="conversion-rate-unit font-weight-bold">USD</span>
-
-        To complete the setup please select from the below options.
+        <br/>To complete the setup please select from the below options.
       </p>
     </div>
   </div>
@@ -38,7 +41,7 @@
         <p class="text-center mt-2 font-weight-bold small token-setup-option-ost">OST</p>
       </div>
       <div class="mx-4">
-        <p class="font-weight-light">The quickest way to test OST platform functionality in sandbox is to continue without setting up a wallet to hold OST-Test tokens.</p>
+        <p class="font-weight-light">To expedite testing, continue without setting up a company wallet. Since these are just test tokens, we will hold them for you.</p>
       </div>
       <div class="mx-4">
         <button id="jTokenSetupOstBtn" class="btn btn-primary">Get Started</button>
@@ -54,12 +57,24 @@
         <p class="text-center mt-2 font-weight-bold small token-setup-option-metamask">METAMASK</p>
       </div>
       <div class="mx-4">
-        <p class="font-weight-light">Metamask provides a secure wallet to hold your OST-Test tokens. Your current browser does not support metamask. Please swtich to <a class="browser-link" href="#">Google chrome</a> or <a class="browser-link" href="#">Firefox</a> to continue</p>
+        <p class="font-weight-light">
+          <% if is_metamask_whitelisted_browser %>
+            You can choose to install Metamask and hold your OST-Test tokens in the Metamask wallet. Note: This is a required step in Production.
+          <% else %>
+            Optionally, you can choose to install Metamask and hold your OST-Test tokens in the Metamask wallet. Your current browser does not support metamask. Please switch to <a class="browser-link" href="#">Google chrome</a> or <a class="browser-link" href="#">Firefox</a> to continue</p>
+          <% end %>
       </div>
-      <div class="mx-4">
-        <button id="jTokenSetupMetamaskBtn" class="btn btn-primary">Use Metamask</button>
-        <small class="metamask-info-text font-weight-light text-muted mx-auto" style="display: none">Available on chrome and Firefox</small>
-      </div>
+
+
+        <div class="mx-4">
+          <button id="jTokenSetupMetamaskBtn"
+                  class="btn btn-primary <%= is_metamask_whitelisted_browser ? "" : "disabled-install-metamask" %>" >
+            Use Metamask
+          </button>
+          <% if !is_metamask_whitelisted_browser %>
+            <small class="metamask-info-text font-weight-light text-muted mx-auto" >Available on chrome and Firefox</small>
+          <%end%>
+        </div>
     </div>
   </div>
 

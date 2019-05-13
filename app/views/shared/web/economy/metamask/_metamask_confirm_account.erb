@@ -1,9 +1,16 @@
+<%
+  is_mainnet = GlobalConstant::Base.main_sub_environment?
+%>
 <div class="metamask-confirm-account-container row">
   <div class="text-center col-12 col-md-8 mx-auto">
     <div id="default-state-wrapper" class="confirm-account-section" >
-      <h3 class="text-center mt-6">Set your Account Owner address</h3>
+      <h3 class="text-center mt-6">Set Your Account Owner Address</h3>
       <p class="font-weight-light mb-5 text-muted">
-        The address displayed below will be set as the Account Owner address. This is the master admin address for this Sandbox OST account. Please make sure to safeguard this address.
+        <% if is_mainnet%>
+          The address displayed below will be set as the Account Owner address. This is the master admin address for this Production OST account. Please make sure to safeguard this address.
+        <% else %>
+          The address displayed below will be set as the Account Owner address. This is the master admin address for this Sandbox OST account. Please make sure to safeguard this address.
+        <%end%>
       </p>
       <p class="font-weight-light mb-5 text-muted container-box p-3 confirm-address">
         0x

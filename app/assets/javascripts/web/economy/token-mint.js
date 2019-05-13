@@ -164,7 +164,7 @@
 
     getPricerConfig : function(){
       var price_points = utilities.deepGet(oThis.dataConfig, 'price_points'),
-        stake_currencies = utilities.deepGet(oThis.dataConfig, 'stake_currencies.data'),//TODO: move .data in erb
+        stake_currencies = utilities.deepGet(oThis.dataConfig, 'stake_currencies'),
         mergedConfig = {}
       ;
       $.extend(true,mergedConfig,price_points,stake_currencies);

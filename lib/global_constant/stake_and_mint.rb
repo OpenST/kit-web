@@ -5,8 +5,12 @@ module GlobalConstant
 
     class << self
 
-      def initial_sc_funding
-        '10000'  #keep this in sync with SASS and KIT_API
+      def initial_ost_funding
+        '10000'  # Keep this in sync with SAAS and KIT_API
+      end
+
+      def initial_usdc_funding
+        '10000'  # Keep this in sync with SAAS and KIT_API
       end
 
       def min_bt_to_mint

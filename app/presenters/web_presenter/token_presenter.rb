@@ -193,6 +193,17 @@ module WebPresenter
       end
     end
 
-  end
+    def initial_funding_sc
+      @i_f_sc ||= begin
+        if formatter_obj.present? && formatter_obj.client_token.present?
+          if formatter_obj.client_token.stake_currency_symbol == GlobalConstant::StakeCurrencies.ost_stake_currency_symbol
+            GlobalConstant::StakeAndMint.initial_ost_funding
+          elsif formatter_obj.client_token.stake_currency_symbol == GlobalConstant::StakeCurrencies.usdc_stake_currency_symbol
+            GlobalConstant::StakeAndMint.initial_usdc_funding
+          end
+        end
+      end
+    end
 
+  end
 end

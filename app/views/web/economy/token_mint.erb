@@ -23,7 +23,7 @@
 
   is_buy_sc = GlobalConstant::Base.main_sub_environment?
   is_workflow = @presenter_obj.workflow.is_present?
-  initial_sc_funding = GlobalConstant::StakeAndMint.initial_sc_funding
+  initial_sc_funding = @presenter_obj.initial_funding_sc
   bt_to_mint_min = GlobalConstant::StakeAndMint.min_bt_to_mint
   bt_to_mint_step = GlobalConstant::StakeAndMint.step_bt_to_mint
   is_super_admin = @presenter_obj.is_super_admin?

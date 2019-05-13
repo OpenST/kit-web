@@ -1,7 +1,7 @@
 <%
   chain_id = GlobalConstant::Chain.origin_chain_id
   mint_api =GlobalConstant::RoutesMap.getApis()[:api_mint]
-  get_ost_api =GlobalConstant::RoutesMap.getApis()[:api_grant]
+  get_sc_api =GlobalConstant::RoutesMap.getApis()[:api_grant]
   workflow_status_api =GlobalConstant::RoutesMap.getApis()[:api_workflow]
   pre_mint_api =GlobalConstant::RoutesMap.getApis()[:api_pre_mint]
   get_balance_api = GlobalConstant::RoutesMap.getApis()[:api_get_balance]
@@ -21,9 +21,9 @@
       stake_currencies: @presenter_obj.stake_currencies.data
   }
 
-  is_buy_ost = GlobalConstant::Base.main_sub_environment?
+  is_buy_sc = GlobalConstant::Base.main_sub_environment?
   is_workflow = @presenter_obj.workflow.is_present?
-  initial_ost_funding = GlobalConstant::StakeAndMint.initial_ost_funding
+  initial_sc_funding = GlobalConstant::StakeAndMint.initial_sc_funding
   bt_to_mint_min = GlobalConstant::StakeAndMint.min_bt_to_mint
   bt_to_mint_step = GlobalConstant::StakeAndMint.step_bt_to_mint
   is_super_admin = @presenter_obj.is_super_admin?
@@ -136,24 +136,24 @@
                   <div class="col-8  form-group m-0">
                     <div class="d-flex align-items-center">
                       <div class="p-0 form-group m-0 position-relative">
-                        <div id="ostSupplyInAccountPie" class="pie-chat" style="width:200px; height: 200px"></div>
-                        <div class="total-ost">
+                        <div id="scSupplyInAccountPie" class="pie-chat" style="width:200px; height: 200px"></div>
+                        <div class="total-sc">
                           <span>Total <%= stake_currency_symbol %> tokens</span><br/>
-                          <span class="total-ost-available"></span>
+                          <span class="total-sc-available"></span>
                         </div>
                       </div>
                       <ul class="p-0 m-0">
                         <li class="d-flex align-items-center mb-3">
-                          <span class="ost-supply available"></span>
+                          <span class="sc-supply available"></span>
                           <p class="m-0 ml-2">
                             <small class="d-block" data-ost_available_key><%= stake_currency_symbol %> tokens available after minting</small>
-                            <small><span class="ost-mocker-value total-ost-available"
+                            <small><span class="ost-mocker-value total-sc-available"
                                          data-type="sc" data-ost-mock-element="#<%= bt_to_mint_id %>"
-                                         data-ost-mock-parser="ost.tokenMint.ostAvailableOnBtChange"></span></small>
+                                         data-ost-mock-parser="ost.tokenMint.scAvailableOnBtChange"></span></small>
                           </p>
                         </li>
                         <li class="d-flex align-items-center mb-3">
-                          <span class="ost-supply staked-minting"></span>
+                          <span class="sc-supply staked-minting"></span>
                           <p class="m-0 ml-2">
                             <small class="d-block" data-ost_staked_key><%= stake_currency_symbol %> tokens used for minting</small>
                             <small class="d-block" data-ost_staked_val>
@@ -166,7 +166,7 @@
                                    data-ost-mock-element="#<%= bt_to_mint_id %>"  />
                           </p>
                         </li>
-                      </ul>
+
                     </div>
                   </div>
                 </div>
@@ -219,7 +219,7 @@
 
   <div class="jMintSections" id="jInsufficientBalSection" style="display: <%= is_workflow ? "block" : "none" %>">
     <div class="container">
-      <form id="get-sc-form" action="<%= get_ost_api %>" method="GET">
+      <form id="get-sc-form" action="<%= get_sc_api %>" method="GET">
         <div class="row">
           <div class="col-10 mx-auto">
             <div class="card card-planner my-5">
@@ -238,7 +238,7 @@
                     <div class="status-message">
                       <svg class="svg float-left mr-2" style="width: 25px;height: 25px">
                         <switch>
-                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<%= is_buy_ost ? '#icon-error' : '#icon-fund-wallet' %>"></use>
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<%= is_buy_sc ? '#icon-error' : '#icon-fund-wallet' %>"></use>
                         </switch>
                       </svg>
                       <div style="overflow: auto;" class="text-muted font-weight-light">
@@ -255,18 +255,18 @@
                     </div>
                   </div>
                 </div>
-                <% if is_buy_ost %>
+                <% if is_buy_sc %>
                   <a href="https://openst.org/#token"
                      target="_blank"
-                     class="btn btn-primary buy-ost-btn" style="display: none;">Buy <%= stake_currency_symbol %></a>
+                     class="btn btn-primary buy-sc-btn" style="display: none;">Buy <%= stake_currency_symbol %></a>
                 <% else %>
                   <div class="card-header p-0"></div>
                   <div class="text-muted font-weight-light mt-2 mb-3">
-                    Will fund <%=initial_ost_funding%>&nbsp;<%= display_stake_currency_symbol %> and minimum required <%= ether_text %> in to your selected MetaMask wallet to get you started.</div>
+                    Will fund <%=initial_sc_funding%>&nbsp;<%= display_stake_currency_symbol %> and minimum required <%= ether_text %> in to your selected MetaMask wallet to get you started.</div>
                   <button id="get-sc-btn" type="submit" data-submiting="Getting <%= display_stake_currency_symbol %>..."
                           class="btn btn-primary d-inline-block">Get&nbsp;<%= display_stake_currency_symbol %>
                   </button>
-                  <span class="jGetOstLoaderText ml-3 text-muted font-weight-light align-middle" style="display: none">
+                  <span class="jGetScLoaderText ml-3 text-muted font-weight-light align-middle" style="display: none">
                     <img src="//dxwfxs8b4lg24.cloudfront.net/ost-kit/images/processed-loader-1.gif" width="25" height="25"/>
                     <span class="align-middle" style="font-size: 14px">Please wait while we transfer <%= stake_currency_symbol %> and <%= ether_text %> required</span>
                   </span>

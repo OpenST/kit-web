@@ -239,7 +239,7 @@
       $('#'+oThis.btToMintId).on( 'keyup change' ,function () {
         var bt = $(this).val(),
             scToStake = Pricer.btToStakeCurrency( bt ) ;
-        if( !Pricer.isNaN( oThis.totalOST ) ) {
+        if( !Pricer.isNaN( oThis.totalSc ) ) {
           oThis.updateSupplyPieChart( scToStake ) ;
         }
       } );
@@ -301,7 +301,7 @@
       } else if( lowEth ) {
         oThis.jEtherText.show();
       } else if( lowSc ) {
-        $('.buy-ost-btn').show();
+        $('.buy-sc-btn').show();
         oThis.jScText.show();
       } else{
         sc = Pricer.fromSmallestUnit( sc );
@@ -318,32 +318,32 @@
      *       NOTE IMPORTANT : STAKE CURRENCY PASSED AFTER VALIDATION ON BALANCE IS NOT IN WEI , ITS ABSOLUTE VALUE      *
      *********************************************************************************************************/
   
-    onValidationComplete : function ( ost ) {
+    onValidationComplete : function ( sc ) {
       var btToMint = oThis.getBTtoMint() ,
           scToStake = Pricer.btToStakeCurrency( btToMint );
       ;
-      if( !Pricer.isNaN( ost )){
-        oThis.totalOST = Number( ost );
+      if( !Pricer.isNaN( sc )){
+        oThis.totalSc = Number( sc );
       }
       oThis.mintDonuteChart = new GoogleCharts();
       oThis.initSupplyPieChart( scToStake );
-      $('.total-ost-available').text( Pricer.toPrecisionStakeCurrency( ost ) );  //No mocker so set via precession
-      var ostBalance = oThis.ostAvailableOnBtChange( btToMint ) ;
-      $('.ost-mocker-value.total-ost-available').text( Pricer.toPrecisionStakeCurrency( ostBalance ) ) ;
-      oThis.updateSlider( ost );
+      $('.total-sc-available').text( Pricer.toPrecisionStakeCurrency( sc ) );  //No mocker so set via precession
+      var scBalance = oThis.scAvailableOnBtChange( btToMint ) ;
+      $('.ost-mocker-value.total-sc-available').text( Pricer.toPrecisionStakeCurrency( scBalance ) ) ;
+      oThis.updateSlider( sc );
       oThis.showSection(  oThis.jStakeMintProcess ) ;
     },
   
     requestingScUIState : function () {
       $('.jStatusWrapper').hide();
-      $('.jGetOstLoaderText').show();
+      $('.jGetScLoaderText').show();
       //This will be handled by FormHelper , but its a common function for long polling so dont delete
       utilities.btnSubmittingState( oThis.jGetScBtn );
     } ,
   
     resetGetScUIState: function () {
       $('.jStatusWrapper').show();
-      $('.jGetOstLoaderText').hide();
+      $('.jGetScLoaderText').hide();
       //This will be handled by FormHelper , but its a common function for long polling so dont delete
       utilities.btnSubmitCompleteState( oThis.jGetScBtn );
     },
@@ -390,32 +390,32 @@
       oThis.resetGetScUIState();
     },
     
-    updateSlider : function ( ost ) {
-      var maxBT = oThis.getMaxBTToMint( ost ),
+    updateSlider : function ( sc ) {
+      var maxBT = oThis.getMaxBTToMint( sc ),
           jSlider = oThis.jBtToMint.closest( '.form-group' ).find('#'+oThis.btToMintId+"_slider")
       ;
       oThis.jBtToMint.attr("max" , maxBT );
       jSlider.slider({"max" : maxBT }) ;
     },
   
-    ostAvailableOnBtChange : function ( val ) {
+    scAvailableOnBtChange : function ( val ) {
       if(!Pricer) return;
-      if( Pricer.isNaN( oThis.totalOST )) {
+      if( Pricer.isNaN( oThis.totalSc )) {
         return val ;
       }
       var scToStake = Pricer.btToStakeCurrency( val ) ;
       if( Pricer.isNaN( scToStake )) {
-        return oThis.totalOST  ;
+        return oThis.totalSc  ;
       }
       scToStake = Number( scToStake ) ;
 
-      var ostAvailable = oThis.totalOST - scToStake;
+      var scAvailable = oThis.totalSc - scToStake;
 
-      if( ostAvailable < 0 ){
+      if( scAvailable < 0 ){
         return 0 ;
       }
       
-      return ostAvailable  ;
+      return scAvailable  ;
     },
 
     btToStakeCurrencyWei : function ( val ) {
@@ -552,16 +552,16 @@
         scToStake = 0 ;
       }
       
-      var ostAvailable  = oThis.totalOST -  scToStake  ;
+      var scAvailable  = oThis.totalSc -  scToStake  ;
 
-      if( ostAvailable < 0){
-        ostAvailable = 0;
+      if( scAvailable < 0){
+        scAvailable = 0;
       }
 
       var data = [
         ['Type', 'Tokens'],
-        ['OSTStaked', scToStake],
-        ['OSTAvailable', ostAvailable]
+        ['ScStaked', scToStake],
+        ['scAvailable', scAvailable]
       ];
      oThis.mintDonuteChart.draw({
         data : data
@@ -570,19 +570,19 @@
     
     initSupplyPieChart: function( scToStake  ){
       
-      scToStake    = ost && Number( scToStake ) || 0 ;
+      scToStake    = scToStake && Number( scToStake ) || 0 ;
       
-      var ostAvailable  = oThis.totalOST -  scToStake  ;
+      var scAvailable  = oThis.totalSc -  scToStake  ;
       oThis.mintDonuteChart.draw({
         data: [
           ['Type', 'Tokens'],
-          ['OSTStaked', scToStake],
-          ['OSTAvailable', ostAvailable]
+          ['ScStaked', scToStake],
+          ['scAvailable', scAvailable]
         ],
-        selector: '#ostSupplyInAccountPie',
+        selector: '#scSupplyInAccountPie',
         type: 'PieChart',
         options: {
-          title: 'OST SUPPLY IN ACCOUNT',
+          title: 'STAKE CURRENCY SUPPLY IN ACCOUNT',
           pieHole: 0.7,
           pieSliceText: 'none',
           pieSliceBorderColor: 'none',

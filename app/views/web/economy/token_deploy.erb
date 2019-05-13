@@ -12,13 +12,6 @@
   end
 
   current_step_failed_status = GlobalConstant::Workflow.failed
-  client_token_symbol = @presenter_obj.client_token_symbol
-  stake_currencies = @presenter_obj.stake_currencies
-
-  stake_currency_symbol = 'OST'
-  if @presenter_obj.client_token.present? && @presenter_obj.client_token.stake_currency_id.present?
-      stake_currency_symbol = @presenter_obj.client_token.stake_currency_symbol
-  end
 %>
 
 <div class="token-deploy-container text-center" style="display: <%= !is_poll_failed ? "block" : "none" %>">

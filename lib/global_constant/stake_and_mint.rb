@@ -5,7 +5,7 @@ module GlobalConstant
 
     class << self
 
-      def initial_ost_funding
+      def initial_sc_funding
         '10000'  #keep this in sync with SASS and KIT_API
       end
 

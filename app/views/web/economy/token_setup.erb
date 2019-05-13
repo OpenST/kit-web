@@ -26,9 +26,9 @@
     # TODO: FE to use @presenter_obj.all_stake_currencies to show drop down or to pick a default and remove OST hardcoding below
 
     stake_currency_symbol = 'OST'
-    # if @presenter_obj.client_token.present? && @presenter_obj.client_token.stake_currency_id.present?
-    #   stake_currency_symbol = @presenter_obj.client_token.stake_currency_symbol
-    # end
+    if @presenter_obj.client_token.present? && @presenter_obj.client_token.stake_currency_id.present?
+      stake_currency_symbol = @presenter_obj.client_token.stake_currency_symbol
+    end
 
     #TODO: Base currency should be changed dynamically by FE.
     sc_to_fiat =  @presenter_obj.price_points.stake_currency_to_fiat_conversion_factor('PAX', "USD")

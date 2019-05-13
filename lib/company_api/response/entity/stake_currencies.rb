@@ -30,6 +30,10 @@ module CompanyApi
           end
         end
 
+        def data
+          @data
+        end
+
         private
 
         def id_data_map

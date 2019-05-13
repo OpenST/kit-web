@@ -18,7 +18,7 @@
       workflow: @presenter_obj.workflow.data,
       staker_address:@presenter_obj.origin_addresses.data['owner'],
       min_balances: @presenter_obj.min_balances.data,
-      stake_currencies: @presenter_obj.stake_currencies
+      stake_currencies: @presenter_obj.stake_currencies.data
   }
 
   is_buy_ost = GlobalConstant::Base.main_sub_environment?

@@ -66,9 +66,7 @@ module CompanyApi
         # Sets @client_token
         #
         def set_token(client_token_data)
-          puts"client_token_data======= from base #{client_token_data}"
           @client_token = CompanyApi::Response::Entity::Token.new(client_token_data)
-          puts"@client_token ======= from base #{@client_token.inspect}"
         end
 
         # Set stake currencies

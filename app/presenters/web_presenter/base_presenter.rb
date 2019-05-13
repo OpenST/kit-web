@@ -247,6 +247,22 @@ module WebPresenter
       end
     end
 
+    # NOTE:: Here,"Test" is appended specifically for display purpose for FE.
+    #
+    # This function to be used only for display purpose.
+    #
+    def display_stake_currency_symbol
+      @d_s_c_s ||= begin
+        if formatter_obj.present? && formatter_obj.client_token.present?
+          if GlobalConstant::Base.main_sub_environment?
+            "#{formatter_obj.client_token.stake_currency_symbol}"
+          else
+            "#{formatter_obj.client_token.stake_currency_symbol}-TEST"
+          end
+        end
+      end
+    end
+
   end
 
 end

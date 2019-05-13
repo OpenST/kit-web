@@ -12,9 +12,6 @@
     "ost": "stakeAndMintOst"
   };
 
-  var ostToStakeWei = null ,
-      btToMintWei = null ;
-
   var Pricer = null;
   
   
@@ -42,7 +39,7 @@
     jClientRetryBtn                 :   $('.jClientRetryBtn'),
     jEtherText                      :   $('.ether-text'),
     jScText                         :   $('.sc-text'),
-    jEthOstText                     :   $('.eth-sc-text'),
+    jEthSCText                      :   $('.eth-sc-text'),
     jLowBal                         :   $('.low-bal'),
     jTokenSetupAdminErrorModal      :   $('#token_setup_admin_error'),
     //Static jQuery elements End
@@ -206,7 +203,7 @@
     initGetScFormHelper: function () {
       oThis.getScFormHelper = oThis.jGetScForm.formHelper({
         beforeSend : function () {
-         oThis.requestingOstUIState();
+         oThis.requestingScUIState();
         },
         success: function ( res ) {
           if( res.success ){
@@ -215,11 +212,11 @@
               oThis.onWorkFlow( workflowId );
             }, 0 );
           }else {
-            oThis.resetGetOstUIState( res );
+            oThis.resetGetScUIState( res );
           }
         },
         error: function ( jqXhr , error ) {
-         oThis.resetGetOstUIState( error );
+         oThis.resetGetScUIState( error );
         }
       });
     },
@@ -259,7 +256,7 @@
     },
 
     checkForBal: function () {
-      oThis.resetGetOstUIState();
+      oThis.resetGetScUIState();
       $.ajax({
         url: oThis.getBalanceApi,
         method: 'GET',
@@ -284,31 +281,31 @@
     },
   
     checkForBalSuccess : function( res ) {
-      var eth = utilities.deepGet( res , "data.balance.ETH"),//To ask
-        ost = utilities.deepGet( res , "data.balance.OST"),
+      var eth = utilities.deepGet( res , "data.balance.ETH"),
+        sc = utilities.deepGet( res , "data.balance."+oThis.scSymbol),
         ethBN = eth && BigNumber( eth ),
-        ostBN =  ost && BigNumber( ost ),
+        scBN =  sc && BigNumber( sc ),
         minETHRequire = oThis.getMinETHRequired(),
-        minOstRequire = oThis.getMinOstRequired(),
+        minScRequire = oThis.getMinScRequired(),
         lowEth = !ethBN ||  ethBN.isLessThan( minETHRequire ),
-        lowOst = !ostBN || ostBN.isLessThan( minOstRequire )
+        lowSc = !scBN || scBN.isLessThan( minScRequire )
       ;
 
-      if( lowEth || lowOst ){
+      if( lowEth || lowSc ){
         oThis.jLowBal.hide();
         oThis.showSection(  oThis.jInsufficientBalSection ) ;
       }
 
-      if( lowEth && lowOst ) {
-        oThis.jEthOstText.show();
+      if( lowEth && lowSc ) {
+        oThis.jEthSCText.show();
       } else if( lowEth ) {
         oThis.jEtherText.show();
-      } else if( lowOst ) {
+      } else if( lowSc ) {
         $('.buy-ost-btn').show();
         oThis.jScText.show();
       } else{
-        ost = Pricer.fromSmallestUnit( ost );
-        oThis.onValidationComplete( ost );
+        sc = Pricer.fromSmallestUnit( sc );
+        oThis.onValidationComplete( sc );
       }
     },
   
@@ -318,7 +315,7 @@
    
 
     /*********************************************************************************************************
-     *       NOTE IMPORTANT : OST PASSED AFTER VALIDATION ON BALANCE IS NOT IN WEI , ITS ABSOLUTE VALUE      *
+     *       NOTE IMPORTANT : STAKE CURRENCY PASSED AFTER VALIDATION ON BALANCE IS NOT IN WEI , ITS ABSOLUTE VALUE      *
      *********************************************************************************************************/
   
     onValidationComplete : function ( ost ) {
@@ -337,14 +334,14 @@
       oThis.showSection(  oThis.jStakeMintProcess ) ;
     },
   
-    requestingOstUIState : function () {
+    requestingScUIState : function () {
       $('.jStatusWrapper').hide();
       $('.jGetOstLoaderText').show();
       //This will be handled by FormHelper , but its a common function for long polling so dont delete
       utilities.btnSubmittingState( oThis.jGetScBtn );
     } ,
   
-    resetGetOstUIState: function () {
+    resetGetScUIState: function () {
       $('.jStatusWrapper').show();
       $('.jGetOstLoaderText').hide();
       //This will be handled by FormHelper , but its a common function for long polling so dont delete
@@ -354,7 +351,7 @@
   
     startGetScPolling: function ( workflowId ) {
       if( !workflowId ) return ;
-      oThis.requestingOstUIState();
+      oThis.requestingScUIState();
       var workflowApi = oThis.getWorkFlowStatusApi( workflowId )
       ;
       oThis.getScPolling = new Polling({
@@ -390,7 +387,7 @@
     showGetScPollingError : function ( res ) {
       oThis.getScPolling.stopPolling();
       utilities.showGeneralError( oThis.jGetScForm ,  res ,  oThis.getScError  );
-      oThis.resetGetOstUIState();
+      oThis.resetGetScUIState();
     },
     
     updateSlider : function ( ost ) {
@@ -430,7 +427,7 @@
       return utilities.deepGet( oThis.dataConfig , "min_balances.ETH" );
     },
     
-    getMinOstRequired : function () {
+    getMinScRequired : function () {
       return utilities.deepGet( oThis.dataConfig , "min_balances.OST" );
     },
 

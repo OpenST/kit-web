@@ -1,5 +1,6 @@
 <%
-  bt_symbol = @presenter_obj.client_token_symbol;
+  bt_symbol = @presenter_obj.client_token_symbol
+  display_stake_currency_symbol = @presenter_obj.display_stake_currency_symbol
 %>
 
 <div class="container jMintSections" id="jTokenStakeAndMintSignSection" style="display: none">
@@ -49,7 +50,7 @@
               Approve staking
               <span data-type="sc"  data-ost-mock-parser="ost.tokenMint.ostToStakeOnBtChange"
                                             data-ost-mock-element="<%=bt_to_mint_selector%>"></span>
-              <%= ost_currency_symbol %> to Mint
+              <%= display_stake_currency_symbol %> to Mint
               <span data-type="bt" data-ost-mock-element="<%=bt_to_mint_selector%>"></span> <%= bt_symbol %> Tokens
             </span>
           </div>

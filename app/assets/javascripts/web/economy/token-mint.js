@@ -428,7 +428,7 @@
     },
     
     getMinScRequired : function () {
-      return utilities.deepGet( oThis.dataConfig , "min_balances.OST" );
+      return utilities.deepGet( oThis.dataConfig , "min_balances."+oThis.scSymbol );
     },
 
     getStakeCurrencyToBTConversion : function () {

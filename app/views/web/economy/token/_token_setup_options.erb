@@ -12,7 +12,7 @@
     <div class="mx-2 mr-4">
       <h4>We will start deploying your token soon</h4>
       <p class="font-weight-light">
-        Token Symbol :
+        Token Identifier :
         <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
         <span class="standing-line"> | </span> Conversion Rate :
         <span class="conversion-rate font-weight-bold">1</span>
@@ -23,8 +23,7 @@
         =
         <span class="conversion-rate j-fiat-value font-weight-bold">$</span>
         <span class="conversion-rate-unit font-weight-bold">USD</span>
-
-        To complete the setup please select from the below options.
+        <br/>To complete the setup please select from the below options.
       </p>
     </div>
   </div>
@@ -42,7 +41,7 @@
         <p class="text-center mt-2 font-weight-bold small token-setup-option-ost">OST</p>
       </div>
       <div class="mx-4">
-        <p class="font-weight-light">To expedite testing, continue without setting up a wallet. Since these are just test tokens, we will hold them for you.</p>
+        <p class="font-weight-light">To expedite testing, continue without setting up a company wallet. Since these are just test tokens, we will hold them for you.</p>
       </div>
       <div class="mx-4">
         <button id="jTokenSetupOstBtn" class="btn btn-primary">Get Started</button>
@@ -60,7 +59,7 @@
       <div class="mx-4">
         <p class="font-weight-light">
           <% if is_metamask_whitelisted_browser %>
-            Optionally, you can choose to install Metamask and hold your OST-Test tokens in the Metamask wallet. Note: This is a required step in Production.
+            You can choose to install Metamask and hold your OST-Test tokens in the Metamask wallet. Note: This is a required step in Production.
           <% else %>
             Optionally, you can choose to install Metamask and hold your OST-Test tokens in the Metamask wallet. Your current browser does not support metamask. Please switch to <a class="browser-link" href="#">Google chrome</a> or <a class="browser-link" href="#">Firefox</a> to continue</p>
           <% end %>

@@ -11,7 +11,7 @@
         <span class="header-recommendation font-weight-bold">
           We recommend keeping it simple and setting the conversion rate to 1
           <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
-          = 1 <span class="stake-currency-symbol"><%= stake_currency_symbol %></span> = $
+          = 1 <span class="stake-currency-symbol"><%= stake_currency_symbol %></span> = <%= fiat_currency_symbol['USD'] %>
               <span class="j-fiat-value ost-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol != "OST" ? "hide" : ""  %>"></span>
               <span class="j-fiat-value usdc-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol == "OST" ? "hide" : ""  %>"></span>
           USD
@@ -27,7 +27,7 @@
           <span class="conversion-rate">1</span>
           <b> <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>  =</b>
           <span class="conversion-rate">1</span>
-          <b> <span class="stake-currency-symbol"><%= stake_currency_symbol %></span> =</b>$
+          <b> <span class="stake-currency-symbol"><%= stake_currency_symbol %></span> =</b><%= fiat_currency_symbol['USD'] %>
              <span class="conversion-rate j-fiat-value ost-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol != "OST" ? "hide" : ""  %>"></span>
              <span class="conversion-rate j-fiat-value usdc-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol == "OST" ? "hide" : ""  %>"></span>
           <b>USD</b>
@@ -64,7 +64,7 @@
                   <div class="d-flex align-items-center">
                     <span class="conversion-rate mr-1">1</span>
                     <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
-                    <span class="equal-to-sign mx-2 font-weight-bold">=</span> $
+                    <span class="equal-to-sign mx-2 font-weight-bold">=</span> <%= fiat_currency_symbol['USD'] %>
                     <span class="ost-mocker-value conversion-rate j-bt-to-fiat-val text-truncate"
                           data-type="fiat" data-ost-mock-element="#<%=sc_to_bt_id%>"  data-ost-mock-parser="ost.tokenSetup.btToFiat"> <%= sc_to_fiat %>
                                                 </span>

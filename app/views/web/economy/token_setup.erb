@@ -1,5 +1,7 @@
 <%
-
+    fiat_currency_symbol = {
+        'USD' => '$'
+    }
     wallet_association =  @presenter_obj.sign_messages.wallet_association
 
 
@@ -70,7 +72,8 @@
              :bt_to_sc_step => bt_to_sc_step,
              :sc_to_bt_id => sc_to_bt_id,
              :conversion_factor => conversion_factor,
-             :sc_to_fiat => sc_to_fiat
+             :sc_to_fiat => sc_to_fiat,
+             :fiat_currency_symbol => fiat_currency_symbol
         } %>
 
       </div>

@@ -13,7 +13,7 @@
           <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
           = 1 <span class="stake-currency-symbol"><%= stake_currency_symbol %></span> = $
               <span class="j-fiat-value ost-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol != "OST" ? "hide" : ""  %>"></span>
-              <span class="j-fiat-value pax-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol == "OST" ? "hide" : ""  %>"></span>
+              <span class="j-fiat-value usdc-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol == "OST" ? "hide" : ""  %>"></span>
           USD
         </span>
       </p>
@@ -29,7 +29,7 @@
           <span class="conversion-rate">1</span>
           <b> <span class="stake-currency-symbol"><%= stake_currency_symbol %></span> =</b>$
              <span class="conversion-rate j-fiat-value ost-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol != "OST" ? "hide" : ""  %>"></span>
-             <span class="conversion-rate j-fiat-value pax-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol == "OST" ? "hide" : ""  %>"></span>
+             <span class="conversion-rate j-fiat-value usdc-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol == "OST" ? "hide" : ""  %>"></span>
           <b>USD</b>
           <span class="edit-collapse ml-1" data-toggle="collapse"
                 data-target="#collapsable-element"

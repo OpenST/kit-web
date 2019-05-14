@@ -45,7 +45,7 @@
       ;
       for (i = 0; i < paths.length; ++i) {
         if (current[paths[i]] == undefined) {
-          console.error('Could not find '+path+' in data');
+          console.warn('Could not find '+path+' in data');
           return undefined;
         } else {
           current = current[paths[i]];

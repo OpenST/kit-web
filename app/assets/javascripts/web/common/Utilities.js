@@ -111,7 +111,7 @@
     },
 
     showStakeCurrencyWrappers : function (  scSymbol  , jWrapper ) {
-      scSymbol = scSymbol && String( scSymbol ).toLowerCase();
+      scSymbol = scSymbol && String( scSymbol );
       if( !scSymbol ) return ;
       var scClassName = 'sc-display-wrapper' ,
           sHideEls = "."+scClassName ,

@@ -120,12 +120,12 @@
     onConfirmStakeMintSuccess : function ( res ) {
       var oThis =  this ,
         data = res && res.data ,
-        ostToStake = utilities.deepGet( res , "data.precise_amounts.stake_currency"),
+        scToStake = utilities.deepGet( res , "data.precise_amounts.stake_currency"),
         btToMint =   utilities.deepGet( res , "data.precise_amounts.bt" )
       ;
       oThis.setDataInDataConfig( "gatewayComposerDetails" ,  data );
       oThis.showSection( oThis.jTokenStakeAndMintSignSection ) ;
-      oThis.setScToSmallestUnit( ostToStake );
+      oThis.setScToSmallestUnit( scToStake );
       oThis.setBtToMintSmallestUnit( btToMint );
       oThis.approve( );
     },
@@ -133,7 +133,7 @@
     approve: function ( ) {
       var oThis = this  ;
 
-      var ostToStake = oThis.getScToSmallestUnit() ,
+      var scToStake = oThis.getScToSmallestUnit() ,
           btToMint = oThis.getBtToMintSmallestUnit()
       ;
       
@@ -142,7 +142,7 @@
       // Build params for approve
       var params = [
         oThis.getGatewayComposerContractAddress(),
-        ostToStake
+        scToStake
       ];
 
       debugger;
@@ -350,22 +350,22 @@
       });
     },
   
-    getOstBal : function() {
+    getScBal : function() {
       var oThis = this ;
       var walletAddress = oThis.getWalletAddress(),
         simpleTokenContractAddress  =   oThis.getStakeCurrencyContractAddress()
       ;
       oThis.defScBal = $.Deferred();
-      oThis.metamask.balanceOf( walletAddress , simpleTokenContractAddress , function ( ost ) {
-        oThis.defScBal.resolve( ost );
+      oThis.metamask.balanceOf( walletAddress , simpleTokenContractAddress , function ( sc ) {
+        oThis.defScBal.resolve( sc );
       });
     },
   
     convertToBrandedTokens: function ( sucCallback ,  errCallback ) {
       var oThis = this ;
       var btToMint      = oThis.getBTtoMint() ,
-        ostToStake    = Pricer.btToStakeCurrency( btToMint ) ,
-        scToSmallestUnit = Pricer.toSmallestUnit( ostToStake )
+        scToStake    = Pricer.btToStakeCurrency( btToMint ) ,
+        scToSmallestUnit = Pricer.toSmallestUnit( scToStake )
       ;
     
       var options = {

@@ -191,7 +191,7 @@
     btToStakeCurrencySmallestUnit : function( val ){
       if(!oThis.pricer) return val ;
       var sc =  oThis.pricer.btToStakeCurrencyPrecision( val );
-      return this.toSmallestUnit( sc );
+      return oThis.toSmallestUnit( sc );
     },
 
     toSmallestUnit : function( val ) {
@@ -429,12 +429,12 @@
       return  utilities.deepGet( oThis.dataConfig , "token.conversion_factor" ) ;
     },
 
-    getSimpleTokenABI : function () {
-      return utilities.deepGet( oThis.dataConfig , "contract_details.simple_token.abi" );
+    getStakeCurrencyABI : function () {
+      return utilities.deepGet( oThis.dataConfig , "contract_details.stake_currency.abi" );
     },
   
-    getSimpleTokenContractAddress : function () {
-      return utilities.deepGet( oThis.dataConfig , "contract_details.simple_token.address" );
+    getStakeCurrencyContractAddress : function () {
+      return utilities.deepGet( oThis.dataConfig , "contract_details.stake_currency.address" );
     },
   
     getBrandedTokenABI : function () {

@@ -144,13 +144,15 @@
         oThis.getGatewayComposerContractAddress(),
         ostToStake
       ];
+
+      debugger;
     
       // Create Encoded ABI using params
       var data = oThis.metamask.getContractEncodedABI(
-        oThis.getSimpleTokenContractAddress(),
+        oThis.getStakeCurrencyContractAddress(),
         'approve',  //ABI method name
         params,
-        oThis.getSimpleTokenABI()
+        oThis.getStakeCurrencyABI()
       );
     
       // Create options ABI using data
@@ -159,7 +161,7 @@
         params: [
           {
             "from": oThis.getWalletAddress(),
-            "to": oThis.getSimpleTokenContractAddress(),
+            "to": oThis.getStakeCurrencyContractAddress(),
             "data": data,
             "gas": oThis.getSimpleTokenContractGas(),
             "gasPrice": oThis.getGasPrice()
@@ -351,7 +353,7 @@
     getOstBal : function() {
       var oThis = this ;
       var walletAddress = oThis.getWalletAddress(),
-        simpleTokenContractAddress  =   oThis.getSimpleTokenContractAddress()
+        simpleTokenContractAddress  =   oThis.getStakeCurrencyContractAddress()
       ;
       oThis.defScBal = $.Deferred();
       oThis.metamask.balanceOf( walletAddress , simpleTokenContractAddress , function ( ost ) {

@@ -1,4 +1,3 @@
-t
 /*************IMP Note- Currently implemented as singleton, as 2 providers cant live parallelly.*******/
 
 ;(function (window,$) {

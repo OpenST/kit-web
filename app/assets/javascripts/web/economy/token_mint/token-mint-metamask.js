@@ -125,16 +125,16 @@
       ;
       oThis.setDataInDataConfig( "gatewayComposerDetails" ,  data );
       oThis.showSection( oThis.jTokenStakeAndMintSignSection ) ;
-      oThis.setOstToStakeWei( ostToStake );
-      oThis.setBtToMintWei( btToMint );
+      oThis.setScToSmallestUnit( ostToStake );
+      oThis.setBtToMintSmallestUnit( btToMint );
       oThis.approve( );
     },
   
     approve: function ( ) {
       var oThis = this  ;
 
-      var ostToStake = oThis.getOstToStakeWei() ,
-          btToMint = oThis.getBtToMintWei()
+      var ostToStake = oThis.getScToSmallestUnit() ,
+          btToMint = oThis.getBtToMintSmallestUnit()
       ;
       
       oThis.resetState();
@@ -212,16 +212,16 @@
     
       var oThis = this ;
 
-      var ostToStakeWei = oThis.getOstToStakeWei() ,
-        btToMintWei = oThis.getBtToMintWei()
+      var scToSmallestUnit = oThis.getScToSmallestUnit() ,
+        btToSmallestUnit = oThis.getBtToMintSmallestUnit()
       ;
 
       var gatewayComposerTxParams = oThis.getGatewayComposerTxParams();
     
       // Build params for requestStake
       var params = [
-        ostToStakeWei,// OST wei as string
-        btToMintWei,  // BT wei as string
+        scToSmallestUnit,
+        btToSmallestUnit,
         gatewayComposerTxParams['gateway_contract'],
         gatewayComposerTxParams['stake_and_mint_beneficiary'],
         gatewayComposerTxParams['gas_price'],
@@ -363,7 +363,7 @@
       var oThis = this ;
       var btToMint      = oThis.getBTtoMint() ,
         ostToStake    = Pricer.btToStakeCurrency( btToMint ) ,
-        ostToStakeWei = Pricer.toSmallestUnit( ostToStake )
+        scToSmallestUnit = Pricer.toSmallestUnit( ostToStake )
       ;
     
       var options = {
@@ -372,7 +372,7 @@
           {
             to: oThis.getBrandedTokenContractAddress(),
             data: oThis.metamask.getContractEncodedABI(oThis.getBrandedTokenContractAddress(),
-              'convertToBrandedTokens', [ostToStakeWei] ,
+              'convertToBrandedTokens', [scToSmallestUnit] ,
               oThis.getBrandedTokenABI())
           }
         ]
@@ -384,9 +384,9 @@
           errCallback && errCallback( err );
         }else if( result && result.result ) {
           var btToMintHex = result.result ,
-            btToMintWei = window.web3.fromWei( btToMintHex , 'wei')
+            btToSmallestUnit = window.web3.fromWei( btToMintHex , 'wei')
           ;
-          sucCallback && sucCallback( ostToStakeWei, btToMintWei )
+          sucCallback && sucCallback( scToSmallestUnit, btToSmallestUnit )
         }
       
         err && console.error(err);

@@ -191,10 +191,12 @@
     },
 
     fromSmallestUnit: function ( val ) {
+      if( !val ) return val;
       return __fromSmallestUnit__(val , this.decimal);
     },
 
     toSmallestUnit: function ( val ) {
+      if( !val ) return val;
       return __toSmallestUnit__(val , this.decimal);
     }
   };

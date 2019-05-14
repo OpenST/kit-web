@@ -59,7 +59,6 @@
 
     getPricerConfig : function(){
       var price_points = utilities.deepGet(oThis.dataConfig, 'price_points'),
-        //TODO: stake_currencies.data should move to the erb file
         stake_currencies = utilities.deepGet(oThis.dataConfig, 'stake_currencies'),
         mergedConfig = {}
       ;
@@ -83,7 +82,7 @@
         var scSymbol = $(this).val() ;
         $(".ost-card").removeClass("checkedlabel");
         if($(this).is(":checked")) $(this).closest(".ost-card").addClass("checkedlabel");
-        $('.stake-currency-symbol').text($(this).val().toUpperCase());
+        $('.stake-currency-symbol').text($(this).val().toUpperCase());  //TODO confirm usage
         utilities.showStakeCurrencyWrappers( scSymbol );
         oThis.updatePricer( scSymbol );
         oThis.initDisplayFiatValue();

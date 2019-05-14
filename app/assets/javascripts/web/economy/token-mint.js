@@ -11,9 +11,6 @@
     "metamask" : "stakeAndMintMetamask" ,
     "ost": "stakeAndMintOst"
   };
-
-  var Pricer = null;
-  
   
   var oThis = ost.tokenMint = {
 
@@ -46,8 +43,8 @@
 
     btToMintName                    : null,
     scToStakeName                   : null,
-    jBtToMintWei                    : null,
-    jScToStakeWei                   : null,
+    jBtToMintSmallestUnit                    : null,
+    jScToStakeSmallestUnit                   : null,
   
     //Dynamic jQuery elements start
     jBtToMint                       :   null,
@@ -94,6 +91,8 @@
     //Deferred Eth Bal object and Ost Bal obj
     defEthBal : null,
     defScBal : null,
+
+    pricer : null ,
 
     init : function (config) {
       console.log("===config====" , config );
@@ -156,7 +155,7 @@
     initPricer : function() {
       var config = oThis.getPricerConfig();
       PricerFactory.init( config );
-      Pricer = PricerFactory.getInstance( oThis.scSymbol );
+      oThis.pricer = PricerFactory.getInstance( oThis.scSymbol );
     },
 
     getPricerConfig : function(){
@@ -170,8 +169,8 @@
     },
 
     initUIValues: function() {
-      oThis.jBtToMintWei    = $("[name='" + oThis.btToMintName +"']") ;
-      oThis.jScToStakeWei  = $("[name='" + oThis.scToStakeName+ "']") ;
+      oThis.jBtToMintSmallestUnit   = $("[name='" + oThis.btToMintName +"']") ;
+      oThis.jScToStakeSmallestUnit  = $("[name='" + oThis.scToStakeName+ "']") ;
       oThis.jBtToMint = $("#"+oThis.btToMintId);
       oThis.jBtToMint.trigger('change');
       oThis.jBtToStakeCurrencyConversion.text(  oThis.getStakeCurrencyToBTConversion() );
@@ -190,14 +189,14 @@
     },
 
     btToStakeCurrencySmallestUnit : function( val ){
-      if(!Pricer) return val ;
-      return Pricer.btToStakeCurrencyPrecision( val );
+      if(!oThis.pricer) return val ;
+      var sc =  oThis.pricer.btToStakeCurrencyPrecision( val );
+      return this.toSmallestUnit( sc );
     },
 
     toSmallestUnit : function( val ) {
-      if(!val) return;
-      if(!Pricer) return val ;
-      return Pricer.toSmallestUnit( val );
+      if( !oThis.pricer ) return val ;
+      return oThis.pricer.toSmallestUnit( val );
     },
     
     initGetScFormHelper: function () {
@@ -238,8 +237,8 @@
 
       $('#'+oThis.btToMintId).on( 'keyup change' ,function () {
         var bt = $(this).val(),
-            scToStake = Pricer.btToStakeCurrency( bt ) ;
-        if( !Pricer.isNaN( oThis.totalSc ) ) {
+            scToStake = oThis.pricer.btToStakeCurrency( bt ) ;
+        if( !oThis.pricer.isNaN( oThis.totalSc ) ) {
           oThis.updateSupplyPieChart( scToStake ) ;
         }
       } );
@@ -304,7 +303,7 @@
         $('.buy-sc-btn').show();
         oThis.jScText.show();
       } else{
-        sc = Pricer.fromSmallestUnit( sc );
+        sc = oThis.pricer.fromSmallestUnit( sc );
         oThis.onValidationComplete( sc );
       }
     },
@@ -314,22 +313,22 @@
     },
    
 
-    /*********************************************************************************************************
-     *       NOTE IMPORTANT : STAKE CURRENCY PASSED AFTER VALIDATION ON BALANCE IS NOT IN WEI , ITS ABSOLUTE VALUE      *
-     *********************************************************************************************************/
+    /********************************************************************************************************************
+     * NOTE IMPORTANT : STAKE CURRENCY PASSED AFTER VALIDATION ON BALANCE IS NOT IN Smallest UNit , ITS ABSOLUTE VALUE  *
+     ********************************************************************************************************************/
   
     onValidationComplete : function ( sc ) {
       var btToMint = oThis.getBTtoMint() ,
-          scToStake = Pricer.btToStakeCurrency( btToMint );
+          scToStake = oThis.pricer.btToStakeCurrency( btToMint );
       ;
-      if( !Pricer.isNaN( sc )){
+      if( !oThis.pricer.isNaN( sc )){
         oThis.totalSc = Number( sc );
       }
       oThis.mintDonuteChart = new GoogleCharts();
       oThis.initSupplyPieChart( scToStake );
-      $('.total-sc-available').text( Pricer.toPrecisionStakeCurrency( sc ) );  //No mocker so set via precession
+      $('.total-sc-available').text( oThis.pricer.toPrecisionStakeCurrency( sc ) );  //No mocker so set via precession
       var scBalance = oThis.scAvailableOnBtChange( btToMint ) ;
-      $('.ost-mocker-value.total-sc-available').text( Pricer.toPrecisionStakeCurrency( scBalance ) ) ;
+      $('.ost-mocker-value.total-sc-available').text( oThis.pricer.toPrecisionStakeCurrency( scBalance ) ) ;
       oThis.updateSlider( sc );
       oThis.showSection(  oThis.jStakeMintProcess ) ;
     },
@@ -399,12 +398,12 @@
     },
   
     scAvailableOnBtChange : function ( val ) {
-      if(!Pricer) return;
-      if( Pricer.isNaN( oThis.totalSc )) {
+      if(!oThis.pricer) return;
+      if( oThis.pricer.isNaN( oThis.totalSc )) {
         return val ;
       }
-      var scToStake = Pricer.btToStakeCurrency( val ) ;
-      if( Pricer.isNaN( scToStake )) {
+      var scToStake = oThis.pricer.btToStakeCurrency( val ) ;
+      if( oThis.pricer.isNaN( scToStake )) {
         return oThis.totalSc  ;
       }
       scToStake = Number( scToStake ) ;
@@ -416,11 +415,6 @@
       }
       
       return scAvailable  ;
-    },
-
-    btToStakeCurrencyWei : function ( val ) {
-      if(!Pricer) return;
-      return Pricer.toSmallestUnit( Pricer.btToStakeCurrency( val ));
     },
   
     getMinETHRequired : function () {
@@ -499,8 +493,8 @@
     },
   
     getMaxBTToMint : function ( val ) {
-      if(!Pricer) return;
-      return Pricer.stakeCurrencyToBt(val );  //Mocker will take care of precision
+      if(!oThis.pricer) return;
+      return oThis.pricer.stakeCurrencyToBt(val );  //Mocker will take care of precision
     },
     
     getWorkFlowStatusApi : function ( id ) {
@@ -517,25 +511,25 @@
       oThis.dataConfig[ key  ] = data ;
     },
 
-    setOstToStakeWei: function( val ){
-      oThis.jScToStakeWei.val( val );
+    setScToSmallestUnit: function( val ){
+      oThis.jScToStakeSmallestUnit.val( val );
     },
 
-    getOstToStakeWei: function(  ){
-      return oThis.jScToStakeWei.val( );
+    getScToSmallestUnit: function(  ){
+      return oThis.jScToStakeSmallestUnit.val( );
     },
 
-    setBtToMintWei: function( val ){
-      oThis.jBtToMintWei.val( val );
+    setBtToMintSmallestUnit: function( val ){
+      oThis.jBtToMintSmallestUnit.val( val );
     },
 
-    getBtToMintWei: function(  ){
-      return  oThis.jBtToMintWei.val( );
+    getBtToMintSmallestUnit: function(  ){
+      return  oThis.jBtToMintSmallestUnit.val( );
     },
   
     btToFiat : function (val) {
-      if(!Pricer) return val;
-      return Pricer.btToFiat( val ) ;  //Mocker will take care of precision
+      if(!oThis.pricer) return val;
+      return oThis.pricer.btToFiat( val ) ;  //Mocker will take care of precision
     },
 
     showSection : function( jSection ){
@@ -582,7 +576,7 @@
         selector: '#scSupplyInAccountPie',
         type: 'PieChart',
         options: {
-          title: 'STAKE CURRENCY SUPPLY IN ACCOUNT',
+          title: this.scSymbol +' SUPPLY IN ACCOUNT',
           pieHole: 0.7,
           pieSliceText: 'none',
           pieSliceBorderColor: 'none',

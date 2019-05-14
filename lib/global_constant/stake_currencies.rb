@@ -10,7 +10,7 @@ module GlobalConstant
       end
 
       def usdc_stake_currency_symbol
-        "PAX"
+        "USDC"
       end
 
     end

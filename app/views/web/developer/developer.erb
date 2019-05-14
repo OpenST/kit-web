@@ -2,6 +2,7 @@
   api_get_key = GlobalConstant::RoutesMap.getApis()[:get_api_keys]
   api_delete_key = GlobalConstant::RoutesMap.getApis()[:delete_api_key]
   developer_page_addresses = @presenter_obj.developer_page_addresses
+  display_stake_currency_symbol = @presenter_obj.display_stake_currency_symbol
   developer_addresses_config = [
       {
           "label" => "Account Owner Address:",
@@ -24,9 +25,9 @@
           "description" => "This is a contract on the value chain which holds Brand Tokens that are backed by OST at a fixed conversion rate."
       },
       {
-          "label" => "OST-Test ERC20 contract address",
+          "label" => "#{display_stake_currency_symbol} ERC20 contract address",
           "key_name" => "erc20_contract_address",
-          "description" => "OST-Test ERC20 token contract address on the value chain."
+          "description" => "#{display_stake_currency_symbol} ERC20 token contract address on the value chain."
       },
       {
           "label" => "Company UUID",

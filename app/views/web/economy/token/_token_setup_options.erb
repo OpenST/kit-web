@@ -1,68 +1,67 @@
 <% is_metamask_whitelisted_browser = browser_supported_by_metamask? %>
 
 <div class="token-setup-options-conatiner mt-6">
-  <div class="shadow-box d-flex flex-row align-items-center mx-5">
-    <div class="m-2">
-      <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/deploy-token-setup-options.png" class="img-fluid" width="152">
-    </div>
-    <div class="mx-2 mr-4">
-      <h4>We will start deploying your token soon</h4>
-      <p class="font-weight-light">
-        Token Identifier :
-        <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
-        <span class="standing-line"> | </span> Conversion Rate :
-        <span class="conversion-rate font-weight-bold">1</span>
-        <span class="conversion-rate-unit font-weight-bold">OST</span>
-        =
-        <span class="ost-mocker-value conversion-rate font-weight-bold" data-ost-mock-element="#ost_to_bt_id">1</span>
-        <span class="ost-mocker-value conversion-rate-unit font-weight-bold" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
-        =
-        <span class="conversion-rate j-fiat-value font-weight-bold">$</span>
-        <span class="conversion-rate-unit font-weight-bold">USD</span>
-        <br/>To complete the setup please select from the below options.
-      </p>
-    </div>
+  <div class="shadow-box mx-5 px-5 py-4">
+    <h4>Company Wallet Options</h4>
+    <p class="font-weight-light mb-2">Select in which way you prefer to set up the Company Wallet in sandbox from the options below in order to complete the setup.</p>
+    <p class="font-weight-normal mb-0">
+      Token Identifier :
+      <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
+      <span class="standing-line"> | </span> Conversion Rate :
+      <span class="conversion-rate font-weight-bold">1</span>
+      <span class="conversion-rate-unit font-weight-bold">OST</span>
+      =
+      <span class="ost-mocker-value conversion-rate font-weight-bold" data-ost-mock-element="#ost_to_bt_id">1</span>
+      <span class="ost-mocker-value conversion-rate-unit font-weight-bold" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
+      =
+      <span class="conversion-rate j-fiat-value font-weight-bold">$</span>
+      <span class="conversion-rate-unit font-weight-bold">USD</span>
+    </p>
   </div>
-  <div class="shadow-box mx-5 mt-5 position-relative">
-    <div class="position-absolute OR-section-seperator">
-      <p class="m-2">OR</p>
+  <div class="shadow-box mx-5 mt-4">
+    <div class="d-flex p-4 position-relative">
+      <div class="row align-items-center">
+        <div class="col-2 text-center">
+          <svg width="60" height="60">
+            <switch>
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ost-logo-token-setup-options"></use>
+            </switch>
+          </svg>
+          <p class="text-center small token-setup-option-ost mb-0">OST</p>
+        </div>
+        <div class="col-6 pl-0">
+          <p class="font-weight-light mb-0">Have OST manage the Company Wallet for you. To expedite testing on sandbox, we will hold the test tokens for you during this phase.</p>
+        </div>
+        <div class="col-4 text-center">
+          <button id="jTokenSetupOstBtn" class="btn btn-primary">Proceed</button>
+        </div>
+      </div>
+      <div class="position-absolute OR-section-seperator">
+        <p class="m-2">OR</p>
+      </div>
     </div>
-    <div class="d-flex flex-row mt-2 align-items-center">
-      <div class="m-4">
-        <svg width="106" height="106">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ost-logo-token-setup-options"></use>
-          </switch>
-        </svg>
-        <p class="text-center mt-2 small token-setup-option-ost">OST</p>
-      </div>
-      <div class="mx-4">
-        <p class="font-weight-light">To expedite testing, continue without setting up a company wallet. Since these are just test tokens, we will hold them for you.</p>
-      </div>
-      <div class="mx-4">
-        <button id="jTokenSetupOstBtn" class="btn btn-primary">Get Started</button>
-      </div>
-    </div>
-    <div class="d-flex flex-row pt-2 align-items-center section-seperator">
-      <div class="m-4">
-        <svg width="105" height="96">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#metamask-logo-token-setup-options"></use>
-          </switch>
-        </svg>
-        <p class="text-center mt-2 small token-setup-option-metamask">METAMASK</p>
-      </div>
-      <div class="mx-4">
-        <p class="font-weight-light">
-          <% if is_metamask_whitelisted_browser %>
-            You can choose to install Metamask and hold your OST-Test tokens in the Metamask wallet. Note: This is a required step in Production.
-          <% else %>
-            You can choose to install Metamask and hold your OST-Test tokens in the Metamask wallet. Your current browser does not support metamask. Please switch to <a class="browser-link" href="https://www.google.com/chrome/" target="_blank">Google chrome</a> or <a class="browser-link" href="https://www.mozilla.org/en-US/firefox/" target="_blank">Firefox</a> to continue</p>
-          <% end %>
-      </div>
-
-
-        <div class="mx-4">
+    <div class="d-flex p-4 section-seperator">
+      <div class="row align-items-center">
+        <div class="col-2 text-center">
+          <svg width="60" height="60">
+            <switch>
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#metamask-logo-token-setup-options"></use>
+            </switch>
+          </svg>
+          <p class="text-center small token-setup-option-metamask mb-0">METAMASK</p>
+        </div>
+        <div class="col-6 pl-0">
+          <p class="font-weight-light mb-0">
+            <% if is_metamask_whitelisted_browser %>
+              Hold the ownership keys of the Company Wallet via Metamask or Hardware wallet. This will be required when going live in Production.
+            <% else %>
+              Hold the ownership keys of the Company Wallet via Metamask or Hardware wallet. This will be required when going live in Production. Your current browser does not support metamask.
+              Please switch to <a class="browser-link" href="https://www.google.com/chrome/" target="_blank">Google chrome</a> or
+              <a class="browser-link" href="https://www.mozilla.org/en-US/firefox/" target="_blank">Firefox</a>
+            <% end %>
+          </p>
+        </div>
+        <div class="col-4 text-center">
           <button id="jTokenSetupMetamaskBtn"
                   class="btn btn-primary <%= is_metamask_whitelisted_browser ? "" : "disabled-install-metamask" %>" >
             Use Metamask
@@ -71,7 +70,7 @@
             <small class="metamask-info-text font-weight-light text-muted mx-auto" >Available on chrome and Firefox</small>
           <%end%>
         </div>
+      </div>
     </div>
   </div>
-
 </div>

@@ -145,8 +145,6 @@
         scToStake
       ];
 
-      debugger;
-    
       // Create Encoded ABI using params
       var data = oThis.metamask.getContractEncodedABI(
         oThis.getStakeCurrencyContractAddress(),

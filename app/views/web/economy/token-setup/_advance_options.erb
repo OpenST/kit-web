@@ -12,13 +12,8 @@
           We recommend keeping it simple and setting the conversion rate to 1
           <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
           = 1 <span class="stake-currency-symbol"><%= stake_currency_symbol %></span> = <%= fiat_currency_symbol['USD'] %>
-<<<<<<< Updated upstream
-              <span class="j-fiat-value <%=GlobalConstant::StakeCurrencies.ost_stake_currency_symbol%>-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol != GlobalConstant::StakeCurrencies.ost_stake_currency_symbol ? "hide" : ""  %>"></span>
-              <span class="j-fiat-value <%=GlobalConstant::StakeCurrencies.usdc_stake_currency_symbol%>-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol == GlobalConstant::StakeCurrencies.ost_stake_currency_symbol ? "hide" : ""  %>"></span>
-=======
-              <span class="j-fiat-value ost-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol != "OST" ? "hide" : ""  %>"></span>
-              <span class="j-fiat-value pax-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol == "OST" ? "hide" : ""  %>"></span>
->>>>>>> Stashed changes
+          <span class="j-fiat-value <%=GlobalConstant::StakeCurrencies.ost_stake_currency_symbol%>-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol != GlobalConstant::StakeCurrencies.ost_stake_currency_symbol ? "hide" : ""  %>"></span>
+          <span class="j-fiat-value <%=GlobalConstant::StakeCurrencies.usdc_stake_currency_symbol%>-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol == GlobalConstant::StakeCurrencies.ost_stake_currency_symbol ? "hide" : ""  %>"></span>
           USD
         </span>
       </p>
@@ -33,13 +28,8 @@
           <b> <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>  =</b>
           <span class="conversion-rate">1</span>
           <b> <span class="stake-currency-symbol"><%= stake_currency_symbol %></span> =</b><%= fiat_currency_symbol['USD'] %>
-<<<<<<< Updated upstream
-             <span class="conversion-rate j-fiat-value <%=GlobalConstant::StakeCurrencies.ost_stake_currency_symbol%>-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol != GlobalConstant::StakeCurrencies.ost_stake_currency_symbol ? "hide" : ""  %>"></span>
-             <span class="conversion-rate j-fiat-value <%=GlobalConstant::StakeCurrencies.usdc_stake_currency_symbol%>-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol == GlobalConstant::StakeCurrencies.ost_stake_currency_symbol ? "hide" : ""  %>"></span>
-=======
-             <span class="conversion-rate j-fiat-value ost-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol != "OST" ? "hide" : ""  %>"></span>
-             <span class="conversion-rate j-fiat-value pax-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol == "OST" ? "hide" : ""  %>"></span>
->>>>>>> Stashed changes
+          <span class="conversion-rate j-fiat-value <%=GlobalConstant::StakeCurrencies.ost_stake_currency_symbol%>-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol != GlobalConstant::StakeCurrencies.ost_stake_currency_symbol ? "hide" : ""  %>"></span>
+          <span class="conversion-rate j-fiat-value <%=GlobalConstant::StakeCurrencies.usdc_stake_currency_symbol%>-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol == GlobalConstant::StakeCurrencies.ost_stake_currency_symbol ? "hide" : ""  %>"></span>
           <b>USD</b>
           <span class="edit-collapse ml-1" data-toggle="collapse"
                 data-target="#collapsable-element"

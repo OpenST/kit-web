@@ -18,7 +18,7 @@
       <span class="conversion-rate-unit font-weight-bold">USD</span>
     </p>
   </div>
-  <div class="shadow-box mx-5 mt-4">
+  <div class="shadow-box m-5">
     <div class="d-flex p-4 position-relative">
       <div class="row align-items-center">
         <div class="col-2 text-center">
@@ -67,7 +67,9 @@
             Use Metamask
           </button>
           <% if !is_metamask_whitelisted_browser %>
-            <small class="metamask-info-text font-weight-light text-muted mx-auto" >Available on chrome and Firefox</small>
+            <div>
+              <small class="metamask-info-text font-weight-light text-muted mx-auto" >Available on chrome and Firefox</small>
+            </div>
           <%end%>
         </div>
       </div>

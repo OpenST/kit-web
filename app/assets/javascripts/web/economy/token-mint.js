@@ -190,7 +190,7 @@
 
     btToStakeCurrencySmallestUnit : function( val ){
       if(!oThis.pricer) return val ;
-      var sc =  oThis.pricer.btToStakeCurrencyPrecision( val );
+      var sc =  oThis.pricer.btToSc( val );
       return oThis.toSmallestUnit( sc );
     },
 
@@ -237,7 +237,7 @@
 
       $('#'+oThis.btToMintId).on( 'keyup change' ,function () {
         var bt = $(this).val(),
-            scToStake = oThis.pricer.btToStakeCurrency( bt ) ;
+            scToStake = oThis.pricer.btToSc( bt ) ;
         if( !oThis.pricer.isNaN( oThis.totalSc ) ) {
           oThis.updateSupplyPieChart( scToStake ) ;
         }
@@ -319,16 +319,16 @@
   
     onValidationComplete : function ( sc ) {
       var btToMint = oThis.getBTtoMint() ,
-          scToStake = oThis.pricer.btToStakeCurrency( btToMint );
+          scToStake = oThis.pricer.btToSc( btToMint );
       ;
       if( !oThis.pricer.isNaN( sc )){
         oThis.totalSc = Number( sc );
       }
       oThis.mintDonuteChart = new GoogleCharts();
       oThis.initSupplyPieChart( scToStake );
-      $('.total-sc-available').text( oThis.pricer.toPrecisionStakeCurrency( sc ) );  //No mocker so set via precession
+      $('.total-sc-available').text( oThis.pricer.toScPrecision( sc ) );  //No mocker so set via precession
       var scBalance = oThis.scAvailableOnBtChange( btToMint ) ;
-      $('.ost-mocker-value.total-sc-available').text( oThis.pricer.toPrecisionStakeCurrency( scBalance ) ) ;
+      $('.ost-mocker-value.total-sc-available').text( oThis.pricer.toScPrecision( scBalance ) ) ;  //No mocker so set via precession
       oThis.updateSlider( sc );
       oThis.showSection(  oThis.jStakeMintProcess ) ;
     },
@@ -402,7 +402,7 @@
       if( oThis.pricer.isNaN( oThis.totalSc )) {
         return val ;
       }
-      var scToStake = oThis.pricer.btToStakeCurrency( val ) ;
+      var scToStake = oThis.pricer.btToSc( val ) ;
       if( oThis.pricer.isNaN( scToStake )) {
         return oThis.totalSc  ;
       }
@@ -494,7 +494,7 @@
   
     getMaxBTToMint : function ( val ) {
       if(!oThis.pricer) return;
-      return oThis.pricer.stakeCurrencyToBt(val );  //Mocker will take care of precision
+      return oThis.pricer.scToBt(val );  //Mocker will take care of precision
     },
     
     getWorkFlowStatusApi : function ( id ) {
@@ -530,6 +530,11 @@
     btToFiat : function (val) {
       if(!oThis.pricer) return val;
       return oThis.pricer.btToFiat( val ) ;  //Mocker will take care of precision
+    },
+
+    btToSc : function( val ){
+      if(!oThis.pricer) return val;
+      return oThis.pricer.btToSc( val ) ;  //Mocker will take care of precision
     },
 
     showSection : function( jSection ){

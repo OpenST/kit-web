@@ -89,7 +89,7 @@
       ;
       
       if( toEthBT ){
-        $('.total-token-minted').text( Pricer.toPrecisionBT( toEthBT ) );
+        $('.total-token-minted').text( Pricer.toBtPrecision( toEthBT ) );
       }
       oThis.showSection( oThis.jMintPollingSuccess );
     },

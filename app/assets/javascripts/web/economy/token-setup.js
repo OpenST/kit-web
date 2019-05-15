@@ -82,7 +82,7 @@
         var scSymbol = $(this).val() ;
         $(".ost-card").removeClass("checkedlabel");
         if($(this).is(":checked")) $(this).closest(".ost-card").addClass("checkedlabel");
-        $('.stake-currency-symbol').text($(this).val().toUpperCase());  //TODO confirm usage
+        $('.stake-currency-symbol').text($(this).val().toUpperCase());
         utilities.showStakeCurrencyWrappers( scSymbol );
         oThis.updatePricer( scSymbol );
         oThis.initDisplayFiatValue();
@@ -109,9 +109,9 @@
         val = jInputEl.val();
       Pricer.SC_TO_BT = oThis.conversion_factor;
       var btFiatVal = Pricer.btToFiatPrecision(1),
-        scFiatVal = Pricer.stakeCurrencyToFiat(1)
+        scFiatVal = Pricer.scToFiat(1)
       ;
-      scFiatVal = Pricer.toPrecisionFiat(scFiatVal);
+      scFiatVal = Pricer.toFiatPrecision(scFiatVal);
       jEL.text(btFiatVal);
       $('.j-fiat-value').text(scFiatVal);
     },

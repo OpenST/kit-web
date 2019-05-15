@@ -91,7 +91,7 @@
       }
 
       if ( typeof PriceOracle !== 'undefined' ) {
-        numPrecisionMapping["sc"]   = PriceOracle.getStakeCurrencyPrecision();
+        numPrecisionMapping["sc"]   = PriceOracle.getScPrecision();
         numPrecisionMapping["bt"]   = PriceOracle.getBtPrecision();
         numPrecisionMapping["fiat"] = PriceOracle.getFiatPrecision();
       }

@@ -40,7 +40,7 @@
     SC_TO_BT   : null ,
     decimal    : null ,
 
-    stakeCurrencyToFiat :  function ( stakeCurrency ) {
+    scToFiat :  function ( stakeCurrency ) {
       if( !stakeCurrency ) return "";
 
       stakeCurrency = BigNumber( stakeCurrency );
@@ -74,10 +74,10 @@
 
       var fiat = this.btToFiat( bt );
 
-      return this.toPrecisionFiat( fiat );
+      return this.toFiatPrecision( fiat );
     },
 
-    stakeCurrencyToBt : function ( stakeCurrency  ) {
+    scToBt : function ( stakeCurrency  ) {
       if( !stakeCurrency ) return "";
 
       if( this.isNaN( this.SC_TO_BT )){
@@ -92,15 +92,15 @@
       return this.toBT( result );
     },
 
-    stakeCurrencyToBtPrecision : function ( stakeCurrency  ) {
+    scToBtPrecision : function ( stakeCurrency  ) {
       if( !stakeCurrency ) return "";
 
-      var result = this.stakeCurrencyToBt( stakeCurrency );
+      var result = this.scToBt( stakeCurrency );
 
-      return this.toPrecisionBT( result );
+      return this.toBtPrecision( result );
     },
 
-    btToStakeCurrency : function (  bt ) {
+    btToSc : function (  bt ) {
       if( !bt ) return "";
 
       if( this.isNaN( this.SC_TO_BT )){
@@ -112,15 +112,15 @@
 
       var result = bt.dividedBy( this.SC_TO_BT );
 
-      return this.toStakeCurrency( result ) ;
+      return this.toSc( result ) ;
     },
 
-    btToStakeCurrencyPrecision : function (  bt ) {
+    btToScPrecision : function (  bt ) {
       if( !bt ) return "";
 
-      var result = this.btToStakeCurrency( bt );
+      var result = this.btToSc( bt );
 
-      return this.toPrecisionStakeCurrency( result ) ;
+      return this.toScPrecision( result ) ;
     },
 
     toBT: function ( bt ) {
@@ -133,7 +133,7 @@
       return bt.toString();
     },
 
-    toPrecisionBT : function ( bt ) {
+    toBtPrecision : function ( bt ) {
 
       bt = this.toBT( bt );
       if ( ! bt  ) {
@@ -143,7 +143,7 @@
       return  bt.toFixed( P_BT , P_BT_ROUND_ROUNDING_MODE );
     },
 
-    toStakeCurrency: function ( stakeCurrency ) {
+    toSc: function ( stakeCurrency ) {
 
       if ( this.isNaN( stakeCurrency ) ) {
         return "";
@@ -153,9 +153,9 @@
       return stakeCurrency.toString( );
     },
 
-    toPrecisionStakeCurrency: function ( stakeCurrency ) {
+    toScPrecision: function ( stakeCurrency ) {
 
-      stakeCurrency = this.toStakeCurrency( stakeCurrency );
+      stakeCurrency = this.toSc( stakeCurrency );
       if ( !stakeCurrency ) {
         return "";
       }
@@ -173,7 +173,7 @@
       return  fiat.toString( );
     },
 
-    toPrecisionFiat : function ( fiat ) {
+    toFiatPrecision : function ( fiat ) {
 
       fiat = this.toFiat( fiat );
 
@@ -204,7 +204,7 @@
   /*********************************************************************************************************
    *                                              STATIC FUNCTIONS                                         *
    *********************************************************************************************************/
-  PriceOracle.getStakeCurrencyPrecision = function(){
+  PriceOracle.getScPrecision = function(){
     return P_SC ;
   };
 
@@ -216,7 +216,7 @@
     return P_FIAT;
   };
 
-  PriceOracle.setStakeCurrencyPrecision = function( val ){
+  PriceOracle.setScPrecision = function( val ){
     P_SC = val;
   };
 

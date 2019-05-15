@@ -362,7 +362,7 @@
     convertToBrandedTokens: function ( sucCallback ,  errCallback ) {
       var oThis = this ;
       var btToMint      = oThis.getBTtoMint() ,
-        scToStake    = Pricer.btToStakeCurrency( btToMint ) ,
+        scToStake    = Pricer.btToSc( btToMint ) ,
         scToSmallestUnit = Pricer.toSmallestUnit( scToStake )
       ;
     

@@ -259,7 +259,7 @@
 
     val = BigNumber( val ) ;
     var exp = BigNumber(10).exponentiatedBy( decimal ) ;
-    return val.dividedBy(exp).decimalPlaces(0).toString( 10 );
+    return val.dividedBy(exp).toString( 10 );
 
   }
 
@@ -277,7 +277,7 @@
 
     val = BigNumber( val ) ;
     var exp = BigNumber(10).exponentiatedBy( decimal ) ;
-    return val.multipliedBy(exp).decimalPlaces(0).toString( 10 );
+    return val.multipliedBy(exp).toString( 10 );
   }
 
 

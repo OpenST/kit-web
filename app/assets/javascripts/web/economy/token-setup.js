@@ -106,9 +106,9 @@
     initDisplayFiatValue: function () {
       var jEL = $('.j-bt-to-fiat-val'),
         jInputEl = $('#' + oThis.scToBtId),
-        val = jInputEl.val();
-      Pricer.SC_TO_BT = oThis.conversion_factor;
-      var btFiatVal = Pricer.btToFiatPrecision(1),
+        val = jInputEl.val() ;
+      Pricer.SC_TO_BT = val || oThis.conversion_factor;
+      var btFiatVal = Pricer.btToFiatPrecision( 1 ),
         scFiatVal = Pricer.scToFiat(1)
       ;
       scFiatVal = Pricer.toFiatPrecision(scFiatVal);

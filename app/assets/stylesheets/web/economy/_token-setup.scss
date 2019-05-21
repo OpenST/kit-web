@@ -29,7 +29,7 @@
   }
 
   .conversion-section{
-    .col-4{
+    .adv-opt-card{
       font-size: 24px;
       font-weight: normal;
       color: $cyan;
@@ -49,7 +49,10 @@
       border: 0;
       justify-content: center;
       border-radius: 0;
-      border-right: 1px solid #dbf2f2;
+      border-left: 1px solid #dbf2f2;
+      &:first-child{
+        border: none;
+      }
     }
 
     .quantity {
@@ -202,14 +205,22 @@
   }
 }
 
+.using-ost, .selected{
+  display: none;
+}
+
 input[name="stake_currency_symbol"]:checked + div > span{
-  &:after{
-    content: 'Using';
-  }
+  display: none;
 }
 
 input[name="stake_currency_symbol"]:not(:checked) + div > span{
-  &:after{
-    content: 'Use';
-  }
+  display: block;
+}
+
+input[name="stake_currency_symbol"]:checked + div > span + span{
+  display: block;
+}
+
+input[name="stake_currency_symbol"]:not(:checked) + div > span + span{
+  display: none;
 }

@@ -21,3 +21,4 @@
 //= require plugins/helpers/responsiveBreakPoint
 //= require web/common/contentBlurOnModalShow
 //= require web/common/LeftMenu
+//= require web/common/Cookie

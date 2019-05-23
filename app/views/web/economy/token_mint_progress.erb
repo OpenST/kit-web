@@ -6,6 +6,7 @@
   has_setup_test_economy = @presenter_obj.client.has_setup_test_economy?
   total_mint_bt = @presenter_obj.workflow_payload.fe_bt_to_mint
   dashboard_url = GlobalConstant::RoutesMap.getRoutes()[:token_dashboard]
+  test_economy_url = GlobalConstant::RoutesMap.getRoutes()[:test_economy]
   data_config = {
       token: @presenter_obj.client_token.data,
       price_points: @presenter_obj.price_points.data,
@@ -88,7 +89,7 @@
                   <div>To experience a mock economy with your <%= bt_symbol %> token as an end-user and better specify your Brand Token economy project, launch a Demo Integration.</div>
                 </div>
                 <div class="col-4">
-                  <a href="" class="btn btn-primary" title="Get Started">Get Started</a>
+                  <a href="<%= test_economy_url %>" class="btn btn-primary" title="Get Started">Get Started</a>
                 </div>
               </div>
             </div>

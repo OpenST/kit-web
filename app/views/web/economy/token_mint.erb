@@ -1,7 +1,7 @@
 <%
   chain_id = GlobalConstant::Chain.origin_chain_id
   mint_api =GlobalConstant::RoutesMap.getApis()[:api_mint]
-  get_ost_api =GlobalConstant::RoutesMap.getApis()[:api_grant]
+  get_sc_api =GlobalConstant::RoutesMap.getApis()[:api_grant]
   workflow_status_api =GlobalConstant::RoutesMap.getApis()[:api_workflow]
   pre_mint_api =GlobalConstant::RoutesMap.getApis()[:api_pre_mint]
   get_balance_api = GlobalConstant::RoutesMap.getApis()[:api_get_balance]
@@ -12,19 +12,18 @@
       auxiliary_addresses: @presenter_obj.auxiliary_addresses.data,
       contract_details: @presenter_obj.contract_details.data,
       token: @presenter_obj.client_token.data,
-      price_points: @presenter_obj.oracle_price_points.data,
+      price_points: @presenter_obj.price_points.data,
       client_manager: @presenter_obj.client_manager.data,
       gas_price: @presenter_obj.gas_price.data,
       workflow: @presenter_obj.workflow.data,
-      min_ost_required: @presenter_obj.min_ost_in_wei.data,
-      min_eth_required: @presenter_obj.min_eth_in_wei.data,
-      staker_address:@presenter_obj.origin_addresses.data['owner']
-
+      staker_address:@presenter_obj.origin_addresses.data['owner'],
+      min_balances: @presenter_obj.min_balances.data,
+      stake_currencies: @presenter_obj.stake_currencies.data
   }
 
-  is_buy_ost = GlobalConstant::Base.main_sub_environment?
+  is_buy_sc = GlobalConstant::Base.main_sub_environment?
   is_workflow = @presenter_obj.workflow.is_present?
-  initial_ost_funding = GlobalConstant::StakeAndMint.initial_ost_funding
+  initial_sc_funding = @presenter_obj.initial_funding_sc
   bt_to_mint_min = GlobalConstant::StakeAndMint.min_bt_to_mint
   bt_to_mint_step = GlobalConstant::StakeAndMint.step_bt_to_mint
   is_super_admin = @presenter_obj.is_super_admin?
@@ -34,7 +33,7 @@
   is_mainnet = GlobalConstant::Base.main_sub_environment?
   is_metamask_whitelisted_browser = browser_supported_by_metamask?
   bt_to_mint_name = "bt_to_mint"
-  ost_to_stake_name = "stake_currency_to_stake"
+  sc_to_stake_name = "stake_currency_to_stake"
   key_provider = @presenter_obj.key_provider
   fetch_balance_currencies = @presenter_obj.fetch_balance_for_currencies
 
@@ -47,6 +46,13 @@
   staker_address_name = "staker_address"
   staker_address_selector = "[name='#{staker_address_name}']"
   ether_text = "ETH"
+
+  stake_currency_symbol = 'OST'
+  if @presenter_obj.client_token.present? && @presenter_obj.client_token.stake_currency_id.present?
+      stake_currency_symbol = @presenter_obj.client_token.stake_currency_symbol
+  end
+
+  display_stake_currency_symbol = @presenter_obj.display_stake_currency_symbol
 %>
 
 <%if (is_mainnet &&  !is_metamask_whitelisted_browser) ||
@@ -114,49 +120,49 @@
                                    :header => "TOKENS VALUE IN USD",
                                    :mock_selector => "#" + bt_to_mint_id,
                                    :mock_parser => "ost.tokenMint.btToFiat",
-                                   :mock_type => "ost",
+                                   :mock_type => "sc",
                                    :value_prefix => "$"
                                }
                       %>
 
                     </div>
-                    <input type="hidden" name="<%= bt_to_mint_name %>" id=""
-                            data-ost-mock-parser="PriceOracle.toWei"
+                    <input type="hidden" name="<%= bt_to_mint_name %>"
+                            data-ost-mock-parser="ost.tokenMint.toSmallestUnit"
                             data-ost-mock-element="#<%= bt_to_mint_id %>" />
-                    <input type="hidden" name="<%= ost_to_stake_name %>" id="stake-currency"
-                           data-ost-mock-parser="ost.tokenMint.btToOstWei"
+                    <input type="hidden" name="<%= sc_to_stake_name %>"
+                           data-ost-mock-parser="ost.tokenMint.btToStakeCurrencySmallestUnit"
                            data-ost-mock-element="#<%= bt_to_mint_id %>" />
                   </div>
                   <div class="col-8  form-group m-0">
                     <div class="d-flex align-items-center">
                       <div class="p-0 form-group m-0 position-relative">
-                        <div id="ostSupplyInAccountPie" class="pie-chat" style="width:200px; height: 200px"></div>
-                        <div class="total-ost">
-                          <span>Total OST tokens</span><br/>
-                          <span class="total-ost-available"></span>
+                        <div id="scSupplyInAccountPie" class="pie-chat" style="width:200px; height: 200px"></div>
+                        <div class="total-sc">
+                          <span>Total <%= stake_currency_symbol %> tokens</span><br/>
+                          <span class="total-sc-available"></span>
                         </div>
                       </div>
                       <ul class="p-0 m-0">
                         <li class="d-flex align-items-center mb-3">
-                          <span class="ost-supply available"></span>
+                          <span class="sc-supply available"></span>
                           <p class="m-0 ml-2">
-                            <small class="d-block" data-ost_available_key>OST tokens available after minting</small>
-                            <small><span class="ost-mocker-value total-ost-available"
-                                         data-type="ost" data-ost-mock-element="#<%= bt_to_mint_id %>"
-                                         data-ost-mock-parser="ost.tokenMint.ostAvailableOnBtChange"></span></small>
+                            <small class="d-block" data-ost_available_key><%= stake_currency_symbol %> tokens available after minting</small>
+                            <small><span class="ost-mocker-value total-sc-available"
+                                         data-type="sc" data-ost-mock-element="#<%= bt_to_mint_id %>"
+                                         data-ost-mock-parser="ost.tokenMint.scAvailableOnBtChange"></span></small>
                           </p>
                         </li>
                         <li class="d-flex align-items-center mb-3">
-                          <span class="ost-supply staked-minting"></span>
+                          <span class="sc-supply staked-minting"></span>
                           <p class="m-0 ml-2">
-                            <small class="d-block" data-ost_staked_key>OST tokens used for minting</small>
+                            <small class="d-block" data-ost_staked_key><%= stake_currency_symbol %> tokens used for minting</small>
                             <small class="d-block" data-ost_staked_val>
-                                  <span class="ost-mocker-value" data-ost-mock-element="#<%= bt_to_mint_id %>"
-                                        data-ost-mock-parser="PriceOracle.btToOstPrecession">
+                                  <span class="ost-mocker-value" data-type="sc" data-ost-mock-element="#<%= bt_to_mint_id %>"
+                                        data-ost-mock-parser="ost.tokenMint.btToSc">
                                 </span>
                             </small>
                             <input type="hidden" name="<%= fe_stake_currency_to_stake%>"
-                                   data-ost-mock-parser="PriceOracle.btToOstPrecession"
+                                   data-ost-mock-parser="ost.tokenMint.btToSc"
                                    data-ost-mock-element="#<%= bt_to_mint_id %>"  />
                           </p>
                         </li>
@@ -213,7 +219,7 @@
 
   <div class="jMintSections" id="jInsufficientBalSection" style="display: <%= is_workflow ? "block" : "none" %>">
     <div class="container">
-      <form id="get-ost-form" action="<%= get_ost_api %>" method="GET">
+      <form id="get-sc-form" action="<%= get_sc_api %>" method="GET">
         <div class="row">
           <div class="col-10 mx-auto">
             <div class="card card-planner my-5">
@@ -232,37 +238,37 @@
                     <div class="status-message">
                       <svg class="svg float-left mr-2" style="width: 25px;height: 25px">
                         <switch>
-                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<%= is_buy_ost ? '#icon-error' : '#icon-fund-wallet' %>"></use>
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<%= is_buy_sc ? '#icon-error' : '#icon-fund-wallet' %>"></use>
                         </switch>
                       </svg>
                       <div style="overflow: auto;" class="text-muted font-weight-light">
                           <span class="low-bal ether-text" style="display: none;">
                             Your selected address does not have enough <%= ether_text %>.
                           </span>
-                        <span class="low-bal ost-text" style="display: none;">
-                            Your selected address does not have enough OST tokens.
+                        <span class="low-bal sc-text" style="display: none;">
+                            Your selected address does not have enough <%= stake_currency_symbol %> tokens.
                           </span>
-                        <span class="low-bal eth-ost-text" style="display: none;">
-                            Your selected address does not have enough <%= ether_text %> or OST tokens to Mint Tokens.
+                        <span class="low-bal eth-sc-text" style="display: none;">
+                            Your selected address does not have enough <%= ether_text %> or <%= stake_currency_symbol %> tokens to Mint Tokens.
                           </span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <% if is_buy_ost %>
+                <% if is_buy_sc %>
                   <a href="https://openst.org/#token"
                      target="_blank"
-                     class="btn btn-primary buy-ost-btn" style="display: none;">Buy Ost</a>
+                     class="btn btn-primary buy-sc-btn" style="display: none;">Buy <%= stake_currency_symbol %></a>
                 <% else %>
                   <div class="card-header p-0"></div>
                   <div class="text-muted font-weight-light mt-2 mb-3">
-                    Will fund <%=initial_ost_funding%>&nbsp;<%= ost_currency_symbol %> and minimum required <%= ether_text %> in to your selected MetaMask wallet to get you started.</div>
-                  <button id="get-ost-btn" type="submit" data-submiting="Getting <%= ost_currency_symbol %>..."
-                          class="btn btn-primary d-inline-block">Get&nbsp;<%= ost_currency_symbol %>
+                    Will fund <%=initial_sc_funding%>&nbsp;<%= display_stake_currency_symbol %> and minimum required <%= ether_text %> in to your selected MetaMask wallet to get you started.</div>
+                  <button id="get-sc-btn" type="submit" data-submiting="Getting <%= display_stake_currency_symbol %>..."
+                          class="btn btn-primary d-inline-block">Get&nbsp;<%= display_stake_currency_symbol %>
                   </button>
-                  <span class="jGetOstLoaderText ml-3 text-muted font-weight-light align-middle" style="display: none">
+                  <span class="jGetScLoaderText ml-3 text-muted font-weight-light align-middle" style="display: none">
                     <img src="//dxwfxs8b4lg24.cloudfront.net/ost-kit/images/processed-loader-1.gif" width="25" height="25"/>
-                    <span class="align-middle" style="font-size: 14px">Please wait while we transfer <%= ost_currency_symbol %> and <%= ether_text %> required</span>
+                    <span class="align-middle" style="font-size: 14px">Please wait while we transfer <%= stake_currency_symbol %> and <%= ether_text %> required</span>
                   </span>
                 <% end %>
                 <div class="invalid-feedback general_error mt-2 text-left" style="font-size: 12px">&nbsp;</div>
@@ -300,7 +306,8 @@
           keyProvider : '<%= key_provider%>',
           fetchBalanceCurrencies : '<%= raw fetch_balance_currencies.to_json %>',
           btToMintName : '<%= bt_to_mint_name %>',
-          ostToStakeName : '<%= ost_to_stake_name %>'
+          scToStakeName : '<%= sc_to_stake_name %>',
+          scSymbol : '<%= stake_currency_symbol %>'
         });
       });
     </script>

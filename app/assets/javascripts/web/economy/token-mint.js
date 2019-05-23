@@ -3,17 +3,14 @@
   
   var ost = ns("ost"),
      Polling = ost.Polling ,
-     utilities = ost.utilities
+     utilities = ost.utilities,
+     PricerFactory = ost.PricerFactory
   ;
   
   var providerMap = {
     "metamask" : "stakeAndMintMetamask" ,
     "ost": "stakeAndMintOst"
   };
-
-  var ostToStakeWei = null ,
-      btToMintWei = null ;
-  
   
   var oThis = ost.tokenMint = {
 
@@ -24,11 +21,11 @@
     jAddressNotWhitelistedSection   :   $('#jAddressNotWhitelistedSection') ,
     jInsufficientBalSection         :   $('#jInsufficientBalSection') ,
     jSelectedAddress                :   $("[name='staker_address']"),
-    jBtToOstConversion              :   $('.bt_to_ost_conversion'),
+    jBtToStakeCurrencyConversion    :   $('.bt_to_sc_conversion'),
     jMintSections                   :   $('.jMintSections'),
     jConfirmStakeMintForm           :   $('#stake-mint-confirm-form'),
-    jGetOstForm                     :   $('#get-ost-form'),
-    jGetOstBtn                      :   $('#get-ost-btn'),
+    jGetScForm                      :   $('#get-sc-form'),
+    jGetScBtn                       :   $('#get-sc-btn'),
     jTokenStakeAndMintSignSection   :   $('#jTokenStakeAndMintSignSection'),
     jSignHeaders                    :   $('.jSignHeader'),
     jAllowStakeAndMintMsgWrapper    :   $('.jAllowStakeAndMintWrapper'),
@@ -38,16 +35,16 @@
     jGoBackBtn                      :   $('.jGoBackBtn'),
     jClientRetryBtn                 :   $('.jClientRetryBtn'),
     jEtherText                      :   $('.ether-text'),
-    jOstText                        :   $('.ost-text'),
-    jEthOstText                     :   $('.eth-ost-text'),
+    jScText                         :   $('.sc-text'),
+    jEthSCText                      :   $('.eth-sc-text'),
     jLowBal                         :   $('.low-bal'),
     jTokenSetupAdminErrorModal      :   $('#token_setup_admin_error'),
     //Static jQuery elements End
 
     btToMintName                    : null,
-    ostToStakeName                  : null,
-    jBtToMintWei                    : null,
-    jOstToStakeWei                  : null,
+    scToStakeName                   : null,
+    jBtToMintSmallestUnit                    : null,
+    jScToStakeSmallestUnit                   : null,
   
     //Dynamic jQuery elements start
     jBtToMint                       :   null,
@@ -58,11 +55,11 @@
   
     //FormHelpers start
     confirmStakeMintFormHelper      :   null ,
-    getOstFormHelper                :   null ,
+    getScFormHelper                 :   null ,
     //FormHelpers end
     
     //Polling start
-    getOstPolling                   :   null,
+    getScPolling                   :   null,
     stakeAndMintPolling             :   null,
     //Polling end
   
@@ -87,19 +84,21 @@
   
     //General error msg start
     genericErrorMessage             :   'Something went wrong!',
-    getOstError                     :   'Not able to grant OST-Test right now. Please <a href="https://help.ost.com/support/home" target="_blank">contact support</a>.',
+    getScError                     :   'Not able to grant OST-Test right now. Please <a href="https://help.ost.com/support/home" target="_blank">contact support</a>.',
     stakeAndMintError               :   "Looks like there was an issue in the minting process, Please connect with customer support with the 2 transaction hash.",
     //General error msg end
 
     //Deferred Eth Bal object and Ost Bal obj
     defEthBal : null,
-    defOstBal : null,
+    defScBal : null,
+
+    pricer : null ,
 
     init : function (config) {
       console.log("===config====" , config );
       $.extend(oThis,config);
+      oThis.initPricer( oThis.dataConfig );
       oThis.setProvider(); //Merge provider
-      oThis.initPriceOracle();
       oThis.initUIValues();
       oThis.bindEvents();
       oThis.initFlow()
@@ -150,22 +149,33 @@
     /*********************************************************************************************************
      *                                  NOTE IMPORTANT : Interface declaration end                           *
      *********************************************************************************************************/
-    
-    initPriceOracle : function ( ) {
-      PriceOracle.init({
-        "ost_to_fiat" : oThis.getPricePoint() ,
-        "ost_to_bt"   : oThis.getOstToBTConversion()
-      });
+
+
+
+    initPricer : function() {
+      var config = oThis.getPricerConfig();
+      PricerFactory.init( config );
+      oThis.pricer = PricerFactory.getInstance( oThis.scSymbol );
     },
-    
+
+    getPricerConfig : function(){
+      var price_points = utilities.deepGet(oThis.dataConfig, 'price_points'),
+        stake_currencies = utilities.deepGet(oThis.dataConfig, 'stake_currencies'),
+        mergedConfig = {}
+      ;
+      $.extend(true,mergedConfig,price_points,stake_currencies);
+      mergedConfig[oThis.scSymbol].conversion_factor = utilities.deepGet(oThis.dataConfig, 'token.conversion_factor');
+      return mergedConfig;
+    },
+
     initUIValues: function() {
-      oThis.jBtToMintWei    = $("[name='" + oThis.btToMintName +"']") ;
-      oThis.jOstToStakeWei  = $("[name='" + oThis.ostToStakeName+ "']") ;
+      oThis.jBtToMintSmallestUnit   = $("[name='" + oThis.btToMintName +"']") ;
+      oThis.jScToStakeSmallestUnit  = $("[name='" + oThis.scToStakeName+ "']") ;
       oThis.jBtToMint = $("#"+oThis.btToMintId);
       oThis.jBtToMint.trigger('change');
-      oThis.jBtToOstConversion.text(  oThis.getOstToBTConversion() );
+      oThis.jBtToStakeCurrencyConversion.text(  oThis.getStakeCurrencyToBTConversion() );
       oThis.initConfirmStakeMintFormHelper();
-      oThis.initGetOstFormHelper();
+      oThis.initGetScFormHelper();
     },
     
     initConfirmStakeMintFormHelper : function () {
@@ -177,11 +187,22 @@
         }
       });
     },
+
+    btToStakeCurrencySmallestUnit : function( val ){
+      if(!oThis.pricer) return val ;
+      var sc =  oThis.pricer.btToSc( val );
+      return oThis.toSmallestUnit( sc );
+    },
+
+    toSmallestUnit : function( val ) {
+      if( !oThis.pricer ) return val ;
+      return oThis.pricer.toSmallestUnit( val );
+    },
     
-    initGetOstFormHelper: function () {
-      oThis.getOstFormHelper = oThis.jGetOstForm.formHelper({
+    initGetScFormHelper: function () {
+      oThis.getScFormHelper = oThis.jGetScForm.formHelper({
         beforeSend : function () {
-         oThis.requestingOstUIState();
+         oThis.requestingScUIState();
         },
         success: function ( res ) {
           if( res.success ){
@@ -190,11 +211,11 @@
               oThis.onWorkFlow( workflowId );
             }, 0 );
           }else {
-            oThis.resetGetOstUIState( res );
+            oThis.resetGetScUIState( res );
           }
         },
         error: function ( jqXhr , error ) {
-         oThis.resetGetOstUIState( error );
+         oThis.resetGetScUIState( error );
         }
       });
     },
@@ -216,16 +237,16 @@
 
       $('#'+oThis.btToMintId).on( 'keyup change' ,function () {
         var bt = $(this).val(),
-            ostToStake = PriceOracle.btToOst( bt ) ;
-        if( !PriceOracle.isNaN( oThis.totalOST ) ) {
-          oThis.updateSupplyPieChart( ostToStake ) ;
+            scToStake = oThis.pricer.btToSc( bt ) ;
+        if( !oThis.pricer.isNaN( oThis.totalSc ) ) {
+          oThis.updateSupplyPieChart( scToStake ) ;
         }
       } );
       
     },
     
     onWorkFlow : function ( workflowId ) {
-      oThis.startGetOstPolling( workflowId )
+      oThis.startGetScPolling( workflowId )
     },
   
     setStakerAddress : function (  ) {
@@ -234,7 +255,7 @@
     },
 
     checkForBal: function () {
-      oThis.resetGetOstUIState();
+      oThis.resetGetScUIState();
       $.ajax({
         url: oThis.getBalanceApi,
         method: 'GET',
@@ -260,30 +281,30 @@
   
     checkForBalSuccess : function( res ) {
       var eth = utilities.deepGet( res , "data.balance.ETH"),
-        ost = utilities.deepGet( res , "data.balance.OST"),
+        sc = utilities.deepGet( res , "data.balance."+oThis.scSymbol),
         ethBN = eth && BigNumber( eth ),
-        ostBN =  ost && BigNumber( ost ),
+        scBN =  sc && BigNumber( sc ),
         minETHRequire = oThis.getMinETHRequired(),
-        minOstRequire = oThis.getMinOstRequired(),
+        minScRequire = oThis.getMinScRequired(),
         lowEth = !ethBN ||  ethBN.isLessThan( minETHRequire ),
-        lowOst = !ostBN || ostBN.isLessThan( minOstRequire )
+        lowSc = !scBN || scBN.isLessThan( minScRequire )
       ;
 
-      if( lowEth || lowOst ){
+      if( lowEth || lowSc ){
         oThis.jLowBal.hide();
         oThis.showSection(  oThis.jInsufficientBalSection ) ;
       }
 
-      if( lowEth && lowOst ) {
-        oThis.jEthOstText.show();
+      if( lowEth && lowSc ) {
+        oThis.jEthSCText.show();
       } else if( lowEth ) {
         oThis.jEtherText.show();
-      } else if( lowOst ) {
-        $('.buy-ost-btn').show();
-        oThis.jOstText.show();
+      } else if( lowSc ) {
+        $('.buy-sc-btn').show();
+        oThis.jScText.show();
       } else{
-        ost = PriceOracle.fromWei( ost );
-        oThis.onValidationComplete( ost );
+        sc = oThis.pricer.fromSmallestUnit( sc );
+        oThis.onValidationComplete( sc );
       }
     },
   
@@ -292,135 +313,128 @@
     },
    
 
-    /*********************************************************************************************************
-     *       NOTE IMPORTANT : OST PASSED AFTER VALIDATION ON BALANCE IS NOT IN WEI , ITS ABSOLUTE VALUE      *
-     *********************************************************************************************************/
+    /********************************************************************************************************************
+     * NOTE IMPORTANT : STAKE CURRENCY PASSED AFTER VALIDATION ON BALANCE IS NOT IN Smallest UNit , ITS ABSOLUTE VALUE  *
+     ********************************************************************************************************************/
   
-    onValidationComplete : function ( ost ) {
+    onValidationComplete : function ( sc ) {
       var btToMint = oThis.getBTtoMint() ,
-          ostToStake = PriceOracle.btToOst( btToMint );
+          scToStake = oThis.pricer.btToSc( btToMint );
       ;
-      if( !PriceOracle.isNaN( ost )){
-        oThis.totalOST = Number( ost );
+      if( !oThis.pricer.isNaN( sc )){
+        oThis.totalSc = Number( sc );
       }
       oThis.mintDonuteChart = new GoogleCharts();
-      oThis.initSupplyPieChart( ostToStake );
-      $('.total-ost-available').text( PriceOracle.toPrecessionOst( ost ) );  //No mocker so set via precession
-      var ostBalance = oThis.ostAvailableOnBtChange( btToMint ) ;
-      $('.ost-mocker-value.total-ost-available').text( PriceOracle.toPrecessionOst( ostBalance ) ) ;
-      oThis.updateSlider( ost );
+      oThis.initSupplyPieChart( scToStake );
+      $('.total-sc-available').text( oThis.pricer.toScPrecision( sc ) );  //No mocker so set via precession
+      var scBalance = oThis.scAvailableOnBtChange( btToMint ) ;
+      $('.ost-mocker-value.total-sc-available').text( oThis.pricer.toScPrecision( scBalance ) ) ;  //No mocker so set via precession
+      oThis.updateSlider( sc );
       oThis.showSection(  oThis.jStakeMintProcess ) ;
     },
   
-    requestingOstUIState : function () {
+    requestingScUIState : function () {
       $('.jStatusWrapper').hide();
-      $('.jGetOstLoaderText').show();
+      $('.jGetScLoaderText').show();
       //This will be handled by FormHelper , but its a common function for long polling so dont delete
-      utilities.btnSubmittingState( oThis.jGetOstBtn );
+      utilities.btnSubmittingState( oThis.jGetScBtn );
     } ,
   
-    resetGetOstUIState: function () {
+    resetGetScUIState: function () {
       $('.jStatusWrapper').show();
-      $('.jGetOstLoaderText').hide();
+      $('.jGetScLoaderText').hide();
       //This will be handled by FormHelper , but its a common function for long polling so dont delete
-      utilities.btnSubmitCompleteState( oThis.jGetOstBtn );
+      utilities.btnSubmitCompleteState( oThis.jGetScBtn );
     },
   
   
-    startGetOstPolling: function ( workflowId ) {
+    startGetScPolling: function ( workflowId ) {
       if( !workflowId ) return ;
-      oThis.requestingOstUIState();
+      oThis.requestingScUIState();
       var workflowApi = oThis.getWorkFlowStatusApi( workflowId )
       ;
-      oThis.getOstPolling = new Polling({
+      oThis.getScPolling = new Polling({
         pollingApi      : workflowApi ,
         pollingInterval : 4000,
-        onPollSuccess   : oThis.getOstPollingSuccess,
-        onPollError     : oThis.getOstPollingError
+        onPollSuccess   : oThis.getScPollingSuccess,
+        onPollError     : oThis.getScPollingError
       });
-      oThis.getOstPolling.startPolling();
+      oThis.getScPolling.startPolling();
     },
   
-    getOstPollingSuccess : function( response ){
+    getScPollingSuccess : function( response ){
       var pollingThis = this ;
       if(response && response.success){
         if( pollingThis.isWorkflowFailed( response ) || pollingThis.isWorkflowCompletedFailed( response ) ){
-          oThis.showGetOstPollingError( response );
+          oThis.showGetScPollingError( response );
         }else if( !pollingThis.isWorkFlowInProgress( response ) ){
           pollingThis.stopPolling();
           oThis.checkForBal();
         }
       }else {
-        oThis.showGetOstPollingError( response );
+        oThis.showGetScPollingError( response );
       }
     },
   
-    getOstPollingError : function( jqXhr , error  ){
+    getScPollingError : function( jqXhr , error  ){
       var pollingThis = this ;
       if( pollingThis.isMaxRetries() ){
-        oThis.showGetOstPollingError( error );
+        oThis.showGetScPollingError( error );
       }
     },
   
-    showGetOstPollingError : function ( res ) {
-      oThis.getOstPolling.stopPolling();
-      utilities.showGeneralError( oThis.jGetOstForm ,  res ,  oThis.getOstError  );
-      oThis.resetGetOstUIState();
+    showGetScPollingError : function ( res ) {
+      oThis.getScPolling.stopPolling();
+      utilities.showGeneralError( oThis.jGetScForm ,  res ,  oThis.getScError  );
+      oThis.resetGetScUIState();
     },
     
-    updateSlider : function ( ost ) {
-      var maxBT = oThis.getMaxBTToMint( ost ),
+    updateSlider : function ( sc ) {
+      var maxBT = oThis.getMaxBTToMint( sc ),
           jSlider = oThis.jBtToMint.closest( '.form-group' ).find('#'+oThis.btToMintId+"_slider")
       ;
       oThis.jBtToMint.attr("max" , maxBT );
       jSlider.slider({"max" : maxBT }) ;
     },
   
-    ostAvailableOnBtChange : function ( val ) {
-      if( PriceOracle.isNaN( oThis.totalOST )) {
+    scAvailableOnBtChange : function ( val ) {
+      if(!oThis.pricer) return;
+      if( oThis.pricer.isNaN( oThis.totalSc )) {
         return val ;
       }
-      var ostToStake = PriceOracle.btToOst( val ) ;
-      if( PriceOracle.isNaN( ostToStake )) {
-        return oThis.totalOST  ;
+      var scToStake = oThis.pricer.btToSc( val ) ;
+      if( oThis.pricer.isNaN( scToStake )) {
+        return oThis.totalSc  ;
       }
-      ostToStake = Number( ostToStake ) ;
+      scToStake = Number( scToStake ) ;
 
-      var ostAvailable = oThis.totalOST - ostToStake;
+      var scAvailable = oThis.totalSc - scToStake;
 
-      if( ostAvailable < 0 ){
+      if( scAvailable < 0 ){
         return 0 ;
       }
       
-      return ostAvailable  ;
-    },
-  
-    btToOstWei : function ( val ) {
-      return PriceOracle.toWei( PriceOracle.btToOst( val ));
+      return scAvailable  ;
     },
   
     getMinETHRequired : function () {
-      return utilities.deepGet( oThis.dataConfig , "min_eth_required" );
+      return utilities.deepGet( oThis.dataConfig , "min_balances.ETH" );
     },
     
-    getMinOstRequired : function () {
-      return utilities.deepGet( oThis.dataConfig , "min_ost_required" );
+    getMinScRequired : function () {
+      return utilities.deepGet( oThis.dataConfig , "min_balances."+oThis.scSymbol );
     },
-    
-    getPricePoint : function () {
-      return utilities.deepGet( oThis.dataConfig , "price_points.OST.USD" ) ;
-    },
-    
-    getOstToBTConversion : function () {
+
+    getStakeCurrencyToBTConversion : function () {
       return  utilities.deepGet( oThis.dataConfig , "token.conversion_factor" ) ;
     },
-  
-    getSimpleTokenABI : function () {
-      return utilities.deepGet( oThis.dataConfig , "contract_details.simple_token.abi" );
+
+    getStakeCurrencyABI : function () {
+      return utilities.deepGet( oThis.dataConfig , "contract_details.stake_currency.abi" );
     },
   
-    getSimpleTokenContractAddress : function () {
-      return utilities.deepGet( oThis.dataConfig , "contract_details.simple_token.address" );
+    getStakeCurrencyContractAddress : function () {
+      return utilities.deepGet( oThis.dataConfig , "contract_details.stake_currency.address" );
     },
   
     getBrandedTokenABI : function () {
@@ -478,8 +492,9 @@
       return utilities.deepGet( oThis.dataConfig , "workflow.id" ) ;
     },
   
-    getMaxBTToMint : function ( ost ) {
-      return PriceOracle.ostToBt(ost );  //Mocker will take care of precession
+    getMaxBTToMint : function ( val ) {
+      if(!oThis.pricer) return;
+      return oThis.pricer.scToBt(val );  //Mocker will take care of precision
     },
     
     getWorkFlowStatusApi : function ( id ) {
@@ -496,24 +511,30 @@
       oThis.dataConfig[ key  ] = data ;
     },
 
-    setOstToStakeWei: function( val ){
-      oThis.jOstToStakeWei.val( val );
+    setScToSmallestUnit: function( val ){
+      oThis.jScToStakeSmallestUnit.val( val );
     },
 
-    getOstToStakeWei: function(  ){
-      return oThis.jOstToStakeWei.val( );
+    getScToSmallestUnit: function(  ){
+      return oThis.jScToStakeSmallestUnit.val( );
     },
 
-    setBtToMintWei: function( val ){
-      oThis.jBtToMintWei.val( val );
+    setBtToMintSmallestUnit: function( val ){
+      oThis.jBtToMintSmallestUnit.val( val );
     },
 
-    getBtToMintWei: function(  ){
-      return  oThis.jBtToMintWei.val( );
+    getBtToMintSmallestUnit: function(  ){
+      return  oThis.jBtToMintSmallestUnit.val( );
     },
   
     btToFiat : function (val) {
-      return PriceOracle.btToFiat( val ) ;  //Mocker will take care of precession
+      if(!oThis.pricer) return val;
+      return oThis.pricer.btToFiat( val ) ;  //Mocker will take care of precision
+    },
+
+    btToSc : function( val ){
+      if(!oThis.pricer) return val;
+      return oThis.pricer.btToSc( val ) ;  //Mocker will take care of precision
     },
 
     showSection : function( jSection ){
@@ -521,46 +542,46 @@
       jSection.show();
     },
   
-    updateSupplyPieChart: function (  ostToStake ) {
+    updateSupplyPieChart: function (  scToStake ) {
       if( !oThis.mintDonuteChart ) return ;
       
-      ostToStake = ostToStake && Number(ostToStake) || 0;
+      scToStake = scToStake && Number(scToStake) || 0;
     
-      if( ostToStake < 0 ) {
-        ostToStake = 0 ;
+      if( scToStake < 0 ) {
+        scToStake = 0 ;
       }
       
-      var ostAvailable  = oThis.totalOST -  ostToStake  ;
+      var scAvailable  = oThis.totalSc -  scToStake  ;
 
-      if( ostAvailable < 0){
-        ostAvailable = 0;
+      if( scAvailable < 0){
+        scAvailable = 0;
       }
 
       var data = [
         ['Type', 'Tokens'],
-        ['OSTStaked', ostToStake],
-        ['OSTAvailable', ostAvailable]
+        ['ScStaked', scToStake],
+        ['scAvailable', scAvailable]
       ];
      oThis.mintDonuteChart.draw({
         data : data
       });
     },
     
-    initSupplyPieChart: function( ostToStake  ){
+    initSupplyPieChart: function( scToStake  ){
       
-      ostToStake    = ost && Number( ostToStake ) || 0 ;
+      scToStake    = scToStake && Number( scToStake ) || 0 ;
       
-      var ostAvailable  = oThis.totalOST -  ostToStake  ;
+      var scAvailable  = oThis.totalSc -  scToStake  ;
       oThis.mintDonuteChart.draw({
         data: [
           ['Type', 'Tokens'],
-          ['OSTStaked', ostToStake],
-          ['OSTAvailable', ostAvailable]
+          ['ScStaked', scToStake],
+          ['scAvailable', scAvailable]
         ],
-        selector: '#ostSupplyInAccountPie',
+        selector: '#scSupplyInAccountPie',
         type: 'PieChart',
         options: {
-          title: 'OST SUPPLY IN ACCOUNT',
+          title: this.scSymbol +' SUPPLY IN ACCOUNT',
           pieHole: 0.7,
           pieSliceText: 'none',
           pieSliceBorderColor: 'none',

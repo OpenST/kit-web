@@ -120,21 +120,21 @@
     onConfirmStakeMintSuccess : function ( res ) {
       var oThis =  this ,
         data = res && res.data ,
-        ostToStake = utilities.deepGet( res , "data.precise_amounts.stake_currency"),
+        scToStake = utilities.deepGet( res , "data.precise_amounts.stake_currency"),
         btToMint =   utilities.deepGet( res , "data.precise_amounts.bt" )
       ;
       oThis.setDataInDataConfig( "gatewayComposerDetails" ,  data );
       oThis.showSection( oThis.jTokenStakeAndMintSignSection ) ;
-      oThis.setOstToStakeWei( ostToStake );
-      oThis.setBtToMintWei( btToMint );
+      oThis.setScToSmallestUnit( scToStake );
+      oThis.setBtToMintSmallestUnit( btToMint );
       oThis.approve( );
     },
   
     approve: function ( ) {
       var oThis = this  ;
 
-      var ostToStake = oThis.getOstToStakeWei() ,
-          btToMint = oThis.getBtToMintWei()
+      var scToStake = oThis.getScToSmallestUnit() ,
+          btToMint = oThis.getBtToMintSmallestUnit()
       ;
       
       oThis.resetState();
@@ -142,15 +142,15 @@
       // Build params for approve
       var params = [
         oThis.getGatewayComposerContractAddress(),
-        ostToStake
+        scToStake
       ];
-    
+
       // Create Encoded ABI using params
       var data = oThis.metamask.getContractEncodedABI(
-        oThis.getSimpleTokenContractAddress(),
+        oThis.getStakeCurrencyContractAddress(),
         'approve',  //ABI method name
         params,
-        oThis.getSimpleTokenABI()
+        oThis.getStakeCurrencyABI()
       );
     
       // Create options ABI using data
@@ -159,7 +159,7 @@
         params: [
           {
             "from": oThis.getWalletAddress(),
-            "to": oThis.getSimpleTokenContractAddress(),
+            "to": oThis.getStakeCurrencyContractAddress(),
             "data": data,
             "gas": oThis.getSimpleTokenContractGas(),
             "gasPrice": oThis.getGasPrice()
@@ -212,16 +212,16 @@
     
       var oThis = this ;
 
-      var ostToStakeWei = oThis.getOstToStakeWei() ,
-        btToMintWei = oThis.getBtToMintWei()
+      var scToSmallestUnit = oThis.getScToSmallestUnit() ,
+        btToSmallestUnit = oThis.getBtToMintSmallestUnit()
       ;
 
       var gatewayComposerTxParams = oThis.getGatewayComposerTxParams();
     
       // Build params for requestStake
       var params = [
-        ostToStakeWei,// OST wei as string
-        btToMintWei,  // BT wei as string
+        scToSmallestUnit,
+        btToSmallestUnit,
         gatewayComposerTxParams['gateway_contract'],
         gatewayComposerTxParams['stake_and_mint_beneficiary'],
         gatewayComposerTxParams['gas_price'],
@@ -348,22 +348,22 @@
       });
     },
   
-    getOstBal : function() {
+    getScBal : function() {
       var oThis = this ;
       var walletAddress = oThis.getWalletAddress(),
-        simpleTokenContractAddress  =   oThis.getSimpleTokenContractAddress()
+        simpleTokenContractAddress  =   oThis.getStakeCurrencyContractAddress()
       ;
-      oThis.defOstBal = $.Deferred();
-      oThis.metamask.balanceOf( walletAddress , simpleTokenContractAddress , function ( ost ) {
-        oThis.defOstBal.resolve( ost );
+      oThis.defScBal = $.Deferred();
+      oThis.metamask.balanceOf( walletAddress , simpleTokenContractAddress , function ( sc ) {
+        oThis.defScBal.resolve( sc );
       });
     },
   
     convertToBrandedTokens: function ( sucCallback ,  errCallback ) {
       var oThis = this ;
       var btToMint      = oThis.getBTtoMint() ,
-        ostToStake    = PriceOracle.btToOst( btToMint ) ,
-        ostToStakeWei = PriceOracle.toWei( ostToStake )
+        scToStake    = Pricer.btToSc( btToMint ) ,
+        scToSmallestUnit = Pricer.toSmallestUnit( scToStake )
       ;
     
       var options = {
@@ -372,7 +372,7 @@
           {
             to: oThis.getBrandedTokenContractAddress(),
             data: oThis.metamask.getContractEncodedABI(oThis.getBrandedTokenContractAddress(),
-              'convertToBrandedTokens', [ostToStakeWei] ,
+              'convertToBrandedTokens', [scToSmallestUnit] ,
               oThis.getBrandedTokenABI())
           }
         ]
@@ -384,9 +384,9 @@
           errCallback && errCallback( err );
         }else if( result && result.result ) {
           var btToMintHex = result.result ,
-            btToMintWei = window.web3.fromWei( btToMintHex , 'wei')
+            btToSmallestUnit = window.web3.fromWei( btToMintHex , 'wei')
           ;
-          sucCallback && sucCallback( ostToStakeWei, btToMintWei )
+          sucCallback && sucCallback( scToSmallestUnit, btToSmallestUnit )
         }
       
         err && console.error(err);

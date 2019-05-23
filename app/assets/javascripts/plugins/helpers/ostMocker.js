@@ -8,6 +8,8 @@
     }
   }
 
+  var PriceOracle = null ;
+
   var jqDataNameSpace     = "ostMocker";
   var eventNameSpace      = "";
   var delegateAttr        = "data-ost-mock-delegate-element";
@@ -37,7 +39,7 @@
       var oThis = this;
 
       var numPrecisionMapping = oThis.getNumberPrecisionMapping()
-        , mockPrecession
+        , mockPrecision
       ;
 
       if ( !oThis.targetSelector || !oThis.jElement ) {
@@ -67,8 +69,8 @@
       } else if ( typeof valType === "string" ) {
         valType = valType.toLowerCase();
         if ( numPrecisionMapping[ valType ] ) {
-          mockPrecession = numPrecisionMapping[ valType ];
-          targertVal = $.number( targertVal, mockPrecession );
+          mockPrecision = numPrecisionMapping[ valType ];
+          targertVal = $.number( targertVal, mockPrecision );
         } else {
           console.log("Unknown type '", valType, "'. Kindly Check.");
         }
@@ -79,14 +81,19 @@
     , getNumberPrecisionMapping: function () {
       var numPrecisionMapping = {
         "number": 2
-        ,"ost"  : 5
+        ,"sc"  : 5
         ,"bt"   : 5
         ,"fiat" : 2
       };
+      if( !PriceOracle ){
+        var ost = ns('ost');
+        PriceOracle = ost.PriceOracle ;
+      }
+
       if ( typeof PriceOracle !== 'undefined' ) {
-        numPrecisionMapping["ost"]  = PriceOracle.getOstPrecession();
-        numPrecisionMapping["bt"]   = PriceOracle.getBtPrecession();
-        numPrecisionMapping["fiat"] = PriceOracle.getFiatPrecession();
+        numPrecisionMapping["sc"]   = PriceOracle.getScPrecision();
+        numPrecisionMapping["bt"]   = PriceOracle.getBtPrecision();
+        numPrecisionMapping["fiat"] = PriceOracle.getFiatPrecision();
       }
       return numPrecisionMapping;
     }

@@ -53,7 +53,7 @@ class Web::EconomyController < Web::BaseController
 
   end
 
-  # Start Token Deploy
+  # Start token deploy.
   #
   # * Author: Ankit
   # * Date: 03/01/2019
@@ -75,7 +75,7 @@ class Web::EconomyController < Web::BaseController
 
   end
 
-  # Mint Tokens
+  # Mint tokens.
   #
   # * Author: Ankit
   # * Date: 03/01/2019

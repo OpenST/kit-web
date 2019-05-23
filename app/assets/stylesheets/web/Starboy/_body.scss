@@ -101,6 +101,12 @@ body.has-cover-element {
   overflow-y: hidden;
 }
 
+.sc-display-wrapper {
+  &.hide{
+    display: none;
+  }
+}
+
 
 
 /* ---------------------------------------------------

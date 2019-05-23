@@ -1,0 +1,63 @@
+<div class="row my-5">
+  <div class="card card-planner">
+    <div class="card-header text-left">
+      <h4 class="mb-2">Staking Options</h4>
+      <p class="font-weight-light mb-0">
+        Choose your Token Name and 3-4 character Identifier. The Identifier acts as a short code for your token, similar to currency codes, such as EUR, GBP, USD, ETH, BTC.
+      </p>
+    </div>
+    <div class="card-body mx-auto p-0 position-relative">
+      <span class="staking-options-or">OR</span>
+      <div class="card-group">
+        <div class="card ost-card border-left-0 border-top-0 border-bottom-0  <%= stake_currency_symbol == GlobalConstant::StakeCurrencies.ost_stake_currency_symbol ? "checkedlabel" : ""  %>">
+          <div class="card-body px-5 pb-0 text-left">
+            <h5 class="mb-3 d-inline-flex align-items-center">
+              <svg style="width: 50px;height: 50px;">
+                <switch>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#staking-options-ost-icon"></use>
+                </switch>
+              </svg>
+              <span class="ml-3">
+                <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerStakingOptions">Token</span> to OST
+              </span>
+            </h5>
+            <p class="m-0">Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam</p>
+          </div>
+          <div class="pt-6">
+            <label class="form-check-label radio-button-label p-0 w-100" for="staking_options_ost">
+              <input id="staking_options_ost" <%= stake_currency_symbol == GlobalConstant::StakeCurrencies.ost_stake_currency_symbol ? "checked" : "" %> hidden type="radio" name="stake_currency_symbol" value="<%= GlobalConstant::StakeCurrencies.ost_stake_currency_symbol %>" />
+              <div href="javascript:void(0)" class="btn btn-secondary ost">
+                <span class="using-ost">USE OST</span>
+                <span class="selected">SELECTED</span>
+              </div>
+            </label>
+          </div>
+        </div>
+        <div class="card ost-card border-0 <%= stake_currency_symbol == GlobalConstant::StakeCurrencies.usdc_stake_currency_symbol ? "checkedlabel" : ""  %>">
+          <div class="card-body px-5 pb-0 text-left">
+            <h5 class="mb-3 d-inline-flex align-items-center">
+              <svg style="width: 50px;height: 50px;">
+                <switch>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#staking-options-usdc-icon"></use>
+                </switch>
+              </svg>
+              <span class="ml-3">
+                <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerStakingOptions">Token</span> to USDC
+              </span>
+            </h5>
+            <p class="m-0">Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam</p>
+          </div>
+          <div class="pt-6">
+            <label class="form-check-label radio-button-label p-0 w-100" for="staking_options_usdc">
+              <input id="staking_options_usdc" <%= stake_currency_symbol == GlobalConstant::StakeCurrencies.usdc_stake_currency_symbol ? "checked" : ""  %> hidden type="radio" name="stake_currency_symbol" value="<%= GlobalConstant::StakeCurrencies.usdc_stake_currency_symbol %>" />
+              <div href="javascript:void(0)" class="btn btn-secondary usd">
+                <span class="using-ost">USE USD COIN</span>
+                <span class="selected">SELECTED</span>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

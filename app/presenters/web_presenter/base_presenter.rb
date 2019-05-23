@@ -55,9 +55,9 @@ module WebPresenter
       end
     end
 
-    def oracle_price_points
+    def price_points
       @o_p_p ||= begin
-        formatter_obj.present? ? formatter_obj.oracle_price_points : nil
+        formatter_obj.present? ? formatter_obj.price_points : nil
       end
     end
 
@@ -243,6 +243,22 @@ module WebPresenter
       @is_ost_managed ||= begin
         if formatter_obj.present? && formatter_obj.client_token.present?
           formatter_obj.client_token.properties.include?(GlobalConstant::Token.has_ost_managed_owner)
+        end
+      end
+    end
+
+    # NOTE:: Here,"Test" is appended specifically for display purpose for FE.
+    #
+    # This function to be used only for display purpose.
+    #
+    def display_stake_currency_symbol
+      @d_s_c_s ||= begin
+        if formatter_obj.present? && formatter_obj.client_token.present?
+          if GlobalConstant::Base.main_sub_environment?
+            "#{formatter_obj.client_token.stake_currency_symbol}"
+          else
+            "#{formatter_obj.client_token.stake_currency_symbol}-TEST"
+          end
         end
       end
     end

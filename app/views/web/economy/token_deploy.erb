@@ -12,7 +12,6 @@
   end
 
   current_step_failed_status = GlobalConstant::Workflow.failed
-  client_token_symbol = @presenter_obj.client_token_symbol
 %>
 
 <div class="token-deploy-container text-center" style="display: <%= !is_poll_failed ? "block" : "none" %>">
@@ -58,25 +57,25 @@
 
   <div class="optional-actions-content mx-auto token-deploy-content">
 
-    <% if is_mainnet %>
-      <div class="my-3 content-wrapper p-2  row">
-        <div class="col-1 my-auto">
-          <svg class="get-ost-icon align-middle" style="width: 34px; height: 34px">
-            <switch>
-              <use class="get-ost-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#get-ost-icon"></use>
-            </switch>
-          </svg>
-        </div>
-        <p class="col-7 text-left my-auto">
-          Buy OST to get started.
-        </p>
-        <div class="col-4">
-          <a class="btn btn-secondary" target="_blank" href="https://openst.org/#token">
-            Buy ost
-          </a>
-        </div>
-      </div>
-    <% end %>
+    <%# if is_mainnet %>
+<!--      <div class="my-3 content-wrapper p-2  row">-->
+<!--        <div class="col-1 my-auto">-->
+<!--          <svg class="get-ost-icon align-middle" style="width: 34px; height: 34px">-->
+<!--            <switch>-->
+<!--              <use class="get-ost-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#get-ost-icon"></use>-->
+<!--            </switch>-->
+<!--          </svg>-->
+<!--        </div>-->
+<!--        <p class="col-7 text-left my-auto">-->
+<!--          Buy <%#= stake_currency_symbol %> to get started.-->
+<!--        </p>-->
+<!--        <div class="col-4">-->
+<!--          <a class="btn btn-secondary" target="_blank" href="https://openst.org/#token">-->
+<!--            Buy <%#= stake_currency_symbol %>-->
+<!--          </a>-->
+<!--        </div>-->
+<!--      </div>-->
+    <%# end %>
 
     <div class="my-3 content-wrapper p-2  row">
       <div class="col-1 my-auto">

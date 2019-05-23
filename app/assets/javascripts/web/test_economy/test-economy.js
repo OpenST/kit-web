@@ -14,10 +14,10 @@
 
     },
     bindEvents : function () {
-      $('#invite-users-btn').on('click',function () {
-        $(this).hide();
-        $('.send-invite-section').show();
-      });
+      // $('#invite-users-btn').on('click',function () {
+      //   $(this).hide();
+      //   $('.send-invite-section').show();
+      // });
       $('#get-qr-code-btn').on('click',function () {
         $(this).hide();
         $('.qr-code-section').show();

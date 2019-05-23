@@ -193,8 +193,15 @@
 .ost-card{
   border: solid 1px rgba(159, 192, 207, 0.2);
   .btn{
-    background-color: rgba(159,192,207, 0.13);
-    color: $blue-800;
+    width: calc(100% + 1px);
+    &.ost{
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &.usd{
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
   }
   &.checkedlabel{
     background-color: rgba(175, 225, 227, 0.2);

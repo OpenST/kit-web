@@ -26,7 +26,7 @@
           <div class="pt-6">
             <label class="form-check-label radio-button-label p-0 w-100" for="staking_options_ost">
               <input id="staking_options_ost" <%= stake_currency_symbol == GlobalConstant::StakeCurrencies.ost_stake_currency_symbol ? "checked" : "" %> hidden type="radio" name="stake_currency_symbol" value="<%= GlobalConstant::StakeCurrencies.ost_stake_currency_symbol %>" />
-              <div href="javascript:void(0)" class="btn w-100">
+              <div href="javascript:void(0)" class="btn btn-secondary ost">
                 <span class="using-ost">USE OST</span>
                 <span class="selected">SELECTED</span>
               </div>
@@ -50,7 +50,7 @@
           <div class="pt-6">
             <label class="form-check-label radio-button-label p-0 w-100" for="staking_options_usdc">
               <input id="staking_options_usdc" <%= stake_currency_symbol == GlobalConstant::StakeCurrencies.usdc_stake_currency_symbol ? "checked" : ""  %> hidden type="radio" name="stake_currency_symbol" value="<%= GlobalConstant::StakeCurrencies.usdc_stake_currency_symbol %>" />
-              <div href="javascript:void(0)" class="btn w-100">
+              <div href="javascript:void(0)" class="btn btn-secondary usd">
                 <span class="using-ost">USE USD COIN</span>
                 <span class="selected">SELECTED</span>
               </div>

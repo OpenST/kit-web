@@ -111,7 +111,7 @@
         <span class="label">Block Explorer</span>
       </a>
     </li>
-    <%if !is_production_env && current_env != main_sub_env_url_prefix%>
+    <% unless GlobalConstant::Base.main_sub_environment? %>
     <li class="nav-item">
 <!--      Need to check one more flag for if tokens are available to mint-->
       <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_client_token_deployed? ? '' : 'disabled to-enable-on-setup' %> <%= @presenter_obj.is_test_economy_route? ? 'active': '' %>"  href="<%= test_economy_url %>">

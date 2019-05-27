@@ -4,7 +4,7 @@
   api_invite_to_test_economy = GlobalConstant::RoutesMap.getApis()[:api_invite_to_test_economy]
   has_setup_test_economy = @presenter_obj.client.has_setup_test_economy?
   qr_code_url = @presenter_obj.test_economy_details.qr_code_url
-  manager_email = @presenter_obj.client_manager.email
+  manager_email = @presenter_obj.manager.email
 %>
 
 <div class="test-economy-container mb-6">

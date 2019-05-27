@@ -4,6 +4,7 @@
   api_invite_to_test_economy = GlobalConstant::RoutesMap.getApis()[:api_invite_to_test_economy]
   has_setup_test_economy = @presenter_obj.client.has_setup_test_economy?
   qr_code_url = @presenter_obj.test_economy_details.qr_code_url
+  manager_email = @presenter_obj.client_manager.email
 %>
 
 <div class="test-economy-container mb-6">
@@ -85,7 +86,7 @@
           </switch>
         </svg>
         <h3>Economy Setup Successful!</h3>
-        <p class="font-weight-light w-75 mx-auto mt-3 mb-5">Your Brand Token Economy has been successfully integrated with the Demo App. An app invite has been sent to amulya@ost.com. Invite users to access the mobile application and connect to the economy.</p>
+        <p class="font-weight-light w-75 mx-auto mt-3 mb-5">Your Brand Token Economy has been successfully integrated with the Demo App. An app invite has been sent to <%= manager_email %>. Invite users to access the mobile application and connect to the economy.</p>
         <a href="javascript:void(0)" class="invite-users-btn btn btn-primary" title="Invite Users">INVITE USERS</a>
       </div>
     </div>

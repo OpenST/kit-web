@@ -32,7 +32,7 @@ module WebPresenter
     end
 
     def client_manager
-      @client ||= begin
+      @c_m ||= begin
         formatter_obj.present? ? formatter_obj.client_manager : nil
       end
     end

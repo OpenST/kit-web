@@ -193,7 +193,7 @@
 .ost-card{
   border: solid 1px rgba(159, 192, 207, 0.2);
   .btn{
-    width: calc(100% + 1px);
+    width: calc(100% - -1px);
     &.ost{
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;

@@ -1,0 +1,90 @@
+<div class="row card card-planner my-5">
+  <div class="text-left">
+    <div class="card-header">
+      <h4 class="mb-0 ">Advanced Options</h4>
+      <p class="font-weight-light mb-0 mt-2">
+        <% if is_mainnet%>
+          Set the fixed conversion rate between your Brand Token and the OST Token. Once you click "Proceed" on this page, this fixed conversation rate cannot be edited.
+        <% else %>
+          Set the fixed conversion rate between your Brand Token and the OST Token. Once you click "Proceed" on this page, this fixed conversation rate cannot be edited. Don't worry though, it's Sandbox -- this is just a test!
+        <%end%>
+        <span class="header-recommendation font-weight-bold">
+          We recommend keeping it simple and setting the conversion rate to 1
+          <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
+          = 1 <span class="stake-currency-symbol"><%= stake_currency_symbol %></span> = <%= fiat_currency_symbol['USD'] %>
+          <span class="j-fiat-value <%=GlobalConstant::StakeCurrencies.ost_stake_currency_symbol%>-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol != GlobalConstant::StakeCurrencies.ost_stake_currency_symbol ? "hide" : ""  %>"></span>
+          <span class="j-fiat-value <%=GlobalConstant::StakeCurrencies.usdc_stake_currency_symbol%>-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol == GlobalConstant::StakeCurrencies.ost_stake_currency_symbol ? "hide" : ""  %>"></span>
+          USD
+        </span>
+      </p>
+    </div>
+  </div>
+  <div class="accordion" id="advance-options-accordion">
+    <div class="text-left">
+      <div class="" id="advance-options-header">
+        <p class="text-left slider-recommendation m-3 ">
+          We recommend keeping it simple and setting the conversion rate to
+          <span class="conversion-rate">1</span>
+          <b> <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>  =</b>
+          <span class="conversion-rate">1</span>
+          <b> <span class="stake-currency-symbol"><%= stake_currency_symbol %></span> =</b><%= fiat_currency_symbol['USD'] %>
+          <span class="conversion-rate j-fiat-value <%=GlobalConstant::StakeCurrencies.ost_stake_currency_symbol%>-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol != GlobalConstant::StakeCurrencies.ost_stake_currency_symbol ? "hide" : ""  %>"></span>
+          <span class="conversion-rate j-fiat-value <%=GlobalConstant::StakeCurrencies.usdc_stake_currency_symbol%>-sc-display-wrapper sc-display-wrapper <%= stake_currency_symbol == GlobalConstant::StakeCurrencies.ost_stake_currency_symbol ? "hide" : ""  %>"></span>
+          <b>USD</b>
+          <span class="edit-collapse ml-1" data-toggle="collapse"
+                data-target="#collapsable-element"
+                aria-expanded="true" aria-controls="collapsable-element">EDIT
+                      </span>
+        </p>
+      </div>
+      <div id="collapsable-element" class="collapse"
+           aria-labelledby="advance-options-header" data-parent="#advance-options-accordion">
+        <div class="card-body pt-3 pb-0">
+          <div class="conversion-section user-form">
+            <div class="card-group">
+              <div class="row form-group w-100 mb-2">
+                <div class="col-6 right-border m-0 card adv-opt-card">
+                  <div class="mx-auto">
+                    <label class="form-label mb-3">SET CONVERSION RATE</label>
+                    <div class="d-flex align-items-center">
+                      <span class="conversion-rate mr-1">1</span> <span class="stake-currency-symbol"><%= stake_currency_symbol %></span>
+                      <span class="equal-to-sign mx-2 font-weight-bold">=</span>
+                      <span class="quantity">
+                                <input type="number" min="<%=bt_to_sc_min%>" max="<%= bt_to_sc_max %>"
+                                       step="<%= bt_to_sc_step%>" id="<%= sc_to_bt_id %>"
+                                       data-msg-min="Please enter a value greater than 0.00001."
+                                       data-msg-max="The value entered must be less than or equal to <%= bt_to_sc_max %>"
+                                       name="conversion_factor" value="<%= conversion_factor %>" title="Conversion rate value" required>
+                              </span>
+                      <span class="ost-mocker-value ml-1" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 right-border m-0 card adv-opt-card">
+                  <div class="mx-auto">
+                    <label class="form-label mb-3">AT CURRENT CONVERSION RATE</label>
+                    <div class="d-flex align-items-center">
+                      <span class="conversion-rate mr-1">1</span>
+                      <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
+                      <span class="equal-to-sign mx-2 font-weight-bold">=</span> <%= fiat_currency_symbol['USD'] %>
+                      <span class="ost-mocker-value conversion-rate j-bt-to-fiat-val text-truncate"
+                            data-type="fiat" data-ost-mock-element="#<%=sc_to_bt_id%>"  data-ost-mock-parser="ost.tokenSetup.btToFiat"> <%= sc_to_fiat %>
+                                                  </span>
+                    </div>
+                  </div>
+                </div>
+<!--                <div class="col-4 instruction-text">-->
+<!--                  The conversion rate establishes a fixed rate of exchange between your Brand Token and the OST token.-->
+<!--                </div>-->
+                <div class="invalid-feedback ml-3 col-6 text-center" style="font-size: 12px" data-for="conversion_factor" ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="invalid-feedback general_error mb-2" data-for="general_error"></div>
+      </div>
+    </div>
+  </div>
+</div>

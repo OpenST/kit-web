@@ -2,9 +2,19 @@
   workflow_id = @presenter_obj.workflow.id
   minting_status_api = GlobalConstant::RoutesMap.getApis()[:api_workflow]+"/#{workflow_id}"
   bt_symbol = @presenter_obj.client_token_symbol
-  stake_ost = @presenter_obj.workflow_payload.fe_stake_currency_to_stake
+  stake_sc = @presenter_obj.workflow_payload.fe_stake_currency_to_stake
   total_mint_bt = @presenter_obj.workflow_payload.fe_bt_to_mint
   dashboard_url = GlobalConstant::RoutesMap.getRoutes()[:token_dashboard]
+  data_config = {
+      token: @presenter_obj.client_token.data,
+      price_points: @presenter_obj.price_points.data,
+      stake_currencies: @presenter_obj.stake_currencies.data
+  }
+
+  stake_currency_symbol = 'OST'
+  if @presenter_obj.client_token.present? && @presenter_obj.client_token.stake_currency_id.present?
+    stake_currency_symbol = @presenter_obj.client_token.stake_currency_symbol
+  end
 %>
 
 <div class="container token-mint-progress-container">
@@ -28,7 +38,7 @@
                 </switch>
               </svg>
               <span class="ml-3 align-middle text-muted font-weight-light">
-                Allow the contract Stake <%= stake_ost%> <%= ost_currency_symbol %> to Mint <%= total_mint_bt%> <%= bt_symbol %> Tokens
+                Allow the contract Stake <%= stake_sc%> <%= stake_currency_symbol %> to Mint <%= total_mint_bt%> <%= bt_symbol %> Tokens
               </span>
             </div>
             <div class="alert alert-secondary align-items-center d-flex" role="alert">
@@ -85,9 +95,12 @@
 <% content_for :end_js do%>
   <script>
     $(function () {
+      var dataConfig = JSON.parse('<%= raw data_config.to_json %>');
       ost.tokenMintProgress.init({
         mintingStatusEndPoint:"<%=minting_status_api%>",
-        workflowId : "<%= workflow_id%>"
+        workflowId : "<%= workflow_id%>",
+        dataConfig : dataConfig,
+        scSymbol : '<%= stake_currency_symbol %>'
       });
     });
   </script>

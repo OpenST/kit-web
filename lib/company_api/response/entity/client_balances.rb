@@ -31,7 +31,7 @@ module CompanyApi
         end
 
         def conversion_factors
-          @c_r ||= @data.present? ? @data['oracle_price_points'] : {}
+          @c_r ||= @data.present? ? @data['price_points'] : {}
         end
 
         def ost_based_conversion_factors

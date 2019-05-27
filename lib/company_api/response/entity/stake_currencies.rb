@@ -20,14 +20,18 @@ module CompanyApi
           @data = data
         end
 
-        def id_obj_map
+        def symbol_obj_map
           @iom ||= begin
             buffer = {}
             id_data_map.each do |id, data|
-              buffer[id.to_i] = CompanyApi::Response::Entity::StakeCurrency.new(data)
+              buffer[id] = CompanyApi::Response::Entity::StakeCurrency.new(data)
             end
             buffer
           end
+        end
+
+        def data
+          @data
         end
 
         private

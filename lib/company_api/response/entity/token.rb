@@ -36,6 +36,10 @@ module CompanyApi
           @data['stake_currency_id'] ||= '' # stake currency id may not be present
         end
 
+        def stake_currency_symbol
+          @data['stake_currency_symbol'] ||= '' # stake currency symbol may not be present
+        end
+
         def ubt_address
           @data['ubt_address'] ||= '' #ubt address may not be present
         end

@@ -45,6 +45,7 @@
       ;
       for (i = 0; i < paths.length; ++i) {
         if (current[paths[i]] == undefined) {
+          console.warn('Could not find '+path+' in data');
           return undefined;
         } else {
           current = current[paths[i]];
@@ -94,6 +95,10 @@
       return val.toUpperCase() || 'BT';
     },
 
+    mockerStakingOptions: function ( val ) {
+      return val.toUpperCase() || 'Token';
+    },
+
     getFormData : function($form){
       var unindexed_array = $form.serializeArray();
       var indexed_array = {};
@@ -103,6 +108,27 @@
       });
 
       return indexed_array;
+    },
+
+    showStakeCurrencyWrappers : function (  scSymbol  , jWrapper ) {
+      scSymbol = scSymbol && String( scSymbol );
+      if( !scSymbol ) return ;
+      var scClassName = 'sc-display-wrapper' ,
+          sHideEls = "."+scClassName ,
+          sShowEls = "."+ scSymbol + "-" + scClassName,
+          jHideEls , jShowEls
+      ;
+      if( jWrapper ){
+        jHideEls = jWrapper.find( sHideEls );
+        jShowEls = jWrapper.find( sShowEls );
+      }else {
+        jHideEls = $( sHideEls );
+        jShowEls =  $( sShowEls  );
+      }
+
+      jHideEls.addClass('hide');
+      jShowEls.removeClass('hide');
+
     }
   }
 

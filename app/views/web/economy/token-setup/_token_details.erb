@@ -1,0 +1,34 @@
+<div class="row my-5">
+  <div class="card card-planner">
+    <div class="card-header text-left">
+      <h4 class="mb-2 ">Token Details</h4>
+      <p class="font-weight-light mb-0">
+        Choose your Token Name and 3-4 character Identifier. The Identifier acts as a short code for your token, similar to currency codes, such as EUR, GBP, USD, ETH, BTC.
+      </p>
+    </div>
+    <div class="card-body ">
+      <div class="user-form row text-left">
+        <div class="form-group mb-2 d-inline-block col-3 mr-4">
+          <label class="form-label" for="token_name">Token Name</label>
+          <input type="text" class="form-control" id="name"
+                 value ="<%= @presenter_obj.client_token_name%>"
+                 placeholder="Token Name" name="name" title="Token name"
+                 minlength="4" maxlength="20" pattern="^[a-zA-Z][a-zA-Z0-9\s]+[a-zA-Z0-9\s]+[a-zA-Z0-9]" required
+                 autocomplete="off"  data-msg-pattern="Please enter letters, numbers and spaces only."
+                 tabindex="1" />
+          <div class="invalid-feedback" data-forid="name">&nbsp;</div>
+        </div>
+        <div class="form-group mb-2 d-inline-block col-3">
+          <label class="form-label" for="token_symbol">Token Identifier</label>
+          <input type="text" class="form-control text-uppercase" id="symbol"
+                 value ="<%= @presenter_obj.client_token_symbol%>" title="Token identifier"
+                 placeholder="Token Identifier" name="symbol"
+                 minlength="3" maxlength="4" pattern="^[a-zA-Z][a-zA-Z0-9]+" required
+                 autocomplete="off" data-msg-pattern="Please enter letters and numbers only."
+                 tabindex="1" />
+          <div class="invalid-feedback" data-forid="symbol">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

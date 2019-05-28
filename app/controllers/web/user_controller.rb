@@ -182,29 +182,44 @@ class Web::UserController < Web::BaseController
   end
 
   def verify_device
-    unless Util::CommonValidator.is_valid_token?(params[:d_t])
-      render 'web/user/invalid_token'
-      return
-    end
 
-    @response = CompanyApi::Request::Access.new(
-      CompanyApi::Response::Formatter::Manager,
-      request.cookies,
-      {"User-Agent" => http_user_agent}
-    ).verify_device(d_t: params[:d_t])
-
-    if @response.success?
-      if @response.go_to.present?
-        handle_temporary_redirects(@response)
+    if params[:d_t].present?
+      unless Util::CommonValidator.is_valid_token?(params[:d_t])
+        render 'web/user/invalid_token'
         return
-      else
-        render 'web/user/verify_email_success' and return
       end
-    elsif @response.http_code == GlobalConstant::ErrorCode.unauthorized_access
-      redirect_to :login and return
+
+      @response = CompanyApi::Request::Access.new(
+        CompanyApi::Response::Formatter::Manager,
+        request.cookies,
+        {"User-Agent" => http_user_agent}
+      ).verify_device(d_t: params[:d_t])
+
+      if @response.success?
+        if @response.go_to.present?
+          handle_temporary_redirects(@response)
+          return
+        else
+          render 'web/user/verify_email_success' and return
+        end
+      elsif @response.http_code == GlobalConstant::ErrorCode.unauthorized_access
+        redirect_to :login and return
+      else
+        render 'web/user/invalid_token'
+        return
+      end
     else
-      render 'web/user/invalid_token'
-      return
+      @response = CompanyApi::Request::Access.new(
+        CompanyApi::Response::Formatter::Manager,
+        request.cookies,
+        {"User-Agent" => http_user_agent}
+      ).verify_device({})
+
+      if @response.go_to.present? || !@response.success?
+        return handle_temporary_redirects(@response)
+      end
+
+      @presenter_obj = ::WebPresenter::ManagerPresenter.new(@response, params)
     end
   end
 

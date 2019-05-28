@@ -161,6 +161,8 @@ class ApplicationController < ActionController::Base
     case service_response.go_to['by_screen_name']
       when 'verify_email'
         redirect_to :verify_email and return
+      when 'verify_device'
+        redirect_to :verify_device and return
       when 'setup_mfa'
         redirect_to :mfa and return
       when 'authenticate_mfa'

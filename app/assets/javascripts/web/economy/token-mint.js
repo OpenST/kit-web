@@ -534,7 +534,7 @@
 
     btToSc : function( val ){
       if(!oThis.pricer) return val;
-      return oThis.pricer.btToSc( val ) ;  //Mocker will take care of precision
+      return oThis.pricer.btToScPrecision( val ) ;
     },
 
     showSection : function( jSection ){

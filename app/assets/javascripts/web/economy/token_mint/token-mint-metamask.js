@@ -359,6 +359,8 @@
       });
     },
   
+    
+    //Un-used code
     convertToBrandedTokens: function ( sucCallback ,  errCallback ) {
       var oThis = this ;
       var btToMint      = oThis.getBTtoMint() ,

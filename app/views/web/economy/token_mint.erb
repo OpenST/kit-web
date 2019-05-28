@@ -65,7 +65,7 @@
 
   <div id="stake-mint-start" class="col-9 mx-auto mt-6 jMintSections" style="display: <%= is_workflow ? "none" : "block" %>">
     <div class="card text-center p-6 card-planner border-0">
-      <% if GlobalConstant::Environment.main_sub_environment? %>
+      <% if GlobalConstant::Base.main_sub_environment? %>
         <h3 class="mb-0">Mint Your Brand Tokens</h3>
       <% else %>
         <h3 class="mb-0">You'll need Brand Tokens to try out the test economy</h3>

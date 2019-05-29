@@ -12,8 +12,6 @@
       oThis.onSetup();
       oThis.bindEvents();
 
-      // oThis.selectizedField[0].selectize.clear();
-
       oThis.selectizedField = $('#set-up-email-address').selectize({
         plugins: ['remove_button'],
         openOnFocus: false,

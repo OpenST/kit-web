@@ -95,8 +95,14 @@
       return val.toUpperCase() || 'BT';
     },
 
-    mockerStakingOptions: function ( val ) {
-      return val.toUpperCase() || 'Token';
+    mockerStakingOstOptions: function ( val ) {
+      var common = 'Stake OST Tokens';
+      return (val && common + ' to mint ' + val.toUpperCase()) || 'Stake OST Tokens';
+    },
+
+    mockerStakingUsdcOptions: function ( val ) {
+      var common = 'Stake USDC';
+      return (val && common + ' to mint ' + val.toUpperCase()) || 'Stake USDC';
     },
 
     getFormData : function($form){

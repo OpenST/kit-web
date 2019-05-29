@@ -26,13 +26,13 @@
 
       var alternateHash = utilities(navigator.userAgent);
       oThis.fingerprintHash.val(alternateHash);
-      oThis.fingerprintType.val(0);
+      oThis.fingerprintType.val('browser_agent');
 
       Fingerprint2.get(function(components){
         var hash = Fingerprint2.x64hash128(components.map(function (pair) { return pair.value }).join());
         if(hash && hash !== "00000000000000000000000000000000"){
           oThis.fingerprintHash.val(hash);
-          oThis.fingerprintType.val(1);
+          oThis.fingerprintType.val('fingerprint_js');
         }
       });
     }

@@ -87,6 +87,10 @@
         var responsivelyLazy = window.responsivelyLazy;
         responsivelyLazy && responsivelyLazy.forceLoadAll && responsivelyLazy.forceLoadAll();
       }, 100);
+
+      ost.securityCheck.init({
+        domain: <%= raw Base64.encode64(URI.parse(GlobalConstant::Base.company_other_product_urls['kit_root_url']).host).split('') %>
+      })
     })
   });
   window.redirectMap = <%= raw GlobalConstant::RoutesMap.getRoutes.to_json %>;

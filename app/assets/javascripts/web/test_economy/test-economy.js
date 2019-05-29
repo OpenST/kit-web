@@ -12,6 +12,24 @@
       oThis.onSetup();
       oThis.bindEvents();
 
+      // oThis.selectizedField[0].selectize.clear();
+
+      oThis.selectizedField = $('#set-up-email-address').selectize({
+        plugins: ['remove_button'],
+        openOnFocus: false,
+        createOnBlur: true,
+        delimiter: ',',
+        persist: false,
+        maxItems: 5,
+        create: function(input) {
+          return {
+            value: input,
+            text: input
+          }
+        }
+      });
+      $('#set-up-email-address-selectized').focus();
+
     },
     bindEvents : function () {
       $('.invite-users-btn').on('click',function () {
@@ -39,7 +57,8 @@
       oThis.inviteEconomyForm.formHelper({
         success:function(response){
           if(response && response.success){
-            oThis.inviteEconomyForm[0].reset();
+            // oThis.inviteEconomyForm[0].reset();
+            oThis.selectizedField[0].selectize.clear();
            $('.test-economy-post-setup').hide();
            $('.invite-successful').show();
           }

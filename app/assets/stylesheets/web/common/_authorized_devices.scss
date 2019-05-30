@@ -1,0 +1,17 @@
+// Import functions as variables depend on functions
+@import "../../plugins/bootstrap/scss/functions";
+
+// Import theme variables
+@import "../Starboy/variables";
+
+.authorized_device_popup{
+  --widtha: calc(100% - 250px);
+  --widthb: calc(var(--widtha)/2);
+  --widthc: calc( var(--widthb) + 250px);
+  left: var(--widthc);
+  top: 50px;
+  transform: translate(-50%,0);
+  background-color: #f1f5f8;
+  height: 80px;
+  border-radius: 10px;
+}

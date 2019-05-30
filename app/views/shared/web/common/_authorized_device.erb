@@ -6,3 +6,8 @@
   </svg>
   <p class="my-auto">This device/browser has been authorized successfully</p>
 </div>
+<% content_for :end_js do %>
+  <script type="text/javascript">
+    ost.authorizeDevice.init();
+  </script>
+<% end %>

@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
   def handle_whitelisted_api_cookies
     new_api_cookies = request.cookies[GlobalConstant::Cookie.new_api_cookie_key.to_sym]
     return if new_api_cookies.blank?
-    whitelisted_api_cookies = [GlobalConstant::Cookie.user_cookie_name, GlobalConstant::Cookie.last_used_env_cookie_name]
+    whitelisted_api_cookies = [GlobalConstant::Cookie.user_cookie_name, GlobalConstant::Cookie.last_used_env_cookie_name, GlobalConstant::Cookie.device_verification_toast_cookie_name]
     whitelisted_api_cookies.each do |key|
       whitelisted_cookie = new_api_cookies[key]
       if whitelisted_cookie.present? and whitelisted_cookie.is_a?(Hash)
@@ -197,6 +197,23 @@ class ApplicationController < ActionController::Base
         render_error_response_for(service_response)
     end
 
+  end
+
+  # Delete cookie
+  #
+  # * Author: Ankit
+  # * Date: 30/05/2019
+  # * Reviewed By:
+  #
+  # @params [String] cookie_name (mandatory)
+  #
+  def delete_cookie(cookie_name)
+    cookies.delete(
+      cookie_name.to_sym,
+      domain: GlobalConstant::CompanyApi.cookie_domain,
+      secure: Rails.env.production?,
+      same_site: :strict
+    )
   end
 
 end

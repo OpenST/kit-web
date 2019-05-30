@@ -4,11 +4,11 @@
   ;
 
   var oThis = ost.authorizeDevice ={
-    init: function () {
-      if(true){
+    init: function (config) {
+      if(config.devtCookiePresent){
         setTimeout(function () {
           $(".authorized_device_popup").animate({opacity:0})
-        },5000)
+        },3000)
       }
     }
   }

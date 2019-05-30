@@ -8,6 +8,8 @@
 </div>
 <% content_for :end_js do %>
   <script type="text/javascript">
-    ost.authorizeDevice.init();
+    ost.authorizeDevice.init({
+      devtCookiePresent : <%=@is_dvt_cookie_present%>
+    });
   </script>
 <% end %>

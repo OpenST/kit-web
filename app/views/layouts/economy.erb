@@ -106,7 +106,7 @@
   <% content_for :popups do %>
     <%= render :partial => "shared/web/modals/help_video" %>
   <%end%>
-  <% if true %>
+  <% if @is_dvt_cookie_present %>
     <%= render :partial => "shared/web/common/authorized_device" %>
   <% end %>
 </main>

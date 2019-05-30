@@ -181,6 +181,14 @@ class Web::UserController < Web::BaseController
     
   end
 
+  # Kit verify device email
+  #
+  # NOTE: Verify device page works with logged in and logged out modes
+  #
+  # * Author: Ankit
+  # * Date: 29/05/2019
+  # * Reviewed By:
+  #
   def verify_device
 
     if params[:d_t].present?
@@ -200,7 +208,7 @@ class Web::UserController < Web::BaseController
           handle_temporary_redirects(@response)
           return
         else
-          render 'web/user/verify_email_success' and return
+          render 'web/user/verify_device_success' and return
         end
       elsif @response.http_code == GlobalConstant::ErrorCode.unauthorized_access
         redirect_to :login and return

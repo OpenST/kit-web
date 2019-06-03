@@ -19,6 +19,8 @@ class Web::UserController < Web::BaseController
 
   after_action :remove_browser_caching
 
+  include UserHelper
+
   # Kit Signup page
   #
   # * Author: Puneet

@@ -2,3 +2,4 @@
 //= require web/common/NavBar
 //= require web/home/index
 //= require plugins/responsively_lazy/responsivelyLazy
+//= require web/common/Cookie

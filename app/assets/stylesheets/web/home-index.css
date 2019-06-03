@@ -14,4 +14,5 @@
  *= require web/home/BlockchainInfra
  *= require web/home/Text
  *= require web/common/_svgcheckbox
+ *= require web/common/_cookie_consent
  */

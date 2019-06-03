@@ -1,0 +1,32 @@
+<div class="accept-cookie-wrapper px-3" style="display: none;">
+  <div>
+    <svg width="24" height="35" class="ml-2 mr-4 mt-2 btn-reject-cookies">
+      <switch>
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cross-mark"></use>
+      </switch>
+    </svg>
+  </div>
+  <div class="my-3">
+    We use cookies to provide you with the best browsing experience. We use essential cookies as well as third-party cookies. You may refuse the third-party cookies by clicking X. A detailed description of the cookies we use can be found in our <a class="cookie-privacy-policy font-weight-bold" href="<%=GlobalConstant::Base.root_url%>privacy"> Privacy Policy</a> .
+  </div>
+  <div class="btn-accept-cookie-wrapper my-auto ml-2">
+    <button type="button"  class="btn btn-primary btn-accept-cookie mr-3">Accept</button>
+  </div>
+</div>
+<div class="modal demo-modal" tabindex="-1" role="dialog" >
+  <div class="modal-dialog demo-modal-dialog"  role="document">
+    <div class="modal-content">
+      <div class="modal-body ">
+        <button type="button" class=" btn-reject-cookies"  data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="mb-3 mx-3">
+          We use cookies to provide you with the best browsing experience. We use essential cookies as well as third-party cookies. You may refuse the third-party cookies by clicking X. A detailed description of the cookies we use can be found in our  <a class="cookie-privacy-policy-modal font-weight-bold" href="<%=GlobalConstant::CompanyOtherProductUrls.kit_root_url%>privacy">Privacy Policy</a> .
+        </div>
+        <div class="btn-accept-cookie-wrapper text-center">
+          <button type="button" class="btn btn-primary btn-accept-cookie" data-dismiss="modal">Accept</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -120,7 +120,7 @@ class Web::BaseController < ApplicationController
   # * Reviewed By:
   #
   def delete_dvt_cookie
-    if @is_dvt_cookie_present && action_name != "verify_device"
+    if @is_dvt_cookie_present && action_name != "verify_device" && response.status == 200
       delete_cookie(GlobalConstant::Cookie.device_verification_toast_cookie_name.to_sym)
     end
   end

@@ -105,6 +105,8 @@
               <div class="g-recaptcha mx-auto  form-recapcha-wrap d-inline-block" id="myid" data-sitekey="<%= GlobalConstant::Base.recaptcha['site_key'] %>"></div>
               <div class="recaptcha-submit-error invalid-feedback">&nbsp;</div>
             </div>
+            <input name="fingerprint" type="hidden" id="fingerprintHash"/>
+            <input name="fingerprint_type" type="hidden" id="fingerprintType"/>
 
             <div class="form-group text-center" >
               <button type="submit" id="register-btn"  class="btn btn-gold" data-submiting="Registering">Register</button>

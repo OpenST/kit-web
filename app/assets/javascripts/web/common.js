@@ -23,3 +23,5 @@
 //= require web/common/LeftMenu
 //= require web/utils/PriceOracle
 //= require web/utils/PricerFactory
+//= require plugins/fpjs/fingerprint
+//= require web/common/authorized_device_popup

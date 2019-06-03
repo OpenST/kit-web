@@ -47,6 +47,18 @@ module CompanyApi
         get('verify-email', params)
       end
 
+      # Verify Device
+      #
+      # * Author: Ankit
+      # * Date: 23/05/2019
+      # * Reviewed By:
+      #
+      # @param [Hash] params - contains token (d_t)
+      #
+      def verify_device(params)
+        get('verify-device', params)
+      end
+
       # Get details to load QR code for setting up MFA
       #
       # * Author: Puneet

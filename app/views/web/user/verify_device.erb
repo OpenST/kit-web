@@ -1,0 +1,23 @@
+<div class="device-verification text-center mt-6">
+  <div class="row text-center">
+    <svg class="mx-auto" style="width: 100px;height: 100px">
+      <switch>
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#verify-device-icon"></use>
+      </switch>
+    </svg>
+  </div>
+  <div class="row">
+    <div class="col-6 mx-auto">
+      <form id="send-verify-device-link" class="user-form"
+            action="<%= GlobalConstant::RoutesMap.getApis()[:api_send_verify_device_link] %>" method="POST" data-ost-formhelper >
+        <h3 class="mt-2">Authorize New Device/Browser!</h3>
+        <p class="text-muted">You are trying to login to Platform from an unrecognized device or browser.
+          A confirmation email has been sent you. Please confirm this device/browser.</p>
+        <p class="small text-muted">Did not receive an email yet?</p>
+        <button type="submit" class="btn btn-secondary" id="re-send-email"  data-submiting="Re-Sending">re-send email</button>
+        <div class="success" id="successMessage"></div>
+        <div class="general_error invalid-feedback">&nbsp;</div>
+      </form>
+    </div>
+  </div>
+</div>

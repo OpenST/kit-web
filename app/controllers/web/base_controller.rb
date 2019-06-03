@@ -2,6 +2,8 @@ class Web::BaseController < ApplicationController
 
   before_action :basic_auth
   before_action :is_user_logged_in
+  before_action :is_dvt_cookie_present
+  after_action  :delete_dvt_cookie
 
   include Util::ResultHelper
 
@@ -9,6 +11,18 @@ class Web::BaseController < ApplicationController
 
   def is_user_logged_in
     @is_user_logged_in = cookies[GlobalConstant::Cookie.user_cookie_name.to_sym].present?
+  end
+
+  # is dvt cookie present
+  #
+  # This is used to display toast on device verification
+  #
+  # * Author: Ankit
+  # * Date: 30/05/2019
+  # * Reviewed By:
+  #
+  def is_dvt_cookie_present
+    @is_dvt_cookie_present = cookies[GlobalConstant::Cookie.device_verification_toast_cookie_name.to_sym].present?
   end
 
   # Render error response pages
@@ -96,6 +110,18 @@ class Web::BaseController < ApplicationController
         request.cookies,
         {"User-Agent" => http_user_agent}
       ).logout({})
+    end
+  end
+
+  # Delete dvt cookie
+  #
+  # * Author: Ankit
+  # * Date: 30/05/2019
+  # * Reviewed By:
+  #
+  def delete_dvt_cookie
+    if @is_dvt_cookie_present && action_name != "verify_device"
+      delete_cookie(GlobalConstant::Cookie.device_verification_toast_cookie_name.to_sym)
     end
   end
 

@@ -5,4 +5,8 @@ module UserHelper
     ['reset_password', 'login', 'sign_up'].include?(params[:action])
   end
 
+  def security_check_needed?
+    ['login', 'sign_up'].include?(params[:action])
+  end
+
 end

@@ -41,6 +41,20 @@
       color: $red;
     }
   }
+  .api-keys-banner{
+    background-color: $china-ivory;
+    height:20px;
+    .banner-text{
+      background-color: $yellow-300;
+      color: $white;
+      text-transform: uppercase;
+      font-size: 12px;
+      padding: 1px 5px;
+      display: inline-block;
+      font-weight: 500;
+      letter-spacing: 2px;
+    }
+  }
 
 }
 

@@ -40,6 +40,19 @@
           "description" => "This contract is deployed on the value chain. It optimizes the transactions required to perform the stake and mint process."
       }
   ]
+  api_keys = [
+      {
+          "key" => "test key1",
+          "secret" => "test secret1"
+      },
+      {
+          "key" => "test key2",
+          "secret" => "test secret2",
+          "expiry_timestamp" => "1559651514"
+      }
+  ]
+  api_keys = nil
+  email_already_sent_flag = true
 %>
 
 <div class="developers-container">
@@ -48,17 +61,69 @@
       Developers
     </h3>
     <div class=" mt-5">
-      <h4 class="mb-3">Get API Keys</h4>
-      <p>
-        In order to use OST Platform APIs you will have to authenticate your account by including an API signature in every request. Signatures validate the authenticity of the account which interacts with OST Platform and ensures that the message sent has not been tampered with.
-        <br/>
-        <br/>
-        Please make sure to never share your API Secret Key and to keep it private and secure. You can always generate a new set of API keys. Once new keys are generated, you can choose to delete the old keys immediately or allow them to expire in 24 hours.
-      </p>
-      <button type="button" class="btn btn-primary mt-3 show-keys-btn" data-submiting="Fetching..." >Show Keys</button>
-      <button type="button" class="btn btn-primary mt-3 generate-key-btn" data-submiting="Creating...">Create New Keys</button>
-      <div class="error mt-2 generate-key-error"></div>
-      <div class="keys-wrapper"></div>
+      <div class="mb-5">
+        <h4 class="mb-3">Get API Keys</h4>
+        <p>
+          In order to use OST Platform APIs you will have to authenticate your account by including an API signature in every request. Signatures validate the authenticity of the account which interacts with OST Platform and ensures that the message sent has not been tampered with.
+          <br/>
+          <br/>
+          Please make sure to never share your API Secret Key and to keep it private and secure. You can always generate a new set of API keys. Once new keys are generated, you can choose to delete the old keys immediately or allow them to expire in 24 hours.
+        </p>
+      </div>
+      <% if !api_keys%>
+        <button type="button" class="btn btn-primary show-keys-btn" <%= email_already_sent_flag ? 'disabled' : ''%> data-submiting="Fetching..." >Show Keys</button>
+        <button type="button" class="btn btn-primary generate-key-btn" data-submiting="Creating...">Create New Keys</button>
+        <div class="error mt-2 generate-key-error"></div>
+      <%end%>
+        <div class="mb-5">
+          <% if api_keys %>
+            <div class="keys-wrapper">
+              <div class="api-keys-banner text-center"><span class="banner-text">TEST KEYS</span></div>
+              <% api_keys.each_with_index do |keyObj, index| %>
+                <div class="dev-container-box <%= index == 0 ? "" : "mt-3" %> p-3">
+                  <div class="row">
+                    <div class="col-8">
+                      <h4>API Key</h4>
+                      <p><%=keyObj['key']%></p>
+                    </div>
+                    <%if keyObj['expiry_timestamp']%>
+                      <div class="col-4">
+                        <div class="float-right d-inline d-flex align-items-center">
+                          <% date = Time.at(keyObj['expiry_timestamp'].to_i).utc%>
+                          <span class="mr-2 expiry">Expires on <%= date.strftime("#{date.day.ordinalize} %b %Y")%></span>
+                          <span class="api-delete-btn">
+                    <svg class="align-middle" style="height: 35px;width: 35px;">
+                      <switch>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#api-delete-icon"></use>
+                      </switch>
+                    </svg>
+                  </span>
+                        </div>
+                      </div>
+                    <%end %>
+                  </div>
+                  <div>
+                    <h4>API Secret</h4>
+                    <p><%=keyObj['secret']%></p>
+                  </div>
+                  <div class="error delete-key-error"></div>
+                </div>
+              <%end %>
+            </div>
+          <%else%>
+              <div class="keys-wrapper"></div>
+          <%end%>
+          <% if email_already_sent_flag && !api_keys%>
+            <p class="bg-light rounded display-3 font-weight-bold p-3 mb-1">
+              <svg class="align-middle" style="width:25px;height:25px;">
+                <switch>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
+                </switch>
+              </svg>
+              We sent you an email to confirm this request. After confirming, you can see and edit all keys for 15 minutes </p>
+            <p class="mb-3">Didn’t receive the email? <span>Resend it</span></p>
+          <%end%>
+        </div>
     </div>
 
     <div>
@@ -193,8 +258,9 @@
 
   <script type="text/x-handlebars-template" id="api-info">
     <div class="my-5">
+      <div class="api-keys-banner text-center"><span class="banner-text">TEST KEYS</span></div>
       {{#each keys}}
-      <div class="dev-container-box mt-3 p-3">
+      <div class="dev-container-box {{#if @index}}mt-3{{/if}} p-3">
         <div class="row">
           <div class="col-8">
             <h4>API Key</h4>

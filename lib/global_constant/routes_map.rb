@@ -43,6 +43,7 @@ module GlobalConstant
             api_pre_mint:         "/#{GlobalConstant::Environment.url_prefix}/api/token/pre-mint",
             get_api_keys:         "/#{GlobalConstant::Environment.url_prefix}/api/developer/api-keys",
             delete_api_key:       "/#{GlobalConstant::Environment.url_prefix}/api/developer/api-keys/delete",
+            resend_api_key:       "/#{GlobalConstant::Environment.url_prefix}/api/verify-sda/request-link",
             api_activate_test_economy: "/#{GlobalConstant::Environment.url_prefix}/api/test-economy",
             api_invite_to_test_economy: "/#{GlobalConstant::Environment.url_prefix}/api/test-economy/invite",
             api_list_admins:      "/api/setting/team/list",

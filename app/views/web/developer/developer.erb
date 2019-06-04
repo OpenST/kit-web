@@ -1,6 +1,7 @@
 <%
   api_get_key = GlobalConstant::RoutesMap.getApis()[:get_api_keys]
   api_delete_key = GlobalConstant::RoutesMap.getApis()[:delete_api_key]
+  resend_api_key = GlobalConstant::RoutesMap.getApis()[:resend_api_key]
   developer_page_addresses = @presenter_obj.developer_page_addresses
   display_stake_currency_symbol = @presenter_obj.display_stake_currency_symbol
   developer_addresses_config = [
@@ -40,19 +41,8 @@
           "description" => "This contract is deployed on the value chain. It optimizes the transactions required to perform the stake and mint process."
       }
   ]
-  api_keys = [
-      {
-          "key" => "test key1",
-          "secret" => "test secret1"
-      },
-      {
-          "key" => "test key2",
-          "secret" => "test secret2",
-          "expiry_timestamp" => "1559651514"
-      }
-  ]
-  api_keys = nil
-  email_already_sent_flag = true
+  api_keys = @presenter_obj.api_keys
+  email_already_sent_flag = @presenter_obj.email_already_sent_flag
 %>
 
 <div class="developers-container">
@@ -121,7 +111,7 @@
                 </switch>
               </svg>
               We sent you an email to confirm this request. After confirming, you can see and edit all keys for 15 minutes </p>
-            <p class="mb-3">Didn’t receive the email? <span>Resend it</span></p>
+            <p class="mb-3">Didn’t receive the email? <span class="resend-btn">Resend it</span></p>
           <%end%>
         </div>
     </div>
@@ -247,7 +237,8 @@
   <script type="text/javascript">
     ost.developer.init({
       'api_get_key' : "<%= api_get_key %>",
-      'api_delete_key' : "<%= api_delete_key %>"
+      'api_delete_key' : "<%= api_delete_key %>",
+      'resend_api_key' : "<%= resend_api_key %>"
     });
 
     Handlebars.registerHelper('prettifyDate',function( timestamp ){

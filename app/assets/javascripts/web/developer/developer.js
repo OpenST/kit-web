@@ -13,6 +13,7 @@
     jKeysWrapper    : $('.keys-wrapper'),
     jMainContainer  : $('.developers-container'),
     jGenerateErr    : $('.generate-key-error'),
+    jResendLink     : $('.resend-btn'),
     jDeleteErr      : null,
     keys            : null,
 
@@ -43,6 +44,11 @@
         e.stopPropagation();
         oThis.jDeleteErr = $(this).closest('.dev-container-box').find('.delete-key-error');
         oThis.deleteAPIKey();
+      });
+
+      oThis.jResendLink.on('click',function( e ){
+        e.stopPropagation();
+        oThis.resendEmail();
       });
 
     },
@@ -114,6 +120,24 @@
         },
         error     : function ( err ) {
           oThis.onError( err , oThis.jDeleteErr );
+        },
+        complete  : function () {
+
+        }
+      });
+    },
+
+    resendEmail: function(){
+      $.ajax({
+        url       : oThis.resend_api_key,
+        method    : 'POST',
+        success   : function ( response ) {
+          if( response.success ) {
+            console.log("Resend email success");
+          }
+        },
+        error     : function ( err ) {
+          console.log("Resend email error occurred!!");
         },
         complete  : function () {
 

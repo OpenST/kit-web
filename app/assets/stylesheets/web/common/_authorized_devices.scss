@@ -3,15 +3,12 @@
 
 // Import theme variables
 @import "../Starboy/variables";
+.authorized_device_popup_wrap{
+  top: 100px;
+  width: calc(100% - 265px);
 
-.authorized_device_popup{
-  --widtha: calc(100% - 250px);
-  --widthb: calc(var(--widtha)/2);
-  --widthc: calc(var(--widthb) + 250px);
-  left: var(--widthc);
-  top: 50px;
-  transform: translate(-50%,0);
-  background-color: $alice-blue;
-  height: 80px;
-  border-radius: 10px;
+  .authorized_device_popup{
+    background-color: $alice-blue;
+    border-radius: 10px;
+  }
 }

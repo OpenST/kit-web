@@ -10,7 +10,7 @@
         console.log("parseInt(timeout)",parseInt(timeout));
         console.log("timeout",timeout);
         setTimeout( function () {
-          $(".authorized_device_popup").animate({'opacity':0.5})
+          $(".authorized_device_popup").animate({'opacity':0})
         }, parseInt(timeout) );
       }
     }

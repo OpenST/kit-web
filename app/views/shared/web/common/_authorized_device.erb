@@ -1,10 +1,12 @@
-<div class="authorized_device_popup position-absolute p-2 d-flex row">
-  <svg width="35" height="35" class="my-auto m-2">
-    <switch>
-      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
-    </switch>
-  </svg>
-  <p class="my-auto">This device/browser has been authorized successfully</p>
+<div class="position-fixed d-flex justify-content-center authorized_device_popup_wrap">
+  <div class="authorized_device_popup p-2 d-flex ">
+    <svg width="35" height="35" class="my-auto m-2">
+      <switch>
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
+      </switch>
+    </svg>
+    <p class="my-auto">This device/browser has been authorized successfully</p>
+  </div>
 </div>
 <% content_for :end_js do %>
   <script type="text/javascript">

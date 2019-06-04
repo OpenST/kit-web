@@ -29,7 +29,7 @@
   }
 
   .conversion-section{
-    .col-4{
+    .adv-opt-card{
       font-size: 24px;
       font-weight: normal;
       color: $cyan;
@@ -49,7 +49,10 @@
       border: 0;
       justify-content: center;
       border-radius: 0;
-      border-right: 1px solid #dbf2f2;
+      border-left: 1px solid #dbf2f2;
+      &:first-child{
+        border: none;
+      }
     }
 
     .quantity {
@@ -169,4 +172,63 @@
   background-repeat: no-repeat!important;
   background-position: center right!important;
   background-size: contain !important;
+}
+
+.staking-options-or{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: $cyan;
+  z-index: 1;
+  border: solid 2px #ecf2f5;
+  background-color: $white;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  line-height: 36px;
+  font-weight: 600;
+  transform: translate(-50%, -50%);
+}
+
+.ost-card{
+  border: solid 1px rgba(159, 192, 207, 0.2);
+  .btn{
+    width: calc(100% - -1px);
+    &.ost{
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &.usd{
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+  &.checkedlabel{
+    background-color: rgba(175, 225, 227, 0.2);
+    transition: background-color 0.25s ease;
+    .btn{
+      background-color: $blue-800;
+      color: $white;
+    }
+  }
+}
+
+.using-ost, .selected{
+  display: none;
+}
+
+input[name="stake_currency_symbol"]:checked + div > span{
+  display: none;
+}
+
+input[name="stake_currency_symbol"]:not(:checked) + div > span{
+  display: block;
+}
+
+input[name="stake_currency_symbol"]:checked + div > span + span{
+  display: block;
+}
+
+input[name="stake_currency_symbol"]:not(:checked) + div > span + span{
+  display: none;
 }

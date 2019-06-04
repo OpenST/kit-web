@@ -21,3 +21,6 @@
 //= require plugins/helpers/responsiveBreakPoint
 //= require web/common/contentBlurOnModalShow
 //= require web/common/LeftMenu
+//= require web/utils/PriceOracle
+//= require web/utils/PricerFactory
+//= require web/common/Cookie

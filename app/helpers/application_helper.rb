@@ -73,4 +73,8 @@ module ApplicationHelper
     return GlobalConstant::Environment.go_back_env_url_prefix_param + "=" + go_back_value
   end
 
+  def show_cookie_consent_banner?
+    ['reset_password', 'login', 'sign_up'].include?(params[:action]) && ['web/user'].include?(params[:controller])
+  end
+
 end

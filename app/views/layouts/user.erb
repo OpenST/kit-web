@@ -69,6 +69,9 @@
 <main class="wrapper d-flex flex-column cloud-bg h-100">
   <%= render :partial => "/shared/web/common/header_logged_out" %>
   <%= yield %>
+  <% if show_cookie_consent_banner? %>
+    <%= render :partial => "/shared/web/common/cookie_banner" %>
+  <% end %>
 </main>
 
 <%= javascript_include_tag "web/common" %>
@@ -92,6 +95,11 @@
         domain: <%= raw Base64.encode64(URI.parse(GlobalConstant::Base.company_other_product_urls['kit_root_url']).host).split('') %>
       })
     })
+    <% if show_cookie_consent_banner? %>
+    ost.utils.cookieConsent.init({
+      domain: '<%= URI.parse(GlobalConstant::Base.root_url).host %>'
+    });
+    <% end %>
   });
   window.redirectMap = <%= raw GlobalConstant::RoutesMap.getRoutes.to_json %>;
 </script>

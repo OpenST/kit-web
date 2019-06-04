@@ -6,10 +6,10 @@ module CompanyApi
 
       class Base
 
-        attr_reader :manager, :client, :client_token, :stake_currencies, :oracle_price_points, :chain_interaction_params,
+        attr_reader :manager, :client, :client_token, :stake_currencies, :price_points, :chain_interaction_params,
                     :client_token_planner, :client_balances, :first_name, :last_name, :token_supply_details, :pending_critical_interactions,
                     :client_manager, :contract_details, :gas_price, :auxiliary_addresses, :origin_addresses,
-                    :workflow, :workflow_current_step, :sign_messages, :sub_env_payloads
+                    :workflow, :workflow_current_step, :sign_messages, :sub_env_payloads, :min_balances
 
         # Initialize
         #
@@ -49,7 +49,7 @@ module CompanyApi
         #
         # @param [Hash] client_data (mandatory) - client token hash
         #
-        # Sets @client_token
+        # Sets @client
         #
         def set_client(client_data)
           @client = CompanyApi::Response::Entity::Client.new(client_data)
@@ -119,7 +119,7 @@ module CompanyApi
         #
         # @param [Hash] client_token_data (mandatory) - client token hash
         #
-        # Sets @client_token
+        # Sets @client_balances
         #
         def set_client_balances(client_balances_data)
           @client_balances = CompanyApi::Response::Entity::ClientBalances.new(client_balances_data, @client_token)
@@ -162,7 +162,7 @@ module CompanyApi
         #
         # @param [Hash] token_supply_details_data (mandatory) - token supply details hash
         #
-        # Sets @client_token_balance
+        # Sets @token_supply_details
         #
         def set_token_supply_details(token_supply_details_data)
           @token_supply_details = CompanyApi::Response::Entity::TokenSupplyDetails.new(token_supply_details_data)
@@ -176,7 +176,7 @@ module CompanyApi
         #
         # @param [Hash] token_supply_details_data (mandatory) - token supply details hash
         #
-        # Sets @client_token_balance
+        # Sets @sign_messages
         #
         def set_sign_messages(sign_messages_data)
           @sign_messages = CompanyApi::Response::Entity::SignMessages.new(sign_messages_data)
@@ -190,10 +190,10 @@ module CompanyApi
         #
         # @param [Hash] price_points_data (mandatory) - price oracle data hash
         #
-        # Sets @oracle_price_points
+        # Sets @price_points
         #
         def set_price_points(price_points_data)
-          @oracle_price_points = CompanyApi::Response::Entity::PricePoints.new(price_points_data, @client_token)
+          @price_points = CompanyApi::Response::Entity::PricePoints.new(price_points_data, @client_token)
         end
 
         # Set client manager data
@@ -283,7 +283,7 @@ module CompanyApi
         #
         # @param [Hash] workflow_step_data (mandatory) - workflow_current_step data hash
         #
-        # Sets @origin_addresses
+        # Sets @workflow_current_step
         def set_workflow_current_step(workflow_step_data)
           @workflow_current_step = CompanyApi::Response::Entity::WorkflowCurrentStep.new(workflow_step_data)
         end
@@ -297,12 +297,11 @@ module CompanyApi
         # @param [Hash] pending_critical_interactions_data (mandatory)
         #
         # Sets @pending_critical_interactions
-        #
         def set_pending_critical_interactions(pending_critical_interactions_data)
           @pending_critical_interactions = CompanyApi::Response::Entity::PendingCriticalInteractions.new(pending_critical_interactions_data)
         end
 
-        # set_sub_env_payload
+        # Set_sub_env_payload
         #
         # * Author: Ankit
         # * Date: 02/02/2018
@@ -314,6 +313,19 @@ module CompanyApi
         #
         def set_sub_env_payload(data)
           @sub_env_payloads = CompanyApi::Response::Entity::SubEnvPayloads.new(data)
+        end
+
+        # Set min balances.
+        #
+        # * Author: Anagha
+        # * Date: 08/05/2019
+        # * Reviewed By:
+        #
+        # @param [Hash] data (mandatory)
+        #
+        # Sets @min_balances
+        def set_min_balances(data)
+          @min_balances = CompanyApi::Response::Entity::MinBalances.new(data)
         end
 
       end

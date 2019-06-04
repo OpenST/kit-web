@@ -228,6 +228,9 @@
             format: 'short',
             gridlines: {
               color: 'e3eef3'
+            },
+            viewWindow:{
+              min:0
             }
           }
         },

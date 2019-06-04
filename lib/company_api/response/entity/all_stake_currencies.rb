@@ -30,8 +30,6 @@ module CompanyApi
           end
         end
 
-        private
-
         def data
           @data
         end

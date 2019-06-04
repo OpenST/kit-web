@@ -1,4 +1,3 @@
-
 /*************IMP Note- Currently implemented as singleton, as 2 providers cant live parallelly.*******/
 
 ;(function (window,$) {
@@ -36,8 +35,8 @@
         ostToStake = utilities.deepGet( res , "data.precise_amounts.stake_currency"),
         btToMint =   utilities.deepGet( res , "data.precise_amounts.bt" )
       ;
-      oThis.setOstToStakeWei( ostToStake );
-      oThis.setBtToMintWei( btToMint );
+      oThis.setScToSmallestUnit( ostToStake );
+      oThis.setBtToMintSmallestUnit( btToMint );
        setTimeout( function () {
          utilities.btnSubmittingState(  $('#stake-and-mint-btn') );
          oThis.mint( );
@@ -69,7 +68,7 @@
   
     getMintData : function () {
       var oThis = this;
-      var formData =  utilities.getFormData( $("#stake-mint-confirm-form") );
+      var formData =  utilities.getFormData( oThis.jConfirmStakeMintForm );
       return formData;
     },
   

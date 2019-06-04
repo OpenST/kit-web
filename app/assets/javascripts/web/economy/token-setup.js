@@ -3,9 +3,13 @@
   
   var ost = ns("ost"),
     formHelper = window.FormHelper.prototype,
+    PricerFactory = ost.PricerFactory,
+    PriceOracle = ost.PriceOracle,
     redirectMap = window.redirectMap,
-    utilities = ns('ost.utilities')
+    utilities = ost.utilities
   ;
+
+  var Pricer = null  ;
   
   var oThis = ost.tokenSetup = {
     
@@ -31,26 +35,38 @@
     metamask: null,
     walletAssociation: null,
     chainId: null,
-  
-    ost_to_fiat: null,
-    ost_to_bt: null,
-    ostToBtId: null,
+
+    scToBtId: null,
     
     isMainnet: null,
     
     
     init: function (config) {
       $.extend(oThis, config);
+      oThis.initPricer();
       oThis.bindActions();
       oThis.jTokenForm.formHelper().success = oThis.tokenSuccess;
-      PriceOracle.init({
-        'ost_to_fiat': config['ost_to_fiat'],  //TODO change for stable coin
-        'ost_to_bt': config['ost_to_bt'],      //TODO change for stable coin
-        'P_FIAT': 5
-      });
       oThis.initDisplayFiatValue();
+      utilities.showStakeCurrencyWrappers( oThis.stakeCurrencySymbol );
     },
-    
+
+    initPricer : function() {
+      var config = oThis.getPricerConfig();
+      PricerFactory.init( config );
+      PriceOracle.setFiatPrecision( 5 );
+      Pricer = PricerFactory.getInstance( oThis.stakeCurrencySymbol );
+    },
+
+    getPricerConfig : function(){
+      var price_points = utilities.deepGet(oThis.dataConfig, 'price_points'),
+        stake_currencies = utilities.deepGet(oThis.dataConfig, 'stake_currencies'),
+        mergedConfig = {}
+      ;
+      $.extend(true,mergedConfig,price_points,stake_currencies);
+      mergedConfig[oThis.stakeCurrencySymbol].conversion_factor = utilities.deepGet(oThis.dataConfig, 'token.conversion_factor');
+      return mergedConfig;
+    },
+
     bindActions: function () {
       
       $("#advance-options-accordion").on('show.bs.collapse', function () {
@@ -61,30 +77,43 @@
       $('#mm-reconnect').off('click').on('click', function () {
         oThis.metamask.enable();
       });
-      
+
+      $('input[name="stake_currency_symbol"]').on("change", function(){
+        var scSymbol = $(this).val() ;
+        $(".ost-card").removeClass("checkedlabel");
+        if($(this).is(":checked")) $(this).closest(".ost-card").addClass("checkedlabel");
+        $('.stake-currency-symbol').text($(this).val().toUpperCase());
+        utilities.showStakeCurrencyWrappers( scSymbol );
+        oThis.updatePricer( scSymbol );
+        oThis.initDisplayFiatValue();
+      });
+
+    },
+
+    updatePricer : function( val ){
+      Pricer = PricerFactory.getInstance( val );
     },
     
     btToFiat: function (conversionFactor) {
-      if (!conversionFactor || !BigNumber) return conversionFactor;
+      if (!conversionFactor || !BigNumber || !Pricer ) return conversionFactor;
       conversionFactor = BigNumber(conversionFactor);
-      var fiatBN = BigNumber(oThis.ost_to_fiat),
+      var fiatBN = BigNumber(Pricer.SC_TO_FIAT),
         oneBTToFiat = fiatBN.dividedBy(conversionFactor)
       ;
-      return PriceOracle.toFiat(oneBTToFiat);
+      return Pricer.toFiat(oneBTToFiat);
     },
     
     initDisplayFiatValue: function () {
       var jEL = $('.j-bt-to-fiat-val'),
-        jInputEl = $('#' + oThis.ostToBtId),
-        val = jInputEl.val(),
-        btFiatVal = PriceOracle.btToFiatPrecession(1),
-        ostFiatVal = PriceOracle.ostToFiat(1)
+        jInputEl = $('#' + oThis.scToBtId),
+        val = jInputEl.val() ;
+      Pricer.SC_TO_BT = val || oThis.conversion_factor;
+      var btFiatVal = Pricer.btToFiatPrecision( 1 ),
+        scFiatVal = Pricer.scToFiat(1)
       ;
-      ostFiatVal = PriceOracle.toPrecessionFiat(ostFiatVal);
-      jEL.data("ost-mock-element", "#" + oThis.ostToBtId);
-      jEL.ostMocker();
+      scFiatVal = Pricer.toFiatPrecision(scFiatVal);
       jEL.text(btFiatVal);
-      $('.j-fiat-value').text(ostFiatVal);
+      $('.j-fiat-value').text(scFiatVal);
     },
     
     tokenSuccess: function (res) {

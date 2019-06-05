@@ -14,6 +14,7 @@
     jMainContainer  : $('.developers-container'),
     jGenerateErr    : $('.generate-key-error'),
     jResendLink     : $('.resend-btn'),
+    jEmailSentWrapper : $('.email-sent-wrapper'),
     jDeleteErr      : null,
     keys            : null,
 
@@ -60,6 +61,10 @@
         success   : function ( response ) {
           if( response.success ){
             oThis.keys = response.data && response.data['api_keys'];
+            var email_already_sent_flag = response.data && response.data['email_already_sent_flag'];
+            if(email_already_sent_flag) {
+              oThis.jEmailSentWrapper.show();
+            }
             oThis.onSuccess();
           }else {
             oThis.onError( response , oThis.jGenerateErr );

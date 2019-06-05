@@ -41,8 +41,10 @@
           "description" => "This contract is deployed on the value chain. It optimizes the transactions required to perform the stake and mint process."
       }
   ]
-  api_keys = nil
-  email_already_sent_flag = false
+  api_keys = @presenter_obj.api_keys
+  email_already_sent_flag = @presenter_obj.email_already_sent_flag?
+  puts "\n\n\n\napi_keys=========#{api_keys.inspect}"
+  puts "email_already_sent_flag=======#{email_already_sent_flag.inspect}"
 %>
 
 <div class="developers-container">
@@ -62,10 +64,10 @@
       </div>
       <% if !api_keys%>
         <button type="button" class="btn btn-primary show-keys-btn" <%= email_already_sent_flag ? 'disabled' : ''%> data-submiting="Requesting..." >Show Keys</button>
+      <%end%>
+      <% if api_keys %>
         <button type="button" class="btn btn-primary generate-key-btn" data-submiting="Creating...">Create New Keys</button>
         <div class="error mt-2 generate-key-error"></div>
-      <%end%>
-        <% if api_keys %>
           <div class="mb-5 keys-wrapper">
             <div class="api-keys-banner text-center"><span class="banner-text">TEST KEYS</span></div>
             <% api_keys.each_with_index do |keyObj, index| %>
@@ -77,17 +79,19 @@
                   </div>
                   <%if keyObj['expiry_timestamp']%>
                     <div class="col-4">
-                      <div class="float-right d-inline d-flex align-items-center">
-                        <% date = Time.at(keyObj['expiry_timestamp'].to_i).utc%>
-                        <span class="mr-2 expiry">Expires on <%= date.strftime("#{date.day.ordinalize} %b %Y")%></span>
-                        <span class="api-delete-btn">
-                  <svg class="align-middle" style="height: 35px;width: 35px;">
-                    <switch>
-                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#api-delete-icon"></use>
-                    </switch>
-                  </svg>
-                </span>
-                      </div>
+                      <% date = keyObj['expiry_timestamp'] == 0 ? '' : Time.at(keyObj['expiry_timestamp'].to_i).utc%>
+                      <% if date.present? %>
+                        <div class="float-right d-inline d-flex align-items-center">
+                          <span class="mr-2 expiry">Expires on <%= date.strftime("#{date.day.ordinalize} %b %Y")%></span>
+                          <span class="api-delete-btn">
+                            <svg class="align-middle" style="height: 35px;width: 35px;">
+                              <switch>
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#api-delete-icon"></use>
+                              </switch>
+                            </svg>
+                          </span>
+                        </div>
+                      <%end%>
                     </div>
                   <%end %>
                 </div>
@@ -99,33 +103,25 @@
               </div>
             <%end %>
           </div>
-          <div class="email-sent-wrapper" style="display: <%=email_already_sent_flag && !api_keys ? 'block' : 'none' %>">
-            <p class="bg-light rounded display-3 font-weight-bold p-3 mb-1">
-              <svg class="align-middle" style="width:25px;height:25px;">
-                <switch>
-                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
-                </switch>
-              </svg>
-              We sent you an email to confirm this request. After confirming, you can see and edit all keys for 15 minutes </p>
-            <p class="mb-3">Didn’t receive the email? <span class="resend-btn">Resend it</span></p>
-          </div>
-        <%else%>
-          <div class="keys-wrapper"></div>
-          <div class="email-sent-wrapper" style="display: none">
-            <p class="bg-light rounded display-3 font-weight-bold p-3 mb-1">
-              <svg class="align-middle" style="width:25px;height:25px;">
-                <switch>
-                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
-                </switch>
-              </svg>
-              We sent you an email to confirm this request. After confirming, you can see and edit all keys for 15 minutes </p>
-            <p class="mb-3">Didn’t receive the email? <span class="resend-btn">Resend it</span></p>
-          </div>
-        <%end%>
+      <%else%>
+        <div class="keys-wrapper"></div>
+      <%end%>
+      <div class="email-sent-wrapper" style="display: <%=email_already_sent_flag && !api_keys ? 'block' : 'none' %>">
+        <p class="bg-light rounded display-3 font-weight-bold p-3 mb-1">
+          <svg class="align-middle" style="width:25px;height:25px;">
+            <switch>
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
+            </switch>
+          </svg>
+          We sent you an email to confirm this request. After confirming, you can see and edit all keys for 15 minutes </p>
+        <p class="mb-3">Didn’t receive the email? <span class="resend-btn">Resend it</span></p>
+      </div>
     </div>
 
     <div>
       <h4 class="mb-3">Developer Resources</h4>
+      <%#= @presenter_obj.formatter_obj.api_keys.to_json %>
+      <%#= @presenter_obj.formatter_obj.email_already_sent_flag.to_json %>
       <p>
         The OST Platform provides:
         <span class="d-block my-2">* APIs, SDKs and Development tools for easy integration and deployment.</span>

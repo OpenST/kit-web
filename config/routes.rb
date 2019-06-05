@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
   scope "#{GlobalConstant::Environment.url_prefix}/developer", controller: 'web/developer', :format => false do
     get '/' => :developer, as: 'developer'
+    get '/verify-sda' => :verify_sda
   end
 
   # Enabling this route only for Non Production Sandbox ENV

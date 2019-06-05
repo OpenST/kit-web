@@ -23,6 +23,7 @@ module GlobalConstant
           service_unavailable:  "/service-unavailable/",
           verify_email:         "/verify-email/",
           verify_device:        "/verify-device/",
+          verify_sda:           "/verify-sda/",
           login:                "/login/",
           logout:                "/logout/"
 

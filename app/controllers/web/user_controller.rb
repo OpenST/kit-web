@@ -2,7 +2,7 @@ class Web::UserController < Web::BaseController
 
   layout "user"
 
-  before_action :check_if_device_is_supported
+  before_action :check_if_device_is_supported, except: [:verify_device]
   before_action :set_page_meta_info
 
   before_action :logout_if_login_cookie_present, only: [

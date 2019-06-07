@@ -90,8 +90,7 @@
       </a>
     </li>
     <% end  %>
-    <%# unless GlobalConstant::Base.main_sub_environment? %>
-    <%if !is_production_env && !GlobalConstant::Base.main_sub_environment? %>
+    <% unless GlobalConstant::Base.main_sub_environment? %>
       <li class="nav-item">
         <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_client_token_deployed? ? '' : 'disabled to-enable-on-setup' %> <%= @presenter_obj.is_test_economy_route? ? 'active': '' %>"  href="<%= test_economy_url %>">
           <svg class="icon">

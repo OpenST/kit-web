@@ -163,8 +163,8 @@ class ApplicationController < ActionController::Base
         redirect_to :verify_email and return
       when 'verify_device'
         redirect_to :verify_device and return
-    when 'verify_sda'
-      redirect_to :verify_sda and return
+      when 'verify_sda'
+        redirect_to :verify_sda and return
       when 'setup_mfa'
         redirect_to :mfa and return
       when 'authenticate_mfa'

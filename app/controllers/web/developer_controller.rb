@@ -52,8 +52,6 @@ class Web::DeveloperController < Web::BaseController
         {"User-Agent" => http_user_agent}
       ).verify_secure_data_access(a_t: params[:a_t])
 
-      puts "\n\n\n\n\n@response======#{@response.inspect}\n\n\n\n"
-
       if @response.success?
         if @response.go_to.present?
           handle_temporary_redirects(@response)

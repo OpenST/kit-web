@@ -25,4 +25,44 @@
   .card{
     border: none;
   }
+
+  .selectize-input{
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    &:focus{
+      box-shadow: none;
+    }
+    &:after,
+    &:before{
+      background: none;
+    }
+    input{
+      font-size: 1rem;
+      line-height: 100%!important;
+    }
+    &.has-items{
+      padding: 0!important;
+    }
+    > div{
+      margin: 0 5px 5px 0!important;
+      background: #cdd7da!important;
+      color: #597a84!important;
+      font-size: 16px;
+    }
+  }
+
+  .selectize-dropdown {
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    &.form-control{
+      border: none;
+    }
+    .selectize-dropdown-content {
+      .create {
+        display: none;
+      }
+    }
+  }
 }

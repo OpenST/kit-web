@@ -65,7 +65,7 @@
 
   <div id="stake-mint-start" class="col-9 mx-auto mt-6 jMintSections" style="display: <%= is_workflow ? "none" : "block" %>">
     <div class="card text-center p-6 card-planner border-0">
-      <h3 class="mb-0">Mint Your Brand Tokens</h3>
+        <h3 class="mb-0">Mint Your Brand Tokens</h3>
       <div class="simulator-image-wrapper my-4">
         <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-start-minting@2x.png" width="150" class="img-fluid"/>
       </div>
@@ -161,8 +161,8 @@
                                         data-ost-mock-parser="ost.tokenMint.btToSc">
                                 </span>
                             </small>
-                            <input type="hidden" name="<%= fe_stake_currency_to_stake%>"
-                                   data-ost-mock-parser="ost.tokenMint.btToSc"
+                            <input type="hidden" name="<%=fe_stake_currency_to_stake%>"
+                                   data-type="sc" data-ost-mock-parser="ost.tokenMint.btToSc"
                                    data-ost-mock-element="#<%= bt_to_mint_id %>"  />
                           </p>
                         </li>

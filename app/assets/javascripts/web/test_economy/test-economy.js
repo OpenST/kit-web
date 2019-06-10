@@ -9,30 +9,45 @@
     init: function (config) {
 
       $.extend(oThis,config);
-      oThis.onLaunchSetupSuccess();
+      oThis.onSetup();
       oThis.bindEvents();
+
+      oThis.selectizedField = $('#set-up-email-address').selectize({
+        plugins: ['remove_button'],
+        openOnFocus: false,
+        createOnBlur: true,
+        delimiter: ',',
+        persist: false,
+        maxItems: 5,
+        create: function(input) {
+          return {
+            value: input,
+            text: input
+          }
+        }
+      });
+      $('#set-up-email-address-selectized').focus();
 
     },
     bindEvents : function () {
-      $('#invite-users-btn').on('click',function () {
-        $(this).hide();
-        $('.send-invite-section').show();
+      $('.invite-users-btn').on('click',function () {
+        $('.test-economy-setup').hide();
+        $('.test-economy-post-setup').show();
       });
-      $('#get-qr-code-btn').on('click',function () {
-        $(this).hide();
-        $('.qr-code-section').show();
+
+      $('.invite-more-users-btn').on('click',function () {
+        $('.invite-successful').hide();
+        $('.test-economy-post-setup').show();
       });
     },
 
-    onLaunchSetupSuccess : function () {
+    onSetup : function () {
 
       $('#launch-setup-form').formHelper({
         success:function(response){
           if(response && response.success){
-            var qrUrl = utilities.deepGet( response ,  'data.test_economy_details.qr_code_url');
             $('.test-economy-pre-setup').hide();
-            $('.test-economy-post-setup').show();
-            $('.qr-code').attr('src' , qrUrl );
+            $('.test-economy-setup').show();
           }
         }
       });
@@ -40,8 +55,10 @@
       oThis.inviteEconomyForm.formHelper({
         success:function(response){
           if(response && response.success){
-            oThis.inviteEconomyForm[0].reset();
-           $('#invite-success-modal').modal('show');
+            // oThis.inviteEconomyForm[0].reset();
+            oThis.selectizedField[0].selectize.clear();
+           $('.test-economy-post-setup').hide();
+           $('.invite-successful').show();
           }
         }
       });

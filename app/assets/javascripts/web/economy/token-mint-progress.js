@@ -22,6 +22,8 @@
     mintingStatusEndPoint :  null,
     workflowId            :  null,
     
+    pricer : null,
+    
 
     init : function ( config ) {
       $.extend( oThis , config );
@@ -36,7 +38,7 @@
     initPricer : function() {
       var config = oThis.getPricerConfig();
       PricerFactory.init( config );
-      Pricer = PricerFactory.getInstance( oThis.scSymbol );
+      oThis.pricer = PricerFactory.getInstance( oThis.scSymbol );
     },
 
     getPricerConfig : function(){
@@ -85,11 +87,11 @@
       oThis.polling.stopPolling();
       
       var amountMinted = utilities.deepGet( response , "data.workflow_payload.amountMinted" ) ,
-        toEthBT      = Pricer.fromSmallestUnit( amountMinted )
+        toEthBT      = oThis.pricer.fromSmallestUnit( amountMinted )
       ;
       
       if( toEthBT ){
-        $('.total-token-minted').text( Pricer.toBtPrecision( toEthBT ) );
+        $('.total-token-minted').text( oThis.pricer.toBtPrecision( toEthBT ) );
       }
       oThis.showSection( oThis.jMintPollingSuccess );
     },

@@ -80,6 +80,21 @@
 
       },
 
+      setVAxisScaleForTxAndOstVolumeGraph: function(config, res) {
+        var vAxes = utilities.deepGet( config , 'options.vAxes' ),
+          viewWindow = vAxes[1].viewWindow,
+          total_transactions = utilities.deepGet(res , 'data.total_transactions'),
+          txVolumeArray = []
+        ;
+        for(var i=0; i<total_transactions.length;i++){
+          txVolumeArray.push(total_transactions[i] && total_transactions[i].token_ost_volume);
+        }
+       var max = Math.max.apply(window, txVolumeArray);
+        if( max == 0){
+          viewWindow['max'] = 1
+        }
+      },
+
       drawTransactionAndOstVolumeGraph: function (filter) {
         var config = $.extend(true , {} , transactions_and_ost_volume ),
             url = oThis.getAjaxUrl( oThis.transactions_and_ost_volume_url , filter) ,
@@ -90,6 +105,7 @@
         oThis.transactionAndOstVolumeGraph.ajaxCallback = function( rawData ){
           var gCThis = this ;
           oThis.setAxisConfiguration( config, filter, rawData );
+          oThis.setVAxisScaleForTxAndOstVolumeGraph( config, rawData );
           $.extend( true , gCThis ,  config  );
           return ajaxCallback.call( gCThis , rawData );
         };

@@ -1,0 +1,46 @@
+// Import functions as variables depend on functions
+@import "../../plugins/bootstrap/scss/functions";
+// Import theme variables
+@import "../Starboy/variables";
+
+.cookie-privacy-policy-modal {
+  color: $blue-800;
+  border-bottom: solid 1px $yellow-300;
+  text-decoration: none;
+
+}
+.demo-modal-dialog {
+  position: fixed;
+  top: 30%;
+}
+
+.accept-cookie-wrapper{
+  position: fixed;
+  max-width: 100%;
+  top: auto;
+  right: auto;
+  bottom: 0px;
+  left: auto;
+  z-index: 1050;
+  background-color: $blue-800;
+  color: $white;
+  display: flex;
+  flex-direction: row;
+
+  .btn-reject-cookies {
+    cursor: pointer;
+
+    .cross-sign{
+      display: inline-block;
+      line-height: 1;
+      font-size: 15px;
+    }
+  }
+  .cookie-privacy-policy {
+     color: $white;
+     border-bottom: solid 1px $yellow-300;
+     text-decoration: none;
+  }
+  }
+
+

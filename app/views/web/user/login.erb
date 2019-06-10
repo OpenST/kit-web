@@ -36,6 +36,8 @@
               <div class="g-recaptcha mx-auto  form-recapcha-wrap d-inline-block" id="myid" data-sitekey="<%= GlobalConstant::Base.recaptcha['site_key'] %>"></div>
               <div class="recaptcha-submit-error invalid-feedback">&nbsp;</div>
             </div>
+            <input type="hidden" name="fingerprint"  id="fingerprintHash"/>
+            <input type="hidden" name="fingerprint_type"  id="fingerprintType"/>
 
 
             <div class="form-group text-center">

@@ -22,6 +22,10 @@ module GlobalConstant
         'ost_up'
       end
 
+      def device_verification_toast_cookie_name
+        'ost_platform_dvt'
+      end
+
     end
 
   end

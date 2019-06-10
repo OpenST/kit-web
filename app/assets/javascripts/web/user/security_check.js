@@ -8,7 +8,7 @@
   var oThis = ost.securityCheck={
     init : function (config) {
 
-      if(eval(oThis.decodeString(h)) !== oThis.decodeiString(config.domain)){
+      if(eval(oThis.decodeString(h)) !== oThis.decodeString(config.domain)){
         $(oThis.decodeString(b)).remove()
       }
     }

@@ -122,6 +122,30 @@ module WebPresenter
       end
     end
 
+    # Developer page api keys in presenter object.
+    #
+    # * Author: Dhananjay
+    # * Date: 31/05/2019
+    # * Reviewed By:
+    #
+    def api_keys
+      @api_keys ||= begin
+        formatter_obj.api_keys.present? ? formatter_obj.api_keys.data : nil
+      end
+    end
+
+    # Developer page email sent flag in presenter object.
+    #
+    # * Author: Dhananjay
+    # * Date: 03/06/2019
+    # * Reviewed By:
+    #
+    def email_already_sent_flag?
+      @asdf ||= begin
+        formatter_obj.present? ? formatter_obj.email_already_sent_flag.data == 1 : nil
+      end
+    end
+
     # Dashboard details in presenter object.
     #
     # * Author: Shlok

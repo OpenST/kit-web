@@ -23,6 +23,7 @@ module GlobalConstant
           service_unavailable:  "/service-unavailable/",
           verify_email:         "/verify-email/",
           verify_device:        "/verify-device/",
+          verify_sda:           "/#{GlobalConstant::Environment.url_prefix}/developer/verify-sda/",
           login:                "/login/",
           logout:                "/logout/"
 
@@ -43,6 +44,7 @@ module GlobalConstant
             api_pre_mint:         "/#{GlobalConstant::Environment.url_prefix}/api/token/pre-mint",
             get_api_keys:         "/#{GlobalConstant::Environment.url_prefix}/api/developer/api-keys",
             delete_api_key:       "/#{GlobalConstant::Environment.url_prefix}/api/developer/api-keys/delete",
+            resend_api_key:       "/api/#{GlobalConstant::Environment.url_prefix}/verify-sda/request-link",
             get_webhook_secrets:         "/#{GlobalConstant::Environment.url_prefix}/api/developer/webhook-secrets",
             delete_webhook_secrets:      "/#{GlobalConstant::Environment.url_prefix}/api/developer/delete-webhook-secrets",
             api_activate_test_economy: "/#{GlobalConstant::Environment.url_prefix}/api/test-economy",

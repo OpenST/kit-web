@@ -18,6 +18,8 @@
     jMainContainer            : $('.developers-container'),
     jGenerateErr              : $('.generate-key-error'),
     jGenerateWSErr            : $('.generate-w-secrets-error'),
+    jResendLink               : $('.resend-btn'),
+    jEmailSentWrapper         : $('.email-sent-wrapper'),
     jDeleteErr                : null,
     keys                      : null,
     webhookSecret             : null,
@@ -51,6 +53,11 @@
         oThis.deleteAPIKey();
       });
 
+      oThis.jResendLink.on('click',function( e ){
+        e.stopPropagation();
+        oThis.resendEmail();
+      });
+
       oThis.jShowWebhookSecretBtn.on('click',function( e ){
         e.stopPropagation();
         utilities.btnSubmittingState( $(this) );
@@ -77,6 +84,10 @@
         success   : function ( response ) {
           if( response.success ){
             oThis.keys = response.data && response.data['api_keys'];
+            var email_already_sent_flag = response.data && response.data['email_already_sent_flag'];
+            if(email_already_sent_flag) {
+              oThis.jEmailSentWrapper.show();
+            }
             oThis.onSuccess();
           }else {
             oThis.onError( response , oThis.jGenerateErr );
@@ -137,6 +148,24 @@
         },
         error     : function ( err ) {
           oThis.onError( err , oThis.jDeleteErr );
+        },
+        complete  : function () {
+
+        }
+      });
+    },
+
+    resendEmail: function(){
+      $.ajax({
+        url       : oThis.resend_api_key,
+        method    : 'POST',
+        success   : function ( response ) {
+          if( response.success ) {
+            console.log("Resend email success");
+          }
+        },
+        error     : function ( err ) {
+          console.log("Resend email error occurred!!");
         },
         complete  : function () {
 
@@ -227,7 +256,7 @@
         oThis.jGenerateWebhookSecretBtn.show();
       }
     },
-    
+
     generateWebhookSecret: function () {
 
       utilities.btnSubmittingState( oThis.jGenerateWebhookSecretBtn );

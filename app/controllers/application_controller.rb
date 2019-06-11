@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
   def handle_whitelisted_api_cookies
     new_api_cookies = request.cookies[GlobalConstant::Cookie.new_api_cookie_key.to_sym]
     return if new_api_cookies.blank?
-    whitelisted_api_cookies = [GlobalConstant::Cookie.user_cookie_name, GlobalConstant::Cookie.last_used_env_cookie_name, GlobalConstant::Cookie.device_verification_toast_cookie_name]
+    whitelisted_api_cookies = [GlobalConstant::Cookie.user_cookie_name, GlobalConstant::Cookie.last_used_env_cookie_name, GlobalConstant::Cookie.device_verification_toast_cookie_name, GlobalConstant::Cookie.secure_data_access_cookie_name]
     whitelisted_api_cookies.each do |key|
       whitelisted_cookie = new_api_cookies[key]
       if whitelisted_cookie.present? and whitelisted_cookie.is_a?(Hash)
@@ -163,6 +163,8 @@ class ApplicationController < ActionController::Base
         redirect_to :verify_email and return
       when 'verify_device'
         redirect_to :verify_device and return
+      when 'verify_sda'
+        redirect_to :verify_sda and return
       when 'setup_mfa'
         redirect_to :mfa and return
       when 'authenticate_mfa'

@@ -26,6 +26,10 @@ module GlobalConstant
         'ost_platform_dvt'
       end
 
+      def secure_data_access_cookie_name
+        'ost_platform_sda'
+      end
+
     end
 
   end

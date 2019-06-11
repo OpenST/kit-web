@@ -7,7 +7,8 @@ module CompanyApi
       class Token < CompanyApi::Response::Formatter::Base
 
         attr_reader :workflow_payload, :developer_page_addresses, :api_keys, :email_already_sent_flag,
-                    :dashboard_details, :graph_urls, :test_economy_details, :all_stake_currencies
+                    :dashboard_details, :graph_urls, :test_economy_details, :all_stake_currencies,
+                    :webhook_secrets
 
         # Initialize
         #
@@ -53,6 +54,7 @@ module CompanyApi
           set_graph_urls(@data['graph_urls']) if @data['graph_urls'].present?
           set_test_economy_details(@data['test_economy_details']) if @data['test_economy_details'].present?
           set_min_balances(@data['min_balances']) if @data['min_balances'].present?
+          set_webhook_secrets(@data['webhook_secrets']) if @data['webhook_secrets'].present?
         end
 
         private
@@ -87,6 +89,10 @@ module CompanyApi
           puts "1345data=====#{data.inspect}"
           @email_already_sent_flag = CompanyApi::Response::Entity::EmailAlreadySentFlag.new(data)
           puts "@email_already_sent_flag=====#{@email_already_sent_flag.inspect}"
+        end
+
+        def set_webhook_secrets(data)
+          @webhook_secrets = CompanyApi::Response::Entity::WebhookSecrets.new(data)
         end
 
         def set_dashboard_details(data)

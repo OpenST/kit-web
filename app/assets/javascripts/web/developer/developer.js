@@ -218,8 +218,11 @@
         url       : oThis.get_webhook_secrets,
         method    : 'GET',
         success   : function ( response ) {
-          console.log(response);
           if( response.success && response.data ){
+            var email_already_sent_flag = response.data && response.data['email_already_sent_flag'];
+            if(email_already_sent_flag) {
+              oThis.jEmailSentWrapper.show();
+            }
             oThis.onShowWebhookSecretsSuccess(response.data);
           }else {
             oThis.onError( response , oThis.jGenerateWSErr );

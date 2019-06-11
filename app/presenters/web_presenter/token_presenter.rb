@@ -134,6 +134,18 @@ module WebPresenter
       end
     end
 
+    # Developer page api keys in presenter object.
+    #
+    # * Author: Dhananjay
+    # * Date: 31/05/2019
+    # * Reviewed By:
+    #
+    def webhook_secrets
+      @webhook_secrets ||= begin
+        formatter_obj.webhook_secrets.present? ? formatter_obj.webhook_secrets.data : nil
+      end
+    end
+
     # Developer page email sent flag in presenter object.
     #
     # * Author: Dhananjay

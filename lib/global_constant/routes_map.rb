@@ -23,7 +23,7 @@ module GlobalConstant
           service_unavailable:  "/service-unavailable/",
           verify_email:         "/verify-email/",
           verify_device:        "/verify-device/",
-          verify_sda:           "/#{GlobalConstant::Environment.url_prefix}/developer/verify-sda/",
+          verify_sda:           "/api/#{GlobalConstant::Environment.url_prefix}/verify-sda/",
           login:                "/login/",
           logout:                "/logout/"
 

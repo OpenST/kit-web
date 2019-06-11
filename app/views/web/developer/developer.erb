@@ -133,9 +133,8 @@
 
       <% if webhook_secrets.blank? %>
         <button type="button" class="btn btn-primary mt-3 show-webhook-secret-btn" data-submiting="Fetching..." >Show Secret</button>
-      <% end %>
-      <% if webhook_secrets.present? %>
-        <button type="button" class="btn btn-primary mt-3 generate-webhook-secret-btn" data-submiting="Creating...">Create New Secret</button>
+      <% elsif webhook_secrets.present? %>
+        <button type="button" class="btn btn-primary mt-3 generate-webhook-secret-btn" style="<%= !webhook_secrets['webhook_grace_secret'] ? 'display:block;' : '' %>" data-submiting="Creating...">Create New Secret</button>
         <div class="error mt-2 generate-w-secrets-error"></div>
         <div class="w-secrets-wrapper">
           <div class="my-5">

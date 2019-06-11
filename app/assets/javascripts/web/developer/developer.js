@@ -6,15 +6,21 @@
 
   var oThis = ost.developer = {
 
-    sGenerateKeyBtn : '.generate-key-btn',
-    sDeleteKey      : '.api-delete-btn',
-    jGenerateKeyBtn : $( '.generate-key-btn' ) ,
-    jShowKeyBtn     : $('.show-keys-btn'),
-    jKeysWrapper    : $('.keys-wrapper'),
-    jMainContainer  : $('.developers-container'),
-    jGenerateErr    : $('.generate-key-error'),
-    jDeleteErr      : null,
-    keys            : null,
+    sGenerateKeyBtn           : '.generate-key-btn',
+    sGenerateWebhookSecretBtn : '.generate-webhook-secret-btn',
+    sDeleteKey                : '.api-delete-btn',
+    jGenerateKeyBtn           : $('.generate-key-btn') ,
+    jShowKeyBtn               : $('.show-keys-btn'),
+    jGenerateWebhookSecretBtn : $('.generate-webhook-secret-btn'),
+    jShowWebhookSecretBtn     : $('.show-webhook-secret-btn'),
+    jKeysWrapper              : $('.keys-wrapper'),
+    jWSecretsWrapper          : $('.w-secrets-wrapper'),
+    jMainContainer            : $('.developers-container'),
+    jGenerateErr              : $('.generate-key-error'),
+    jGenerateWSErr            : $('.generate-w-secrets-error'),
+    jDeleteErr                : null,
+    keys                      : null,
+    webhookSecret             : null,
 
     jTokenSetupAdminErrorModal  :  $('#token_setup_admin_error'),
 
@@ -43,6 +49,23 @@
         e.stopPropagation();
         oThis.jDeleteErr = $(this).closest('.dev-container-box').find('.delete-key-error');
         oThis.deleteAPIKey();
+      });
+
+      oThis.jShowWebhookSecretBtn.on('click',function( e ){
+        e.stopPropagation();
+        utilities.btnSubmittingState( $(this) );
+        oThis.showWebhookSecrets();
+      });
+
+      oThis.jMainContainer.on('click', oThis.sGenerateWebhookSecretBtn ,function( e ){
+        e.stopPropagation();
+        oThis.generateWebhookSecret();
+      });
+      oThis.jWSecretsWrapper.on('click', oThis.sDeleteKey, function( e ){
+        e.stopPropagation();
+        oThis.jDeleteErr = $(this).closest('.dev-container-box').find('.delete-key-error');
+        oThis.devContainerBox = $(this).closest('.dev-container-box');
+        oThis.deleteWebhookSecret();
       });
 
     },
@@ -159,6 +182,102 @@
           html    = template(context);
       $('.keys-wrapper').empty();
       $('.keys-wrapper').append(html);
+    },
+
+    showWebhookSecrets: function(){
+      $.ajax({
+        url       : oThis.get_webhook_secrets,
+        method    : 'GET',
+        success   : function ( response ) {
+          console.log(response);
+          if( response.success && response.data ){
+            oThis.onShowWebhookSecretsSuccess(response.data);
+          }else {
+            oThis.onError( response , oThis.jGenerateWSErr );
+          }
+        },
+        error     : function ( err ) {
+          oThis.onError( err , oThis.jGenerateWSErr );
+        },
+        complete  : function () {
+          utilities.btnSubmitCompleteState( oThis.jShowWebhookSecretBtn );
+        }
+      });
+    },
+
+    onShowWebhookSecretsSuccess: function (resp) {
+      var source   = document.getElementById("webhook-secrets-info").innerHTML,
+        template = Handlebars.compile(source),
+        context =
+          {
+            'webhookSecret': resp['webhook_secret'],
+            'webhookGraceSecret': resp['webhook_grace_secret'],
+            'webhookGraceExpiry': resp['grace_expiry_at']
+          },
+        html    = template(context);
+
+      $('.w-secrets-wrapper').empty();
+      $('.w-secrets-wrapper').append(html);
+
+      if(resp['webhook_grace_secret']){
+        oThis.jShowWebhookSecretBtn.hide();
+        oThis.jGenerateWebhookSecretBtn.hide();
+      } else {
+        oThis.jShowWebhookSecretBtn.hide();
+        oThis.jGenerateWebhookSecretBtn.show();
+      }
+    },
+    
+    generateWebhookSecret: function () {
+
+      utilities.btnSubmittingState( oThis.jGenerateWebhookSecretBtn );
+
+      $.ajax({
+        url       : oThis.get_webhook_secrets,
+        method    : 'POST',
+        success   : function ( response ) {
+          if( response.success && response.data ) {
+            oThis.onShowWebhookSecretsSuccess(response.data);
+          } else {
+            var errorMsg = utilities.deepGet(response, "err.display_text") ;
+            if( errorMsg && errorMsg.toLowerCase() == utilities.authorizationErrMsg.toLowerCase() ){ //Temp change it later.
+              oThis.jTokenSetupAdminErrorModal.modal('show');
+            }
+            oThis.onError( response , oThis.jGenerateWSErr );
+          }
+        },
+        error     : function ( err ) {
+          oThis.onError( err , oThis.jGenerateWSErr );
+        },
+        complete  : function () {
+          utilities.btnSubmitCompleteState( oThis.jGenerateWebhookSecretBtn );
+        }
+      });
+    },
+
+    deleteWebhookSecret: function () {
+      $.ajax({
+        url       : oThis.delete_webhook_secret,
+        method    : 'POST',
+        success   : function ( response ) {
+          if( response.success ) {
+            oThis.devContainerBox.remove();
+            oThis.jGenerateWebhookSecretBtn.show()
+          } else {
+            var errorMsg = utilities.deepGet(response, "err.display_text") ;
+            if( errorMsg && errorMsg.toLowerCase() == utilities.authorizationErrMsg.toLowerCase() ){ //Temp change it later.
+              oThis.jTokenSetupAdminErrorModal.modal('show');
+            }
+            oThis.onError( response , oThis.jDeleteErr);
+          }
+        },
+        error     : function ( err ) {
+          oThis.onError( err , oThis.jDeleteErr );
+        },
+        complete  : function () {
+
+        }
+      });
     }
   }
 

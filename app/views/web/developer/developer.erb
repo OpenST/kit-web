@@ -1,5 +1,7 @@
 <%
   api_get_key = GlobalConstant::RoutesMap.getApis()[:get_api_keys]
+  get_webhook_secrets = GlobalConstant::RoutesMap.getApis()[:get_webhook_secrets]
+  delete_webhook_secrets = GlobalConstant::RoutesMap.getApis()[:delete_webhook_secrets]
   api_delete_key = GlobalConstant::RoutesMap.getApis()[:delete_api_key]
   developer_page_addresses = @presenter_obj.developer_page_addresses
   display_stake_currency_symbol = @presenter_obj.display_stake_currency_symbol
@@ -59,6 +61,20 @@
       <button type="button" class="btn btn-primary mt-3 generate-key-btn" data-submiting="Creating...">Create New Keys</button>
       <div class="error mt-2 generate-key-error"></div>
       <div class="keys-wrapper"></div>
+    </div>
+
+    <div class=" mt-5">
+      <h4 class="mb-3">Get WEBHOOK Secrets</h4>
+      <p>
+        In order to use OST Platform APIs you will have to authenticate your account by including an API signature in every request. Signatures validate the authenticity of the account which interacts with OST Platform and ensures that the message sent has not been tampered with.
+        <br/>
+        <br/>
+        Please make sure to never share your API Secret Key and to keep it private and secure. You can always generate a new set of API keys. Once new keys are generated, you can choose to delete the old keys immediately or allow them to expire in 24 hours.
+      </p>
+      <button type="button" class="btn btn-primary mt-3 show-webhook-secret-btn" data-submiting="Fetching..." >Show Keys</button>
+      <button type="button" class="btn btn-primary mt-3 generate-webhook-secret-btn" data-submiting="Creating...">Create New Secret</button>
+      <div class="error mt-2 generate-w-secrets-error"></div>
+      <div class="w-secrets-wrapper"></div>
     </div>
 
     <div>
@@ -182,7 +198,9 @@
   <script type="text/javascript">
     ost.developer.init({
       'api_get_key' : "<%= api_get_key %>",
-      'api_delete_key' : "<%= api_delete_key %>"
+      'api_delete_key' : "<%= api_delete_key %>",
+      'get_webhook_secrets': "<%= get_webhook_secrets %>",
+      'delete_webhook_secret': "<%= delete_webhook_secrets %>"
     });
 
     Handlebars.registerHelper('prettifyDate',function( timestamp ){
@@ -224,6 +242,43 @@
       {{/each}}
     </div>
   </script>
+
+
+  <script type="text/x-handlebars-template" id="webhook-secrets-info">
+    <div class="my-5">
+      <div class="dev-container-box mt-3 p-3">
+        <div class="row">
+          <div class="col-8">
+            <h4>Webhook Secret</h4>
+            <p>{{webhookSecret}}</p>
+          </div>
+        </div>
+      </div>
+      {{#if webhookGraceSecret}}
+        <div class="dev-container-box mt-3 p-3">
+          <div class="row">
+            <div class="col-8">
+              <h4>Webhook Secret</h4>
+              <p>{{webhookGraceSecret}}</p>
+            </div>
+            <div class="col-4">
+              <div class="float-right d-inline d-flex align-items-center">
+                <span class="mr-2 expiry">Expires on {{prettifyDate webhookGraceExpiry}}</span>
+                <span class="api-delete-btn">
+                  <svg class="align-middle" style="height: 35px;width: 35px;">
+                    <switch>
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#api-delete-icon"></use>
+                    </switch>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+    </div>
+  </script>
+
 <% end %>
 
 <% content_for :popups do %>

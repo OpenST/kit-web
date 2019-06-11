@@ -25,13 +25,16 @@
       }
     }
 
-    .keys-wrapper{
+    .keys-wrapper,.w-secrets-wrapper{
       .expiry{
         color: $blue-700;
         font-size: $font-size-sm;
       }
     }
     .generate-key-btn{
+      display: none;
+    }
+    .generate-webhook-secret-btn{
       display: none;
     }
     .error{

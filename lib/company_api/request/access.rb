@@ -68,7 +68,7 @@ module CompanyApi
       # @param [Hash] params - contains token (d_t)
       #
       def verify_secure_data_access(params)
-        get("#{GlobalConstant::Environment.url_prefix}/verify-sda", params)
+        get("api/#{GlobalConstant::Environment.url_prefix}/verify-sda", params)
       end
 
       # Get details to load QR code for setting up MFA

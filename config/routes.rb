@@ -35,8 +35,8 @@ Rails.application.routes.draw do
     get '/token/mint-progress' => :token_mint_progress, as: 'token_mint_progress'
   end
 
-  scope "#{GlobalConstant::Environment.url_prefix}/developer", controller: 'web/developer', :format => false do
-    get '/' => :developer, as: 'developer'
+  scope "#{GlobalConstant::Environment.url_prefix}", controller: 'web/developer', :format => false do
+    get '/developer' => :developer, as: 'developer'
     get '/verify-sda' => :verify_sda
   end
 

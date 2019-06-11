@@ -22,6 +22,7 @@ module GlobalConstant
           authenticate_mfa:     "/mfa/",
           service_unavailable:  "/service-unavailable/",
           verify_email:         "/verify-email/",
+          verify_device:        "/verify-device/",
           login:                "/login/",
           logout:                "/logout/"
 
@@ -55,6 +56,7 @@ module GlobalConstant
             api_save_company_info:"/api/setting/company-information",
             api_sign_up:          "/api/sign-up",
             api_send_verify_email_link:"/api/verify-email/request-link",
+            api_send_verify_device_link: "/api/verify-device/request-link",
             api_login:            "/api/login",
             api_mfa:              "/api/mfa",
             api_reset_password:   "/api/reset-password",

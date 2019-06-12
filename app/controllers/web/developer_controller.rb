@@ -46,7 +46,7 @@ class Web::DeveloperController < Web::BaseController
         return
       end
 
-      @response = CompanyApi::Request::Access.new(
+      @response = CompanyApi::Request::Verify.new(
         CompanyApi::Response::Formatter::Token,
         request.cookies,
         {"User-Agent" => http_user_agent}
@@ -64,7 +64,7 @@ class Web::DeveloperController < Web::BaseController
         return
       end
     else
-      @response = CompanyApi::Request::Access.new(
+      @response = CompanyApi::Request::Verify.new(
         CompanyApi::Response::Formatter::Token,
         request.cookies,
         {"User-Agent" => http_user_agent}

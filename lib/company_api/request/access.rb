@@ -59,18 +59,6 @@ module CompanyApi
         get('verify-device', params)
       end
 
-      # Verify secure data access
-      #
-      # * Author: Ankit
-      # * Date: 23/05/2019
-      # * Reviewed By:
-      #
-      # @param [Hash] params - contains token (d_t)
-      #
-      def verify_secure_data_access(params)
-        get("#{GlobalConstant::Environment.url_prefix}/verify-sda", params)
-      end
-
       # Get details to load QR code for setting up MFA
       #
       # * Author: Puneet

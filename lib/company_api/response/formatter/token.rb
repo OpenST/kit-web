@@ -86,9 +86,7 @@ module CompanyApi
         end
 
         def set_email_already_sent_flag(data)
-          puts "1345data=====#{data.inspect}"
           @email_already_sent_flag = CompanyApi::Response::Entity::EmailAlreadySentFlag.new(data)
-          puts "@email_already_sent_flag=====#{@email_already_sent_flag.inspect}"
         end
 
         def set_webhook_secrets(data)

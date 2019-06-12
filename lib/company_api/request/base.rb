@@ -82,6 +82,7 @@ module CompanyApi
       # @return [String] returns API URL Example: "https://companystag:12312121!@stagingost.com/list/get/"
       #
       def set_api_url(api_route, url_params_hash)
+        Rails.logger.info("\n\n\n\n\n\n\nset_api_url====#{base_url + @service_base_route.to_s + api_route + generate_api_parameters(url_params_hash)}===\n\n\n\n\n")
         @api_url = base_url + @service_base_route.to_s + api_route + generate_api_parameters(url_params_hash)
       end
 

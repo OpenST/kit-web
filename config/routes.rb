@@ -35,9 +35,12 @@ Rails.application.routes.draw do
     get '/token/mint-progress' => :token_mint_progress, as: 'token_mint_progress'
   end
 
-  scope "#{GlobalConstant::Environment.url_prefix}", controller: 'web/developer', :format => false do
-    get '/developer' => :developer, as: 'developer'
-    get '/verify-sda' => :verify_sda
+  scope "#{GlobalConstant::Environment.url_prefix}/developer", controller: 'web/developer', :format => false do
+    get '/' => :developer, as: 'developer'
+  end
+
+  scope "#{GlobalConstant::Environment.url_prefix}/verify-sda", controller: 'web/developer', :format => false do
+    get '/' => :verify_sda
   end
 
   # Enabling this route only for Non Production Sandbox ENV

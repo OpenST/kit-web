@@ -7,6 +7,7 @@
   developer_page_addresses = @presenter_obj.developer_page_addresses
   display_stake_currency_symbol = @presenter_obj.display_stake_currency_symbol
   is_production_main_env = GlobalConstant::Environment.is_main_production?
+  webhook_enabled_flag = @presenter_obj.webhook_enabled_flag?
   developer_addresses_config = [
       {
           "label" => "Account Owner Address:",
@@ -122,72 +123,74 @@
       </div>
     </div>
 
-    <div class=" mt-5">
-      <h4 class="mb-3">Get WEBHOOK Secrets</h4>
-      <p>
-        In order to use OST Platform APIs you will have to authenticate your account by including an API signature in every request. Signatures validate the authenticity of the account which interacts with OST Platform and ensures that the message sent has not been tampered with.
-        <br/>
-        <br/>
-        Please make sure to never share your API Secret Key and to keep it private and secure. You can always generate a new set of API keys. Once new keys are generated, you can choose to delete the old keys immediately or allow them to expire in 24 hours.
-      </p>
+    <% if webhook_enabled_flag || webhook_secrets.present? %>
+      <div class=" mt-5">
+        <h4 class="mb-3">Get WEBHOOK Secrets</h4>
+        <p>
+          In order to use OST Platform APIs you will have to authenticate your account by including an API signature in every request. Signatures validate the authenticity of the account which interacts with OST Platform and ensures that the message sent has not been tampered with.
+          <br/>
+          <br/>
+          Please make sure to never share your API Secret Key and to keep it private and secure. You can always generate a new set of API keys. Once new keys are generated, you can choose to delete the old keys immediately or allow them to expire in 24 hours.
+        </p>
 
-      <% if webhook_secrets.blank? %>
-        <button type="button" class="btn btn-primary mt-3 show-webhook-secret-btn" data-submiting="Fetching..." >Show Secret</button>
-      <% elsif webhook_secrets.present? %>
-        <button type="button" class="btn btn-primary mt-3 generate-webhook-secret-btn" style="<%= !webhook_secrets['webhook_grace_secret'] ? 'display:block;' : '' %>" data-submiting="Creating...">Create New Secret</button>
-        <div class="error mt-2 generate-w-secrets-error"></div>
-        <div class="w-secrets-wrapper">
-          <div class="my-5">
-            <% if !is_production_main_env %>
-              <div class="api-keys-banner text-center"><span class="banner-text">TEST KEYS</span></div>
-            <% end %>
-            <div class="dev-container-box mt-3 p-3">
-              <div class="row">
-                <div class="col-8">
-                  <h4>Webhook Secret</h4>
-                  <p><%= webhook_secrets['webhook_secret'] %></p>
-                </div>
-              </div>
-            </div>
-            <% if webhook_secrets['webhook_grace_secret'] %>
+        <% if webhook_secrets.blank? %>
+          <button type="button" class="btn btn-primary mt-3 show-webhook-secret-btn" data-submiting="Fetching..." >Show Secret</button>
+        <% elsif webhook_secrets.present? %>
+          <button type="button" class="btn btn-primary mt-3 generate-webhook-secret-btn" style="<%= !webhook_secrets['webhook_grace_secret'] ? 'display:block;' : '' %>" data-submiting="Creating...">Create New Secret</button>
+          <div class="error mt-2 generate-w-secrets-error"></div>
+          <div class="w-secrets-wrapper">
+            <div class="my-5">
+              <% if !is_production_main_env %>
+                <div class="api-keys-banner text-center"><span class="banner-text">TEST KEYS</span></div>
+              <% end %>
               <div class="dev-container-box mt-3 p-3">
                 <div class="row">
                   <div class="col-8">
                     <h4>Webhook Secret</h4>
-                    <p><%= webhook_secrets['webhook_grace_secret'] %></p>
+                    <p><%= webhook_secrets['webhook_secret'] %></p>
                   </div>
-                  <div class="col-4">
-                    <% date = webhook_secrets['grace_expiry_at'] == 0 ? '' : Time.at(webhook_secrets['grace_expiry_at'].to_i).utc %>
-                    <div class="float-right d-inline d-flex align-items-center">
-                      <span class="mr-2 expiry">Expires on <%= date.strftime("#{date.day.ordinalize} %b %Y")%></span>
-                      <span class="api-delete-btn">
+                </div>
+              </div>
+              <% if webhook_secrets['webhook_grace_secret'] %>
+                <div class="dev-container-box mt-3 p-3">
+                  <div class="row">
+                    <div class="col-8">
+                      <h4>Webhook Secret</h4>
+                      <p><%= webhook_secrets['webhook_grace_secret'] %></p>
+                    </div>
+                    <div class="col-4">
+                      <% date = webhook_secrets['grace_expiry_at'] == 0 ? '' : Time.at(webhook_secrets['grace_expiry_at'].to_i).utc %>
+                      <div class="float-right d-inline d-flex align-items-center">
+                        <span class="mr-2 expiry">Expires on <%= date.strftime("#{date.day.ordinalize} %b %Y")%></span>
+                        <span class="api-delete-btn">
                         <svg class="align-middle" style="height: 35px;width: 35px;">
                           <switch>
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#api-delete-icon"></use>
                           </switch>
                         </svg>
                       </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
           </div>
+        <% else %>
+          <div class="w-secrets-wrapper"></div>
+        <% end %>
+        <div class="email-sent-wrapper" style="display: <%= email_already_sent_flag && !api_keys ? 'block' : 'none' %>">
+          <p class="bg-light rounded display-3 font-weight-bold p-3 mb-1">
+            <svg class="align-middle" style="width:25px;height:25px;">
+              <switch>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
+              </switch>
+            </svg>
+            We sent you an email to confirm this request. After confirming, you can see and edit all keys for 15 minutes </p>
+          <p class="mb-3">Didn’t receive the email? <span class="resend-btn">Resend it</span></p>
         </div>
-      <% else %>
-        <div class="w-secrets-wrapper"></div>
-      <% end %>
-      <div class="email-sent-wrapper" style="display: <%= email_already_sent_flag && !api_keys ? 'block' : 'none' %>">
-        <p class="bg-light rounded display-3 font-weight-bold p-3 mb-1">
-          <svg class="align-middle" style="width:25px;height:25px;">
-            <switch>
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
-            </switch>
-          </svg>
-          We sent you an email to confirm this request. After confirming, you can see and edit all keys for 15 minutes </p>
-        <p class="mb-3">Didn’t receive the email? <span class="resend-btn">Resend it</span></p>
       </div>
-    </div>
+    <% end %>
 
     <div>
       <h4 class="mb-3">Developer Resources</h4>

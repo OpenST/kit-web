@@ -158,6 +158,18 @@ module WebPresenter
       end
     end
 
+    # Developer page email sent flag in presenter object.
+    #
+    # * Author: Dhananjay
+    # * Date: 03/06/2019
+    # * Reviewed By:
+    #
+    def webhook_enabled_flag?
+      @wef ||= begin
+        formatter_obj.present? ? formatter_obj.webhook_enabled_flag.data == 1 : nil
+      end
+    end
+
     # Dashboard details in presenter object.
     #
     # * Author: Shlok

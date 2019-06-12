@@ -8,7 +8,7 @@ module CompanyApi
 
         attr_reader :workflow_payload, :developer_page_addresses, :api_keys, :email_already_sent_flag,
                     :dashboard_details, :graph_urls, :test_economy_details, :all_stake_currencies,
-                    :webhook_secrets
+                    :webhook_secrets, :webhook_enabled_flag
 
         # Initialize
         #
@@ -50,6 +50,7 @@ module CompanyApi
           set_developer_page_addresses(@data['developer_page_addresses']) if @data['developer_page_addresses'].present?
           set_api_keys(@data['api_keys']) if @data['api_keys'].present?
           set_email_already_sent_flag(@data['email_already_sent_flag']) if @data['email_already_sent_flag'].present?
+          set_webhook_enabled_flag(@data['webhook_enabled_flag']) if @data['webhook_enabled_flag'].present?
           set_dashboard_details(@data['dashboard_details']) if @data['dashboard_details'].present?
           set_graph_urls(@data['graph_urls']) if @data['graph_urls'].present?
           set_test_economy_details(@data['test_economy_details']) if @data['test_economy_details'].present?
@@ -87,6 +88,10 @@ module CompanyApi
 
         def set_email_already_sent_flag(data)
           @email_already_sent_flag = CompanyApi::Response::Entity::EmailAlreadySentFlag.new(data)
+        end
+
+        def set_webhook_enabled_flag(data)
+          @webhook_enabled_flag = CompanyApi::Response::Entity::WebhookEnabledFlag.new(data)
         end
 
         def set_webhook_secrets(data)

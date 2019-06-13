@@ -96,7 +96,7 @@
           <button type="button" class="btn btn-primary generate-key-btn" style="<%= api_keys.length==1 ? 'display:block;' : '' %>" data-submiting="Creating...">Create New Keys</button>
           <div class="error mt-2 generate-key-error"></div>
           <% if !is_production_main_env %>
-            <div class="api-keys-banner text-center" style="height: auto;"><span class="banner-text">TEST KEYS</span></div>
+            <div class="api-keys-banner text-center" style="font-size:0;"><span class="banner-text">TEST KEYS</span></div>
           <%end%>
           <div class="mb-5 keys-wrapper">
             <% api_keys.each_with_index do |keyObj, index| %>
@@ -131,7 +131,7 @@
             <button type="button" class="btn btn-primary mt-3 generate-webhook-secret-btn" style="<%= !webhook_secrets['webhook_grace_secret'] ? 'display:block;' : '' %>" data-submiting="Creating...">Create New Secret</button>
             <div class="error mt-2 generate-w-secrets-error"></div>
             <% if !is_production_main_env %>
-              <div class="api-keys-banner text-center" style="height: auto;"><span class="banner-text">TEST KEYS</span></div>
+              <div class="api-keys-banner text-center" style="font-size:0;"><span class="banner-text">TEST KEYS</span></div>
             <% end %>
             <div class="mb-5 w-secrets-wrapper">
               <% date = webhook_secrets['grace_expiry_at'] == 0 ? '' : Time.at(webhook_secrets['grace_expiry_at'].to_i).utc %>

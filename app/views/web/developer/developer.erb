@@ -92,9 +92,6 @@
             Please make sure to never share your API Secret Key and to keep it private and secure. You can always generate a new set of API keys. Once new keys are generated, you can choose to delete the old keys immediately or allow them to expire in 24 hours.
           </p>
         </div>
-        <% if !api_keys%>
-          <button type="button" class="btn btn-primary show-keys-btn" data-submiting="Requesting..." >Show Keys</button>
-        <% end %>
         <% if api_keys %>
           <button type="button" class="btn btn-primary generate-key-btn" style="<%= api_keys.length==1 ? 'display:block;' : '' %>" data-submiting="Creating...">Create New Keys</button>
           <div class="error mt-2 generate-key-error"></div>
@@ -103,40 +100,15 @@
           <%end%>
           <div class="mb-5 keys-wrapper">
             <% api_keys.each_with_index do |keyObj, index| %>
-              <div class="dev-container-box <%= index == 0 ? "" : "mt-3" %> p-3">
-                <div class="row">
-                  <div class="col-8">
-                    <h4>API Key</h4>
-                    <p><%=keyObj['key']%></p>
-                  </div>
-                  <%if keyObj['expiry_timestamp']%>
-                    <div class="col-4">
-                      <% date = keyObj['expiry_timestamp'] == 0 ? '' : Time.at(keyObj['expiry_timestamp'].to_i).utc%>
-                      <% if date.present? %>
-                        <div class="float-right d-inline d-flex align-items-center">
-                          <span class="mr-2 expiry">Expires on <%= date.strftime("#{date.day.ordinalize} %b %Y")%></span>
-                          <span class="api-delete-btn">
-                            <svg class="align-middle" style="height: 35px;width: 35px;">
-                              <switch>
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#api-delete-icon"></use>
-                              </switch>
-                            </svg>
-                          </span>
-                        </div>
-                      <%end%>
-                    </div>
-                  <%end %>
-                </div>
-                <div>
-                  <h4>API Secret</h4>
-                  <p><%=keyObj['secret']%></p>
-                </div>
-                <div class="error delete-key-error"></div>
-              </div>
+              <% date = (keyObj['expiry_timestamp'] == 0 ? '' : Time.at(keyObj['expiry_timestamp'].to_i).utc)%>
+              <%= render :partial => 'api_key_secret',
+                        :locals => {
+                            api_key: keyObj['key'],
+                            expiry_timestamp: (date.present?? date.strftime("#{date.day.ordinalize} %b %Y") : ''),
+                            api_secret: keyObj['secret']
+                        } %>
             <%end %>
           </div>
-        <%else%>
-          <div class="mb-5 keys-wrapper"></div>
         <%end%>
       </div>
 
@@ -155,49 +127,21 @@
             Please make sure you never share your webhook secret and keep it private and secure. You can always generate a new webhook secret key. Once new secret key is generated, you can choose to delete the old key immediately or allow it to expire in 24 hours.
           </p>
 
-          <% if webhook_secrets.blank? %>
-            <button type="button" class="btn btn-primary mt-3 show-webhook-secret-btn" data-submiting="Fetching..." >Show Secret</button>
-          <% elsif webhook_secrets.present? %>
+          <% if webhook_secrets.present? %>
             <button type="button" class="btn btn-primary mt-3 generate-webhook-secret-btn" style="<%= !webhook_secrets['webhook_grace_secret'] ? 'display:block;' : '' %>" data-submiting="Creating...">Create New Secret</button>
             <div class="error mt-2 generate-w-secrets-error"></div>
             <% if !is_production_main_env %>
               <div class="api-keys-banner text-center" style="height: auto;"><span class="banner-text">TEST KEYS</span></div>
             <% end %>
             <div class="mb-5 w-secrets-wrapper">
-                <div class="dev-container-box p-3">
-                  <div class="row">
-                    <div class="col-8">
-                      <h4>Webhook Secret</h4>
-                      <p><%= webhook_secrets['webhook_secret'] %></p>
-                    </div>
-                  </div>
-                </div>
-                <% if webhook_secrets['webhook_grace_secret'] %>
-                  <div class="dev-container-box mt-3 p-3">
-                    <div class="row">
-                      <div class="col-8">
-                        <h4>Webhook Secret</h4>
-                        <p><%= webhook_secrets['webhook_grace_secret'] %></p>
-                      </div>
-                      <div class="col-4">
-                        <% date = webhook_secrets['grace_expiry_at'] == 0 ? '' : Time.at(webhook_secrets['grace_expiry_at'].to_i).utc %>
-                        <div class="float-right d-inline d-flex align-items-center">
-                          <span class="mr-2 expiry">Expires on <%= date.strftime("#{date.day.ordinalize} %b %Y")%></span>
-                          <span class="api-delete-btn">
-                          <svg class="align-middle" style="height: 35px;width: 35px;">
-                            <switch>
-                              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#api-delete-icon"></use>
-                            </switch>
-                          </svg>
-                        </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                <% end %>
+              <% date = webhook_secrets['grace_expiry_at'] == 0 ? '' : Time.at(webhook_secrets['grace_expiry_at'].to_i).utc %>
+              <%= render :partial => 'webhook_secret',
+                         :locals => {
+                             webhook_secret: webhook_secrets['webhook_secret'],
+                             webhook_grace_secret: webhook_secrets['webhook_grace_secret'],
+                             expiry_timestamp: (date.present?? date.strftime("#{date.day.ordinalize} %b %Y") : '')
+                         } %>
             </div>
-          <% else %>
-            <div class="mb-5 w-secrets-wrapper"></div>
           <% end %>
           <div class="email-sent-wrapper" style="display: <%= email_already_sent_flag && !api_keys ? 'block' : 'none' %>">
             <p class="bg-light rounded display-3 font-weight-bold p-3 mb-1">
@@ -216,8 +160,6 @@
 
     <div>
       <h4 class="mb-3">Developer Resources</h4>
-      <%#= @presenter_obj.formatter_obj.api_keys.to_json %>
-      <%#= @presenter_obj.formatter_obj.email_already_sent_flag.to_json %>
       <p>
         The OST Platform provides:
         <span class="d-block my-2">* APIs, SDKs and Development tools for easy integration and deployment.</span>
@@ -350,36 +292,17 @@
 
   </script>
 
-  <script type="text/x-handlebars-template" id="api-info">
+    <script type="text/x-handlebars-template" id="api-info">
     <div class="mb-5">
       {{#each keys}}
-      <div class="dev-container-box mb-3 p-3">
-        <div class="row">
-          <div class="col-8">
-            <h4>API Key</h4>
-            <p>{{key}}</p>
-          </div>
-          {{#if expiry_timestamp}}
-          <div class="col-4">
-            <div class="float-right d-inline d-flex align-items-center">
-              <span class="mr-2 expiry">Expires on {{prettifyDate expiry_timestamp}}</span>
-              <span class="api-delete-btn">
-                  <svg class="align-middle" style="height: 35px;width: 35px;">
-                    <switch>
-                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#api-delete-icon"></use>
-                    </switch>
-                  </svg>
-                </span>
-            </div>
-          </div>
-          {{/if}}
-        </div>
-        <div>
-          <h4>API Secret</h4>
-          <p>{{secret}}</p>
-        </div>
-        <div class="error delete-key-error"></div>
-      </div>
+      <%= render :partial => 'api_key_secret',
+                 :locals => {
+                     api_key: "{{key}}",
+                     api_secret: "{{secret}}",
+                     expiry_timestamp: "{{prettifyDate expiry_timestamp}}",
+                     delete_link: "{{#if expiry_timestamp}}",
+                     delete_link_end: "{{/if}}"
+                 } %>
       {{/each}}
     </div>
   </script>
@@ -387,37 +310,14 @@
 
   <script type="text/x-handlebars-template" id="webhook-secrets-info">
     <div class="mb-5">
-      <div class="dev-container-box p-3">
-        <div class="row">
-          <div class="col-8">
-            <h4>Webhook Secret</h4>
-            <p>{{webhookSecret}}</p>
-          </div>
-        </div>
-      </div>
-      {{#if webhookGraceSecret}}
-        <div class="dev-container-box mt-3 p-3">
-          <div class="row">
-            <div class="col-8">
-              <h4>Webhook Secret</h4>
-              <p>{{webhookGraceSecret}}</p>
-            </div>
-            <div class="col-4">
-              <div class="float-right d-inline d-flex align-items-center">
-                <span class="mr-2 expiry">Expires on {{prettifyDate webhookGraceExpiry}}</span>
-                <span class="api-delete-btn">
-                  <svg class="align-middle" style="height: 35px;width: 35px;">
-                    <switch>
-                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#api-delete-icon"></use>
-                    </switch>
-                  </svg>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="error delete-key-error"></div>
-        </div>
-      {{/if}}
+      <%= render :partial => 'webhook_secret',
+                 :locals => {
+                     webhook_secret: "{{webhookSecret}}",
+                     webhook_grace_secret: "{{webhookGraceSecret}}",
+                     expiry_timestamp: "{{prettifyDate webhookGraceExpiry}}",
+                     delete_link: "{{#if webhookGraceSecret}}",
+                     delete_link_end: "{{/if}}"
+                 } %>
     </div>
   </script>
 

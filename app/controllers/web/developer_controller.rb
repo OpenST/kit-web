@@ -42,7 +42,7 @@ class Web::DeveloperController < Web::BaseController
 
     if params[:a_t].present?
       unless Util::CommonValidator.is_valid_token?(params[:a_t])
-        render 'web/user/invalid_token'
+        render 'web/user/invalid_token', layout: "user"
         return
       end
 
@@ -60,7 +60,7 @@ class Web::DeveloperController < Web::BaseController
       elsif @response.http_code == GlobalConstant::ErrorCode.unauthorized_access
         redirect_to :login and return
       else
-        render 'web/user/invalid_token'
+        render 'web/user/invalid_token', layout: "user"
         return
       end
     else

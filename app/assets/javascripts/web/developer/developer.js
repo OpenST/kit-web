@@ -10,6 +10,8 @@
     sGenerateWebhookSecretBtn : '.generate-webhook-secret-btn',
     sDeleteKey                : '.api-delete-btn',
     jGenerateKeyBtn           : $('.generate-key-btn') ,
+    jShowKeysEmailBtn         : $('.show-keys-email-btn'),
+    jShowKeysEmailErr         : $('.show-keys-email-error'),
     jShowKeyBtn               : $('.show-keys-btn'),
     jGenerateWebhookSecretBtn : $('.generate-webhook-secret-btn'),
     jShowWebhookSecretBtn     : $('.show-webhook-secret-btn'),
@@ -36,10 +38,10 @@
 
     bindEvents: function() {
 
-      oThis.jShowKeyBtn.on('click',function( e ){
+      oThis.jShowKeysEmailBtn.on('click',function( e ){
         e.stopPropagation();
         utilities.btnSubmittingState( $(this) );
-        oThis.showKeys();
+        oThis.getKeysEmail();
       });
 
       oThis.jMainContainer.on('click', oThis.sGenerateKeyBtn ,function( e ){
@@ -77,27 +79,22 @@
 
     },
 
-    showKeys: function(){
+    getKeysEmail: function(){
       $.ajax({
-        url       : oThis.api_get_key,
+        url       : oThis.show_api_keys,
         method    : 'GET',
         success   : function ( response ) {
           if( response.success ){
-            oThis.keys = response.data && response.data['api_keys'];
-            var email_already_sent_flag = response.data && response.data['email_already_sent_flag'];
-            if(email_already_sent_flag) {
-              oThis.jEmailSentWrapper.show();
-            }
-            oThis.onSuccess();
+            oThis.jEmailSentWrapper.show();
           }else {
-            oThis.onError( response , oThis.jGenerateErr );
+            oThis.onError( response , oThis.jShowKeysEmailErr );
           }
         },
         error     : function ( err ) {
-          oThis.onError( err , oThis.jGenerateErr );
+          oThis.onError( err , oThis.jShowKeysEmailErr );
         },
         complete  : function () {
-          utilities.btnSubmitCompleteState( oThis.jShowKeyBtn );
+          utilities.btnSubmitCompleteState( oThis.jShowKeysEmailBtn );
         }
       });
     },
@@ -180,10 +177,8 @@
 
       oThis.appendKeysInfoToDOM();
       if(length == 2){
-        oThis.jShowKeyBtn.hide();
         oThis.jGenerateKeyBtn.hide();
       } else if(length == 1){
-        oThis.jShowKeyBtn.hide();
         oThis.jGenerateKeyBtn.show();
       }
     },
@@ -211,30 +206,6 @@
           html    = template(context);
       $('.keys-wrapper').empty();
       $('.keys-wrapper').append(html);
-    },
-
-    showWebhookSecrets: function(){
-      $.ajax({
-        url       : oThis.get_webhook_secrets,
-        method    : 'GET',
-        success   : function ( response ) {
-          if( response.success && response.data ){
-            var email_already_sent_flag = response.data && response.data['email_already_sent_flag'];
-            if(email_already_sent_flag) {
-              oThis.jEmailSentWrapper.show();
-            }
-            oThis.onShowWebhookSecretsSuccess(response.data);
-          }else {
-            oThis.onError( response , oThis.jGenerateWSErr );
-          }
-        },
-        error     : function ( err ) {
-          oThis.onError( err , oThis.jGenerateWSErr );
-        },
-        complete  : function () {
-          utilities.btnSubmitCompleteState( oThis.jShowWebhookSecretBtn );
-        }
-      });
     },
 
     onShowWebhookSecretsSuccess: function (resp) {
@@ -293,7 +264,6 @@
             oThis.devContainerBox.remove();
             oThis.jGenerateWebhookSecretBtn.show()
           } else {
-            //var errorMsg = utilities.deepGet(response, "err.display_text") ;
             oThis.onError( response , oThis.jDeleteErr);
           }
         },

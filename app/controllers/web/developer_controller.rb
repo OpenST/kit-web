@@ -56,6 +56,8 @@ class Web::DeveloperController < Web::BaseController
         if @response.go_to.present?
           handle_temporary_redirects(@response)
           return
+        else
+          render 'web/developer/verify_sda_email_success' and return
         end
       elsif @response.http_code == GlobalConstant::ErrorCode.unauthorized_access
         redirect_to :login and return

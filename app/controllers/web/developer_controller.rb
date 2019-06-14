@@ -5,7 +5,7 @@ class Web::DeveloperController < Web::BaseController
   before_action :check_if_device_is_supported, except: [:verify_sda]
   before_action :set_page_meta_info
 
-  before_action :redirect_to_login_if_login_cookie_not_present
+  before_action :redirect_to_login_if_login_cookie_not_present, except: [:verify_sda]
 
   after_action :remove_browser_caching
 

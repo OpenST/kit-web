@@ -119,6 +119,8 @@
           <p>
             Webhooks secret key is not generated for your account. You need to create at least one webhook subscription to get your webhook secret key.
           </p>
+
+          <div class="mb-5 resend-btn"> <a href="https://dev.ost.com/" target="_blank" style="color: #8eb9ce;letter-spacing: 2px;"> CREATE/ACTIVATE YOUR WEBHOOK </a> </div>
         <% else %>
           <p>
             To validate the webhook data, you will need to use the webhook secret key to generate the signature which you can match with the signature header in webhook response.
@@ -143,16 +145,6 @@
                          } %>
             </div>
           <% end %>
-          <div class="email-sent-wrapper" style="display: <%= email_already_sent_flag && !api_keys ? 'block' : 'none' %>">
-            <p class="bg-light rounded display-3 font-weight-bold p-3 mb-1">
-              <svg class="align-middle" style="width:25px;height:25px;">
-                <switch>
-                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
-                </switch>
-              </svg>
-              We sent you an email to confirm this request. After confirming, you can see and edit all keys for 15 minutes </p>
-            <p class="mb-3">Didn’t receive the email? <span class="resend-btn">Resend it</span></p>
-          </div>
 
         <% end %>
       </div>

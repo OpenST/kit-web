@@ -31,7 +31,9 @@
         <div class="card">
           <h3 class="card-header">Send App Invites</h3>
           <div class="card-body">
-            <p class="font-weight-light text-muted">Lets get the party started! Add your e-mail and your co-workers e-mail to check out the Test App so you can sync, barinstorm and be on your way to integrating in no time!</p>
+            <p class="font-weight-light text-muted">Invite your colleagues to join you in the OST Wallet test app.
+              You will be able to easily send tokens to each other, view transactions on the blockchain, and explore all of the wallet
+              security features.</p>
             <div class="send-invite-section">
               <div class="row">
                 <div class="col-7">
@@ -61,22 +63,27 @@
   </div>
 
   <div class="test-economy-pre-setup mt-2" style="display: <%= !has_setup_test_economy ? 'block': 'none'%>">
-    <h3 class="text-center mt-5"> Demo Integration </h3>
+    <h3 class="text-center mt-5"> Wallet </h3>
     <div class="row">
       <div class="col-9 mx-auto px-3 mt-3 font-weight-light text-muted text-center">
-        <p>To see what is possible with the OST SDKs, <br/>connect your Brand Token to our Demo App.</p>
+        <p>Now that your economy is setup, we recommend running some test transactions in the OST Wallet.
+          This will give you and your team a feel for the potential before starting integration with your apps and website.
+          If you have any questions at any time, please reach out to us at <a>support@ost.com</a>
+        </p>
       </div>
     </div>
     <div class="row">
       <div class="col-9 mx-auto shadow-box px-0">
         <form id="launch-setup-form" action="<%= activate_test_economy_api_route %>" method="POST">
           <div class="card">
-            <h3 class="card-header">Setup economy</h3>
+            <h3 class="card-header">Setup Test Wallet</h3>
             <div class="card-body">
-              <p class="font-weight-light text-muted">This step simulates the server-side integrations with a 1-click UX. During setup, a server that represents the role of your backend systems is deployed.
-                This server maintains user-id mappings between the application and the OST Platform, creates and stores passphrases for recovery and sends HMAC authenticated API calls to the OST Platform.</p>
+              <p class="font-weight-light text-muted">This step will create your token economy in the OST Wallet test app.
+                You and your team members will be able to download the test app on iOS and Android, run test transactions,
+                and explore the wallet security features.
+              </p>
               <button type="submit" id="launch-test-economy" data-submiting="Setting up.." class="btn btn-primary">
-                Launch  setup
+                SETUP WALLET
               </button>
               <div class="invalid-feedback" data-forid="launch-test-economy">&nbsp;</div>
               <div class="general_error invalid-feedback"></div>
@@ -95,8 +102,10 @@
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#email-icon"></use>
           </switch>
         </svg>
-        <h3>Economy Setup Successful!</h3>
-        <p class="font-weight-light w-75 mx-auto mt-3 mb-5">Your Brand Token Economy has been successfully integrated with the Demo App. An app invite has been sent to <%= manager_email %>. Invite users to access the mobile application and connect to the economy.</p>
+        <h3>OST Wallet Setup Complete!</h3>
+        <p class="font-weight-light w-75 mx-auto mt-3 mb-5">Your token economy has been successfully setup in the OST Wallet app.
+          An invite has been sent to frankie@ost.com.
+          Now invite your colleagues so you can send and receive tokens with each other.</p>
         <a href="javascript:void(0)" class="invite-users-btn btn btn-primary" title="Invite Users">INVITE USERS</a>
       </div>
     </div>

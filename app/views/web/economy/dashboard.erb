@@ -1,8 +1,8 @@
 <%
   graph_urls = @presenter_obj.graph_urls.data
-  column_chart_url = graph_urls['total_tx']
-  tx_by_type_url = graph_urls['tx_by_type']
-  tx_by_name_url = graph_urls['tx_by_name']
+  column_chart_url = graph_urls['total_transactions']
+  tx_by_type_url = graph_urls['total_transactions_by_type']
+  tx_by_name_url = graph_urls['total_transactions_by_name']
   client_token_symbol = @presenter_obj.client_token_symbol
   total_supply = @presenter_obj.dashboard_details.total_supply
   circulating_supply = @presenter_obj.dashboard_details.circulating_supply

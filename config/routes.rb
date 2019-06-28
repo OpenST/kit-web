@@ -45,7 +45,7 @@ Rails.application.routes.draw do
 
   # Enabling this route only for Non Production Sandbox ENV
   scope "#{GlobalConstant::Environment.sandbox_sub_url_prefix}", controller: 'web/test_economy', :format => false do
-    get '/test-economy' => :test_economy, as: 'test_economy', constraints: lambda { |_| !GlobalConstant::Environment.is_production? }
+    get '/wallet' => :test_economy, as: 'wallet', constraints: lambda { |_| !GlobalConstant::Environment.is_production? }
   end
 
   namespace "#{GlobalConstant::Environment.url_prefix}" do

@@ -15,7 +15,7 @@ module GlobalConstant
           token_mint:           "/#{GlobalConstant::Environment.url_prefix}/token/mint/",
           token_mint_progress:  "/#{GlobalConstant::Environment.url_prefix}/token/mint-progress/",
           developer:            "/#{GlobalConstant::Environment.url_prefix}/developer/",
-          test_economy:         "/#{GlobalConstant::Environment.url_prefix}/test-economy",
+          test_economy:         "/#{GlobalConstant::Environment.url_prefix}/wallet",
           team:                 "/settings/team/",
           company_information:  "/settings/company-information/",
           setup_mfa:            "/mfa/",

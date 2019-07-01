@@ -60,6 +60,7 @@
   <%= render :partial => "/shared/web/common/fav_icons" %>
 
   <%= stylesheet_link_tag "web/bootstrap-theme" %>
+  <%= stylesheet_link_tag "web/common" %>
   <%= stylesheet_link_tag "#{specific_manifest_file_path}", media: 'all' if has_specific_css_manifest_file? %>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
@@ -73,7 +74,7 @@
   <%=params[:action] == 'team' ? 'cloud-bg team-page-height' : ''%>
 <% end %>
 
-<main id="app-content" class="wrapper <%= yield (:app_content_classes) %>">
+<main id="app-content" class="wrapper position-relative <%= yield (:app_content_classes) %>">
 
   <%
     content_style = ""
@@ -95,6 +96,9 @@
         <%= render :partial => "/shared/web/common/environment_banner" %>
       <% end %>
       <%= yield %>
+    <% if @is_dvt_cookie_present %>
+      <%= render :partial => "shared/web/common/authorized_device" %>
+    <% end %>
       <div class="row">
           <% # meta-mask-workflow Needs to be the first element %>
           <div class="col-12" id="cover-container">
@@ -106,7 +110,6 @@
   <% content_for :popups do %>
     <%= render :partial => "shared/web/modals/help_video" %>
   <%end%>
-
 </main>
 
 <%= yield(:popups) %>

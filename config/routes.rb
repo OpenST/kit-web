@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get '/reset-password' => :reset_password
     get '/update-password' => :update_password
     get '/verify-email' => :verify_email
+    get '/verify-device' => :verify_device
     get '/mfa' => :mfa
     get '/invalid-token' => :invalid_token
   end
@@ -36,6 +37,10 @@ Rails.application.routes.draw do
 
   scope "#{GlobalConstant::Environment.url_prefix}/developer", controller: 'web/developer', :format => false do
     get '/' => :developer, as: 'developer'
+  end
+
+  scope "#{GlobalConstant::Environment.url_prefix}/verify-sda", controller: 'web/developer', :format => false do
+    get '/' => :verify_sda
   end
 
   # Enabling this route only for Non Production Sandbox ENV

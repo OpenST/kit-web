@@ -25,7 +25,7 @@
       }
     }
 
-    .keys-wrapper{
+    .keys-wrapper,.w-secrets-wrapper{
       .expiry{
         color: $blue-700;
         font-size: $font-size-sm;
@@ -34,12 +34,33 @@
     .generate-key-btn{
       display: none;
     }
+    .generate-webhook-secret-btn{
+      display: none;
+    }
     .error{
       min-height: 25px;
       font-weight: $font-weight-normal;
       font-size: $font-size-sm;
       color: $red;
     }
+  }
+  .api-keys-banner{
+    background-color: $china-ivory;
+    .banner-text{
+      background-color: $yellow-300;
+      color: $white;
+      text-transform: uppercase;
+      font-size: 12px;
+      padding: 1px 5px;
+      display: inline-block;
+      font-weight: 500;
+      letter-spacing: 2px;
+    }
+  }
+  .resend-btn{
+    color: $yellow-300;
+    text-decoration: underline;
+    cursor: pointer;
   }
 
 }

@@ -1,0 +1,14 @@
+// Import functions as variables depend on functions
+@import "../../plugins/bootstrap/scss/functions";
+
+// Import theme variables
+@import "../Starboy/variables";
+.authorized_device_popup_wrap{
+  top: 100px;
+  width: calc(100% - 265px);
+
+  .authorized_device_popup{
+    background-color: $alice-blue;
+    border-radius: 10px;
+  }
+}

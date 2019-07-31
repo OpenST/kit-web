@@ -4,6 +4,8 @@
   developer_url = GlobalConstant::RoutesMap.getRoutes()[:developer]
   dashboard_url = GlobalConstant::RoutesMap.getRoutes()[:token_dashboard]
   test_economy_url = GlobalConstant::RoutesMap.getRoutes()[:test_economy]
+  team_dashboard_url = GlobalConstant::RoutesMap.getRoutes()[:team]
+  mfa_url = GlobalConstant::RoutesMap.getRoutes()[:authenticate_mfa]
   api_request_whitelist = GlobalConstant::RoutesMap.getApis()[:api_request_whitelist]
   is_whitelisted_user = @presenter_obj.sub_env_payloads.is_mainnet_whitelisted?
   is_mainnet_whitelisting_requested = @presenter_obj.sub_env_payloads.is_mainnet_whitelisting_requested?
@@ -121,6 +123,27 @@
           </switch>
         </svg>
         <span class="label">Block Explorer</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link d-flex align-items-center <%= (@presenter_obj.is_client_token_deployed? || @presenter_obj.is_client_token_deploying?) ? '' : 'disabled to-enable-on-setup' %>"  data-toggle="collapse" href=".multi-collapse" role="button"  aria-expanded="true" aria-controls="settingsCollapseTeam settingsCollapse2fa"   >
+        <svg class="icon">
+          <switch>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-settings"></use>
+          </switch>
+        </svg>
+        <span class="label">Settings</span>
+      </a>
+    </li>
+
+    <li class="collapse multi-collapse nav-item" id="settingsCollapseTeam">
+      <a class="nav-link d-flex align-items-center " href="<%= team_dashboard_url %>">
+        Team
+      </a>
+    </li>
+    <li class="collapse multi-collapse nav-item" id="settingsCollapse2fa">
+      <a class="nav-link d-flex align-items-center " href="<%= mfa_url %>" >
+        2FA
       </a>
     </li>
   </ul>

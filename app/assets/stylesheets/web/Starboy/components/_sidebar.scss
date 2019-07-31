@@ -83,6 +83,19 @@
         @include nav-disabled();
       }
     }
+    .multi-collapse{
+      .nav-link{
+        padding-left: 50px;
+        font-size: $font-size-sm;
+        color: $cyan;
+        cursor : pointer;
+        background-color: $nav-pills-link-inactive-bg
+      }
+      svg.icon{
+        fill: $cyan;
+      }
+
+    }
     .nav-link.disabled{
       @include nav-disabled();
     }

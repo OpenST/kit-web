@@ -126,13 +126,23 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link d-flex align-items-center <%= (@presenter_obj.is_client_token_deployed? || @presenter_obj.is_client_token_deploying?) ? '' : 'disabled to-enable-on-setup' %>"  data-toggle="collapse" href=".multi-collapse" role="button"  aria-expanded="true" aria-controls="settingsCollapseTeam settingsCollapse2fa"   >
+      <a class="nav-link settings-collapse d-flex align-items-center  <%= (@presenter_obj.is_client_token_deployed? || @presenter_obj.is_client_token_deploying?) ? '' : 'disabled to-enable-on-setup' %>"  data-toggle="collapse" href=".multi-collapse" role="button"  aria-expanded="false" aria-controls="settingsCollapseTeam settingsCollapse2fa"   >
         <svg class="icon">
           <switch>
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-settings"></use>
           </switch>
         </svg>
         <span class="label">Settings</span>
+        <svg class="icon ml-auto down-arrow" style=" width: 11px;height: 11px">
+          <switch>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sidenav-down-arrow"></use>
+          </switch>
+        </svg>
+        <svg class="icon ml-auto up-arrow" style="width: 11px;height: 11px">
+          <switch>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sidenav-up-arrow"></use>
+          </switch>
+        </svg>
       </a>
     </li>
 
@@ -147,6 +157,11 @@
       </a>
     </li>
   </ul>
+  <div class="mx-auto position-absolute"style="bottom: 10px;left:10px" >
+    <a target="_blank"  href="https://join.slack.com/t/tryost/shared_invite/enQtNjk5MTI4NDY5MjIyLTFlZWYyODNhMjA0YmNmM2ZmMTJkZDM4MDU0NGJlNDc3ZWEwMjY5ZWNiNjNiZDcyOTIyZTljNGFmN2E2NzY2MDk" >
+      Join our Slack space
+    </a>
+  </div>
 
 </aside>
 

@@ -204,7 +204,7 @@ a[aria-expanded="false"]{
     display:none;
   }
 }
-.settings-collapse{
+.settings-collapse,.nav-pills{
   &.disabled {
     .down-arrow,.up-arrow{
       stroke: $mystic;

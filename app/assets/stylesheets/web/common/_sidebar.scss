@@ -62,7 +62,7 @@
     }
   }
 
-  input:checked + .slider {
+  input:not(:checked) + .slider {
     background-color: $yellow-300;
   }
 

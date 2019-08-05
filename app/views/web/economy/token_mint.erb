@@ -49,7 +49,7 @@
 
   stake_currency_symbol = 'OST'
   if @presenter_obj.client_token.present? && @presenter_obj.client_token.stake_currency_id.present?
-      stake_currency_symbol = @presenter_obj.client_token.stake_currency_symbol
+    stake_currency_symbol = @presenter_obj.client_token.stake_currency_symbol
   end
 
   display_stake_currency_symbol = @presenter_obj.display_stake_currency_symbol
@@ -65,13 +65,12 @@
 
   <div id="stake-mint-start" class="col-9 mx-auto mt-6 jMintSections" style="display: <%= is_workflow ? "none" : "block" %>">
     <div class="card text-center p-6 card-planner border-0">
-        <h3 class="mb-0">Mint Your Brand Tokens</h3>
+      <h3 class="mb-0">Mint Your Tokens</h3>
       <div class="simulator-image-wrapper my-4">
         <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-start-minting@2x.png" width="150" class="img-fluid"/>
       </div>
-      <div class="token-supply-infotext mb-4 col-5 mx-auto">Mint your Brand Tokens first to try the OST Wallet</div>
       <div class="run-transaction-btn-wrapper">
-        <button id="mint-tokens" class="btn btn-gold" data-submiting="Setting up ...">Setup Minting</button>
+        <button id="mint-tokens" class="btn btn-gold" data-submiting="Setting up ...">Mint Tokens</button>
       </div>
     </div>
   </div>
@@ -93,15 +92,12 @@
                                  :selector => staker_address_selector
                              }
                   %>
-                  <div class="col-6 text-left pl-0">
-                    <span class="text-muted font-weight-light">Your Account Owner Address is used to authorize the minting of your Brand Tokens</span>
-                  </div>
                 </div>
                 <div class="row">
                   <div class="col-4">
-                      <%= render partial: 'shared/web/common/slider_top',
+                    <%= render partial: 'shared/web/common/slider_top',
                                locals: {
-                                   label: "#{bt_symbol} Tokens to mint",
+                                   label: "Tokens to mint",
                                    id: bt_to_mint_id,
                                    name: fe_bt_to_mint,
                                    type: 'number',
@@ -112,12 +108,12 @@
                                    tooltip: 'hide',
                                    classes: 'slider-primary'
                                }
-                      %>
+                    %>
                     <div class="mt-4 mb-2">
                       <%=
                         render partial: 'shared/web/common/mocker',
                                locals: {
-                                   :header => "TOKENS VALUE IN USD",
+                                   :header => "VALUE IN USD",
                                    :mock_selector => "#" + bt_to_mint_id,
                                    :mock_parser => "ost.tokenMint.btToFiat",
                                    :mock_type => "sc",
@@ -127,8 +123,8 @@
 
                     </div>
                     <input type="hidden" name="<%= bt_to_mint_name %>"
-                            data-ost-mock-parser="ost.tokenMint.toSmallestUnit"
-                            data-ost-mock-element="#<%= bt_to_mint_id %>" />
+                           data-ost-mock-parser="ost.tokenMint.toSmallestUnit"
+                           data-ost-mock-element="#<%= bt_to_mint_id %>" />
                     <input type="hidden" name="<%= sc_to_stake_name %>"
                            data-ost-mock-parser="ost.tokenMint.btToStakeCurrencySmallestUnit"
                            data-ost-mock-element="#<%= bt_to_mint_id %>" />
@@ -138,34 +134,36 @@
                       <div class="p-0 form-group m-0 position-relative">
                         <div id="scSupplyInAccountPie" class="pie-chat" style="width:200px; height: 200px"></div>
                         <div class="total-sc">
-                          <span>Total <%= stake_currency_symbol %> tokens</span><br/>
+                          <span>Stake Available </span><br/>
                           <span class="total-sc-available"></span>
+                          <%= stake_currency_symbol %>
                         </div>
                       </div>
                       <ul class="p-0 m-0">
                         <li class="d-flex align-items-center mb-3">
-                          <span class="sc-supply available"></span>
-                          <p class="m-0 ml-2">
-                            <small class="d-block" data-ost_available_key><%= stake_currency_symbol %> tokens available after minting</small>
-                            <small><span class="ost-mocker-value total-sc-available"
-                                         data-type="sc" data-ost-mock-element="#<%= bt_to_mint_id %>"
-                                         data-ost-mock-parser="ost.tokenMint.scAvailableOnBtChange"></span></small>
-                          </p>
-                        </li>
-                        <li class="d-flex align-items-center mb-3">
                           <span class="sc-supply staked-minting"></span>
                           <p class="m-0 ml-2">
-                            <small class="d-block" data-ost_staked_key><%= stake_currency_symbol %> tokens used for minting</small>
-                            <small class="d-block" data-ost_staked_val>
-                                  <span class="ost-mocker-value" data-type="sc" data-ost-mock-element="#<%= bt_to_mint_id %>"
-                                        data-ost-mock-parser="ost.tokenMint.btToSc">
+                            <small class="d-block" data-ost_staked_key data-ost_staked_val>Stake Amount
+
+                              <span class="ost-mocker-value" data-type="sc" data-ost-mock-element="#<%= bt_to_mint_id %>"
+                                    data-ost-mock-parser="ost.tokenMint.btToSc">
                                 </span>
+                              <%= stake_currency_symbol %>
                             </small>
                             <input type="hidden" name="<%=fe_stake_currency_to_stake%>"
                                    data-type="sc" data-ost-mock-parser="ost.tokenMint.btToSc"
                                    data-ost-mock-element="#<%= bt_to_mint_id %>"  />
                           </p>
                         </li>
+                        <li class="d-flex align-items-center mb-3">
+                          <span class="sc-supply available"></span>
+                          <p class="m-0 ml-2">
+                            <small class="d-block" data-ost_available_key data-ost_staked_val> Remaining Stake <span class="ost-mocker-value total-sc-available"
+                                                                                                                     data-type="sc" data-ost-mock-element="#<%= bt_to_mint_id %>"
+                                                                                                                     data-ost-mock-parser="ost.tokenMint.scAvailableOnBtChange"></span> <%= stake_currency_symbol %></small>
+                          </p>
+                        </li>
+
                       </ul>
                     </div>
                   </div>

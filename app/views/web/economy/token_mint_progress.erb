@@ -40,7 +40,7 @@
                 </switch>
               </svg>
               <span class="ml-3 align-middle text-muted font-weight-light">
-                Allow the contract Stake <%= stake_sc%> <%= stake_currency_symbol %> to Mint <%= total_mint_bt%> <%= bt_symbol %> Tokens
+                Allow the contract to stake <%= stake_sc%> <%= stake_currency_symbol %> to mint <%= total_mint_bt%> <%= bt_symbol %> Tokens
               </span>
             </div>
             <div class="alert alert-secondary align-items-center d-flex" role="alert">
@@ -74,27 +74,11 @@
           </div>
           <div class="col-8 mt-3 mx-auto">
             <a href="<%= dashboard_url %>" class="btn btn-secondary">DASHBOARD</a>
-            <a href="<%= GlobalConstant::RoutesMap.getRoutes()[:token_mint] %>" class="btn btn-primary ml-3">MINT MORE</a>
-          </div>
-        </div>
-        <% if !GlobalConstant::Base.main_sub_environment? && !has_setup_test_economy %>
-          <div class="row">
-            <div class="shadow-box col-10 mx-auto my-3">
-              <div class="row align-items-center flex-wrap py-4">
-                <div class="col-2">
-                  <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/deploy-token-setup-options.png" class="img-fluid"/>
-                </div>
-                <div class="text-muted font-weight-light col-6 text-left">
-                  <h4>Launch your Demo Integration</h4>
-                  <div>To experience a mock economy with your <%= bt_symbol %> token as an end-user and better specify your Brand Token economy project, launch a Demo Integration.</div>
-                </div>
-                <div class="col-4">
-                  <a href="<%= test_economy_url %>" class="btn btn-primary" title="Get Started">Get Started</a>
-                </div>
+            <% if !GlobalConstant::Base.main_sub_environment? %>
+            <a href="<%= test_economy_url %>" class="btn btn-primary ml-3">Run transactions</a>
+            <% end %>
               </div>
-            </div>
-          </div>
-        <% end %>
+        </div>
       </div>
     </div>
   </section>

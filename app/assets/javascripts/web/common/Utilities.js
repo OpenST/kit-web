@@ -96,8 +96,8 @@
     },
 
     mockerStakingOstOptions: function ( val ) {
-      var common = 'Stake OST Tokens';
-      return (val && common + ' to mint ' + val.toUpperCase()) || 'Stake OST Tokens';
+      var common = 'Stake OST';
+      return (val && common + ' to mint ' + val.toUpperCase()) || 'Stake OST';
     },
 
     mockerStakingUsdcOptions: function ( val ) {

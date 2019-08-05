@@ -326,11 +326,20 @@
       }
       oThis.mintDonuteChart = new GoogleCharts();
       oThis.initSupplyPieChart( scToStake );
-      $('.total-sc-available').text( oThis.pricer.toScPrecision( sc ) );  //No mocker so set via precession
-      var scBalance = oThis.scAvailableOnBtChange( btToMint ) ;
-      $('.ost-mocker-value.total-sc-available').text( oThis.pricer.toScPrecision( scBalance ) ) ;  //No mocker so set via precession
+      var seperators = oThis.getDecimalGroupSeperators();
+      var displayVal = $.number(oThis.pricer.toScPrecision( sc ),0,seperators[1],seperators[0]);
+      $('.total-sc-available').text( displayVal );  //No mocker so set via precession
+      var scBalance = oThis.scAvailablBtChange( btToMint ) ;
+      var displayVal = $.number(oThis.pricer.toScPrecision( scBalance ),0,seperators[1],seperators[0]);
+      $('.ost-mocker-value.total-sc-available').text( displayVal ) ;  //No mocker so set via precession
       oThis.updateSlider( sc );
       oThis.showSection(  oThis.jStakeMintProcess ) ;
+    },
+    getDecimalGroupSeperators: function () {
+      var num = 1000.1;
+      var formatedNum = num.toLocaleString(navigator.language);
+      formatedNum = formatedNum.split("");
+      return [formatedNum[1],formatedNum[5]] //formatedNum[1] : group seperator, formatedNum[5] : decimal sepeartor
     },
   
     requestingScUIState : function () {

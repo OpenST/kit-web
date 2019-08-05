@@ -30,10 +30,6 @@
 
     },
     bindEvents : function () {
-      $('.invite-users-btn').on('click',function () {
-        $('.test-economy-setup').hide();
-        $('.test-economy-post-setup').show();
-      });
 
       $('.invite-more-users-btn').on('click',function () {
         $('.invite-successful').hide();
@@ -47,7 +43,7 @@
         success:function(response){
           if(response && response.success){
             $('.test-economy-pre-setup').hide();
-            $('.test-economy-setup').show();
+            $('.test-economy-post-setup').show();
           }
         }
       });
@@ -57,8 +53,10 @@
           if(response && response.success){
             // oThis.inviteEconomyForm[0].reset();
             oThis.selectizedField[0].selectize.clear();
-           $('.test-economy-post-setup').hide();
-           $('.invite-successful').show();
+            $('#invite-successful-message').show();
+            setTimeout(function () {
+              $('#invite-successful-message').hide();
+            },2000)
           }
         }
       });

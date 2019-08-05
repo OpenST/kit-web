@@ -25,12 +25,12 @@
     switch_state_class = "checked"
     slider_state_class = 'slider-testnet-background environment-slider testnet'
     env_text_class = "Sandbox Mode"
-    input_checkbox_state = "checked"
+    input_checkbox_state = ""
   else
       switch_state_class = "unchecked"
       slider_state_class = 'slider-mainnet-background environment-slider mainnet'
       env_text_class = "Production Mode"
-      input_checkbox_state = ""
+      input_checkbox_state = "checked"
   end
 
   is_company_info_route = @presenter_obj.is_company_information_route?
@@ -156,12 +156,17 @@
         2FA
       </a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link d-flex align-items-center" target="_blank"  href="https://join.slack.com/t/tryost/shared_invite/enQtNjk5MTI4NDY5MjIyLTFlZWYyODNhMjA0YmNmM2ZmMTJkZDM4MDU0NGJlNDc3ZWEwMjY5ZWNiNjNiZDcyOTIyZTljNGFmN2E2NzY2MDk">
+        <svg class="icon">
+          <switch>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#slack-icon"></use>
+          </switch>
+        </svg>
+        <span class="label">Join our Slack space</span>
+      </a>
+    </li>
   </ul>
-  <div class="mx-auto position-absolute"style="bottom: 10px;left:10px" >
-    <a target="_blank"  href="https://join.slack.com/t/tryost/shared_invite/enQtNjk5MTI4NDY5MjIyLTFlZWYyODNhMjA0YmNmM2ZmMTJkZDM4MDU0NGJlNDc3ZWEwMjY5ZWNiNjNiZDcyOTIyZTljNGFmN2E2NzY2MDk" >
-      Join our Slack space
-    </a>
-  </div>
 
 </aside>
 

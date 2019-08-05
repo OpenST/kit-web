@@ -3,11 +3,11 @@
 <div class="token-setup-options-conatiner mt-6">
   <div class="shadow-box mx-5 px-5 py-4">
     <h4>Company Wallet Options</h4>
-    <p class="font-weight-light mb-2">Select in which way you prefer to set up the Company Wallet in sandbox from the options below in order to complete the setup.</p>
+    <p class="font-weight-light mb-2">In Sandbox, you can choose to have OST Platform manage a wallet account on your behalf or else you can use you own wallet with MetaMask. In Production, you have to use your own wallet.</p>
     <p class="font-weight-normal mb-0">
-      Token Identifier :
+      Token Identifier:
       <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerTokenName">BT</span>
-      <span class="standing-line"> | </span> Conversion Rate :
+      <span class="standing-line"> | </span> Conversion Rate:
       <span class="conversion-rate font-weight-bold">1</span>
       <span class="conversion-rate-unit font-weight-bold stake-currency-symbol"><%= stake_currency_symbol %></span>
       =
@@ -30,10 +30,10 @@
           <p class="text-center small token-setup-option-ost mb-0">OST</p>
         </div>
         <div class="col-6 pl-0">
-          <p class="font-weight-light mb-0">Have OST manage the Company Wallet for you. To expedite testing on sandbox, we will hold the test tokens for you during this phase.</p>
+          <p class="font-weight-light mb-0">OST Platform will hold test tokens for you in Sandbox and manage your Company Wallet.</p>
         </div>
         <div class="col-4 text-center">
-          <button id="jTokenSetupOstBtn" class="btn btn-primary">Proceed</button>
+          <button id="jTokenSetupOstBtn" class="btn btn-primary">Use platform</button>
         </div>
       </div>
       <div class="position-absolute OR-section-seperator">
@@ -53,9 +53,9 @@
         <div class="col-6 pl-0">
           <p class="font-weight-light mb-0">
             <% if is_metamask_whitelisted_browser %>
-              Hold the ownership keys of the Company Wallet via Metamask or Hardware wallet. This will be required when going live in Production.
+              Use your own wallet and hold the ownership keys of your Company Wallet.
             <% else %>
-              Hold the ownership keys of the Company Wallet via Metamask or Hardware wallet. This will be required when going live in Production. Your current browser does not support metamask.
+              Use your own wallet and hold the ownership keys of your Company Wallet. Your current browser does not support metamask.
               Please switch to <a class="browser-link" href="https://www.google.com/chrome/" target="_blank">Google chrome</a> or
               <a class="browser-link" href="https://www.mozilla.org/en-US/firefox/" target="_blank">Firefox</a>
             <% end %>

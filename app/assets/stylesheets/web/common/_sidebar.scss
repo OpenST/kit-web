@@ -185,3 +185,29 @@
   border: none;
   box-shadow: 1.5px 0 4.5px 0 rgba(0, 0, 0, 0.1)
 }
+
+a[aria-expanded="true"]{
+  .down-arrow{
+    display:none;
+  }
+  .up-arrow{
+    display:block;
+    stroke: $cyan;
+  }
+}
+a[aria-expanded="false"]{
+  .down-arrow{
+    display:block;
+    stroke: $cyan;
+  }
+  .up-arrow{
+    display:none;
+  }
+}
+.settings-collapse{
+  &.disabled {
+    .down-arrow,.up-arrow{
+      stroke: $mystic;
+    }
+  }
+}

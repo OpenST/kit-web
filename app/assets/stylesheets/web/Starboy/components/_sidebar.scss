@@ -83,22 +83,7 @@
         @include nav-disabled();
       }
     }
-    a[aria-expanded="true"]{
-      .down-arrow{
-        display:none;
-      }
-      .up-arrow{
-        display:block;
-      }
-    }
-    a[aria-expanded="false"]{
-      .down-arrow{
-        display:block;
-      }
-      .up-arrow{
-        display:none;
-      }
-    }
+
 
 
     .multi-collapse{

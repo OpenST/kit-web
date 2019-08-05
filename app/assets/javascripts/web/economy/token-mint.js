@@ -4,7 +4,8 @@
   var ost = ns("ost"),
      Polling = ost.Polling ,
      utilities = ost.utilities,
-     PricerFactory = ost.PricerFactory
+     PricerFactory = ost.PricerFactory,
+    PriceOracle = ost.PriceOracle;
   ;
   
   var providerMap = {
@@ -326,22 +327,17 @@
       }
       oThis.mintDonuteChart = new GoogleCharts();
       oThis.initSupplyPieChart( scToStake );
-      var seperators = oThis.getDecimalGroupSeperators();
-      var displayVal = $.number(oThis.pricer.toScPrecision( sc ),0,seperators[1],seperators[0]);
+      var seperators = utilities.getDecimalGroupSeperators();
+      var scPrecision =PriceOracle.getScPrecision()
+      var displayVal = $.number(oThis.pricer.toScPrecision( sc ),scPrecision,seperators[1],seperators[0]);
       $('.total-sc-available').text( displayVal );  //No mocker so set via precession
-      var scBalance = oThis.scAvailablBtChange( btToMint ) ;
-      var displayVal = $.number(oThis.pricer.toScPrecision( scBalance ),0,seperators[1],seperators[0]);
+      var scBalance = oThis.scAvailableOnBtChange( btToMint ) ;
+      var displayVal = $.number(oThis.pricer.toScPrecision( scBalance ),scPrecision,seperators[1],seperators[0]);
       $('.ost-mocker-value.total-sc-available').text( displayVal ) ;  //No mocker so set via precession
       oThis.updateSlider( sc );
       oThis.showSection(  oThis.jStakeMintProcess ) ;
     },
-    getDecimalGroupSeperators: function () {
-      var num = 1000.1;
-      var formatedNum = num.toLocaleString(navigator.language);
-      formatedNum = formatedNum.split("");
-      return [formatedNum[1],formatedNum[5]] //formatedNum[1] : group seperator, formatedNum[5] : decimal sepeartor
-    },
-  
+
     requestingScUIState : function () {
       $('.jStatusWrapper').hide();
       $('.jGetScLoaderText').show();

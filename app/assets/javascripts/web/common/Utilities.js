@@ -135,6 +135,12 @@
       jHideEls.addClass('hide');
       jShowEls.removeClass('hide');
 
+    },
+    getDecimalGroupSeperators: function () {
+      var num = 1000.1;
+      var formatedNum = num.toLocaleString(navigator.language);
+      formatedNum = formatedNum.split("");
+      return [formatedNum[1],formatedNum[5]] //formatedNum[1] : group seperator, formatedNum[5] : decimal sepeartor
     }
   }
 

@@ -197,7 +197,7 @@
         },
         {
           type: 'number',
-          opt_label: 'Volume of Transactions in OST ',
+          opt_label: 'Value of Transactions in OST ',
           opt_id: 'token_ost_volume'
         }
       ],
@@ -212,7 +212,7 @@
           },
           1: {
             targetAxisIndex: 1,
-            labelInLegend: 'Volume of Transactions in OST (right axis)',
+            labelInLegend: 'Value of Transactions in OST (right axis)',
             color: 'b2dde6'
           }
         },

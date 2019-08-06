@@ -293,6 +293,7 @@
 
       if( lowEth || lowSc ){
         oThis.jLowBal.hide();
+        utilities.reformatDecimals({precision : 0});
         oThis.showSection(  oThis.jInsufficientBalSection ) ;
       }
 

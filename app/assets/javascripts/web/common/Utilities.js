@@ -141,6 +141,29 @@
       var formatedNum = num.toLocaleString(navigator.language);
       formatedNum = formatedNum.split("");
       return [formatedNum[1],formatedNum[5]] //formatedNum[1] : group seperator, formatedNum[5] : decimal sepeartor
+    },
+    reformatDecimals( options ){
+
+      var options = options || {};
+      var precisionVal = options.precision;
+      var displayVal    = options.displayNum;
+      var seperators = oThis.getDecimalGroupSeperators();
+      $('.reformat-decimal').each(function(i) {
+
+        if(options.precision === undefined){
+          var precisionFunction = $(this).data("precision-function");
+          precisionFunction  = precisionFunction && ns( precisionFunction )
+          if( precisionFunction && typeof precisionFunction== "function") {
+            precisionVal = precisionFunction();
+          }
+        }
+        if(options.displayNum === undefined){
+          displayVal = $(this).data("value");
+        }
+
+        displayVal = $.number(displayVal, precisionVal, seperators[1], seperators[0]); // seperators[1] - decimal seperator, seperators[0] - group seperator
+        $(this).html(displayVal);
+      });
     }
   }
 

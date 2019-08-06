@@ -19,6 +19,7 @@
     };
 
     var ost = ns('ost'),
+        PriceOracle = ost.PriceOracle,
         graphConfig = ost.dashboardGraphConfig,
         filterOptionsMap               = graphConfig.filterOptionsMap,
         transactions_and_ost_volume    = graphConfig.transactions_and_ost_volume,
@@ -38,6 +39,7 @@
           $.extend(oThis,config);
           oThis.initCharts();
           oThis.bindActions();
+          utilities.reformatDecimals();
       },
 
       initCharts: function(){
@@ -53,7 +55,7 @@
 
       updateTransactionAndOstVolumeGraphConfig: function(){
         var seriesConfig = utilities.deepGet(transactions_and_ost_volume,'options.series');
-        seriesConfig[1].labelInLegend = 'Volume of Transactions in '+ oThis.token_symbol+' (right axis)';
+        seriesConfig[1].labelInLegend = 'Value of Transactions in '+ oThis.token_symbol+' (right axis)';
       },
 
       setAxisConfiguration: function(config, filter, res) {

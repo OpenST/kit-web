@@ -260,7 +260,7 @@
                 <% else %>
                   <div class="card-header p-0"></div>
                   <div class="text-muted font-weight-light mt-2 mb-3">
-                    Will fund <%=initial_sc_funding%>&nbsp;<%= display_stake_currency_symbol %> and minimum required <%= ether_text %> in to your selected MetaMask wallet to get you started.</div>
+                    Will fund <span data-precision-function="ost.PriceOracle.getScPrecision" data-value="<%= initial_sc_funding %>" class="reformat-decimal"></span>&nbsp;<%= display_stake_currency_symbol %> and minimum required <%= ether_text %> in to your selected MetaMask wallet to get you started.</div>
                   <button id="get-sc-btn" type="submit" data-submiting="Getting <%= display_stake_currency_symbol %>..."
                           class="btn btn-primary d-inline-block">Get&nbsp;<%= display_stake_currency_symbol %>
                   </button>

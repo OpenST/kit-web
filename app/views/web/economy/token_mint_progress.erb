@@ -18,7 +18,6 @@
     stake_currency_symbol = @presenter_obj.client_token.stake_currency_symbol
   end
 %>
-
 <div class="container token-mint-progress-container">
 
   <section class="jSection" id="minting-inprogress">
@@ -40,7 +39,7 @@
                 </switch>
               </svg>
               <span class="ml-3 align-middle text-muted font-weight-light">
-                Allow the contract to stake <%= stake_sc%> <%= stake_currency_symbol %> to mint <%= total_mint_bt%> <%= bt_symbol %> Tokens
+                Allow the contract to stake <span data-precision-function="ost.PriceOracle.getScPrecision" data-value="<%= stake_sc %>" class="reformat-decimal"></span> <%= stake_currency_symbol %> to mint <span data-precision-function="ost.PriceOracle.getBtPrecision" data-value="<%= total_mint_bt %>" class="reformat-decimal"></span> <%= bt_symbol %> Tokens
               </span>
             </div>
             <div class="alert alert-secondary align-items-center d-flex" role="alert">
@@ -69,7 +68,7 @@
                   <use class="success-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
                 </switch>
               </svg>
-              You have successfully minted&nbsp;<span class="total-token-minted"><%= total_mint_bt %></span>&nbsp;<%= bt_symbol%>&nbsp;Tokens
+              You have successfully minted&nbsp;<span class="total-token-minted reformat-decimal" data-precision-function="ost.PriceOracle.getBtPrecision" data-value="<%= total_mint_bt %>"><%= total_mint_bt %></span>&nbsp;<%= bt_symbol%>&nbsp;Tokens
             </div>
           </div>
           <div class="col-8 mt-3 mx-auto">

@@ -142,7 +142,7 @@
       formatedNum = formatedNum.split("");
       return [formatedNum[1],formatedNum[5]] //formatedNum[1] : group seperator, formatedNum[5] : decimal sepeartor
     },
-    reformatDecimals( options ){
+    reformatDecimals: function( options ){
 
       var options = options || {};
       var precisionVal = options.precision;

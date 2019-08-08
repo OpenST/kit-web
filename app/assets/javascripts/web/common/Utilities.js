@@ -137,10 +137,11 @@
 
     },
     getDecimalGroupSeperators: function () {
-      var num = 1000.1;
-      var groupSeperator = ""
-      var decimalSeperator = ""
-      var formatedNum = num.toLocaleString(navigator.language);
+      var num = 1000.1,
+          groupSeperator = "",
+          decimalSeperator = "",
+          formatedNum = num.toLocaleString(navigator.language);
+
       formatedNum = formatedNum.split("");
       if(!formatedNum[1] == 0){
         groupSeperator = formatedNum[1];

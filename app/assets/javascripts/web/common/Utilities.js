@@ -96,8 +96,8 @@
     },
 
     mockerStakingOstOptions: function ( val ) {
-      var common = 'Stake OST Tokens';
-      return (val && common + ' to mint ' + val.toUpperCase()) || 'Stake OST Tokens';
+      var common = 'Stake OST';
+      return (val && common + ' to mint ' + val.toUpperCase()) || 'Stake OST';
     },
 
     mockerStakingUsdcOptions: function ( val ) {
@@ -135,6 +135,44 @@
       jHideEls.addClass('hide');
       jShowEls.removeClass('hide');
 
+    },
+    getDecimalGroupSeperators: function () {
+      var num = 1000.1,
+          groupSeperator = "",
+          decimalSeperator = "",
+          formatedNum = num.toLocaleString(navigator.language);
+
+      formatedNum = formatedNum.split("");
+      if(!formatedNum[1] == 0){
+        groupSeperator = formatedNum[1];
+        decimalSeperator = formatedNum[5]
+      }else{
+        decimalSeperator = formatedNum[5]
+      }
+      return [groupSeperator,decimalSeperator]
+    },
+    reformatDecimals: function( options ){
+
+      var options = options || {};
+      var precisionVal = options.precision;
+      var displayVal    = options.displayNum;
+      var seperators = oThis.getDecimalGroupSeperators();
+      $('.reformat-decimal').each(function(i) {
+
+        if(options.precision === undefined){
+          var precisionFunction = $(this).data("precision-function");
+          precisionFunction  = precisionFunction && ns( precisionFunction )
+          if( precisionFunction && typeof precisionFunction== "function") {
+            precisionVal = precisionFunction();
+          }
+        }
+        if(options.displayNum === undefined){
+          displayVal = $(this).data("value");
+        }
+
+        displayVal = $.number(displayVal, precisionVal, seperators[1], seperators[0]); // seperators[1] - decimal seperator, seperators[0] - group seperator
+        $(this).html(displayVal);
+      });
     }
   }
 

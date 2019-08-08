@@ -192,12 +192,12 @@
         },
         {
           type: 'number',
-          opt_label: 'No. of Transactions',
+          opt_label: 'Number of Transactions',
           opt_id: 'token_transactions'
         },
         {
           type: 'number',
-          opt_label: 'Volume of Transactions in ost ',
+          opt_label: 'Value of Transactions in OST ',
           opt_id: 'token_ost_volume'
         }
       ],
@@ -206,13 +206,13 @@
         series: {
           0: {
             targetAxisIndex: 0,
-            labelInLegend: 'No. of Transactions (left axis)',
+            labelInLegend: 'Number of Transactions (left axis)',
             color: 'ff8385',
             type: 'line'
           },
           1: {
             targetAxisIndex: 1,
-            labelInLegend: 'Volume of Transactions in ost (right axis)',
+            labelInLegend: 'Value of Transactions in OST (right axis)',
             color: 'b2dde6'
           }
         },

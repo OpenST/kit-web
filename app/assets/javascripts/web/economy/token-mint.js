@@ -4,7 +4,8 @@
   var ost = ns("ost"),
      Polling = ost.Polling ,
      utilities = ost.utilities,
-     PricerFactory = ost.PricerFactory
+     PricerFactory = ost.PricerFactory,
+    PriceOracle = ost.PriceOracle;
   ;
   
   var providerMap = {
@@ -292,6 +293,7 @@
 
       if( lowEth || lowSc ){
         oThis.jLowBal.hide();
+        utilities.reformatDecimals({precision : 0});
         oThis.showSection(  oThis.jInsufficientBalSection ) ;
       }
 
@@ -326,13 +328,17 @@
       }
       oThis.mintDonuteChart = new GoogleCharts();
       oThis.initSupplyPieChart( scToStake );
-      $('.total-sc-available').text( oThis.pricer.toScPrecision( sc ) );  //No mocker so set via precession
+      var seperators = utilities.getDecimalGroupSeperators();
+      var scPrecision =PriceOracle.getScPrecision()
+      var displayVal = $.number(oThis.pricer.toScPrecision( sc ),scPrecision,seperators[1],seperators[0]);
+      $('.total-sc-available').text( displayVal );  //No mocker so set via precession
       var scBalance = oThis.scAvailableOnBtChange( btToMint ) ;
-      $('.ost-mocker-value.total-sc-available').text( oThis.pricer.toScPrecision( scBalance ) ) ;  //No mocker so set via precession
+      var displayVal = $.number(oThis.pricer.toScPrecision( scBalance ),scPrecision,seperators[1],seperators[0]);
+      $('.ost-mocker-value.total-sc-available').text( displayVal ) ;  //No mocker so set via precession
       oThis.updateSlider( sc );
       oThis.showSection(  oThis.jStakeMintProcess ) ;
     },
-  
+
     requestingScUIState : function () {
       $('.jStatusWrapper').hide();
       $('.jGetScLoaderText').show();

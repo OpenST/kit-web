@@ -16,18 +16,18 @@
         <div class="col-4 text-center">
           <div class="stats-col p-3">
             <h6 class="title">total supply</h6>
-            <div class="gold"><%= client_token_symbol %>&nbsp;<%= total_supply %></div>
+            <div class="gold"><%= client_token_symbol %>&nbsp;<span data-precision-function="ost.PriceOracle.getBtPrecision" data-value="<%= total_supply %>" class="reformat-decimal"></span></div>
           </div>
         </div>
         <div class="col-4 text-center">
           <div class="stats-col p-3">
             <h6 class="title">circulating supply</h6>
-            <div class="gold"><%= client_token_symbol %>&nbsp;<%= circulating_supply %></div>
+            <div class="gold"><%= client_token_symbol %>&nbsp;<span data-precision-function="ost.PriceOracle.getBtPrecision" data-value="<%= circulating_supply %>" class="reformat-decimal"></span></div>
           </div>
         </div>
         <div class="col-4 text-center">
           <div class="stats-col p-3">
-            <h6 class="title">Economy Users</h6>
+            <h6 class="title">Users</h6>
             <div class="gold"><%= @presenter_obj.dashboard_details.economy_users %></div>
           </div>
         </div>
@@ -37,9 +37,9 @@
 
   <div class="row transactions_and_ost_volume my-6">
     <div class="col-12">
-      <h3 class="mb-3">Economic Indicators </h3>
+      <h3 class="mb-3">Performance Indicators </h3>
       <div class="d-flex graph-header">
-        <div class="mr-auto p-2">No. of Transactions vs. <%= @presenter_obj.client_token_symbol%> Volume</div>
+        <div class="mr-auto p-2">Number and Value of Transactions</div>
         <div class="p-2 interval " data-interval="day">1 D</div>
         <div class="p-2 interval active" data-interval="week">1 W</div>
         <div class="p-2 interval" data-interval="month">1 M</div>
@@ -52,7 +52,7 @@
   <div class="row transaction_by_type my-6">
     <div class="col-12">
       <div class="d-flex graph-header">
-        <div class="mr-auto p-2">Transactions By Type</div>
+        <div class="mr-auto p-2">Transactions by Type</div>
         <div class="p-2 interval" data-interval="day">1 D</div>
         <div class="p-2 interval active" data-interval="week">1 W</div>
         <div class="p-2 interval" data-interval="month">1 M</div>
@@ -84,7 +84,7 @@
             </div>
             <div class="mx-auto pie-chart-wrapper">
               <div class="text-center my-2 typeChartSubHeading">
-                Volume of Transactions
+                Value of Transactions
               </div>
               <div class="position-relative">
                 <div id="pieChart"></div>
@@ -104,7 +104,7 @@
   <div class="row transaction_by_name my-6">
     <div class="col-12">
       <div class="d-flex graph-header">
-        <div class="mr-auto p-2">No. of Transactions By Name</div>
+        <div class="mr-auto p-2">Transactions by Name</div>
         <div class="p-2 partition date-container"></div>
         <div class="p-2 interval" data-interval="day">1 D</div>
         <div class="p-2 interval active" data-interval="week">1 W</div>
@@ -116,20 +116,19 @@
   </div>
 
   <div id="transactionsAnsOstVolumeNodataHTML" style="display: none;" class="my-6 position-relative">
-    <h6 class="text-center info-text transactions-ost-volume" >The graph will start populating once you
-      have transactions in your economy</h6>
+    <h6 class="text-center info-text transactions-ost-volume" >The graph will start populating once there are transactions</h6>
     <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-graph-transactions-ost-volume-1.png" class="d-block mx-auto w-100" />
   </div>
 
   <div id="transactionByTypeNodataHTML" style="display: none;" class="my-6 position-relative">
     <h6 class="text-center info-text transaction-by-type" >The graph will start populating once transactions
-      you have associated type with are executed</h6>
+      with the selected type have been executed</h6>
     <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-graph-transactions-by-type-1.png" class="d-block mx-auto w-100" />
   </div>
 
   <div id="transactionByNameNodataHTML" style="display: none;" class="my-6 position-relative">
     <h6 class="text-center info-text transaction-by-name" >The graph will start populating once transactions
-      you have associated name with are executed</h6>
+      with the selected name have been executed</h6>
     <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-graph-transactions-by-name-1.png" class="d-block mx-auto w-100" />
   </div>
 

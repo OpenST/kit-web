@@ -33,6 +33,7 @@
       });
       oThis.progressBar.setTooltipPosition(0);
       oThis.getMintingStatus();
+      utilities.reformatDecimals();
     },
 
     initPricer : function() {
@@ -91,7 +92,8 @@
       ;
       
       if( toEthBT ){
-        $('.total-token-minted').text( oThis.pricer.toBtPrecision( toEthBT ) );
+        utilities.reformatDecimals({displayNum : oThis.pricer.toBtPrecision( toEthBT )});
+        // $('.total-token-minted').text( oThis.pricer.toBtPrecision( toEthBT ) );
       }
       oThis.showSection( oThis.jMintPollingSuccess );
     },

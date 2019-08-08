@@ -11,31 +11,31 @@
 
   <div class="test-economy-post-setup" style="display: <%= has_setup_test_economy ? 'block': 'none'%>">
     <div class="row mt-6">
-      <div class="col-9 shadow-box mx-auto p-4 d-flex align-items-center">
+      <div class="col-9 alert alert-secondary mx-auto p-4 d-flex align-items-center">
         <svg class="success-icon" style="width: 34px; height: 34px;">
           <switch>
             <use class="success-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
           </switch>
         </svg>
-        <p class="mb-0 font-weight-light text-muted ml-3" style="flex: 1">The servers for the <%=bt_symbol%> Token economy have been deployed.</p>
+        <p class="mb-0 font-weight-light text-muted ml-3" style="flex: 1">The servers for your OST Platform Sandbox account have been deployed.</p>
       </div>
     </div>
     <div class="row mt-3">
-      <div class="col-9 shadow-box mx-auto p-4 d-flex align-items-center">
+      <div class="col-9 alert alert-secondary mx-auto p-4 d-flex align-items-center">
             <svg class="success-icon" style="width: 34px; height: 34px;">
               <switch>
                 <use class="success-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
               </switch>
             </svg>
-            <p class="mb-0 font-weight-light text-muted ml-3" style="flex: 1">Your Brand Token economy has been setup in the OST Wallet App. Please check your email for further instructions.</p>
+            <p class="mb-0 font-weight-light text-muted ml-3" style="flex: 1">Your Token has been added to OST Wallet App. Please check your email for further instructions.</p>
       </div>
     </div>
     <div class="row mt-4">
       <div class="col-9 mx-auto shadow-box px-0 mb-6">
         <div class="card">
-          <h3 class="card-header">Invite Your Colleagues</h3>
+          <h4 class="card-header">Invite Your Colleagues</h4>
           <div class="card-body">
-            <p class="font-weight-light text-muted">Invite your colleagues to join your economy in the OST Wallet app. You will be able to send and receive tokens to each other, view transactions on the blockchain, and explore all of the wallet security features.</p>
+            <p class="font-weight-light text-muted">Invite your colleagues to join you in the OST Wallet app. You will be able to send tokens to each other and explore wallet features.</p>
             <div class="send-invite-section">
               <div class="row">
                 <div class="col-7">
@@ -53,6 +53,14 @@
                         SEND INVITE
                       </button>
                     </div>
+                    <div id="invite-successful-message" style="display: none">
+                      <svg class="success-icon d-inline" style="width: 15px; height: 15px;">
+                        <switch>
+                          <use class="success-icon" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#success-icon"></use>
+                        </switch>
+                      </svg>
+                      <p class="mb-0 font-weight-light d-inline text-muted ml-2" style="flex: 1">Invite has been sent successfully!</p>
+                    </div>
                     <div class="general_error invalid-feedback" data-forid="invite-economy-form">&nbsp;</div>
                   </form>
                 </div>
@@ -64,65 +72,32 @@
     </div>
   </div>
 
-  <div class="test-economy-pre-setup mt-2" style="display: <%= !has_setup_test_economy ? 'block': 'none'%>">
-    <h3 class="text-center mt-5"> Connect Your Brand Token to the OST Wallet App </h3>
+  <div class="test-economy-pre-setup mt-2" style="display:<%= !has_setup_test_economy ? 'block': 'none'%>">
+    <h3 class="text-center mt-5"> Run Test Transactions</h3>
     <div class="row">
       <div class="col-9 mx-auto px-3 mt-3 font-weight-light text-muted text-center">
-        <p>Now that your economy is setup, we recommend running some test transactions in the OST Wallet. This will give you and your team a feel for the potential before starting integration with your apps and website.
-          If you have any questions, please reach out to us at
-          <a href="https://help.ost.com/support/home" target="_blank">
-            support@ost.com.
-          </a>
+        <p>Now that your token is setup, we recommend running some test transactions in OST Wallet App. This will give you and your team a feel for OST Platform before integrating into your app.
         </p>
+        <br>
+        <br>
       </div>
     </div>
     <div class="row">
       <div class="col-9 mx-auto shadow-box px-0">
         <form id="launch-setup-form" action="<%= activate_test_economy_api_route %>" method="POST">
           <div class="card">
-            <h3 class="card-header">Setup Wallet</h3>
+            <h4 class="card-header">Add Your Token To OST Wallet App</h4>
             <div class="card-body">
-              <p class="font-weight-light text-muted">This step will create your token economy in the OST Wallet app. You and your team members will be able to download the app on iOS and Android, run test transactions, and explore wallet security features.
+              <p class="font-weight-light text-muted">This step will add your token to the OST Wallet App. You and your team members will be able to download the app, run test transactions, and explore wallet features that you can incorporate into you own app.
               </p>
               <button type="submit" id="launch-test-economy" data-submiting="Setting up.." class="btn btn-primary">
-                SETUP WALLET
+                Add Token
               </button>
               <div class="invalid-feedback" data-forid="launch-test-economy">&nbsp;</div>
               <div class="general_error invalid-feedback"></div>
             </div>
           </div>
         </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="test-economy-setup mt-6" style="display: none">
-    <div class="row">
-      <div class="col-8 mx-auto px-0 text-center">
-        <svg class="mb-3 mt-4" style="height: 60px;width: 62px;">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#email-icon"></use>
-          </switch>
-        </svg>
-        <h3>OST Wallet Setup Complete!</h3>
-        <p class="font-weight-light w-75 mx-auto mb-0 mt-3">Your token economy has been successfully setup in the OST Wallet app.
-          An invite with further instructions has been sent to to your email address.</p>
-        <p class="font-weight-light w-75 mx-auto mb-5">Next, invite your colleagues so you can send and receive tokens to each other.</p>
-        <a href="javascript:void(0)" class="invite-users-btn btn btn-primary" title="Invite Users">INVITE USERS</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="invite-successful mt-6" style="display: none">
-    <div class="row">
-      <div class="col-8 mx-auto px-0 text-center">
-        <svg class="mb-3 mt-4" style="height: 60px;width: 62px;">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#email-icon"></use>
-          </switch>
-        </svg>
-        <h3>Invites have been sent!</h3>
-        <a href="" class="invite-more-users-btn btn btn-primary mt-3" title="Invite More Users">INVITE More USERS</a>
       </div>
     </div>
   </div>

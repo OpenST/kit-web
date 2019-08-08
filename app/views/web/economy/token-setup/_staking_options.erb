@@ -3,7 +3,7 @@
     <div class="card-header text-left">
       <h4 class="mb-2">Staking Options</h4>
       <p class="font-weight-light mb-0">
-        Choose the cryptocurrency you want to stake to back the value of your Brand Tokens. Select OST if you want your users to be exposed to market increases/decreases of the OST Token. Select USDC if you want to a more stable economy.
+        Choose the token that you want to use to back the value of your tokens. The value of your tokens will fluctuate with the underlying value of the token that is staked.
       </p>
     </div>
     <div class="card-body mx-auto p-0 position-relative">
@@ -21,13 +21,13 @@
                 <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerStakingOstOptions"></span>
               </span>
             </h5>
-            <p class="m-0">The price of OST is market determined. If you choose to back your token with OST, the value of your token will be subject to market movements.</p>
+            <p class="m-0">OST is a utility token on Ethereum. Its price is determined by the market. If you choose OST, the value of your tokens will fluctuate relative to USD.</p>
           </div>
           <div class="pt-6">
             <label class="form-check-label radio-button-label p-0 w-100" for="staking_options_ost">
               <input id="staking_options_ost" <%= stake_currency_symbol == GlobalConstant::StakeCurrencies.ost_stake_currency_symbol ? "checked" : "" %> hidden type="radio" name="stake_currency_symbol" value="<%= GlobalConstant::StakeCurrencies.ost_stake_currency_symbol %>" />
               <div href="javascript:void(0)" class="btn btn-secondary ost">
-                <span class="using-ost">USE OST</span>
+                <span class="using-ost">STAKE OST</span>
                 <span class="selected">SELECTED</span>
               </div>
             </label>
@@ -45,13 +45,13 @@
                 <span class="ost-mocker-value" data-ost-mock-element="#symbol" data-ost-mock-parser="ost.utilities.mockerStakingUsdcOptions"></span>
               </span>
             </h5>
-            <p class="m-0">USDC is a stablecoin backed by US dollars, giving it a more stable price. If you choose USDC, the value of your Brand Tokens will remain relatively stable.</p>
+            <p class="m-0">USDC is a stablecoin on Ethereum, backed by US dollars. If you choose USDC, the value of your tokens will be stable relative to USD.</p>
           </div>
           <div class="pt-6">
             <label class="form-check-label radio-button-label p-0 w-100" for="staking_options_usdc">
               <input id="staking_options_usdc" <%= stake_currency_symbol == GlobalConstant::StakeCurrencies.usdc_stake_currency_symbol ? "checked" : ""  %> hidden type="radio" name="stake_currency_symbol" value="<%= GlobalConstant::StakeCurrencies.usdc_stake_currency_symbol %>" />
               <div href="javascript:void(0)" class="btn btn-secondary usd">
-                <span class="using-ost">USE USDC</span>
+                <span class="using-ost">STAKE USDC</span>
                 <span class="selected">SELECTED</span>
               </div>
             </label>

@@ -112,8 +112,12 @@
         scFiatVal = Pricer.scToFiat(1)
       ;
       scFiatVal = Pricer.toFiatPrecision(scFiatVal);
-      jEL.text(btFiatVal);
-      $('.j-fiat-value').text(scFiatVal);
+      var fiatPrecision = PriceOracle.getFiatPrecision();
+      var seperators = utilities.getDecimalGroupSeperators()
+      var btFiatDisplayVal = $.number(btFiatVal,fiatPrecision,seperators[1],seperators[0])
+      jEL.text(btFiatDisplayVal);
+      var scFiatDisplayVal = $.number(scFiatVal,fiatPrecision,seperators[1],seperators[0])
+      $('.j-fiat-value').text(scFiatDisplayVal);
     },
     
     tokenSuccess: function (res) {
@@ -147,7 +151,7 @@
     
     bindTestnetFlow: function () {
       oThis.jTokenSetupOstBtn = $('#jTokenSetupOstBtn');
-     
+
       oThis.jTokenSetupOstBtn.on('click', function () {
         oThis.tokenSetupViaOst();
       });

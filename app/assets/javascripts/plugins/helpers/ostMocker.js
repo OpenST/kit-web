@@ -70,7 +70,8 @@
         valType = valType.toLowerCase();
         if ( numPrecisionMapping[ valType ] ) {
           mockPrecision = numPrecisionMapping[ valType ];
-          targertVal = $.number( targertVal, mockPrecision );
+          var seperators = oThis.getDecimalGroupSeperators();
+          targertVal = $.number( targertVal, mockPrecision, seperators[1],seperators[0] );
         } else {
           console.log("Unknown type '", valType, "'. Kindly Check.");
         }
@@ -96,6 +97,20 @@
         numPrecisionMapping["fiat"] = PriceOracle.getFiatPrecision();
       }
       return numPrecisionMapping;
+    },
+    getDecimalGroupSeperators: function () {
+      var num = 1000.1;
+      var groupSeperator = ""
+      var decimalSeperator = ""
+      var formatedNum = num.toLocaleString(navigator.language);
+      formatedNum = formatedNum.split("");
+      if(!formatedNum[1] == 0){
+        groupSeperator = formatedNum[1];
+        decimalSeperator = formatedNum[5]
+      }else{
+        decimalSeperator = formatedNum[5]
+      }
+      return [groupSeperator,decimalSeperator]
     }
 
     , start : function () {

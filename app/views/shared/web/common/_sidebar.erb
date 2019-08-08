@@ -4,6 +4,8 @@
   developer_url = GlobalConstant::RoutesMap.getRoutes()[:developer]
   dashboard_url = GlobalConstant::RoutesMap.getRoutes()[:token_dashboard]
   test_economy_url = GlobalConstant::RoutesMap.getRoutes()[:test_economy]
+  team_dashboard_url = GlobalConstant::RoutesMap.getRoutes()[:team]
+  mfa_url = GlobalConstant::RoutesMap.getRoutes()[:authenticate_mfa]
   api_request_whitelist = GlobalConstant::RoutesMap.getApis()[:api_request_whitelist]
   is_whitelisted_user = @presenter_obj.sub_env_payloads.is_mainnet_whitelisted?
   is_mainnet_whitelisting_requested = @presenter_obj.sub_env_payloads.is_mainnet_whitelisting_requested?
@@ -23,12 +25,12 @@
     switch_state_class = "checked"
     slider_state_class = 'slider-testnet-background environment-slider testnet'
     env_text_class = "Sandbox Mode"
-    input_checkbox_state = "checked"
+    input_checkbox_state = ""
   else
       switch_state_class = "unchecked"
       slider_state_class = 'slider-mainnet-background environment-slider mainnet'
       env_text_class = "Production Mode"
-      input_checkbox_state = ""
+      input_checkbox_state = "checked"
   end
 
   is_company_info_route = @presenter_obj.is_company_information_route?
@@ -36,7 +38,6 @@
 
 %>
 <%= render :partial => "/shared/web/common/sidebar-icons.svg" %>
-
 <aside id="sidebar" class="sidebar-nav">
 
   <div class="header-phantom-el-wrapper">
@@ -121,6 +122,49 @@
           </switch>
         </svg>
         <span class="label">Block Explorer</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link settings-collapse d-flex align-items-center"  data-toggle="collapse" href=".multi-collapse" role="button"  aria-expanded="false" aria-controls="settingsCollapseTeam settingsCollapse2fa"   >
+        <svg class="icon">
+          <switch>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-settings"></use>
+          </switch>
+        </svg>
+        <span class="label">Settings</span>
+        <svg class="icon ml-auto down-arrow" style=" width: 11px;height: 11px">
+          <switch>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sidenav-down-arrow"></use>
+          </switch>
+        </svg>
+        <svg class="icon ml-auto up-arrow" style="width: 11px;height: 11px">
+          <switch>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sidenav-up-arrow"></use>
+          </switch>
+        </svg>
+      </a>
+    </li>
+
+    <li class="collapse multi-collapse nav-item" id="settingsCollapseTeam">
+      <a class="nav-link d-flex align-items-center " href="<%= team_dashboard_url %>?<%= get_go_back_url_query_param %>">
+        Team
+      </a>
+    </li>
+    <%if !GlobalConstant::Base.main_sub_environment? && @presenter_obj.manager.properties.exclude?('has_setup_mfa') %>
+      <li class="collapse multi-collapse nav-item" id="settingsCollapse2fa">
+        <a class="nav-link d-flex align-items-center " href="<%= mfa_url %>" >
+          2FA
+        </a>
+      </li>
+    <%end%>
+    <li class="nav-item">
+      <a class="nav-link d-flex align-items-center" target="_blank"  href="https://join.slack.com/t/tryost/shared_invite/enQtNjk5MTI4NDY5MjIyLTFlZWYyODNhMjA0YmNmM2ZmMTJkZDM4MDU0NGJlNDc3ZWEwMjY5ZWNiNjNiZDcyOTIyZTljNGFmN2E2NzY2MDk">
+        <svg class="icon">
+          <switch>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#slack-icon"></use>
+          </switch>
+        </svg>
+        <span class="label">Join our Slack space</span>
       </a>
     </li>
   </ul>

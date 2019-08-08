@@ -2,7 +2,7 @@
   if @presenter_obj.client_token_symbol
     dropdown_text = @presenter_obj.client_token_symbol
   else
-    if @presenter_obj.manager.first_name
+    if @presenter_obj.manager.first_name && @presenter_obj.manager.first_name != ""
       dropdown_text = @presenter_obj.manager.first_name
     elsif @presenter_obj.manager.email
       dropdown_text = @presenter_obj.manager.email.split('@')[0]

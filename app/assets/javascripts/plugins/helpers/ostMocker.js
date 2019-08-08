@@ -100,9 +100,17 @@
     },
     getDecimalGroupSeperators: function () {
       var num = 1000.1;
+      var groupSeperator = ""
+      var decimalSeperator = ""
       var formatedNum = num.toLocaleString(navigator.language);
       formatedNum = formatedNum.split("");
-      return [formatedNum[1],formatedNum[5]] //formatedNum[1] : group seperator, formatedNum[5] : decimal sepeartor
+      if(!formatedNum[1] == 0){
+        groupSeperator = formatedNum[1];
+        decimalSeperator = formatedNum[5]
+      }else{
+        decimalSeperator = formatedNum[5]
+      }
+      return [groupSeperator,decimalSeperator]
     }
 
     , start : function () {

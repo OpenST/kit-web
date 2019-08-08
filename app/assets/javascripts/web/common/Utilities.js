@@ -138,8 +138,8 @@
     },
     getDecimalGroupSeperators: function () {
       var num = 1000.1;
-      var groupSeperator = null
-      var decimalSeperator = null
+      var groupSeperator = ""
+      var decimalSeperator = ""
       var formatedNum = num.toLocaleString(navigator.language);
       formatedNum = formatedNum.split("");
       if(!formatedNum[1] == 0){
@@ -148,7 +148,7 @@
       }else{
         decimalSeperator = formatedNum[5]
       }
-      return [groupSeperator,decimalSeperator] //formatedNum[1] : group seperator, formatedNum[5] : decimal sepeartor
+      return [groupSeperator,decimalSeperator]
     },
     reformatDecimals: function( options ){
 

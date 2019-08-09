@@ -103,12 +103,13 @@
 
             <% if  GlobalConstant::Environment.skip_recaptcha?(params) %>
               <input name="automation_test_token" type="hidden" id="automation_test_token" value="<%= params['automation_test_token'] %>"/>
-            <% else %>
-              <div class="form-group text-center mb-1">
-                <div class="g-recaptcha mx-auto  form-recapcha-wrap d-inline-block" id="myid" data-sitekey="<%= GlobalConstant::Base.recaptcha['site_key'] %>"></div>
-                <div class="recaptcha-submit-error invalid-feedback">&nbsp;</div>
-              </div>
             <% end %>
+
+            <div class="form-group text-center mb-1">
+              <div class="g-recaptcha mx-auto  form-recapcha-wrap d-inline-block" id="myid" data-sitekey="<%= GlobalConstant::Base.recaptcha(params)['site_key'] %>"></div>
+              <div class="recaptcha-submit-error invalid-feedback">&nbsp;</div>
+            </div>
+
             <input name="fingerprint" type="hidden" id="fingerprintHash"/>
             <input name="fingerprint_type" type="hidden" id="fingerprintType"/>
 

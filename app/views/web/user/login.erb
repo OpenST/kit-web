@@ -7,6 +7,9 @@
                 action="<%= GlobalConstant::RoutesMap.getApis()[:api_login] %>" method="POST">
             <h3 class="text-center mb-2" style="font-size: 2rem;">Log In
             </h3>
+            <% if  GlobalConstant::Environment.skip_recaptcha?(params) %>
+              <input name="automation_test_token" type="hidden" id="automation_test_token" value="<%= params['automation_test_token'] %>"/>
+            <% end %>
             <div class="general_error invalid-feedback">&nbsp</div>
             <div class="text-center mb-3">
               <p> Please make sure you are visiting: <%= GlobalConstant::CompanyOtherProductUrls.kit_root_url %></p>

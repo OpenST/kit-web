@@ -170,7 +170,7 @@
 #app-content{
   &.blur-content{
     .header-phantom-el-wrapper{
-      height: 0;
+      display: none;
     }
   }
 }

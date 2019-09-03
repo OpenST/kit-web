@@ -87,10 +87,10 @@
     },
 
     onRequestWhitelistUserSuccess: function(){
-      $('.switch-mode').addClass('disabled');
-      $('.switch-mode .switch').addClass('disabled');
+      // $('.switch-mode').addClass('disabled');
+      // $('.switch-mode .switch').addClass('disabled');
       oThis.isMainnetWhitelistingRequested = true;
-      oThis.initTooltip();
+      //oThis.initTooltip();
       oThis.jWhitelistUserModalDefaultState.hide();
       oThis.jWhitelistUserModalSuccessState.show();
       oThis.jWhitelistingNotRequestedText.hide();

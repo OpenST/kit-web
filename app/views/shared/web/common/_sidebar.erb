@@ -48,7 +48,7 @@
     <div class="d-flex align-items-center switch-mode-tooltip" data-toggle="tooltip" data-placement="right" data-boundary="window" data-title="Production access request has already been sent.">
 
         <span class="env-title"><%= env_text_class %></span>
-        <label class="switch ml-auto <%= (whitelisting_request_pending) || is_company_info_route ? 'disabled' : '' %>">
+        <label class="switch ml-auto <%= is_company_info_route ? 'disabled' : '' %>">
         <input id="switch_mode_checkbox" type="checkbox" <%= input_checkbox_state%> >
         <span class="slider <%= slider_state_class %> round"></span>
       </label>

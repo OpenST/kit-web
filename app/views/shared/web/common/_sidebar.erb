@@ -145,13 +145,12 @@
       </a>
     </li>
 
-    <% if @presenter_obj.is_client_token_deployed? %>
-      <li class="collapse multi-collapse nav-item" id="settingsCollapseTeam">
-        <a class="nav-link d-flex align-items-center " href="<%= team_dashboard_url %>?<%= get_go_back_url_query_param %>">
-          Team
-        </a>
-      </li>
-    <%end%>
+
+    <li class="collapse multi-collapse nav-item <%= (GlobalConstant::Base.sandbox_sub_environment? && !@presenter_obj.is_client_token_deployed?) ? 'disabled' : '' %>" id="settingsCollapseTeam">
+      <a class="nav-link d-flex align-items-center " href="<%= team_dashboard_url %>?<%= get_go_back_url_query_param %>">
+        Team
+      </a>
+    </li>
     <%if !GlobalConstant::Base.main_sub_environment? && @presenter_obj.manager.properties.exclude?('has_setup_mfa') %>
       <li class="collapse multi-collapse nav-item" id="settingsCollapse2fa">
         <a class="nav-link d-flex align-items-center " href="<%= mfa_url %>" >

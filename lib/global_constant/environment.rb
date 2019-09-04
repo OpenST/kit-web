@@ -4,6 +4,11 @@ module GlobalConstant
 
     class << self
 
+      def skip_recaptcha?(params)
+        !GlobalConstant::Environment.is_production? &&
+            params['automation_test_token'] == 'lkashfiouqheinsdioqinsoidfhiondoi09239hnw903n903'
+      end
+
       def main_sub_env_name
         'main'
       end

@@ -62,8 +62,12 @@ module GlobalConstant
         true
       end
 
-      def recaptcha
-        env_config.fetch('recaptcha', {})
+      def recaptcha(params)
+        if GlobalConstant::Environment.skip_recaptcha?(params)
+          {'site_key' => '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'}
+        else
+          env_config.fetch('recaptcha', {})
+        end
       end
 
       def env_config

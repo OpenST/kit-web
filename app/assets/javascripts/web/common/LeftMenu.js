@@ -73,7 +73,7 @@
     sendRequestToTheTeam: function( event ){
       event.preventDefault();
       if(oThis.currentEnv == oThis.sandboxSubUrlPrefix){
-        if(oThis.isMainnetWhitelistingRequested) {
+        if(oThis.isMainnetWhitelistingRequested && !oThis.isUserWhitelisted) {
           oThis.jWhitelistTrueModal.modal('show');
         }else if( !oThis.isUserWhitelisted ) {
           oThis.jWhitelistUserModal.modal('show');

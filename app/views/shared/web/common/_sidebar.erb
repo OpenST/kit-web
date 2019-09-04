@@ -147,7 +147,7 @@
 
 
     <li class="collapse multi-collapse nav-item" id="settingsCollapseTeam">
-      <a class="nav-link d-flex align-items-center <%= (current_env == sandbox_sub_url_prefix && !@presenter_obj.is_client_token_deployed?) ? 'disabled to-enable-on-setup' : '' %>" href="<%= team_dashboard_url %>?<%= get_go_back_url_query_param %>">
+      <a class="nav-link d-flex align-items-center <%= (current_env == sandbox_sub_url_prefix && (!@presenter_obj.is_client_token_deployed? || !@presenter_obj.is_client_token_deploying?)) ? 'disabled to-enable-on-setup' : '' %>" href="<%= team_dashboard_url %>?<%= get_go_back_url_query_param %>">
         Team
       </a>
     </li>

@@ -36,10 +36,16 @@
                 <div class="invalid-feedback" data-forid="password">&nbsp;</div>
               </div>
             </div>
+
+            <% if  GlobalConstant::Environment.skip_recaptcha?(params) %>
+              <input name="automation_test_token" type="hidden" id="automation_test_token" value="<%= params['automation_test_token'] %>"/>
+            <% end %>
+
             <div class="form-group text-center">
-              <div class="g-recaptcha mx-auto  form-recapcha-wrap d-inline-block" id="myid" data-sitekey="<%= GlobalConstant::Base.recaptcha['site_key'] %>"></div>
+              <div class="g-recaptcha mx-auto  form-recapcha-wrap d-inline-block" id="myid" data-sitekey="<%= GlobalConstant::Base.recaptcha(params)['site_key'] %>"></div>
               <div class="recaptcha-submit-error invalid-feedback">&nbsp;</div>
             </div>
+
             <input type="hidden" name="fingerprint"  id="fingerprintHash"/>
             <input type="hidden" name="fingerprint_type"  id="fingerprintType"/>
 

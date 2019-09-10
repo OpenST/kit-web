@@ -19,6 +19,7 @@
     jConfirmModeChangeCheckbox : $('.confirm-mode-change-checkbox'),
 
     jWhitelistUserModal : $('#whitelist_user_modal'),
+    jWhitelistTrueModal : $('#whitelisted-true-modal'),
     jWhitelistUserCheckbox : $('#whitelist_user_checkbox'),
     jWhitelistUserModalDefaultState : $('#whitelist_user_modal .default-state'),
     jWhitelistUserModalSuccessState : $('#whitelist_user_modal .success-state'),
@@ -31,7 +32,16 @@
 
       $.extend( oThis, config );
       oThis.bindEvents();
-      oThis.initTooltip();
+      //oThis.initTooltip();
+
+      $('#whitelist_user_form').formHelper({
+          success : function () {
+            oThis.onRequestWhitelistUserSuccess();
+          },
+          error: function () {
+            oThis.onRequestWhitelistUserError();
+          }
+      })
     },
 
     initTooltip: function() {
@@ -63,9 +73,11 @@
     sendRequestToTheTeam: function( event ){
       event.preventDefault();
       if(oThis.currentEnv == oThis.sandboxSubUrlPrefix){
-        if( !oThis.isUserWhitelisted ) {
+        if(oThis.isMainnetWhitelistingRequested && !oThis.isUserWhitelisted) {
+          oThis.jWhitelistTrueModal.modal('show');
+        }else if( !oThis.isUserWhitelisted ) {
           oThis.jWhitelistUserModal.modal('show');
-        } else{
+        } else {
           oThis.jConfirmModeChangeModal.modal('show');
         }
       } else if(oThis.currentEnv == oThis.mainSubEnvUrlPrefix){
@@ -75,15 +87,19 @@
     },
 
     onRequestWhitelistUserSuccess: function(){
-      $('.switch-mode').addClass('disabled');
-      $('.switch-mode .switch').addClass('disabled');
+      // $('.switch-mode').addClass('disabled');
+      // $('.switch-mode .switch').addClass('disabled');
       oThis.isMainnetWhitelistingRequested = true;
-      oThis.initTooltip();
+      //oThis.initTooltip();
       oThis.jWhitelistUserModalDefaultState.hide();
       oThis.jWhitelistUserModalSuccessState.show();
       oThis.jWhitelistingNotRequestedText.hide();
       oThis.jWhitelistingRequestedText.show();
       $('#dashboard-complete-kyc').hide();
+    },
+
+    onRequestWhitelistUserError: function () {
+
     }
 
   };

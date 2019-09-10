@@ -48,13 +48,13 @@
       <div class="switch-mode p-3 <%= switch_state_class %> <%= is_company_info_route ? 'grey-out': '' %> <%= whitelisting_request_pending ? 'disabled' : '' %>">
         <div class="d-flex align-items-center switch-mode-tooltip" data-toggle="tooltip" data-placement="right" data-boundary="window" data-title="Production access request has already been sent.">
 
-          <span class="env-title"><%= env_text_class %></span>
-          <label class="switch ml-auto <%= (whitelisting_request_pending) || is_company_info_route ? 'disabled' : '' %>">
-            <input id="switch_mode_checkbox" type="checkbox" <%= input_checkbox_state%> >
-            <span class="slider <%= slider_state_class %> round"></span>
-          </label>
-        </div>
-      </div>
+        <span class="env-title"><%= env_text_class %></span>
+        <label class="switch ml-auto <%= is_company_info_route ? 'disabled' : '' %>">
+        <input id="switch_mode_checkbox" type="checkbox" <%= input_checkbox_state%> >
+        <span class="slider <%= slider_state_class %> round"></span>
+      </label>
+    </div>
+  </div>
 
       <ul class="nav nav-pills flex-column <%= @presenter_obj.is_company_information_route? ? 'disabled': '' %>">
         <% if !@presenter_obj.is_client_token_deployed? %>

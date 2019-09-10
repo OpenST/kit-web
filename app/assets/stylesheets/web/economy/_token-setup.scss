@@ -167,6 +167,14 @@
   }
 }
 
+#app-content{
+  &.blur-content{
+    .header-phantom-el-wrapper{
+      display: none;
+    }
+  }
+}
+
 .brand-curreny-bg{
   background: url('https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-deploy-your-brand-curreny.png')!important;
   background-repeat: no-repeat!important;

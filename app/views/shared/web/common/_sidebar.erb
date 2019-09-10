@@ -38,136 +38,147 @@
 
 %>
 <%= render :partial => "/shared/web/common/sidebar-icons.svg" %>
-<aside id="sidebar" class="sidebar-nav">
+<aside id="sidebar" class="sidebar-nav d-flex flex-column justify-content-between">
 
-  <div class="header-phantom-el-wrapper">
-    <%= yield(:phantom_header_el) %>
-  </div>
+    <div>
+      <div class="header-phantom-el-wrapper">
+        <%= yield(:phantom_header_el) %>
+      </div>
 
-  <div class="switch-mode p-3 <%= switch_state_class %> <%= is_company_info_route ? 'grey-out': '' %> <%= whitelisting_request_pending ? 'disabled' : '' %>">
-    <div class="d-flex align-items-center switch-mode-tooltip" data-toggle="tooltip" data-placement="right" data-boundary="window" data-title="Production access request has already been sent.">
+      <div class="switch-mode p-3 <%= switch_state_class %> <%= is_company_info_route ? 'grey-out': '' %> <%= whitelisting_request_pending ? 'disabled' : '' %>">
+        <div class="d-flex align-items-center switch-mode-tooltip" data-toggle="tooltip" data-placement="right" data-boundary="window" data-title="Production access request has already been sent.">
 
-        <span class="env-title"><%= env_text_class %></span>
-        <label class="switch ml-auto <%= (whitelisting_request_pending) || is_company_info_route ? 'disabled' : '' %>">
-        <input id="switch_mode_checkbox" type="checkbox" <%= input_checkbox_state%> >
-        <span class="slider <%= slider_state_class %> round"></span>
-      </label>
+          <span class="env-title"><%= env_text_class %></span>
+          <label class="switch ml-auto <%= (whitelisting_request_pending) || is_company_info_route ? 'disabled' : '' %>">
+            <input id="switch_mode_checkbox" type="checkbox" <%= input_checkbox_state%> >
+            <span class="slider <%= slider_state_class %> round"></span>
+          </label>
+        </div>
+      </div>
+
+      <ul class="nav nav-pills flex-column <%= @presenter_obj.is_company_information_route? ? 'disabled': '' %>">
+        <% if !@presenter_obj.is_client_token_deployed? %>
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_token_setup_route? ? 'active': '' %>" href="<%= planner_url %>">
+              <svg class="icon">
+                <switch>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-planner"></use>
+                </switch>
+              </svg>
+              <span class="label">Token Setup</span>
+            </a>
+          </li>
+        <% end  %>
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_client_token_deployed? ? '' : 'disabled to-enable-on-setup' %> <%= @presenter_obj.is_dashboard_route? ? 'active': '' %> "
+             href="<%= dashboard_url %>">
+            <svg class="icon">
+              <switch>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-dashboard"></use>
+              </switch>
+            </svg>
+            <span class="label">Dashboard</span>
+          </a>
+        </li>
+        <% if is_super_admin %>
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_client_token_deployed? ? '' : 'disabled to-enable-on-setup' %> <%= @presenter_obj.is_token_mint_route? ? 'active': '' %> "  href="<%= mint_token_url %>">
+              <svg class="icon">
+                <switch>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-token-supply"></use>
+                </switch>
+              </svg>
+              <span class="label">Mint Tokens</span>
+            </a>
+          </li>
+        <% end  %>
+        <% unless GlobalConstant::Base.main_sub_environment? %>
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_client_token_deployed? ? '' : 'disabled to-enable-on-setup' %> <%= @presenter_obj.is_test_economy_route? ? 'active': '' %>"  href="<%= test_economy_url %>">
+              <svg class="icon">
+                <switch>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-test-economy"></use>
+                </switch>
+              </svg>
+              <span class="label">Wallet</span>
+            </a>
+          </li>
+        <% end %>
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center <%= (@presenter_obj.is_client_token_deployed? || @presenter_obj.is_client_token_deploying?) ? '' : 'disabled to-enable-on-setup' %> <%= @presenter_obj.is_developer_route? ? 'active': '' %>"  href="<%= developer_url %>">
+            <svg class="icon">
+              <switch>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-dev-api"></use>
+              </switch>
+            </svg>
+            <span class="label">Developers</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_client_token_deployed? ? '' : 'disabled to-enable-on-setup' %>"
+             href="<%= GlobalConstant::CompanyOtherProductUrls.view_root_url + view_token_url %>" target="_blank">
+            <svg class="icon">
+              <switch>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-bt-explorer"></use>
+              </switch>
+            </svg>
+            <span class="label">Block Explorer</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link settings-collapse d-flex align-items-center"  data-toggle="collapse" href=".multi-collapse" role="button"  aria-expanded="false" aria-controls="settingsCollapseTeam settingsCollapse2fa"   >
+            <svg class="icon">
+              <switch>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-settings"></use>
+              </switch>
+            </svg>
+            <span class="label">Settings</span>
+            <svg class="icon ml-auto down-arrow" style=" width: 11px;height: 11px">
+              <switch>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sidenav-down-arrow"></use>
+              </switch>
+            </svg>
+            <svg class="icon ml-auto up-arrow" style="width: 11px;height: 11px">
+              <switch>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sidenav-up-arrow"></use>
+              </switch>
+            </svg>
+          </a>
+        </li>
+
+        <li class="collapse multi-collapse nav-item" id="settingsCollapseTeam">
+          <a class="nav-link d-flex align-items-center " href="<%= team_dashboard_url %>?<%= get_go_back_url_query_param %>">
+            Team
+          </a>
+        </li>
+        <%if !GlobalConstant::Base.main_sub_environment? && @presenter_obj.manager.properties.exclude?('has_setup_mfa') %>
+          <li class="collapse multi-collapse nav-item" id="settingsCollapse2fa">
+            <a class="nav-link d-flex align-items-center " href="<%= mfa_url %>" >
+              2FA
+            </a>
+          </li>
+        <%end%>
+        <!--    <li class="nav-item">-->
+
+        <!--    </li>-->
+      </ul>
     </div>
-  </div>
 
-  <ul class="nav nav-pills flex-column <%= @presenter_obj.is_company_information_route? ? 'disabled': '' %>">
-    <% if !@presenter_obj.is_client_token_deployed? %>
-      <li class="nav-item">
-        <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_token_setup_route? ? 'active': '' %>" href="<%= planner_url %>">
-          <svg class="icon">
-            <switch>
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-planner"></use>
-            </switch>
-          </svg>
-          <span class="label">Token Setup</span>
-        </a>
-      </li>
-    <% end  %>
-    <li class="nav-item">
-      <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_client_token_deployed? ? '' : 'disabled to-enable-on-setup' %> <%= @presenter_obj.is_dashboard_route? ? 'active': '' %> "
-         href="<%= dashboard_url %>">
-        <svg class="icon">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-dashboard"></use>
-          </switch>
-        </svg>
-        <span class="label">Dashboard</span>
-      </a>
-    </li>
-    <% if is_super_admin %>
-    <li class="nav-item">
-      <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_client_token_deployed? ? '' : 'disabled to-enable-on-setup' %> <%= @presenter_obj.is_token_mint_route? ? 'active': '' %> "  href="<%= mint_token_url %>">
-        <svg class="icon">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-token-supply"></use>
-          </switch>
-        </svg>
-        <span class="label">Mint Tokens</span>
-      </a>
-    </li>
-    <% end  %>
-    <% unless GlobalConstant::Base.main_sub_environment? %>
-      <li class="nav-item">
-        <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_client_token_deployed? ? '' : 'disabled to-enable-on-setup' %> <%= @presenter_obj.is_test_economy_route? ? 'active': '' %>"  href="<%= test_economy_url %>">
-          <svg class="icon">
-            <switch>
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-test-economy"></use>
-            </switch>
-          </svg>
-          <span class="label">Wallet</span>
-        </a>
-      </li>
-    <% end %>
-    <li class="nav-item">
-      <a class="nav-link d-flex align-items-center <%= (@presenter_obj.is_client_token_deployed? || @presenter_obj.is_client_token_deploying?) ? '' : 'disabled to-enable-on-setup' %> <%= @presenter_obj.is_developer_route? ? 'active': '' %>"  href="<%= developer_url %>">
-        <svg class="icon">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-dev-api"></use>
-          </switch>
-        </svg>
-        <span class="label">Developers</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link d-flex align-items-center <%= @presenter_obj.is_client_token_deployed? ? '' : 'disabled to-enable-on-setup' %>"
-         href="<%= GlobalConstant::CompanyOtherProductUrls.view_root_url + view_token_url %>" target="_blank">
-        <svg class="icon">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-bt-explorer"></use>
-          </switch>
-        </svg>
-        <span class="label">Block Explorer</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link settings-collapse d-flex align-items-center"  data-toggle="collapse" href=".multi-collapse" role="button"  aria-expanded="false" aria-controls="settingsCollapseTeam settingsCollapse2fa"   >
-        <svg class="icon">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-settings"></use>
-          </switch>
-        </svg>
-        <span class="label">Settings</span>
-        <svg class="icon ml-auto down-arrow" style=" width: 11px;height: 11px">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sidenav-down-arrow"></use>
-          </switch>
-        </svg>
-        <svg class="icon ml-auto up-arrow" style="width: 11px;height: 11px">
-          <switch>
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sidenav-up-arrow"></use>
-          </switch>
-        </svg>
-      </a>
-    </li>
-
-    <li class="collapse multi-collapse nav-item" id="settingsCollapseTeam">
-      <a class="nav-link d-flex align-items-center " href="<%= team_dashboard_url %>?<%= get_go_back_url_query_param %>">
-        Team
-      </a>
-    </li>
-    <%if !GlobalConstant::Base.main_sub_environment? && @presenter_obj.manager.properties.exclude?('has_setup_mfa') %>
-      <li class="collapse multi-collapse nav-item" id="settingsCollapse2fa">
-        <a class="nav-link d-flex align-items-center " href="<%= mfa_url %>" >
-          2FA
-        </a>
-      </li>
-    <%end%>
-    <li class="nav-item">
-      <a class="nav-link d-flex align-items-center" target="_blank"  href="https://join.slack.com/t/tryost/shared_invite/enQtNjk5MTI4NDY5MjIyLTFlZWYyODNhMjA0YmNmM2ZmMTJkZDM4MDU0NGJlNDc3ZWEwMjY5ZWNiNjNiZDcyOTIyZTljNGFmN2E2NzY2MDk">
-        <svg class="icon">
+    <div style="margin: 0 auto 50px">
+      <a class="nav-link d-flex px-4" target="_blank"
+         title="Join us on Slack"
+         style="background-color: #34445b;border-radius: 20px;"
+         href="https://join.slack.com/t/tryost/shared_invite/enQtNjk5MTI4NDY5MjIyLTFlZWYyODNhMjA0YmNmM2ZmMTJkZDM4MDU0NGJlNDc3ZWEwMjY5ZWNiNjNiZDcyOTIyZTljNGFmN2E2NzY2MDk">
+        <svg class="icon" style="height: 22px;
+            width: 22px;
+            fill: #ffffff;">
           <switch>
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#slack-icon"></use>
           </switch>
         </svg>
-        <span class="label">Join our Slack space</span>
+        <span class="label ml-2" style="color: #ffffff">Join us on Slack</span>
       </a>
-    </li>
-  </ul>
+    </div>
 
 </aside>
 

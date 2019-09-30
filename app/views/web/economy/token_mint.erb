@@ -70,7 +70,13 @@
         <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-start-minting@2x.png" width="150" class="img-fluid"/>
       </div>
       <div class="run-transaction-btn-wrapper">
-        <button id="mint-tokens" class="btn btn-gold" data-submiting="Setting up ...">Mint Tokens</button>
+        <% if is_mainnet %>
+          <button id="mint-tokens" class="btn btn-gold" data-submiting="Setting up ...">Mint Tokens</button>
+        <% else %>
+          <!-- Temp code for Istanbul fork -->
+          <button id="mint-tokens-fork" class="btn btn-gold" disabled data-submiting="Setting up ...">Mint Tokens</button>
+          <div class="invalid-feedback is-invalid">Istanbul Hard Fork is undergoing, causing network instability on Testnet. <br />On Sandbox some actions are disabled until the end of the forking.</div>
+        <% end %>
       </div>
     </div>
   </div>

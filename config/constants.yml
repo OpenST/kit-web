@@ -41,4 +41,4 @@ constants:
   chain:
     origin_chain_id: <%= ENV['CW_CA_ORIGIN_CHAIN_ID'] %>
 
-  mainnet_network_outage: <%= ENV['STW_MAINNET_NETWORK_OUTAGE'] %>
+  origin_network_upgrade: <%= ENV['STW_ORIGIN_NETWORK_UPGRADE'] %>

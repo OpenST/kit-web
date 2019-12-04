@@ -40,3 +40,5 @@ constants:
 
   chain:
     origin_chain_id: <%= ENV['CW_CA_ORIGIN_CHAIN_ID'] %>
+
+  forking_in_progress: <%= ENV['STW_FORKING_IN_PROGRESS'] %>

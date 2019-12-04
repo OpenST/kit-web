@@ -58,8 +58,8 @@ module GlobalConstant
         @stw_campaign_details ||= fetch_config.fetch('pepo_campaign', {}).with_indifferent_access
       end
 
-      def is_forking_in_progress?
-        @forking_in_progress ||= (fetch_config.fetch('forking_in_progress', 0) == 1)
+      def is_mainnet_network_outage?
+        @mainnet_network_outage ||= (fetch_config.fetch('mainnet_network_outage', 0) == 1)
       end
 
       def is_public_launch_done?

@@ -79,9 +79,18 @@
       </div>
 
           <div class="container">
-            <div class="row">
-                <button type="submit" class="btn btn-primary mb-6"
-                        data-submiting="Proceeding..." id="setup-token-btn" title="Proceed">Set Up Your Token</button>
+            <div class="row mb-6">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                data-submiting="Proceeding..."
+                id="setup-token-btn"
+                title="Proceed"
+                <%=GlobalConstant::Base.origin_network_upgrade_on? ? 'disabled' : ''%>
+              >Set Up Your Token</button>
+              <% if GlobalConstant::Base.origin_network_upgrade_on? %>
+              <p class="px-2 form-group text-left"><span class="error">Forking or network upgrade is undergoing causing network instability. <br />Some actions are disabled until the network is operating normally.</span></p>
+              <% end %>
             </div>
           </div>
     </div>

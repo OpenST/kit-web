@@ -40,3 +40,5 @@ constants:
 
   chain:
     origin_chain_id: <%= ENV['CW_CA_ORIGIN_CHAIN_ID'] %>
+
+  origin_network_upgrade: <%= ENV['CW_ORIGIN_NETWORK_UPGRADE'] %>

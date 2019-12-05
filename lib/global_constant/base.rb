@@ -58,6 +58,10 @@ module GlobalConstant
         @stw_campaign_details ||= fetch_config.fetch('pepo_campaign', {}).with_indifferent_access
       end
 
+      def origin_network_upgrade_on?
+        @origin_network_upgrade_on ||= (fetch_config.fetch('origin_network_upgrade', 0) == 1)
+      end
+
       def is_public_launch_done?
         true
       end

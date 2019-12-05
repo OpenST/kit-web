@@ -70,7 +70,15 @@
         <img src="https://dxwfxs8b4lg24.cloudfront.net/ost-kit/images/ost-kit-start-minting@2x.png" width="150" class="img-fluid"/>
       </div>
       <div class="run-transaction-btn-wrapper">
-        <button id="mint-tokens" class="btn btn-gold" data-submiting="Setting up ...">Mint Tokens</button>
+        <button
+          id="mint-tokens"
+          class="btn btn-gold"
+          data-submiting="Setting up ..."
+          <%=GlobalConstant::Base.origin_network_upgrade_on? ? 'disabled' : ''%>
+        >Mint Tokens</button>
+        <% if GlobalConstant::Base.origin_network_upgrade_on? %>
+          <p class="px-2 form-group"><span class="error">Forking or network upgrade is undergoing causing network instability. <br />Some actions are disabled until the network is operating normally.</span></p>
+        <% end %>
       </div>
     </div>
   </div>

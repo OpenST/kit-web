@@ -227,11 +227,11 @@
           params: [message, from],
           from: from
         }, function (err, result) {
-          if(err){
-            return oThis.showConfirmError(oThis.jGeneralErrorState);
-          }
-          if(result && result.error){
+          if(err && err.code === 4001){
             return oThis.showConfirmError(oThis.jRejectedSignErrorState);
+          }
+          if(err && err.code !== 4001){
+            return oThis.showConfirmError(oThis.jGeneralErrorState);
           }
           oThis.associateAddress(result);
         });

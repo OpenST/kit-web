@@ -386,7 +386,7 @@
           errCallback && errCallback( err );
         }else if( result && result.result ) {
           var btToMintHex = result.result ,
-            btToSmallestUnit = window.web3.fromWei( btToMintHex , 'wei')
+            btToSmallestUnit = oThis.metamask.web3.utils.fromWei( btToMintHex , 'wei')
           ;
           sucCallback && sucCallback( scToSmallestUnit, btToSmallestUnit )
         }

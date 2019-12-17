@@ -23,9 +23,10 @@
 
             // Modern Dapp browser / Metamask...
             if (typeof window.ethereum !== 'undefined') {
+                ethereum.autoRefreshOnNetworkChange = false;
                 oThis.isDapp = true;
-                oThis.ethereum = ethereum;
-                oThis.web3 = new Web3(ethereum);
+                oThis.setEthereum();
+                oThis.setWeb3();
                 oThis.setMetamask();
                 if(oThis.isMetamask) {
                     ethereum.on('accountsChanged', function(accounts){
@@ -38,12 +39,6 @@
                     });
                 }
             }
-            // Legacy Dapp browser / Metamask...
-            else if (typeof window.web3 !== 'undefined') {
-                oThis.isDapp = true;
-                oThis.web3 = new Web3(web3.currentProvider);
-                oThis.setMetamask();
-            }
             // No Dapp browser / Metamask...
             else {
                 oThis.isDapp = false;
@@ -51,11 +46,24 @@
             }
         },
 
+        setEthereum: function(){
+            var oThis = this;
+            oThis.ethereum = ethereum;
+            oThis.onEthereum();
+        },
+
+        setWeb3: function(){
+            var oThis = this;
+            oThis.web3 = new Web3(ethereum);
+            oThis.onWeb3();
+        },
+
         setMetamask: function() {
             var oThis = this;
-            oThis.isMetamask = (oThis.web3.currentProvider.isMetaMask && oThis.web3.currentProvider._metamask) ? true : false;
+            oThis.isMetamask = (oThis.ethereum.isMetaMask && oThis.ethereum._metamask);
             if(oThis.isMetamask){
-                oThis.metamask = oThis.web3.currentProvider._metamask;
+                // This is assigned, but purposely not used anywhere as this may get deprecated in future
+                oThis.metamask = oThis.ethereum._metamask;
                 oThis.onMetamask();
             } else {
                 oThis.onNotMetamask();
@@ -68,9 +76,6 @@
             if(!oThis.isDapp) return oThis.onNotDapp();
             if(!oThis.isMetamask) return oThis.onNotMetamask();
 
-            oThis.isApproved().then(function(r){
-              if(!r) oThis.onWaitingEnable();
-            });
             oThis.ethereum && oThis.ethereum.enable()
                 .then(function(accounts){
                     oThis.onEnabled();
@@ -100,11 +105,11 @@
                         }
                     }
                 })
-                .catch(function(reason){
-                    if (reason === 'User rejected provider access') {
+                .catch(function(error){
+                    if (error.code === 4001) {
                         oThis.onUserRejectedProviderAccess();
                     } else {
-                        console.error('There was an issue signing you in Metamask.', reason);
+                        console.error('There was an issue signing you in Metamask.', error);
                     }
                 });
         },
@@ -150,7 +155,7 @@
               if( val && val === '0x'){
                 result.result = '0x0';
               }
-              val && callback && callback(oThis.web3.fromWei(result.result, unit));
+              val && callback && callback(oThis.web3.utils.fromWei(result.result, unit));
             });
 
         },
@@ -178,7 +183,7 @@
                 if( val && val === '0x'){
                   result.result = '0x0';
                 }
-                val && callback && callback(oThis.web3.fromWei(result.result, unit));
+                val && callback && callback(oThis.web3.utils.fromWei(result.result, unit));
             });
 
         },
@@ -191,40 +196,15 @@
             if(values.constructor !== Array) return;
             if(!abi) abi = oThis.humanStandardTokenAbi;
 
-            var contractMethod = oThis.web3.eth.contract(abi).at(contractAddress)[method];
+            var contractMethod = (new oThis.web3.eth.Contract(abi, contractAddress)).methods[method];
 
             if(typeof contractMethod !== "function") {
                 console.error(method+' not found in provided abi');
                 return;
             }
 
-            return contractMethod.getData.apply(this, values);
+            return contractMethod.apply(contractMethod, values).encodeABI();
 
-        },
-
-        /**
-         * List of flags specific to Metamask, implemented as Promises or functions
-         * Avoid usage unless UI needs such granular checks
-         *
-         */
-
-        isApproved: function() {
-            var oThis = this;
-            return oThis.metamask && oThis.metamask.isApproved().then(function(r){
-                return r;
-            })
-        },
-
-        isUnlocked: function() {
-            var oThis = this;
-            return oThis.metamask && oThis.metamask.isUnlocked().then(function(r){
-                return r;
-            })
-        },
-
-        isEnabled: function() {
-            var oThis = this;
-            return oThis.metamask && oThis.metamask.isEnabled();
         },
 
         /**
@@ -233,6 +213,8 @@
          * Positive flows:
          * ---------------
          * onMetamask
+         * onEthereum
+         * onWeb3
          * onEnabled
          * onDesiredNetwork
          * onDesiredAccount
@@ -257,6 +239,17 @@
 
         onMetamask: function(callback){
             console.log('MetaMask detected');
+            callback && callback();
+        },
+
+        onEthereum: function(callback){
+            console.log('Ethereum set');
+            callback && callback();
+        },
+
+        onWeb3: function(callback){
+            var oThis = this;
+            console.log('Web3 version '+oThis.web3.version+' set');
             callback && callback();
         },
 

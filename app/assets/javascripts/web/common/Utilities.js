@@ -157,6 +157,7 @@
       var precisionVal = options.precision;
       var displayVal    = options.displayNum;
       var seperators = oThis.getDecimalGroupSeperators();
+      console.log(" **************** options.displayNum(displayVal)  **************** ",displayVal);
       $('.reformat-decimal').each(function(i) {
 
         if(options.precision === undefined){
@@ -168,9 +169,11 @@
         }
         if(options.displayNum === undefined){
           displayVal = $(this).data("value");
+          console.log(" **************** displayVal extracted as data attribute **************** ",displayVal);
         }
 
         displayVal = $.number(displayVal, precisionVal, seperators[1], seperators[0]); // seperators[1] - decimal seperator, seperators[0] - group seperator
+        console.log(" **************** displayVal after formatting **************** ",displayVal)
         $(this).html(displayVal);
       });
     }

@@ -90,7 +90,8 @@
       var amountMinted = utilities.deepGet( response , "data.workflow_payload.amountMinted" ) ,
         toEthBT      = oThis.pricer.fromSmallestUnit( amountMinted )
       ;
-      
+      console.log(" **************** amountMinted as per response  **************** ",amountMinted);
+      console.log(" **************** oThis.pricer.fromSmallestUnit( toEthBT )  **************** ",toEthBT);
       if( toEthBT ){
         utilities.reformatDecimals({displayNum : oThis.pricer.toBtPrecision( toEthBT )});
         // $('.total-token-minted').text( oThis.pricer.toBtPrecision( toEthBT ) );

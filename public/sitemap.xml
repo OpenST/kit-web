@@ -11,12 +11,13 @@
     <changefreq>weekly</changefreq>
     <priority>1</priority>
   </url>
-  <url>
+  <!-- KYC_STOP_CHANGES -->
+  <!-- <url>
     <loc>https://kyc.ost.com</loc>
     <lastmod>2018-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1</priority>
-  </url>
+  </url> -->
   <url>
     <loc>https://ost.com/team</loc>
     <lastmod>2018-03-15</lastmod>

@@ -30,7 +30,7 @@ module GlobalConstant
       end
 
       def bt_to_sc_max
-        500
+        100000
       end
 
     end
